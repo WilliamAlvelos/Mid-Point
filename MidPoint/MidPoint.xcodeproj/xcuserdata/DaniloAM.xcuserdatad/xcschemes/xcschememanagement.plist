@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Mid Point.xcscheme</key>
+		<key>MidPoint.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,12 +12,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3D61BFDF1B46EAD5001745DB</key>
+		<key>FFC2C6E11AF935E0004B0AA7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3D61BFF41B46EAD5001745DB</key>
+		<key>FFC2C6F91AF935E0004B0AA7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

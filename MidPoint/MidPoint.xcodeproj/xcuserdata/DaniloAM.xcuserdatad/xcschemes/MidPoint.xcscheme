@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0640"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3D61BFDF1B46EAD5001745DB"
-               BuildableName = "Mid Point.app"
-               BlueprintName = "Mid Point"
-               ReferencedContainer = "container:Mid Point.xcodeproj">
+               BlueprintIdentifier = "FFC2C6E11AF935E0004B0AA7"
+               BuildableName = "MidPoint.app"
+               BlueprintName = "MidPoint"
+               ReferencedContainer = "container:MidPoint.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,10 +28,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3D61BFF41B46EAD5001745DB"
-               BuildableName = "Mid PointTests.xctest"
-               BlueprintName = "Mid PointTests"
-               ReferencedContainer = "container:Mid Point.xcodeproj">
+               BlueprintIdentifier = "FFC2C6F91AF935E0004B0AA7"
+               BuildableName = "MidPointTests.xctest"
+               BlueprintName = "MidPointTests"
+               ReferencedContainer = "container:MidPoint.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,20 +46,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3D61BFF41B46EAD5001745DB"
-               BuildableName = "Mid PointTests.xctest"
-               BlueprintName = "Mid PointTests"
-               ReferencedContainer = "container:Mid Point.xcodeproj">
+               BlueprintIdentifier = "FFC2C6F91AF935E0004B0AA7"
+               BuildableName = "MidPointTests.xctest"
+               BlueprintName = "MidPointTests"
+               ReferencedContainer = "container:MidPoint.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3D61BFDF1B46EAD5001745DB"
-            BuildableName = "Mid Point.app"
-            BlueprintName = "Mid Point"
-            ReferencedContainer = "container:Mid Point.xcodeproj">
+            BlueprintIdentifier = "FFC2C6E11AF935E0004B0AA7"
+            BuildableName = "MidPoint.app"
+            BlueprintName = "MidPoint"
+            ReferencedContainer = "container:MidPoint.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,10 +76,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3D61BFDF1B46EAD5001745DB"
-            BuildableName = "Mid Point.app"
-            BlueprintName = "Mid Point"
-            ReferencedContainer = "container:Mid Point.xcodeproj">
+            BlueprintIdentifier = "FFC2C6E11AF935E0004B0AA7"
+            BuildableName = "MidPoint.app"
+            BlueprintName = "MidPoint"
+            ReferencedContainer = "container:MidPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,10 +95,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3D61BFDF1B46EAD5001745DB"
-            BuildableName = "Mid Point.app"
-            BlueprintName = "Mid Point"
-            ReferencedContainer = "container:Mid Point.xcodeproj">
+            BlueprintIdentifier = "FFC2C6E11AF935E0004B0AA7"
+            BuildableName = "MidPoint.app"
+            BlueprintName = "MidPoint"
+            ReferencedContainer = "container:MidPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -1,15 +1,15 @@
 //
-//  Mid_PointTests.swift
-//  Mid PointTests
+//  MidPointTests.swift
+//  MidPointTests
 //
-//  Created by William Alvelos on 03/07/15.
-//  Copyright (c) 2015 William Alvelos. All rights reserved.
+//  Created by Danilo Mative on 05/05/15.
+//  Copyright (c) 2015 FDJ. All rights reserved.
 //
 
 import UIKit
 import XCTest
 
-class Mid_PointTests: XCTestCase {
+class MidPointTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
