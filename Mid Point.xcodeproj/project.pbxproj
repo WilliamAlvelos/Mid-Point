@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3D61BFE61B46EAD5001745DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D61BFE51B46EAD5001745DB /* AppDelegate.swift */; };
+		3D61BFE81B46EAD5001745DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D61BFE71B46EAD5001745DB /* ViewController.swift */; };
+		3D61BFEB1B46EAD5001745DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D61BFE91B46EAD5001745DB /* Main.storyboard */; };
+		3D61BFED1B46EAD5001745DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D61BFEC1B46EAD5001745DB /* Images.xcassets */; };
+		3D61BFF01B46EAD5001745DB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D61BFEE1B46EAD5001745DB /* LaunchScreen.xib */; };
+		3D61BFFC1B46EAD5001745DB /* Mid_PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D61BFFB1B46EAD5001745DB /* Mid_PointTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3D61BFF61B46EAD5001745DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D61BFD81B46EAD5001745DB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D61BFDF1B46EAD5001745DB;
+			remoteInfo = "Mid Point";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3D61BFE01B46EAD5001745DB /* Mid Point.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mid Point.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D61BFE41B46EAD5001745DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D61BFE51B46EAD5001745DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3D61BFE71B46EAD5001745DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3D61BFEA1B46EAD5001745DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3D61BFEC1B46EAD5001745DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3D61BFEF1B46EAD5001745DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		3D61BFF51B46EAD5001745DB /* Mid PointTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mid PointTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D61BFFA1B46EAD5001745DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D61BFFB1B46EAD5001745DB /* Mid_PointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mid_PointTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3D61BFDD1B46EAD5001745DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D61BFF21B46EAD5001745DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3D61BFD71B46EAD5001745DB = {
+			isa = PBXGroup;
+			children = (
+				3D61BFE21B46EAD5001745DB /* Mid Point */,
+				3D61BFF81B46EAD5001745DB /* Mid PointTests */,
+				3D61BFE11B46EAD5001745DB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3D61BFE11B46EAD5001745DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3D61BFE01B46EAD5001745DB /* Mid Point.app */,
+				3D61BFF51B46EAD5001745DB /* Mid PointTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3D61BFE21B46EAD5001745DB /* Mid Point */ = {
+			isa = PBXGroup;
+			children = (
+				3D61BFE51B46EAD5001745DB /* AppDelegate.swift */,
+				3D61BFE71B46EAD5001745DB /* ViewController.swift */,
+				3D61BFE91B46EAD5001745DB /* Main.storyboard */,
+				3D61BFEC1B46EAD5001745DB /* Images.xcassets */,
+				3D61BFEE1B46EAD5001745DB /* LaunchScreen.xib */,
+				3D61BFE31B46EAD5001745DB /* Supporting Files */,
+			);
+			path = "Mid Point";
+			sourceTree = "<group>";
+		};
+		3D61BFE31B46EAD5001745DB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3D61BFE41B46EAD5001745DB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3D61BFF81B46EAD5001745DB /* Mid PointTests */ = {
+			isa = PBXGroup;
+			children = (
+				3D61BFFB1B46EAD5001745DB /* Mid_PointTests.swift */,
+				3D61BFF91B46EAD5001745DB /* Supporting Files */,
+			);
+			path = "Mid PointTests";
+			sourceTree = "<group>";
+		};
+		3D61BFF91B46EAD5001745DB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3D61BFFA1B46EAD5001745DB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3D61BFDF1B46EAD5001745DB /* Mid Point */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D61BFFF1B46EAD5001745DB /* Build configuration list for PBXNativeTarget "Mid Point" */;
+			buildPhases = (
+				3D61BFDC1B46EAD5001745DB /* Sources */,
+				3D61BFDD1B46EAD5001745DB /* Frameworks */,
+				3D61BFDE1B46EAD5001745DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mid Point";
+			productName = "Mid Point";
+			productReference = 3D61BFE01B46EAD5001745DB /* Mid Point.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3D61BFF41B46EAD5001745DB /* Mid PointTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D61C0021B46EAD5001745DB /* Build configuration list for PBXNativeTarget "Mid PointTests" */;
+			buildPhases = (
+				3D61BFF11B46EAD5001745DB /* Sources */,
+				3D61BFF21B46EAD5001745DB /* Frameworks */,
+				3D61BFF31B46EAD5001745DB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3D61BFF71B46EAD5001745DB /* PBXTargetDependency */,
+			);
+			name = "Mid PointTests";
+			productName = "Mid PointTests";
+			productReference = 3D61BFF51B46EAD5001745DB /* Mid PointTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3D61BFD81B46EAD5001745DB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "William Alvelos";
+				TargetAttributes = {
+					3D61BFDF1B46EAD5001745DB = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					3D61BFF41B46EAD5001745DB = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 3D61BFDF1B46EAD5001745DB;
+					};
+				};
+			};
+			buildConfigurationList = 3D61BFDB1B46EAD5001745DB /* Build configuration list for PBXProject "Mid Point" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3D61BFD71B46EAD5001745DB;
+			productRefGroup = 3D61BFE11B46EAD5001745DB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3D61BFDF1B46EAD5001745DB /* Mid Point */,
+				3D61BFF41B46EAD5001745DB /* Mid PointTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3D61BFDE1B46EAD5001745DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D61BFEB1B46EAD5001745DB /* Main.storyboard in Resources */,
+				3D61BFF01B46EAD5001745DB /* LaunchScreen.xib in Resources */,
+				3D61BFED1B46EAD5001745DB /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D61BFF31B46EAD5001745DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3D61BFDC1B46EAD5001745DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D61BFE81B46EAD5001745DB /* ViewController.swift in Sources */,
+				3D61BFE61B46EAD5001745DB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D61BFF11B46EAD5001745DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D61BFFC1B46EAD5001745DB /* Mid_PointTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3D61BFF71B46EAD5001745DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D61BFDF1B46EAD5001745DB /* Mid Point */;
+			targetProxy = 3D61BFF61B46EAD5001745DB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3D61BFE91B46EAD5001745DB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D61BFEA1B46EAD5001745DB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3D61BFEE1B46EAD5001745DB /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D61BFEF1B46EAD5001745DB /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3D61BFFD1B46EAD5001745DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3D61BFFE1B46EAD5001745DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3D61C0001B46EAD5001745DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Mid Point/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3D61C0011B46EAD5001745DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Mid Point/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		3D61C0031B46EAD5001745DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Mid PointTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mid Point.app/Mid Point";
+			};
+			name = Debug;
+		};
+		3D61C0041B46EAD5001745DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Mid PointTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mid Point.app/Mid Point";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3D61BFDB1B46EAD5001745DB /* Build configuration list for PBXProject "Mid Point" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D61BFFD1B46EAD5001745DB /* Debug */,
+				3D61BFFE1B46EAD5001745DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D61BFFF1B46EAD5001745DB /* Build configuration list for PBXNativeTarget "Mid Point" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D61C0001B46EAD5001745DB /* Debug */,
+				3D61C0011B46EAD5001745DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3D61C0021B46EAD5001745DB /* Build configuration list for PBXNativeTarget "Mid PointTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D61C0031B46EAD5001745DB /* Debug */,
+				3D61C0041B46EAD5001745DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3D61BFD81B46EAD5001745DB /* Project object */;
+}
