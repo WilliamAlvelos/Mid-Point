@@ -86,7 +86,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             if(places.count < 20 && name == ""){
                 radius = radius + 500
                 
-                addPointsOfInterest("", name: localTextField.text, location: geoLocation);
+                
+                var string: String = localTextField.text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
+                addPointsOfInterest("", name: string, location: geoLocation);
             }
             
             
@@ -114,8 +116,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
         }
         
+        let data: NSData?
         
-        if  NSData(contentsOfURL: NSURL(string: url)!) != nil {
+        data = NSData(contentsOfURL: NSURL(string: url!)!)
+            
+        if data == nil {
+            
             let data1: NSData = NSData(contentsOfURL: NSURL(string: url2)!)!
             
             var jsonFourSquare: AnyObject! = NSJSONSerialization.JSONObjectWithData(data1, options: NSJSONReadingOptions.MutableContainers, error: nil)
@@ -156,17 +162,36 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
 
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation?) -> MKAnnotationView! {
-        var annView:MKPinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-        
-        if annotation!.subtitle == "FourSquare"{
-            annView.pinColor = MKPinAnnotationColor.Purple
-        }
-        else{
-            annView.pinColor = MKPinAnnotationColor.Red
-        }
-        return annView
+
+    
+    
+    func mapView(mapView: MKMapView!,
+        viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+            
+            if annotation is MKUserLocation {
+                //return nil so map view draws "blue dot" for standard user location
+                
+                return nil
+            }
+            
+            let reuseId = "pin"
+            
+            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+            if pinView == nil {
+                    pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                    pinView!.canShowCallout = true
+                    pinView!.animatesDrop = true
+                    pinView!.canBecomeFirstResponder()
+                    pinView!.pinColor = .Purple
+            }
+            else {
+                pinView!.annotation = annotation
+            }
+            
+            return pinView
     }
+    
+    
 
     @IBAction func actionSearch(sender: AnyObject) {
         
@@ -217,7 +242,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let region = MKCoordinateRegionMakeWithDistance(coord, radius, radius)
         
         geoLocation = coord
-
         
         mapView.setRegion(region, animated: true)
         
