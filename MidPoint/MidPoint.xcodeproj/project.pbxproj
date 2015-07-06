@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
 		FFC2C6ED1AF935E0004B0AA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6EC1AF935E0004B0AA7 /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D6FD8DA1B4A3C08008E70E9 /* b_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_search.png; sourceTree = "<group>"; };
 		FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC2C6E61AF935E0004B0AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				FFC2C6F11AF935E0004B0AA7 /* Images.xcassets */,
 				FFC2C6F31AF935E0004B0AA7 /* LaunchScreen.xib */,
 				FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */,
+				3D6FD8DA1B4A3C08008E70E9 /* b_search.png */,
 				FFC2C6E51AF935E0004B0AA7 /* Supporting Files */,
 			);
 			path = MidPoint;
@@ -197,6 +200,7 @@
 			files = (
 				FFC2C6F01AF935E0004B0AA7 /* Main.storyboard in Resources */,
 				FFC2C6F51AF935E0004B0AA7 /* LaunchScreen.xib in Resources */,
+				3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */,
 				FFC2C6F21AF935E0004B0AA7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +419,7 @@
 				FFC2C7061AF935E0004B0AA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FFC2C7071AF935E0004B0AA7 /* Build configuration list for PBXNativeTarget "MidPointTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +428,7 @@
 				FFC2C7091AF935E0004B0AA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
