@@ -21,7 +21,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView!
-    let radius: CLLocationDistance = 100
+    var radius: CLLocationDistance = 500
     
     
     var geoLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(-23.670055, -46.701234)
@@ -59,26 +59,35 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         var url2: String!
         
         if name.isEmpty {
-            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=5000&types=" + type + "&sensor=true&key=" + googleAPIKey
+            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&sensor=true&key=" + googleAPIKey
 
             
-            url2 = "https://api.foursquare.com/v2/venues/search?client_id=AF0RKOHW12ZHKMLCLO0C5LV0CA3CQEFC2RBIV4TDUQARJCE0&client_secret=VBQQDPB5OHA4NFRX5O02KZR5FVDNNBKC1HLB1YKJUTTLODNB&v=20130815&ll=\(location.latitude),\(location.longitude)&query=" + type
+            url2 = "https://api.foursquare.com/v2/venues/search?client_id=AF0RKOHW12ZHKMLCLO0C5LV0CA3CQEFC2RBIV4TDUQARJCE0&client_secret=VBQQDPB5OHA4NFRX5O02KZR5FVDNNBKC1HLB1YKJUTTLODNB&v=20130815&ll=\(location.latitude),\(location.longitude)&query="
         }
         
         else {
-            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=5000&types=" + type + "&name=" + name + "&sensor=true&key=" + googleAPIKey
+            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&name=" + name + "&sensor=true&key=" + googleAPIKey
             
-            url2 = "https://api.foursquare.com/v2/venues/search?client_id=AF0RKOHW12ZHKMLCLO0C5LV0CA3CQEFC2RBIV4TDUQARJCE0&client_secret=VBQQDPB5OHA4NFRX5O02KZR5FVDNNBKC1HLB1YKJUTTLODNB&v=20130815&ll=\(location.latitude),\(location.longitude)&query="+type
+            url2 = "https://api.foursquare.com/v2/venues/search?client_id=AF0RKOHW12ZHKMLCLO0C5LV0CA3CQEFC2RBIV4TDUQARJCE0&client_secret=VBQQDPB5OHA4NFRX5O02KZR5FVDNNBKC1HLB1YKJUTTLODNB&v=20130815&ll=\(location.latitude),\(location.longitude)&query="+name
             
         }
 
-        if let data = NSData(contentsOfURL: NSURL(string: url)!) {
+        if NSData(contentsOfURL: NSURL(string: url)!) != nil {
             
+            let data = NSData(contentsOfURL: NSURL(string: url)!)
             
-            var jsonGooogle: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)
+            var jsonGooogle: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil)
             
             var places: NSArray = jsonGooogle.objectForKey("results") as! NSArray
             
+            println(places.count)
+            
+            
+            if(places.count < 20 && name == ""){
+                radius = radius + 500
+                
+                addPointsOfInterest("", name: localTextField.text, location: geoLocation);
+            }
             
             
             for(var x = 0; x < places.count; x++) {
@@ -97,16 +106,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 
                 point.title = name
                 point.coordinate = coordinate
+                point.subtitle = "Google"
                 
                 mapView.addAnnotation(point)
-                
                 
             }
             
         }
         
         
-        if let data1: NSData = NSData(contentsOfURL: NSURL(string: url2)!){
+        if  NSData(contentsOfURL: NSURL(string: url)!) != nil {
+            let data1: NSData = NSData(contentsOfURL: NSURL(string: url2)!)!
             
             var jsonFourSquare: AnyObject! = NSJSONSerialization.JSONObjectWithData(data1, options: NSJSONReadingOptions.MutableContainers, error: nil)
             
@@ -132,28 +142,40 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 
                 var coordinateFourSquare: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latFourSquare.doubleValue, lonFourSquare.doubleValue)
                 
-                
                 pointFourSquare.title = nameFourSquare
                 pointFourSquare.coordinate = coordinateFourSquare
-                
+                pointFourSquare.subtitle = "FourSquare"
                 
                 mapView.addAnnotation(pointFourSquare)
                 
             }
             
-        
         }
     
     }
     
+
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation?) -> MKAnnotationView! {
+        var annView:MKPinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+        
+        if annotation!.subtitle == "FourSquare"{
+            annView.pinColor = MKPinAnnotationColor.Purple
+        }
+        else{
+            annView.pinColor = MKPinAnnotationColor.Red
+        }
+        return annView
+    }
+
     @IBAction func actionSearch(sender: AnyObject) {
         
         if(localTextField.hidden){
             localTextField.hidden = false
-            addPointsOfInterest("", name: localTextField.text, location: geoLocation);
-            locationManager.startUpdatingLocation()
         }else{
             localTextField.hidden = true
+            addPointsOfInterest("", name: localTextField.text, location: geoLocation);
+            locationManager.startUpdatingLocation()
         }
     }
 
