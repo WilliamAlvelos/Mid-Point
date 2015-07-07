@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
+		3DFB8A161B4C1EEE00463EA4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A151B4C1EEE00463EA4 /* CloudKit.framework */; };
+		3DFB8A181B4C218700463EA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A171B4C218700463EA4 /* User.swift */; };
+		3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */; };
+		3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1C1B4C22DD00463EA4 /* UserDAOCloudKit.swift */; };
+		3DFB8A1F1B4C381300463EA4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */; };
+		3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
 		FFC2C6ED1AF935E0004B0AA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6EC1AF935E0004B0AA7 /* ViewController.swift */; };
@@ -29,6 +35,13 @@
 
 /* Begin PBXFileReference section */
 		3D6FD8DA1B4A3C08008E70E9 /* b_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_search.png; sourceTree = "<group>"; };
+		3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MidPoint.entitlements; sourceTree = "<group>"; };
+		3DFB8A151B4C1EEE00463EA4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		3DFB8A171B4C218700463EA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
+		3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDAO.swift; sourceTree = "<group>"; };
+		3DFB8A1C1B4C22DD00463EA4 /* UserDAOCloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDAOCloudKit.swift; sourceTree = "<group>"; };
+		3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC2C6E61AF935E0004B0AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DFB8A161B4C1EEE00463EA4 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,9 +74,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3DFB8A191B4C221100463EA4 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				3DFB8A171B4C218700463EA4 /* User.swift */,
+				3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */,
+				3DFB8A1C1B4C22DD00463EA4 /* UserDAOCloudKit.swift */,
+			);
+			name = DAO;
+			sourceTree = "<group>";
+		};
+		3DFB8A201B4C383300463EA4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */,
+				3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		FFC2C6D91AF935E0004B0AA7 = {
 			isa = PBXGroup;
 			children = (
+				3DFB8A151B4C1EEE00463EA4 /* CloudKit.framework */,
 				FFC2C6E41AF935E0004B0AA7 /* MidPoint */,
 				FFC2C6FD1AF935E0004B0AA7 /* MidPointTests */,
 				FFC2C6E31AF935E0004B0AA7 /* Products */,
@@ -81,6 +115,9 @@
 		FFC2C6E41AF935E0004B0AA7 /* MidPoint */ = {
 			isa = PBXGroup;
 			children = (
+				3DFB8A191B4C221100463EA4 /* DAO */,
+				3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */,
+				3DFB8A201B4C383300463EA4 /* ViewControllers */,
 				FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */,
 				FFC2C6EC1AF935E0004B0AA7 /* ViewController.swift */,
 				FFC2C6EE1AF935E0004B0AA7 /* Main.storyboard */,
@@ -167,6 +204,12 @@
 				TargetAttributes = {
 					FFC2C6E11AF935E0004B0AA7 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 5QNPEDDWDK;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					FFC2C6F91AF935E0004B0AA7 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -219,8 +262,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DFB8A1F1B4C381300463EA4 /* LoginViewController.swift in Sources */,
+				3DFB8A181B4C218700463EA4 /* User.swift in Sources */,
 				FFC2C6ED1AF935E0004B0AA7 /* ViewController.swift in Sources */,
+				3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */,
+				3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */,
 				FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */,
+				3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */,
 				FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,9 +398,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MidPoint/MidPoint.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MidPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -360,9 +412,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MidPoint/MidPoint.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MidPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

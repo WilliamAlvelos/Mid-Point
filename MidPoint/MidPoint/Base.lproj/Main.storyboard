@@ -68,6 +68,32 @@
             </objects>
             <point key="canvasLocation" x="509.5" y="242.5"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="ZWj-b6-yEO">
+            <objects>
+                <viewController id="H3V-C5-oET" customClass="LoginViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IcF-y0-wMi"/>
+                        <viewControllerLayoutGuide type="bottom" id="cUr-uu-Xvz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="X4J-Fu-Uhf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="45h-Ck-jgb">
+                                <rect key="frame" x="21" y="175" width="319" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b6E-1a-L8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-66.5" y="242.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="b_search.png" width="155" height="155"/>

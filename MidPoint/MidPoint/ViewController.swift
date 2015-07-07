@@ -138,7 +138,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     point.subtitle = point.subtitle + typeString + " "
                 }
 
-                }
 
                 mapView.addAnnotation(point)
                 
