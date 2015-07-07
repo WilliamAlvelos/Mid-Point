@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LoginViewController: ViewController, UserDAOCloudKitDelegate{
+class LoginViewController: UIViewController, UserManagerDelegate{
     
     @IBOutlet var nomeText: UITextField!
     
@@ -28,14 +28,20 @@ class LoginViewController: ViewController, UserDAOCloudKitDelegate{
     
     
     @IBAction func logInAction(sender: AnyObject) {
-        var userDao: UserDAOCloudKit = UserDAOCloudKit()
-        userDao.delegate = self
+        var usuario: UserManager = UserManager()
+        usuario.delegate = self
         
-        var usuario: User = User(name: nomeText.text, password: senhaText.text)
+        var user: User = User(name: nomeText.text, password: senhaText.text, email: nomeText.text)
         
-        userDao.getUser(usuario, option: .Get)
+        usuario.getUserDatabase(user)
     }
     
+    @IBAction func registerAction(sender: AnyObject) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("register") as! RegisterViewController
+        self.presentViewController(nextViewController, animated:true, completion:nil)
+        
+    }
     
     func errorThrowed(error: NSError){
         println("errorThrowed")

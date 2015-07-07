@@ -12,7 +12,7 @@ import CoreLocation
 
 
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var activity: UIActivityIndicatorView!
     @IBOutlet var localTextField: UITextField!

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class RegisterViewController: ViewController, UserDAOCloudKitDelegate{
+class RegisterViewController: UIViewController, UserDAOCloudKitDelegate{
     
     @IBOutlet var nameTextField: UITextField!
     
