@@ -44,6 +44,10 @@
                                     <action selector="actionSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QLr-RZ-Pfg"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="8Oo-h0-wDB">
+                                <rect key="frame" x="169" y="233" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -55,6 +59,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="activity" destination="8Oo-h0-wDB" id="PRT-mT-iCM"/>
                         <outlet property="localTextField" destination="OFI-zo-UTu" id="kYe-MA-16J"/>
                         <outlet property="mapView" destination="Ocn-MR-G2Q" id="qxw-vx-JgR"/>
                     </connections>

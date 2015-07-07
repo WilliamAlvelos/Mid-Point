@@ -14,6 +14,7 @@ import CoreLocation
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
+    @IBOutlet var activity: UIActivityIndicatorView!
     @IBOutlet var localTextField: UITextField!
     
     let googleAPIKey: String = "AIzaSyDHIzjnXRJtWRDpPsux99HhTwjOmcLQplU"
@@ -38,6 +39,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.delegate = self
         mapView.showsUserLocation = true
         localTextField.hidden = true
+        showActivity()
+        
+
         
         locationManager.requestAlwaysAuthorization()
         
@@ -48,88 +52,115 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //addPointsOfInterest("restaurant|food", name: "", location: coor2);
         //addLocationsFromGoogle()
         
+        activity.stopAnimating()
+        
+    }
+    
+    
+    func showActivity(){
+        activity.hidesWhenStopped = true
+        activity.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        activity.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+        activity.layer.cornerRadius = 10
+        activity.startAnimating()
     }
     
     private func addPointsOfInterest(type: String, name: String, location: CLLocationCoordinate2D) {
         
         mapView.removeAnnotations(mapView.annotations)
+        showActivity()
+
         
         
-        var url: String!
-        var url2: String!
+        var url: String?
+        //var url2: String!
         
         if name.isEmpty {
-            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&sensor=true&key=" + googleAPIKey
+            //url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&sensor=true&key=" + googleAPIKey
 
             
-            url2 = "https://api.foursquare.com/v2/venues/search?client_id=AF0RKOHW12ZHKMLCLO0C5LV0CA3CQEFC2RBIV4TDUQARJCE0&client_secret=VBQQDPB5OHA4NFRX5O02KZR5FVDNNBKC1HLB1YKJUTTLODNB&v=20130815&ll=\(location.latitude),\(location.longitude)&query="
+            url = "https://api.foursquare.com/v2/venues/search?client_id=AF0RKOHW12ZHKMLCLO0C5LV0CA3CQEFC2RBIV4TDUQARJCE0&client_secret=VBQQDPB5OHA4NFRX5O02KZR5FVDNNBKC1HLB1YKJUTTLODNB&v=20130815&ll=\(location.latitude),\(location.longitude)&query="
+        }else {
+            //url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&name=" + name + "&sensor=true&key=" + googleAPIKey
+            
+            url = "https://api.foursquare.com/v2/venues/search?client_id=AF0RKOHW12ZHKMLCLO0C5LV0CA3CQEFC2RBIV4TDUQARJCE0&client_secret=VBQQDPB5OHA4NFRX5O02KZR5FVDNNBKC1HLB1YKJUTTLODNB&v=20130815&ll=\(location.latitude),\(location.longitude)&query="+name
+            
         }
+//
+//        let data: NSData? = NSData(contentsOfURL: NSURL(string: url!)!)
+//        
+//        if data != nil {
+//            
+//            var jsonGooogle: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil)
+//            
+//            var places: NSArray = jsonGooogle.objectForKey("results") as! NSArray
+//            
+//            
+//            if((places.count < 15 && name == "") || places.count < 1){
+//                radius = radius + 500
+//                addPointsOfInterest(type, name: name, location: location)
+//            }
+//            
+//            
+//            for(var x = 0; x < places.count; x++) {
+//                
+//                var place: NSDictionary = places.objectAtIndex(x) as! NSDictionary
+//                var geo: NSDictionary = place.objectForKey("geometry") as! NSDictionary
+//                var opening: NSDictionary = place.objectForKey("opening_hours") as! NSDictionary
+//                var openNow: NSString = opening.objectForKey("open_now") as! NSString
+//                var icon: String = place.objectForKey("icon") as! String
+//                var loc: NSDictionary = geo.objectForKey("location") as! NSDictionary
+//                var name: String = place.objectForKey("name") as! String
+//                var lat: NSNumber = loc.objectForKey("lat") as! NSNumber
+//                var lon: NSNumber = loc.objectForKey("lng") as! NSNumber
+//                var types: NSArray = place.objectForKey("types") as! NSArray
+//                
+//                var point: MKPointAnnotation = MKPointAnnotation()
+//                
+//                var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat.doubleValue, lon.doubleValue)
+//                
+//                
+//                point.title = name
+//                point.coordinate = coordinate
+//                if openNow == "true"{
+//                    point.subtitle = "Aberto"
+//                }else if openNow == "false"{
+//                    point.subtitle = "Fechado"
+//                }
+//                
+//                
+//                for(var i = 0; i < types.count; i++){
+//                    point.subtitle = point.subtitle + "\n \(types[i])"
+//                }
+//                
+//                mapView.addAnnotation(point)
+//                
+//            }
+//            
+//        }
         
-        else {
-            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&name=" + name + "&sensor=true&key=" + googleAPIKey
+        let data1: NSData?
+        
+        data1 = NSData(contentsOfURL: NSURL(string: url!)!)
             
-            url2 = "https://api.foursquare.com/v2/venues/search?client_id=AF0RKOHW12ZHKMLCLO0C5LV0CA3CQEFC2RBIV4TDUQARJCE0&client_secret=VBQQDPB5OHA4NFRX5O02KZR5FVDNNBKC1HLB1YKJUTTLODNB&v=20130815&ll=\(location.latitude),\(location.longitude)&query="+name
-            
-        }
+        if data1 != nil {
 
-        if NSData(contentsOfURL: NSURL(string: url)!) != nil {
             
-            let data = NSData(contentsOfURL: NSURL(string: url)!)
-            
-            var jsonGooogle: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil)
-            
-            var places: NSArray = jsonGooogle.objectForKey("results") as! NSArray
-            
-            println(places.count)
-            
-            
-            if(places.count < 20 && name == ""){
-                radius = radius + 500
-                
-                
-                var string: String = localTextField.text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
-                addPointsOfInterest("", name: string, location: geoLocation);
-            }
-            
-            
-            for(var x = 0; x < places.count; x++) {
-                
-                var place: NSDictionary = places.objectAtIndex(x) as! NSDictionary
-                var geo: NSDictionary = place.objectForKey("geometry") as! NSDictionary
-                var icon: String = place.objectForKey("icon") as! String
-                var loc: NSDictionary = geo.objectForKey("location") as! NSDictionary
-                var name: String = place.objectForKey("name") as! String
-                var lat: NSNumber = loc.objectForKey("lat") as! NSNumber
-                var lon: NSNumber = loc.objectForKey("lng") as! NSNumber
-                var point: MKPointAnnotation = MKPointAnnotation()
-                
-                var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat.doubleValue, lon.doubleValue)
-                
-                
-                point.title = name
-                point.coordinate = coordinate
-                point.subtitle = "Google"
-                
-                mapView.addAnnotation(point)
-                
-            }
-            
-        }
-        
-        let data: NSData?
-        
-        data = NSData(contentsOfURL: NSURL(string: url!)!)
-            
-        if data == nil {
-            
-            let data1: NSData = NSData(contentsOfURL: NSURL(string: url2)!)!
-            
-            var jsonFourSquare: AnyObject! = NSJSONSerialization.JSONObjectWithData(data1, options: NSJSONReadingOptions.MutableContainers, error: nil)
+            var jsonFourSquare: AnyObject! = NSJSONSerialization.JSONObjectWithData(data1!, options: NSJSONReadingOptions.MutableContainers, error: nil)
             
             
             var venues: NSDictionary = jsonFourSquare.objectForKey("response") as! NSDictionary
             
             var placesFourSquare: NSArray = venues.objectForKey("venues") as! NSArray
+            
+            if((placesFourSquare.count < 15 && name == "") || placesFourSquare.count < 1){
+                radius = radius + 500
+                
+                if(radius < 15000){
+                    addPointsOfInterest(type, name: name, location: location)
+                }
+                
+            }
             
             
             for(var x = 0; x < placesFourSquare.count; x++) {
@@ -157,6 +188,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
             
         }
+        
+
+        activity.stopAnimating()
     
     }
     
@@ -199,13 +233,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             localTextField.hidden = false
         }else{
             localTextField.hidden = true
-            addPointsOfInterest("", name: localTextField.text, location: geoLocation);
+            
+            var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
+            addPointsOfInterest("", name: string, location: geoLocation);
             locationManager.startUpdatingLocation()
         }
     }
 
     func locationManager(manager: CLLocationManager!,
         didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+            
+            showActivity()
+            
             var shouldIAllow = false
             
             switch status {
@@ -225,7 +264,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 locationManager.startUpdatingLocation()
             }
             
-            
+            activity.stopAnimating()
     }
     
     
@@ -245,7 +284,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         mapView.setRegion(region, animated: true)
         
-        addPointsOfInterest("restaurant", name: localTextField.text, location: coord);
+        addPointsOfInterest("", name: localTextField.text, location: coord);
 
     }
 
