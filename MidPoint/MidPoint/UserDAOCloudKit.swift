@@ -18,12 +18,12 @@ protocol UserDAOCloudKitDelegate{
     func getUserFinished(user: User)
 }
 
-private class UserDAOCloudKit: NSObject, UserDAOProtocol {
+class UserDAOCloudKit: NSObject, UserDAOProtocol {
     
     private var container: CKContainer
     private var publicDB: CKDatabase
     
-    private var delegate: UserDAOCloudKitDelegate!
+    var delegate: UserDAOCloudKitDelegate!
     
     override init(){
         container = CKContainer.defaultContainer()
@@ -34,9 +34,9 @@ private class UserDAOCloudKit: NSObject, UserDAOProtocol {
         return User()
     }
     
+
     func getUser(user:User, option : Option){
-        var predicate = NSPredicate(format: "email = %@", user.email!)
-        
+        var predicate = NSPredicate(format: "email = %@ && senha = %@", user.email!, user.password!)
         var query = CKQuery(recordType: "USUARIO", predicate: predicate)
         self.publicDB.performQuery(query, inZoneWithID: nil , completionHandler: { (records: [AnyObject]!, error : NSError!) in
             if error != nil{
@@ -48,7 +48,7 @@ private class UserDAOCloudKit: NSObject, UserDAOProtocol {
             else{
                 if option == .Save{
                     if records.count == 0{
-                        self.saveUser(user)
+                        self.performQuery(user)
                     }else{
                         self.runDelegateOnMainThread(Selector("self.delegate.userStillInserted(user)"))
 
@@ -83,7 +83,7 @@ private class UserDAOCloudKit: NSObject, UserDAOProtocol {
         })
         
     }
-    private func saveUser(user: User){
+    private func performQuery(user: User){
         var record:CKRecord = CKRecord(recordType: "USUARIO")
         record.setObject(user.name, forKey: "nome")
         record.setObject(user.email, forKey: "email")
@@ -105,7 +105,7 @@ private class UserDAOCloudKit: NSObject, UserDAOProtocol {
 
     }
 
-    func saveUser(user: User, option : Option){
+    func saveUser(user: User){
         var predicate = NSPredicate(format: "email = %@", user.email!)
         self.getUser(user, option: .Save)
         

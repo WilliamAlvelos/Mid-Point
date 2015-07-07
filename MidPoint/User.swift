@@ -16,9 +16,24 @@ class User: NSObject {
     var image: NSData?
     
     
-    override init() {
+    
+    init(name: String, password: String, email:String){
+        self.name = name
+        self.password = password
+        self.email = email
+    }
+    
+    
+    init(name:String, password:String) {
+        self.name = name
+        self.password = password
         
     }
     
+    override init(){
+        
+    }
+    
+
     
 }
