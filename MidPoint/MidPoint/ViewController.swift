@@ -124,18 +124,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 point.subtitle = ""
                 point.title = name
                 point.coordinate = coordinate
+                
                 if openNow == "true"{
                     point.subtitle = "Aberto"
                 }else if openNow == "false"{
                     point.subtitle = "Fechado"
                 }
                 
+
                 
                 for(var i = 0; i < types.count; i++){
                     let typeString: String = types[i] as! String
                     point.subtitle = point.subtitle + typeString + " "
                 }
-                
+
+                }
+
                 mapView.addAnnotation(point)
                 
             }
@@ -275,7 +279,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
-//        var coorSP:CLLocationCoordinate2D = CLLocationCoordinate2DMake(-23.670055, -46.701234)
         
         locationManager.stopUpdatingLocation()
 
@@ -289,7 +292,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         mapView.setRegion(region, animated: true)
         
-        addPointsOfInterest("", name: localTextField.text, location: coord);
+        var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
+        addPointsOfInterest("", name: string, location: coord);
 
     }
 
