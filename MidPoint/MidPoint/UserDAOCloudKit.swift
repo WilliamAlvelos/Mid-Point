@@ -18,12 +18,12 @@ protocol UserDAOCloudKitDelegate{
     func getUserFinished(user: User)
 }
 
-private class UserDAOCloudKit: NSObject, UserDAOProtocol {
+class UserDAOCloudKit: NSObject, UserDAOProtocol {
     
     private var container: CKContainer
     private var publicDB: CKDatabase
     
-    private var delegate: UserDAOCloudKitDelegate!
+    var delegate: UserDAOCloudKitDelegate!
     
     override init(){
         container = CKContainer.defaultContainer()
@@ -35,7 +35,7 @@ private class UserDAOCloudKit: NSObject, UserDAOProtocol {
     }
     
     func getUser(user:User){
-        var predicate = NSPredicate(format: "email = %@", user.email!)
+        var predicate = NSPredicate(format: "email = %@ && senha = %@", user.email!, user.password!)
         
         var query = CKQuery(recordType: "USUARIO", predicate: predicate)
         self.publicDB.performQuery(query, inZoneWithID: nil , completionHandler: { (records: [AnyObject]!, error : NSError!) in

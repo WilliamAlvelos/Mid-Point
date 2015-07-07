@@ -30,8 +30,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         localTextField.resignFirstResponder()
-//        var coor2:CLLocationCoordinate2D = CLLocationCoordinate2DMake(-23.690055, -46.901234)
-//        addPointsOfInterest("", name: localTextField.text, location: coor2);
+
     }
     
     override func viewWillAppear(animated: Bool) {
