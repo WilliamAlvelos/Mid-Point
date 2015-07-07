@@ -37,10 +37,11 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol {
 
     func getUser(user:User, option : Option){
         var predicate = NSPredicate(format: "email = %@ && senha = %@", user.email!, user.password!)
+        
         var query = CKQuery(recordType: "USUARIO", predicate: predicate)
         self.publicDB.performQuery(query, inZoneWithID: nil , completionHandler: { (records: [AnyObject]!, error : NSError!) in
             if error != nil{
-                self.runDelegateOnMainThread(Selector("self.delegate.errorThrowed(error)"))
+                //self.runDelegateOnMainThread(Selector("self.delegate.errorThrowed(error)"))
 
                 
             }
@@ -50,15 +51,16 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol {
                     if records.count == 0{
                         self.performQuery(user)
                     }else{
-                        self.runDelegateOnMainThread(Selector("self.delegate.userStillInserted(user)"))
-
-                        
-                        
+                        self.Dispatcher({
+                            self.delegate.userStillInserted(user)
+                        })
                     }
                 }
                 else if option == .Get{
                     if records.count == 0{
-                        self.runDelegateOnMainThread(Selector("self.delegate.userNotFound(user)"))
+                        self.Dispatcher({
+                            self.delegate.userNotFound(user)
+                        })
 
                         
                     }else{
@@ -67,7 +69,9 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol {
                         client.name = records[0].objectForKey("nome") as? String
                         client.email = records[0].objectForKey("email") as? String
                         client.password = records[0].objectForKey("senha") as? String
-                        self.runDelegateOnMainThread(Selector("self.delegate.getUserFinished(client)"))
+                        self.Dispatcher({
+                            self.delegate.getUserFinished(client)
+                        })
                     }
                 }
                 
@@ -77,11 +81,9 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol {
         })
     
     }
-    private func runDelegateOnMainThread(selector : Selector){
-        dispatch_async(dispatch_get_main_queue(), {
-            selector
-        })
-        
+    func Dispatcher(functionToRunOnMainThread: () -> ())
+    {
+        dispatch_async(dispatch_get_main_queue(), functionToRunOnMainThread)
     }
     private func performQuery(user: User){
         var record:CKRecord = CKRecord(recordType: "USUARIO")
@@ -92,12 +94,15 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol {
         self.publicDB.saveRecord(record, completionHandler: { (record:CKRecord!, error:NSError!) -> Void in
             
             if error != nil{
-                self.runDelegateOnMainThread(Selector("self.delegate.errorThrowed(error)"))
+                self.Dispatcher({
+                    self.delegate.errorThrowed(error)
+                })
 
                 
             }else{
-               
-                self.runDelegateOnMainThread(Selector("self.delegate.saveUserFinished(user)"))
+                self.Dispatcher({
+                    self.delegate.saveUserFinished(user)
+                })
 
             }
             

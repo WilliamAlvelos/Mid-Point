@@ -31,8 +31,7 @@ class LoginViewController: ViewController, UserDAOCloudKitDelegate{
         var userDao: UserDAOCloudKit = UserDAOCloudKit()
         userDao.delegate = self
         
-        var usuario: User = User(name: nomeText.text, password: senhaText.text)
-        
+        var usuario: User = User(name: nomeText.text, password: senhaText.text, email : nomeText.text)
         userDao.getUser(usuario, option: .Get)
     }
     
