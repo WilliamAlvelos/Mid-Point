@@ -115,13 +115,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 var name: String = place.objectForKey("name") as! String
                 var lat: NSNumber = loc.objectForKey("lat") as! NSNumber
                 var lon: NSNumber = loc.objectForKey("lng") as! NSNumber
-                var types: NSArray? = place.objectForKey("types") as? NSArray
+                var types = place.objectForKey("types") as! [AnyObject]
                 
                 var point: MKPointAnnotation = MKPointAnnotation()
                 
                 var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat.doubleValue, lon.doubleValue)
                 
-                
+                point.subtitle = ""
                 point.title = name
                 point.coordinate = coordinate
                 if openNow == "true"{
@@ -131,8 +131,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 }
                 
                 
-                for(var i = 0; i < types?.count; i++){
-                    point.subtitle = point.subtitle + "\(types?[i])"
+                for(var i = 0; i < types.count; i++){
+                    let typeString: String = types[i] as! String
+                    point.subtitle = point.subtitle + typeString + " "
                 }
                 
                 mapView.addAnnotation(point)
@@ -236,7 +237,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }else{
             localTextField.hidden = true
             
-            var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
+            var string = localTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "%20", options:  NSStringCompareOptions.LiteralSearch, range: nil)
+            
+            //var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
             addPointsOfInterest("", name: string, location: geoLocation);
             locationManager.startUpdatingLocation()
         }
