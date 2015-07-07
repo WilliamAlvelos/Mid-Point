@@ -34,77 +34,80 @@ private class UserDAOCloudKit: NSObject, UserDAOProtocol {
         return User()
     }
     
-    func getUser(user:User){
+    func getUser(user:User, option : Option){
         var predicate = NSPredicate(format: "email = %@", user.email!)
         
         var query = CKQuery(recordType: "USUARIO", predicate: predicate)
         self.publicDB.performQuery(query, inZoneWithID: nil , completionHandler: { (records: [AnyObject]!, error : NSError!) in
             if error != nil{
-                self.delegate.errorThrowed(error)
-            }else{
-                if records.count == 0{
-                    self.delegate.userNotFound(user)
-                }else{
-                    var client : User = User()
-                    
-                    client.name = records[0].objectForKey("nome") as? String
-                    client.email = records[0].objectForKey("email") as? String
-                    client.password = records[0].objectForKey("senha") as? String
-                    
-                    self.delegate.getUserFinished(client)
-                }
-                
+                self.runDelegateOnMainThread(Selector("self.delegate.errorThrowed(error)"))
+
                 
             }
             
-        })
-    
-    }
-    
-    
-    private func dispatchThread(seletor: Selector, object: AnyObject?){
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            NSThread.detachNewThreadSelector(seletor, toTarget: self, withObject: object)
-            
-            
-            //joao olha isso \n
-            // mo bosta
-        })
-        
-    }
-    
-    func saveUser(user: User){
-        var predicate = NSPredicate(format: "email = %@", user.email!)
-        
-        var query = CKQuery(recordType: "USUARIO", predicate: predicate)
-        self.publicDB.performQuery(query, inZoneWithID: nil , completionHandler: { (records: [AnyObject]!, error : NSError!) in
-            if error != nil{
-                self.delegate.errorThrowed(error)
-            }else{
-                if records.count == 0{
-                    var record:CKRecord = CKRecord(recordType: "USUARIO")
-                    record.setObject(user.name, forKey: "nome")
-                    record.setObject(user.email, forKey: "email")
-                    record.setObject(user.password, forKey: "senha")
-                    
-                    self.publicDB.saveRecord(record, completionHandler: { (record:CKRecord!, error:NSError!) -> Void in
+            else{
+                if option == .Save{
+                    if records.count == 0{
+                        self.saveUser(user)
+                    }else{
+                        self.runDelegateOnMainThread(Selector("self.delegate.userStillInserted(user)"))
+
                         
-                        if error != nil{
-                            self.delegate.errorThrowed(error)
-                        }else{
-                            self.delegate.saveUserFinished(user)
-                        }
-                            
-                    })
-                }else{
-                    self.delegate.userStillInserted(user)
-                    
+                        
+                    }
+                }
+                else if option == .Get{
+                    if records.count == 0{
+                        self.runDelegateOnMainThread(Selector("self.delegate.userNotFound(user)"))
+
+                        
+                    }else{
+                        var client : User = User()
+                        
+                        client.name = records[0].objectForKey("nome") as? String
+                        client.email = records[0].objectForKey("email") as? String
+                        client.password = records[0].objectForKey("senha") as? String
+                        self.runDelegateOnMainThread(Selector("self.delegate.getUserFinished(client)"))
+                    }
                 }
                 
-            
+                
             }
             
         })
+    
+    }
+    private func runDelegateOnMainThread(selector : Selector){
+        dispatch_async(dispatch_get_main_queue(), {
+            selector
+        })
+        
+    }
+    private func saveUser(user: User){
+        var record:CKRecord = CKRecord(recordType: "USUARIO")
+        record.setObject(user.name, forKey: "nome")
+        record.setObject(user.email, forKey: "email")
+        record.setObject(user.password, forKey: "senha")
+        
+        self.publicDB.saveRecord(record, completionHandler: { (record:CKRecord!, error:NSError!) -> Void in
+            
+            if error != nil{
+                self.runDelegateOnMainThread(Selector("self.delegate.errorThrowed(error)"))
+
+                
+            }else{
+               
+                self.runDelegateOnMainThread(Selector("self.delegate.saveUserFinished(user)"))
+
+            }
+            
+        })
+
+    }
+
+    func saveUser(user: User, option : Option){
+        var predicate = NSPredicate(format: "email = %@", user.email!)
+        self.getUser(user, option: .Save)
         
     }
     
