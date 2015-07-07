@@ -34,6 +34,7 @@ class LoginViewController: UIViewController, UserManagerDelegate{
         var user: User = User(name: nomeText.text, password: senhaText.text, email: nomeText.text)
         
         usuario.getUserDatabase(user)
+
     }
     
     @IBAction func registerAction(sender: AnyObject) {
