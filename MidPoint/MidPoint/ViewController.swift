@@ -87,7 +87,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
         }
 
+<<<<<<< Updated upstream
         let data: NSData? = NSData(contentsOfURL: NSURL(string: url!)!)
+=======
+        var data: NSData = NSData(contentsOfURL: NSURL(string: url)!)!
+        
+        var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: nil)
+>>>>>>> Stashed changes
         
         if data != nil {
             
