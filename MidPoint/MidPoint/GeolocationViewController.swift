@@ -17,12 +17,14 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     @IBOutlet var activity: UIActivityIndicatorView!
     @IBOutlet var localTextField: UITextField!
     
+    var nomeUser: String?
+    
     let googleAPIKey: String = "AIzaSyDHIzjnXRJtWRDpPsux99HhTwjOmcLQplU"
     
     var locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView!
-    var radius: CLLocationDistance = 500
+    var radius: CLLocationDistance = 300
     
     
     var geoLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(-23.670055, -46.701234)
@@ -52,7 +54,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         //addLocationsFromGoogle()
         
         activity.stopAnimating()
-        
     }
     
     
@@ -63,6 +64,33 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         activity.layer.cornerRadius = 10
         activity.startAnimating()
     }
+    
+    
+    func addYourFriends(friends: [Friends]){
+        
+        
+        for(var i = 0; i < friends.count; i++){
+    
+        
+            var point: MKPointAnnotation = MKPointAnnotation()
+        
+            point.title = friends[i].name
+            point.coordinate = friends[i].location!
+            
+            let pinAnnotation = MKPinAnnotationView()
+            pinAnnotation.pinColor = .Red
+            
+            pinAnnotation.annotation = point
+            
+            mapView.addAnnotation(pinAnnotation.annotation)
+            
+            
+        }
+        
+        
+    }
+    
+    
     
     private func addPointsOfInterest(type: String, name: String, location: CLLocationCoordinate2D) {
         
@@ -98,8 +126,11 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             
             
             if((places.count < 15 && name == "") || places.count < 1){
-                radius = radius + 500
-                addPointsOfInterest(type, name: name, location: location)
+                
+                if(radius < 3000000){
+                    radius = radius * 2
+                    addPointsOfInterest(type, name: name, location: location)
+                }
             }
             
             
@@ -124,17 +155,19 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 point.title = name
                 point.coordinate = coordinate
                 
+                
                 if openNow == "true"{
                     point.subtitle = "Aberto"
                 }else if openNow == "false"{
                     point.subtitle = "Fechado"
                 }
                 
-
                 
                 for(var i = 0; i < types.count; i++){
                     let typeString: String = types[i] as! String
-                    point.subtitle = point.subtitle + typeString + " "
+                    
+                    var string = typeString.stringByReplacingOccurrencesOfString("_", withString: " ", options:  NSStringCompareOptions.LiteralSearch, range: nil)
+                    point.subtitle = point.subtitle + string + "\n"
                 }
 
 
@@ -208,8 +241,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
             
             if annotation is MKUserLocation {
-                //return nil so map view draws "blue dot" for standard user location
-                
                 return nil
             }
             
@@ -222,6 +253,22 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                     pinView!.animatesDrop = true
                     pinView!.canBecomeFirstResponder()
                     pinView!.pinColor = .Purple
+                
+                
+                
+                    let roleButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+                
+                    roleButton.addTarget(self, action: "selectRole:", forControlEvents: UIControlEvents.TouchUpInside)
+                
+                    roleButton.frame.size.width = 44
+                    roleButton.frame.size.height = 44
+                    roleButton.backgroundColor = UIColor.redColor()
+                    roleButton.setImage(UIImage(named: "teste.png"), forState: .Normal)
+                
+                    pinView!.rightCalloutAccessoryView = roleButton
+                
+                    var icon = UIImageView(image: UIImage(named: "teste.png"))
+                    pinView!.leftCalloutAccessoryView = icon
             }
             else {
                 pinView!.annotation = annotation
@@ -229,6 +276,13 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             
             return pinView
     }
+    
+    
+    func selectRole (sender : UIButton!) {
+        println("role Selecionado")
+    }
+    
+    
     
     
 
@@ -242,6 +296,11 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             var string = localTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "%20", options:  NSStringCompareOptions.LiteralSearch, range: nil)
             
             //var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
+            
+            
+            
+            
+            
             addPointsOfInterest("", name: string, location: geoLocation);
             locationManager.startUpdatingLocation()
         }
@@ -290,7 +349,11 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         mapView.setRegion(region, animated: true)
         
+        mapView.userLocation.title = nomeUser
+        
         var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
+        
+        
         addPointsOfInterest("", name: string, location: coord);
 
     }
