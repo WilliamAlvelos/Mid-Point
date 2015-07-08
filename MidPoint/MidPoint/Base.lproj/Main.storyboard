@@ -134,22 +134,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MTl-AM-OOu">
-                                <rect key="frame" x="16" y="110" width="343" height="30"/>
+                                <rect key="frame" x="11" y="277" width="343" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZIr-Tq-Cwd">
-                                <rect key="frame" x="16" y="158" width="343" height="30"/>
+                                <rect key="frame" x="16" y="338" width="343" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M04-Me-g6e">
-                                <rect key="frame" x="16" y="264" width="343" height="30"/>
+                                <rect key="frame" x="16" y="446" width="343" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rS1-VI-Hx9">
-                                <rect key="frame" x="148" y="366" width="57" height="30"/>
+                                <rect key="frame" x="159" y="508" width="57" height="30"/>
                                 <state key="normal" title="Register">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -158,15 +158,23 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FME-c1-cvh">
-                                <rect key="frame" x="16" y="212" width="343" height="30"/>
+                                <rect key="frame" x="16" y="394" width="343" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZK-IX-G3d">
+                                <rect key="frame" x="67" y="28" width="241" height="241"/>
+                                <state key="normal" title="Let's Take a selfie"/>
+                                <connections>
+                                    <action selector="changeImage:" destination="jPM-wH-c5S" eventType="touchUpInside" id="M5n-2U-hsa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="button" destination="mZK-IX-G3d" id="XfP-pm-a5C"/>
                         <outlet property="confirmPasswordTextFied" destination="M04-Me-g6e" id="YOI-GB-3fM"/>
                         <outlet property="emailTexteField" destination="ZIr-Tq-Cwd" id="DYT-nW-Eyq"/>
                         <outlet property="nameTextField" destination="MTl-AM-OOu" id="ngO-QZ-SvV"/>

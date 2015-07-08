@@ -16,6 +16,10 @@
 		3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */; };
 		3DFB8A241B4C53E600463EA4 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A231B4C53E600463EA4 /* TransitionManager.swift */; };
 		3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A261B4C5B0A00463EA4 /* UserManager.swift */; };
+		3DFB8A2E1B4CC4A900463EA4 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A2A1B4CC4A900463EA4 /* Fabric.framework */; };
+		3DFB8A2F1B4CC4A900463EA4 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */; };
+		3DFB8A301B4CC4A900463EA4 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */; };
+		3DFB8A311B4CC4A900463EA4 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
 		FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */; };
@@ -46,6 +50,10 @@
 		3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		3DFB8A231B4C53E600463EA4 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		3DFB8A261B4C5B0A00463EA4 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		3DFB8A2A1B4CC4A900463EA4 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
+		3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC2C6E61AF935E0004B0AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +73,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DFB8A161B4C1EEE00463EA4 /* CloudKit.framework in Frameworks */,
+				3DFB8A311B4CC4A900463EA4 /* TwitterCore.framework in Frameworks */,
+				3DFB8A2E1B4CC4A900463EA4 /* Fabric.framework in Frameworks */,
+				3DFB8A2F1B4CC4A900463EA4 /* TwitterKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,8 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */,
-				FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */,
 				3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */,
+				FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -110,6 +121,10 @@
 		FFC2C6D91AF935E0004B0AA7 = {
 			isa = PBXGroup;
 			children = (
+				3DFB8A2A1B4CC4A900463EA4 /* Fabric.framework */,
+				3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */,
+				3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */,
+				3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */,
 				3DFB8A151B4C1EEE00463EA4 /* CloudKit.framework */,
 				FFC2C6E41AF935E0004B0AA7 /* MidPoint */,
 				FFC2C6FD1AF935E0004B0AA7 /* MidPointTests */,
@@ -179,6 +194,7 @@
 				FFC2C6DE1AF935E0004B0AA7 /* Sources */,
 				FFC2C6DF1AF935E0004B0AA7 /* Frameworks */,
 				FFC2C6E01AF935E0004B0AA7 /* Resources */,
+				3DFB8A281B4CC45700463EA4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -259,6 +275,7 @@
 				FFC2C6F51AF935E0004B0AA7 /* LaunchScreen.xib in Resources */,
 				3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */,
 				FFC2C6F21AF935E0004B0AA7 /* Images.xcassets in Resources */,
+				3DFB8A301B4CC4A900463EA4 /* TwitterKitResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +287,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3DFB8A281B4CC45700463EA4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 813ff53536bc81411bc1c3cb59f8e1a0da6f7a3d eafcd316f8a63984bc9539c82b26f429a35218fd94797109a96eddc7b5a5d346";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FFC2C6DE1AF935E0004B0AA7 /* Sources */ = {
@@ -417,6 +450,10 @@
 				CODE_SIGN_ENTITLEMENTS = MidPoint/MidPoint.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MidPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -431,6 +468,10 @@
 				CODE_SIGN_ENTITLEMENTS = MidPoint/MidPoint.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MidPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

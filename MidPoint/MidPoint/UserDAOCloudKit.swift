@@ -8,7 +8,7 @@
 
 import Foundation
 import CloudKit
-
+import UIKit
 
 protocol UserDAOCloudKitDelegate{
     func errorThrowed(error: NSError)
@@ -18,7 +18,7 @@ protocol UserDAOCloudKitDelegate{
     func getUserFinished(user: User)
 }
 
-class UserDAOCloudKit: NSObject, UserDAOProtocol {
+class UserDAOCloudKit: NSObject, UserDAOProtocol{
     
     private var container: CKContainer
     private var publicDB: CKDatabase
@@ -38,8 +38,9 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol {
         var query = CKQuery(recordType: "USUARIO", predicate: predicate)
         self.publicDB.performQuery(query, inZoneWithID: nil , completionHandler: { (records: [AnyObject]!, error : NSError!) in
             if error != nil{
-                //self.runDelegateOnMainThread(Selector("self.delegate.errorThrowed(error)"))
-
+                self.Dispatcher({
+                    self.delegate.errorThrowed(error)
+                })
                 
             }
             
@@ -66,6 +67,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol {
                         client.name = records[0].objectForKey("nome") as? String
                         client.email = records[0].objectForKey("email") as? String
                         client.password = records[0].objectForKey("senha") as? String
+                        
                         self.Dispatcher({
                             self.delegate.getUserFinished(client)
                         })
@@ -78,7 +80,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol {
         })
     
     }
-    func Dispatcher(functionToRunOnMainThread: () -> ())
+    private func Dispatcher(functionToRunOnMainThread: () -> ())
     {
         dispatch_async(dispatch_get_main_queue(), functionToRunOnMainThread)
     }
@@ -87,6 +89,8 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol {
         record.setObject(user.name, forKey: "nome")
         record.setObject(user.email, forKey: "email")
         record.setObject(user.password, forKey: "senha")
+        var asset:CKAsset = CKAsset(fileURL: user.image)
+        record.setObject(asset, forKey: "imagem")
         
         self.publicDB.saveRecord(record, completionHandler: { (record:CKRecord!, error:NSError!) -> Void in
             

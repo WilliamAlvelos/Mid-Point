@@ -10,7 +10,11 @@ import Foundation
 import UIKit
 
 
-class RegisterViewController: UIViewController, UserDAOCloudKitDelegate{
+class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    var pickerLibrary : UIImagePickerController?
+    
+    @IBOutlet var button: UIButton!
     
     @IBOutlet var nameTextField: UITextField!
     
@@ -24,16 +28,35 @@ class RegisterViewController: UIViewController, UserDAOCloudKitDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pickerLibrary = UIImagePickerController()
+        pickerLibrary!.delegate = self
+        button.layer.cornerRadius = button.bounds.size.width/2
+        button.layer.borderWidth = 0
+        button.layer.masksToBounds = true
         
     }
     
     override func  viewWillAppear(animated: Bool) {
         
+        
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
     }
     
     func errorThrowed(error: NSError){
-        println("errorThrowed")
+        
+        if error.code == 3 || error.code == 4{
+            println("BAD INTERNET")
+        }else if error.code == 9 || error.code == 1{
+            println("nao esta logado no icloud fdp")
+        }else{
+            println("internal error")
+        }
+        
     }
+    
     func userStillInserted(user: User){
         println("userStillInserted")
     }
@@ -44,22 +67,68 @@ class RegisterViewController: UIViewController, UserDAOCloudKitDelegate{
     func userNotFound(user : User){
         println("userNotFound")
     }
-    func getUserFinished(user: User){
-        println("getUserFinished")
+
     
+    @IBAction func changeImage(sender: AnyObject) {
+        
+        var actionsheet: UIAlertController = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .ActionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .Default,handler: { (alert: UIAlertAction!) -> Void in
+
+            self.pickerLibrary?.sourceType = .Camera
+            self.pickerLibrary?.allowsEditing = true
+            self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
+        })
+        
+        let roloCamera = UIAlertAction(title: "Rolo de camera", style: .Default,handler: { (alert: UIAlertAction!) -> Void in
+            self.pickerLibrary?.sourceType = .PhotoLibrary
+            self.pickerLibrary?.allowsEditing = true
+            self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
+        })
+        
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel,handler:{ (alert: UIAlertAction!) -> Void in
+            println("cancelar")
+        })
+        
+        actionsheet.addAction(cameraAction)
+        actionsheet.addAction(roloCamera)
+        actionsheet.addAction(cancelAction)
+        
+        
+        self.presentViewController(actionsheet, animated: true, completion: nil)
+        
     }
+    
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        button.setBackgroundImage(image, forState: .Normal)
+
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    
+    private func imagePathURL()->NSURL{
+        return NSURL.fileURLWithPath(NSString(format: "%@%@", aplicationDocumentsDirectory(),"userPhoto.JPG") as String)!
+    }
+    private func aplicationDocumentsDirectory()->NSString{
+        var paths :NSArray = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        
+        return paths[0] as! NSString
+    }
+    
     
     
     @IBAction func registerAction(sender: AnyObject) {
         
         if((passwordTextField.text == confirmPasswordTextFied.text) || passwordTextField.text != ""){
             
-            var userDao :UserDAOCloudKit = UserDAOCloudKit()
-            userDao.delegate = self
+            var userManager :UserManager = UserManager()
+            userManager.delegate = self
             
-            var user: User = User(name: nameTextField.text, password: passwordTextField.text, email: emailTexteField.text)
+            var user: User = User(name: nameTextField.text, password: passwordTextField.text, email: emailTexteField.text, image: imagePathURL())
 
-            userDao.saveUser(user)
+            userManager.insertUserDatabase(user)
             
         }
         

@@ -9,13 +9,12 @@
 import Foundation
 import UIKit
 
-
-protocol UserManagerDelegate{
+@objc protocol UserManagerDelegate{
     func errorThrowed(error: NSError)
-    func userStillInserted(user: User)
-    func saveUserFinished(user: User)
     func userNotFound(user : User)
-    func getUserFinished(user: User)
+    optional func getUserFinished(user: User)
+    optional func userStillInserted(user: User)
+    optional func saveUserFinished(user: User)
 }
 
 class UserManager: UserDAOCloudKitDelegate{
@@ -35,11 +34,11 @@ class UserManager: UserDAOCloudKitDelegate{
     }
     
     func userStillInserted(user: User){
-        self.delegate?.userStillInserted(user)
+        self.delegate?.userStillInserted!(user)
     }
     
     func saveUserFinished(user: User){
-        self.delegate?.userStillInserted(user)
+        self.delegate?.saveUserFinished!(user)
     }
     
     func userNotFound(user : User){
@@ -47,7 +46,7 @@ class UserManager: UserDAOCloudKitDelegate{
     }
     
     func getUserFinished(user: User){
-        self.delegate?.getUserFinished(user)
+        self.delegate?.getUserFinished!(user)
     }
 
     

@@ -7,22 +7,30 @@
 //
 
 import Foundation
+import UIKit
 
 class User: NSObject {
     
     var name: String?
     var password: String?
     var email: String?
-    var image: NSData?
+    var image: NSURL?
     
     
-    
-    init(name: String, password: String, email:String){
+    init(name: String, password: String, email:String, image: NSURL){
         self.name = name
         self.password = password
         self.email = email
+        self.image = image
     }
     
+    
+    init(name:String, password:String, email:String) {
+        self.name = name
+        self.password = password
+        self.email = email
+        
+    }
     
     init(name:String, password:String) {
         self.name = name

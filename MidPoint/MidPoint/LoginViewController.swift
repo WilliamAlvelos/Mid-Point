@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import TwitterKit
 
 class LoginViewController: UIViewController, UserManagerDelegate{
     
@@ -17,9 +18,14 @@ class LoginViewController: UIViewController, UserManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let logInButton = TWTRLogInButton(logInCompletion: {
+            (session: TWTRSession!, error: NSError!) in
+            // play with Twitter session
+        })
+        logInButton.center = self.view.center
+        self.view.addSubview(logInButton)
+
         
-        
-    
     }
     
     override func  viewWillAppear(animated: Bool) {
@@ -45,14 +51,17 @@ class LoginViewController: UIViewController, UserManagerDelegate{
     }
     
     func errorThrowed(error: NSError){
-        println("errorThrowed")
+        
+        if error.code == 3 || error.code == 4{
+            println("BAD INTERNET")
+        }else if error.code == 9 || error.code == 1{
+            println("nao esta logado no icloud fdp")
+        }else{
+            println("internal error")
+        }
+
     }
-    func userStillInserted(user: User){
-        println("userStillInserted")
-    }
-    func saveUserFinished(user: User){
-        println("oloko")
-    }
+
     func userNotFound(user : User){
         println("userNotFound")
     }
