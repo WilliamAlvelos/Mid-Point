@@ -32,8 +32,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
 
     
 
-   private func getUser(user:User, option : Option){
-        var predicate = NSPredicate(format: "email = %@ && senha = %@", user.email!, user.password!)
+    private func getUser(user:User, option : Option, predicate : NSPredicate){
         
         var query = CKQuery(recordType: "USUARIO", predicate: predicate)
         self.publicDB.performQuery(query, inZoneWithID: nil , completionHandler: { (records: [AnyObject]!, error : NSError!) in
@@ -113,12 +112,14 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
 
     func saveUser(user: User){
         var predicate = NSPredicate(format: "email = %@", user.email!)
-        self.getUser(user, option: .Save)
+        self.getUser(user, option: .Save, predicate : predicate)
         
     }
     
     func getUser(user: User){
-        self.getUser(user, option: .Get)
+        var predicate = NSPredicate(format: "email = %@ && senha = %@", user.email!, user.password!)
+
+        self.getUser(user, option: .Get, predicate : predicate)
     }
     
     

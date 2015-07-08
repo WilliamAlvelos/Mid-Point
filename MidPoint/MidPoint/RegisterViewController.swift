@@ -24,8 +24,6 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     @IBOutlet var confirmPasswordTextFied: UITextField!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerLibrary = UIImagePickerController()
@@ -101,22 +99,28 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     }
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        button.setBackgroundImage(image, forState: .Normal)
+  
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!){
+        let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
+        data.writeToFile(self.imagePathURL().path!, atomically: true)
+        println("%@", self.imagePathURL().path!)
 
+        button.setBackgroundImage(image, forState: .Normal)
+        
         self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
 
     
     private func imagePathURL()->NSURL{
-        return NSURL.fileURLWithPath(NSString(format: "%@%@", aplicationDocumentsDirectory(),"userPhoto.JPG") as String)!
+        return NSURL.fileURLWithPath(NSString(format: "%@%@", aplicationDocumentsDirectory(),"/userPhoto.JPG") as String)!
     }
     private func aplicationDocumentsDirectory()->NSString{
         var paths :NSArray = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         
         return paths[0] as! NSString
     }
-    
+//
     
     
     @IBAction func registerAction(sender: AnyObject) {
@@ -126,7 +130,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
             var userManager :UserManager = UserManager()
             userManager.delegate = self
             
-            var user: User = User(name: nameTextField.text, password: passwordTextField.text, email: emailTexteField.text, image: imagePathURL())
+            var user: User = User(name: nameTextField.text, password: passwordTextField.text, email: emailTexteField.text, image: self.imagePathURL())
 
             userManager.insertUserDatabase(user)
             
