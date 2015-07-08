@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>3F48945A-1543-4796-813C-69845223CD49</string>
 	<key>IDESourceControlProjectName</key>
-	<string>MidPoint</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>36BA4D95D42D14472C7571EA77192FF118B04925</key>
 		<string>https://github.com/WilliamAlvelos/Mid-Point.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MidPoint/MidPoint.xcodeproj</string>
+	<string>MidPoint/MidPoint.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>36BA4D95D42D14472C7571EA77192FF118B04925</key>

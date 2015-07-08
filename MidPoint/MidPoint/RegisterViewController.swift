@@ -31,7 +31,6 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         button.layer.cornerRadius = button.bounds.size.width/2
         button.layer.borderWidth = 0
         button.layer.masksToBounds = true
-        
     }
     
     override func  viewWillAppear(animated: Bool) {
@@ -116,6 +115,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     private func imagePathURL()->NSURL{
         return NSURL.fileURLWithPath(NSString(format: "%@%@", aplicationDocumentsDirectory(),"/userPhoto.JPG") as String)!
     }
+    
     private func aplicationDocumentsDirectory()->NSString{
         var paths :NSArray = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         

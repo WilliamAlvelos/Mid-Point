@@ -7,12 +7,14 @@
 //
 
 import Foundation
+
 enum Option {
     case Create
     case Edit
     case Save
     case Get
 }
+
 protocol UserDAOProtocol{
     func saveUser(user:User)
     func getUser(user: User)

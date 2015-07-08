@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class Friends: NSObject {
+class Friend: NSObject {
     
     var name: String?
     var location: CLLocationCoordinate2D?

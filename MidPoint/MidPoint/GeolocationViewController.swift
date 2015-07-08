@@ -280,6 +280,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     func selectRole (sender : UIButton!) {
         println("role Selecionado")
+        
     }
     
     
