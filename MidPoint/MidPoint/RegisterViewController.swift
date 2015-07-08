@@ -36,7 +36,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     override func  viewWillAppear(animated: Bool) {
         
-        
+        PermissionsResponse.checkCameraPermission()
+        PermissionsResponse.checkRollCameraPermission()
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

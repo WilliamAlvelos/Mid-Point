@@ -22,6 +22,7 @@
 		3DFB8A311B4CC4A900463EA4 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */; };
 		3DFB8A331B4CD98D00463EA4 /* teste.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB8A321B4CD98D00463EA4 /* teste.png */; };
 		3DFC96C01B4D720300E7041E /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFC96BF1B4D720300E7041E /* Friends.swift */; };
+		7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
 		FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */; };
@@ -58,6 +59,7 @@
 		3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		3DFB8A321B4CD98D00463EA4 /* teste.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teste.png; sourceTree = "<group>"; };
 		3DFC96BF1B4D720300E7041E /* Friends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
+		7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsResponse.swift; sourceTree = "<group>"; };
 		FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC2C6E61AF935E0004B0AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		FFC2C6D91AF935E0004B0AA7 = {
 			isa = PBXGroup;
 			children = (
+				7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */,
 				3DFB8A2A1B4CC4A900463EA4 /* Fabric.framework */,
 				3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */,
 				3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */,
@@ -339,6 +342,7 @@
 				3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */,
 				3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */,
 				FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */,
+				7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */,
 				3DFB8A241B4C53E600463EA4 /* TransitionManager.swift in Sources */,
 				3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */,
 				3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */,
