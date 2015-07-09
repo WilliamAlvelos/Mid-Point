@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
+		3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */; };
 		3DFB8A161B4C1EEE00463EA4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A151B4C1EEE00463EA4 /* CloudKit.framework */; };
 		3DFB8A181B4C218700463EA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A171B4C218700463EA4 /* User.swift */; };
 		3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		3D6FD8DA1B4A3C08008E70E9 /* b_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_search.png; sourceTree = "<group>"; };
+		3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MidPoint.entitlements; sourceTree = "<group>"; };
 		3DFB8A151B4C1EEE00463EA4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		3DFB8A171B4C218700463EA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
@@ -101,6 +103,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3DEE4F581B4ED66600645CA1 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TableView;
+			sourceTree = "<group>";
+		};
 		3DFB8A191B4C221100463EA4 /* DAO */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +125,7 @@
 				3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */,
 				3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */,
 				FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */,
+				3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */,
 				3DFB8A321B4CD98D00463EA4 /* teste.png */,
 			);
 			name = ViewControllers;
@@ -181,6 +191,7 @@
 				3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */,
 				FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */,
 				3DFB8A191B4C221100463EA4 /* DAO */,
+				3DEE4F581B4ED66600645CA1 /* TableView */,
 				3DFB8A201B4C383300463EA4 /* ViewControllers */,
 				3DFB8A251B4C54C800463EA4 /* NSObject */,
 				FFC2C6EE1AF935E0004B0AA7 /* Main.storyboard */,
@@ -356,6 +367,7 @@
 				3DFC96C61B4DD19F00E7041E /* FriendDAOCloudKit.swift in Sources */,
 				3DFC96C81B4DD5F100E7041E /* FriendManager.swift in Sources */,
 				3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */,
+				3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */,
 				3DFC96C41B4DD0C300E7041E /* FriendDAO.swift in Sources */,
 				3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */,
 				FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */,

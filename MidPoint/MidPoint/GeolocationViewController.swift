@@ -66,7 +66,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     
-    func addYourFriends(friends: [Friends]){
+    func addYourFriends(friends: [Friend]){
         
         
         for(var i = 0; i < friends.count; i++){

@@ -11,11 +11,17 @@ import UIKit
 import MapKit
 
 class Friend: NSObject {
-    
+    //normal Login
     var name: String?
     var location: CLLocationCoordinate2D?
     var email: String?
     var image: NSURL?
+    
+    //Login with API
+    var userNameTwitter: String?
+    var userIdTwitter: String?
+    var userNameFacebook: String?
+    var userIdFacebook: String?
     
     
     init(name: String, location: CLLocationCoordinate2D, email:String, image: NSURL){
@@ -24,6 +30,20 @@ class Friend: NSObject {
         self.email = email
         self.image = image
     }
+    
+    //init for FB
+    init(userNameFB: String, userIdFB: String){
+        self.userIdFacebook = userIdFB
+        self.userNameFacebook = userNameFB
+    }
+    
+    //init for Twitter
+    init(userNameTwitter: String, userIdTwitter:String){
+        self.userNameTwitter = userNameTwitter
+        self.userIdTwitter = userIdTwitter
+    
+    }
+    
     
     override init(){
         
