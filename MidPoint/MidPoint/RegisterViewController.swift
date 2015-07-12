@@ -37,6 +37,22 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
         PermissionsResponse.checkCameraPermission()
         PermissionsResponse.checkRollCameraPermission()
+        
+        
+        passwordTextField.center.x  -= view.bounds.width
+        emailTexteField.center.x -= view.bounds.width
+        confirmPasswordTextFied.center.x -= view.bounds.width
+        nameTextField.center.x -= view.bounds.width
+        
+        
+        UIView.animateWithDuration(5.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.nameTextField.center.x += self.view.bounds.width
+            self.confirmPasswordTextFied.center.x += self.view.bounds.width
+            self.emailTexteField.center.x += self.view.bounds.width
+            self.passwordTextField.center.x += self.view.bounds.width
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+        
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
