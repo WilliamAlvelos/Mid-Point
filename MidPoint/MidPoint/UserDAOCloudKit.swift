@@ -88,7 +88,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         record.setObject(user.name, forKey: "nome")
         record.setObject(user.email, forKey: "email")
         record.setObject(user.password, forKey: "senha")
-        var asset:CKAsset = CKAsset(fileURL: user.image)
+        var asset:CKAsset = CKAsset(fileURL: user.url)
         record.setObject(asset, forKey: "imagem")
         
         self.publicDB.saveRecord(record, completionHandler: { (record:CKRecord!, error:NSError!) -> Void in
@@ -111,13 +111,13 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
     }
 
     func saveUser(user: User){
-        var predicate = NSPredicate(format: "email = %@", user.email!)
+        var predicate = NSPredicate(format: "email = %@", user.email!.lowercaseString)
         self.getUser(user, option: .Save, predicate : predicate)
         
     }
     
     func getUser(user: User){
-        var predicate = NSPredicate(format: "email = %@ && senha = %@", user.email!, user.password!)
+        var predicate = NSPredicate(format: "email = %@ && senha = %@", user.email!.lowercaseString, user.password!)
 
         self.getUser(user, option: .Get, predicate : predicate)
     }

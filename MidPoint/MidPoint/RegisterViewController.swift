@@ -13,7 +13,7 @@ import UIKit
 class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     var pickerLibrary : UIImagePickerController?
-    
+    var user : User?
     @IBOutlet var button: UIButton!
     
     @IBOutlet var nameTextField: UITextField!
@@ -135,9 +135,9 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
         data.writeToFile(self.imagePathURL().path!, atomically: true)
         println("%@", self.imagePathURL().path!)
-
-        button.setBackgroundImage(image, forState: .Normal)
         
+        button.setBackgroundImage(image, forState: .Normal)
+        user?.image = image
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
@@ -162,8 +162,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
             var userManager :UserManager = UserManager()
             userManager.delegate = self
             
-            var user: User = User(name: nameTextField.text, password: passwordTextField.text, email: emailTexteField.text, image: self.imagePathURL())
-
+            var user: User = User(name: nameTextField.text, password: passwordTextField.text, email: emailTexteField.text)
+            user.image = self.user?.image
             userManager.insertUserDatabase(user)
             
         }

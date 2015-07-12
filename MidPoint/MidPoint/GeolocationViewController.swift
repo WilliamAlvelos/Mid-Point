@@ -73,6 +73,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
         
             var point: MKPointAnnotation = MKPointAnnotation()
+            
         
             point.title = friends[i].name
             point.coordinate = friends[i].location!

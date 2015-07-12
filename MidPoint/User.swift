@@ -14,10 +14,11 @@ class User: NSObject {
     var name: String?
     var password: String?
     var email: String?
-    var image: NSURL?
+    var image: UIImage?
+    var url : NSURL?
     
     
-    init(name: String, password: String, email:String, image: NSURL){
+    init(name: String, password: String, email:String, image: UIImage){
         self.name = name
         self.password = password
         self.email = email
