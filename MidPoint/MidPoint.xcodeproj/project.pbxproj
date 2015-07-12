@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
+		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
+		3DACDEB21B52274900711E25 /* CustomCellFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEB11B52274900711E25 /* CustomCellFriend.swift */; };
 		3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */; };
 		3DFB8A161B4C1EEE00463EA4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A151B4C1EEE00463EA4 /* CloudKit.framework */; };
 		3DFB8A181B4C218700463EA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A171B4C218700463EA4 /* User.swift */; };
@@ -48,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		3D6FD8DA1B4A3C08008E70E9 /* b_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_search.png; sourceTree = "<group>"; };
+		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		3DACDEB11B52274900711E25 /* CustomCellFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellFriend.swift; sourceTree = "<group>"; };
 		3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MidPoint.entitlements; sourceTree = "<group>"; };
 		3DFB8A151B4C1EEE00463EA4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -103,9 +107,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3DACDEB01B5222E900711E25 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				3DACDEAE1B5222E300711E25 /* Event.swift */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
 		3DEE4F581B4ED66600645CA1 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				3DACDEB11B52274900711E25 /* CustomCellFriend.swift */,
 			);
 			name = TableView;
 			sourceTree = "<group>";
@@ -114,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				3DFC96C21B4D722400E7041E /* Friends */,
+				3DACDEB01B5222E900711E25 /* Event */,
 				3DFC96C11B4D720E00E7041E /* User */,
 			);
 			name = DAO;
@@ -359,6 +373,7 @@
 				3DFB8A181B4C218700463EA4 /* User.swift in Sources */,
 				FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */,
 				3DFC96C01B4D720300E7041E /* Friend.swift in Sources */,
+				3DACDEB21B52274900711E25 /* CustomCellFriend.swift in Sources */,
 				3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */,
 				3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */,
 				FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */,
@@ -369,6 +384,7 @@
 				3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */,
 				3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */,
 				3DFC96C41B4DD0C300E7041E /* FriendDAO.swift in Sources */,
+				3DACDEAF1B5222E300711E25 /* Event.swift in Sources */,
 				3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */,
 				FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */,
 			);

@@ -45,14 +45,29 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         nameTextField.center.x -= view.bounds.width
         
         
-        UIView.animateWithDuration(5.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.nameTextField.center.x += self.view.bounds.width
-            self.confirmPasswordTextFied.center.x += self.view.bounds.width
+
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+        
+        UIView.animateWithDuration(0.8, delay: 0.2, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.emailTexteField.center.x += self.view.bounds.width
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+        
+        UIView.animateWithDuration(0.8, delay: 0.4, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.passwordTextField.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)
         
+        UIView.animateWithDuration(0.8, delay: 0.6, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.confirmPasswordTextFied.center.x += self.view.bounds.width
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+
+
+
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

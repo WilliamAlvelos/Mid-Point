@@ -197,90 +197,112 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPx-0c-mC7">
-                                <rect key="frame" x="164" y="114" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcR-Nb-s1K">
                                 <rect key="frame" x="166" y="183" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="310-oN-b5E">
+                                <rect key="frame" x="164" y="128" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7i-EZ-gCN">
                                 <rect key="frame" x="166" y="224" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9tD-g5-WXB">
-                                <rect key="frame" x="0.0" y="333" width="375" height="334"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <toolbar key="tableHeaderView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="0QO-qe-FB4">
-                                    <rect key="frame" x="0.0" y="312" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <items>
-                                        <barButtonItem title="favoritos" id="YxR-OO-cd6">
-                                            <connections>
-                                                <action selector="favoritos:" destination="3Xw-0E-rJ3" id="RdG-46-e7p"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem title="avaliacoes" width="90" id="6hU-0F-Is7">
-                                            <connections>
-                                                <action selector="avaliacao:" destination="3Xw-0E-rJ3" id="Gf9-BL-rn2"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem title="Facebook" width="100" id="KWh-eb-Mpx">
-                                            <connections>
-                                                <action selector="FacebookFriend:" destination="3Xw-0E-rJ3" id="sni-02-wZ6"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem title="Twitter" width="85" id="XqD-Dn-9cj">
-                                            <connections>
-                                                <action selector="TwitterFriend:" destination="3Xw-0E-rJ3" id="2LY-ag-zRM"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </items>
-                                </toolbar>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zNY-N1-9Nn">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zNY-N1-9Nn" id="vhq-kb-td5">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="310-oN-b5E">
-                                <rect key="frame" x="164" y="114" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuG-dk-YbC">
                                 <rect key="frame" x="166" y="183" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2s1-GQ-3aY">
+                                <rect key="frame" x="0.0" y="287" width="375" height="63"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0QO-qe-FB4">
+                                        <rect key="frame" x="0.0" y="19" width="375" height="44"/>
+                                        <items>
+                                            <barButtonItem title="favoritos" id="YxR-OO-cd6">
+                                                <connections>
+                                                    <action selector="favoritos:" destination="3Xw-0E-rJ3" id="RdG-46-e7p"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="avaliacoes" width="90" id="6hU-0F-Is7">
+                                                <connections>
+                                                    <action selector="avaliacao:" destination="3Xw-0E-rJ3" id="Gf9-BL-rn2"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Facebook" width="100" id="KWh-eb-Mpx">
+                                                <connections>
+                                                    <action selector="FacebookFriend:" destination="3Xw-0E-rJ3" id="sni-02-wZ6"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Twitter" width="85" id="XqD-Dn-9cj">
+                                                <connections>
+                                                    <action selector="TwitterFriend:" destination="3Xw-0E-rJ3" id="2LY-ag-zRM"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                </subviews>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="166" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9tD-g5-WXB">
+                                <rect key="frame" x="0.0" y="349" width="375" height="1000"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomCellFriend" rowHeight="166" id="zNY-N1-9Nn" customClass="CustomCellFriend" customModule="MidPoint" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zNY-N1-9Nn" id="vhq-kb-td5">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teste.png" translatesAutoresizingMaskIntoConstraints="NO" id="eb5-ln-aSM">
+                                                    <rect key="frame" x="15" y="32" width="98" height="100.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16Z-wI-aPH">
+                                                    <rect key="frame" x="166" y="44" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Nn-v4-Y8S">
+                                                    <rect key="frame" x="166" y="98" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageLabel" destination="eb5-ln-aSM" id="AlP-EQ-rUT"/>
+                                            <outlet property="subtitleLabel" destination="5Nn-v4-Y8S" id="9g1-lX-Ij1"/>
+                                            <outlet property="titleLabel" destination="16Z-wI-aPH" id="e05-b8-rtX"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="HaM-RP-xYc"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="barraFriend" destination="0QO-qe-FB4" id="rY7-tO-ohs"/>
                         <outlet property="buttonImage" destination="310-oN-b5E" id="y9w-MO-14f"/>
                         <outlet property="localFriend" destination="L7i-EZ-gCN" id="zzl-0c-Hev"/>
                         <outlet property="nameFriend" destination="tuG-dk-YbC" id="n1D-8P-sot"/>
                         <outlet property="tableView" destination="9tD-g5-WXB" id="tci-xR-Kty"/>
+                        <outlet property="viewGesture" destination="2s1-GQ-3aY" id="l12-ts-FKR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZq-IZ-O0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1173.5" y="1003.5"/>
+            <point key="canvasLocation" x="1169.5" y="1037.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PLo-Gd-0u2">
@@ -301,5 +323,6 @@
     </scenes>
     <resources>
         <image name="b_search.png" width="155" height="155"/>
+        <image name="teste.png" width="26" height="20"/>
     </resources>
 </document>

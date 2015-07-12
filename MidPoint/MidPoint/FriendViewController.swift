@@ -14,18 +14,28 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //receber um amigo para monstrar o perfil dele
     var friend:Friend?
+    
+    var evento: Event?
     //Outlets
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var viewGesture: UIView!
     @IBOutlet var buttonImage: UIButton!
     @IBOutlet var nameFriend: UILabel!
     @IBOutlet var localFriend: UILabel!
     
+    @IBOutlet var barraFriend: UIToolbar!
+    
+    
     //ganbs para ver se esta funfando enquanto nao recebo o amigo
-    var favoritos: [String] = ["pizza", "balada", "shopping"]
-    var avaliacoes: [String] = ["ruin", "lixo", "pior"]
+    var favoritos: [String] = ["pizza", "balada", "shopping","pizza", "balada", "shopping","pizza", "balada", "shopping","pizza", "balada", "shopping","pizza", "balada", "shopping","pizza", "balada", "shopping","pizza", "balada", "shopping","pizza", "balada", "shopping"]
+    var avaliacoes: [String] = ["ruin", "lixo", "pior" ,"ruin", "lixo", "pior","ruin", "lixo", "pior","ruin", "lixo", "pior","ruin", "lixo", "pior","ruin", "lixo", "pior","ruin", "lixo", "pior","ruin", "lixo", "pior"]
     
     var data: [String]?
+    
+    var travado: Bool?
+    
+    var navItem:UINavigationItem?
     
     
     override func viewDidLoad() {
@@ -33,15 +43,81 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         data = favoritos
-        
+        travado = false
+
+
+        navItem = self.navigationItem
         
         nameFriend.text = friend?.name
-        localFriend.text = friend?.location as? String
+        //localFriend.text = friend?.location as? String
+        
+        buttonImage.layer.cornerRadius = button.bounds.size.width/2
+        buttonImage.layer.borderWidth = 0
+        buttonImage.layer.masksToBounds = true
+        
+        
+        var swipeUP:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipe:"))
+        swipeUP.direction = UISwipeGestureRecognizerDirection.Up
+        
+        var swipeDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipe:"))
+        
+        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
+        
+        self.viewGesture.addGestureRecognizer(swipeUP)
+        
+        self.viewGesture.addGestureRecognizer(swipeDown)
+        
+        
+        self.view.addGestureRecognizer(swipeUP)
+        
+        self.view.addGestureRecognizer(swipeDown)
+        
         
     }
     
+    
+    func UpSwipe(gesture: UISwipeGestureRecognizer){
+        
+        if(travado == false){
+            
+            navItem!.title = "amigo"
+            
+            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                self.tableView.center.y -= self.view.bounds.width/1.55
+                self.viewGesture.center.y -= self.view.bounds.width/1.55
+//                self.buttonImage.center.x -= self.view.bounds.height/5
+//                self.buttonImage.center.y -= self.view.bounds.width/8
+                
+                self.view.backgroundColor = UIColor(red: 0, green:0 , blue: 255, alpha: 1)
+                
+                self.view.layoutIfNeeded()
+                }, completion: nil)
+            
+            travado = true
+        }
+        
+    }
+    
+    func DownSwipe(gesture: UISwipeGestureRecognizer){
+        if(travado == true){
+            
+            navItem!.title = " "
+            
+            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                self.tableView.center.y += self.view.bounds.width/1.55
+                self.viewGesture.center.y += self.view.bounds.width/1.55
+//                self.buttonImage.center.x += self.view.bounds.height/5
+//                self.buttonImage.center.y += self.view.bounds.width/8
+                self.view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
+                self.view.layoutIfNeeded()
+                }, completion: nil)
+        
+            travado = false
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
-        animateTable()
+       animateTable()
         
     }
     
@@ -72,7 +148,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 50;
+        return 150;
         
     }
     
@@ -88,9 +164,13 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        var cell:CustomCellFriend = self.tableView.dequeueReusableCellWithIdentifier("CustomCellFriend") as! CustomCellFriend
         
-        cell.textLabel?.text = self.data![indexPath.row]
+        cell.titleLabel?.text = self.data![indexPath.row]
+        
+        cell.imageLabel = UIImageView(image: UIImage(named: "teste"))
+
+        cell.subtitleLabel.text = self.data![indexPath.row]
         
         return cell
     }
@@ -122,12 +202,12 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     @IBAction func favoritos(sender: AnyObject) {
         data = favoritos
-        tableView.reloadData()
+        animateTable()
         
     }
     @IBAction func avaliacao(sender: AnyObject) {
         data = avaliacoes
-        tableView.reloadData()
+        animateTable()
     }
     
     @IBAction func FacebookFriend(sender: AnyObject) {
