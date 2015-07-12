@@ -51,7 +51,7 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         nameFriend.text = friend?.name
         //localFriend.text = friend?.location as? String
         
-        buttonImage.layer.cornerRadius = button.bounds.size.width/2
+        buttonImage.layer.cornerRadius = buttonImage.bounds.size.width/2
         buttonImage.layer.borderWidth = 0
         buttonImage.layer.masksToBounds = true
         
