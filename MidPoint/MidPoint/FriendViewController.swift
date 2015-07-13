@@ -45,7 +45,8 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
         data = favoritos
         travado = false
 
-
+        
+        
         navItem = self.navigationItem
         
         nameFriend.text = friend?.name
