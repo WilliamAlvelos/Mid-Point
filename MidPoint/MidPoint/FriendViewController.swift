@@ -47,13 +47,6 @@ class FriendViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         
         
-        // Create a reference to a Firebase location
-        var myRootRef = Firebase(url:"https://<YOUR-FIREBASE-APP>.firebaseio.com")
-        // Write data to Firebase
-        myRootRef.setValue("Do you have data? You'll love Firebase.")
-        
-        
-
         navItem = self.navigationItem
         
         nameFriend.text = friend?.name
