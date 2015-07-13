@@ -162,9 +162,9 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
             var userManager :UserManager = UserManager()
             userManager.delegate = self
             
-            var user: User = User(name: nameTextField.text, password: passwordTextField.text, email: emailTexteField.text)
+            var user: User = User(name: nameTextField.text, email: emailTexteField.text)
             user.image = self.user?.image
-            userManager.insertUserDatabase(user)
+            userManager.insertUserDatabase(user, password : passwordTextField.text)
             
         }
         

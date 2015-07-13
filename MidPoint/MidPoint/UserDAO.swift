@@ -16,7 +16,7 @@ enum Option {
 }
 
 protocol UserDAOProtocol{
-    func saveUser(user:User)
-    func getUser(user: User)
+    func saveUser(user:User,  password : String)
+    func getUser(user: User, password : String)
     
 }

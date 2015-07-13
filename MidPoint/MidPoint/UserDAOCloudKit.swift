@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CloudKit
 import UIKit
 
 protocol UserDAOCloudKitDelegate{
@@ -20,107 +19,80 @@ protocol UserDAOCloudKitDelegate{
 
 class UserDAOCloudKit: NSObject, UserDAOProtocol{
     
-    private var container: CKContainer
-    private var publicDB: CKDatabase
-    
+
     var delegate: UserDAOCloudKitDelegate!
     
-    override init(){
-        container = CKContainer.defaultContainer()
-        publicDB = container.publicCloudDatabase
+
+    func parseJSON(inputData: NSData) -> NSDictionary{
+        var error: NSError?
+        var boardsDictionary:  NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
+        return boardsDictionary
     }
+    private func createMutableRequest(url : String, bodyHttp : String, completionHandler handler: (NSURLResponse!, NSData!, NSError!) -> Void){
+        var url : NSURL  = NSURL(string: url)!
+        var mutableRequest: NSMutableURLRequest  = NSMutableURLRequest(URL: url)
+        mutableRequest.cachePolicy = .UseProtocolCachePolicy
+        mutableRequest.timeoutInterval = 10.0
+        mutableRequest.HTTPBody = bodyHttp.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+        mutableRequest.HTTPMethod = "POST"
+        let queue:NSOperationQueue = NSOperationQueue()
 
-    
-
-    private func getUser(user:User, option : Option, predicate : NSPredicate){
-        
-        var query = CKQuery(recordType: "USUARIO", predicate: predicate)
-        self.publicDB.performQuery(query, inZoneWithID: nil , completionHandler: { (records: [AnyObject]!, error : NSError!) in
-            if error != nil{
-                self.Dispatcher({
-                    self.delegate.errorThrowed(error)
-                })
-                
+        NSURLConnection.sendAsynchronousRequest(mutableRequest, queue: queue, completionHandler: handler)
+    }
+    func saveUser(user: User, password : String){
+        let url : String = "http://www.alvelos.wc.lt/MidPoint/cadastro.php"
+        let bodyHttp = String(format: "email=%@&password=%@&name=%@", user.email!,password,user.name!)
+        createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                self.delegate.errorThrowed(error)
+               
+                return
             }
-            
-            else{
-                if option == .Save{
-                    if records.count == 0{
-                        self.performQuery(user)
-                    }else{
-                        self.Dispatcher({
-                            self.delegate.userStillInserted(user)
-                        })
-                    }
-                }
-                else if option == .Get{
-                    if records.count == 0{
-                        self.Dispatcher({
-                            self.delegate.userNotFound(user)
-                        })
-
-                        
-                    }else{
-                        var client : User = User()
-                        
-                        client.name = records[0].objectForKey("nome") as? String
-                        client.email = records[0].objectForKey("email") as? String
-                        client.password = records[0].objectForKey("senha") as? String
-                        
-                        self.Dispatcher({
-                            self.delegate.getUserFinished(client)
-                        })
-                    }
-                }
-                
-                
+         let string = self.parseJSON(data)
+            if (string.objectForKey("error") != nil){
+                var int = string.objectForKey("error")! as! Int
+                let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
+                self.delegate.errorThrowed(error)
+                return
             }
-            
-        })
-    
-    }
-    private func Dispatcher(functionToRunOnMainThread: () -> ())
-    {
-        dispatch_async(dispatch_get_main_queue(), functionToRunOnMainThread)
-    }
-    private func performQuery(user: User){
-        var record:CKRecord = CKRecord(recordType: "USUARIO")
-        record.setObject(user.name, forKey: "nome")
-        record.setObject(user.email, forKey: "email")
-        record.setObject(user.password, forKey: "senha")
-        var asset:CKAsset = CKAsset(fileURL: user.url)
-        record.setObject(asset, forKey: "imagem")
-        
-        self.publicDB.saveRecord(record, completionHandler: { (record:CKRecord!, error:NSError!) -> Void in
-            
-            if error != nil{
-                self.Dispatcher({
-                    self.delegate.errorThrowed(error)
-                })
-
-                
-            }else{
-                self.Dispatcher({
-                    self.delegate.saveUserFinished(user)
-                })
-
+            if (string.objectForKey("succesfull") != nil){
+                self.delegate.saveUserFinished(user)
+                return
             }
             
         })
 
     }
-
-    func saveUser(user: User){
-        var predicate = NSPredicate(format: "email = %@", user.email!.lowercaseString)
-        self.getUser(user, option: .Save, predicate : predicate)
-        
-    }
     
-    func getUser(user: User){
-        var predicate = NSPredicate(format: "email = %@ && senha = %@", user.email!.lowercaseString, user.password!)
+    func getUser(user: User, password : String){
 
-        self.getUser(user, option: .Get, predicate : predicate)
+        let url : String = "http://alvelos.wc.lt/MidPoint/login.php"
+        let bodyHttp = String(format: "password=%@&email=%@", password ,user.email!)
+        createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                self.delegate.errorThrowed(error)
+                
+                return
+            }
+            let string = self.parseJSON(data)
+            if (string.objectForKey("error") != nil){
+                var int = string.objectForKey("error")! as! Int
+                let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
+                self.delegate.errorThrowed(error)
+            }
+            else {
+                let name = string.objectForKey("name") as! String
+                let email = string.objectForKey("email") as! String
+                let id = (string.objectForKey("id")! as! NSString).integerValue
+
+                self.delegate.getUserFinished(User(name: name, email: email, id: id))
+            }
+            
+            
+        })
+    
     }
+
     
     
 }

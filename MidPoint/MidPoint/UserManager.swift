@@ -54,12 +54,12 @@ class UserManager: UserDAOCloudKitDelegate{
         return User()
     }
     
-    func insertUserDatabase(user:User){
-        userDao?.saveUser(user)
+    func insertUserDatabase(user:User, password : String){
+        userDao?.saveUser(user, password: password)
     }
     
-    func getUserDatabase(user:User){
-        userDao?.getUser(user)
+    func getUserDatabase(user:User, password : String){
+        userDao?.getUser(user, password: password)
     }
     
     

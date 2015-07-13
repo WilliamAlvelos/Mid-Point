@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H3V-C5-oET">
+
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H3V-C5-oET">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -68,6 +69,7 @@
             </objects>
             <point key="canvasLocation" x="509.5" y="242.5"/>
         </scene>
+
         <!--Chat View Controller-->
         <scene sceneID="um1-42-deE">
             <objects>
@@ -364,7 +366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZq-IZ-O0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1169.5" y="1037.5"/>
+            <point key="canvasLocation" x="2021.5" y="893.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PLo-Gd-0u2">
@@ -374,9 +376,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="3Xw-0E-rJ3" kind="relationship" relationship="rootViewController" id="0bS-YD-nAo"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72v-A1-61n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
