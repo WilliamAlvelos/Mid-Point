@@ -62,9 +62,9 @@ class LoginViewController: UIViewController, UserManagerDelegate{
         var usuario: UserManager = UserManager()
         usuario.delegate = self
         
-        var user: User = User(name: nomeText.text, password: senhaText.text, email: nomeText.text)
+        var user: User = User(name: nomeText.text, email: nomeText.text)
         
-        usuario.getUserDatabase(user)
+        usuario.getUserDatabase(user, password: self.senhaText.text)
 
     }
     

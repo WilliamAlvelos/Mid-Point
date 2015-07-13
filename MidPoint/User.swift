@@ -12,30 +12,25 @@ import UIKit
 class User: NSObject {
     
     var name: String?
-    var password: String?
     var email: String?
     var image: UIImage?
-    var url : NSURL?
+    var id : Int?
     
-    
-    init(name: String, password: String, email:String, image: UIImage){
+    init(name: String, email:String, image: UIImage){
         self.name = name
-        self.password = password
         self.email = email
         self.image = image
     }
     
-    
-    init(name:String, password:String, email:String) {
+    init(name: String, email:String, id: Int){
         self.name = name
-        self.password = password
         self.email = email
-        
+        self.id = id
     }
     
-    init(name:String, password:String) {
+    init(name:String, email:String) {
         self.name = name
-        self.password = password
+        self.email = email
         
     }
     
