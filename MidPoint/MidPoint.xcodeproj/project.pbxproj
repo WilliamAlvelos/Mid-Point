@@ -527,11 +527,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
-=======
 				3DE9288A1B5443330053B43C /* libsqlite3.0.dylib in Frameworks */,
 				3DFB8A161B4C1EEE00463EA4 /* CloudKit.framework in Frameworks */,
->>>>>>> origin/master
 				3DFB8A311B4CC4A900463EA4 /* TwitterCore.framework in Frameworks */,
 				3DE927F11B543FF70053B43C /* ParseUI.framework in Frameworks */,
 				3DE927F01B543FF70053B43C /* ParseFacebookUtils.framework in Frameworks */,
@@ -1278,9 +1275,6 @@
 				3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */,
 				3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */,
 				3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */,
-<<<<<<< HEAD
-=======
-				3DFB8A151B4C1EEE00463EA4 /* CloudKit.framework */,
 				3DE927E81B543FF70053B43C /* FacebookSDK.framework */,
 				3DE927E91B543FF70053B43C /* Firebase.framework */,
 				3DE927EA1B543FF70053B43C /* Parse.framework */,
@@ -1315,7 +1309,6 @@
 				3DE9273C1B543FDA0053B43C /* Classes */,
 				3DE926AA1B543A470053B43C /* JSQMessagesViewController */,
 				3DE927081B543A470053B43C /* JSQSystemSoundPlayer */,
->>>>>>> origin/master
 				FFC2C6E41AF935E0004B0AA7 /* MidPoint */,
 				FFC2C6FD1AF935E0004B0AA7 /* MidPointTests */,
 				FFC2C6E31AF935E0004B0AA7 /* Products */,
@@ -1872,11 +1865,8 @@
 			baseConfigurationReference = 82AD4BA35882CD2AED834ED0 /* Pods-MidPoint.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD
-=======
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MidPoint/MidPoint.entitlements;
->>>>>>> origin/master
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1897,11 +1887,8 @@
 			baseConfigurationReference = F60DBEF3DF0B78476E758D8B /* Pods-MidPoint.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD
-=======
-				CLANG_ENABLE_MODULES = YES;
+                CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MidPoint/MidPoint.entitlements;
->>>>>>> origin/master
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
