@@ -171,6 +171,7 @@
 		3DE928831B54403C0053B43C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9286A1B54403C0053B43C /* UIView+WebCacheOperation.m */; };
 		3DE928871B5441660053B43C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE928861B5441660053B43C /* AppDelegate.m */; };
 		3DE9288A1B5443330053B43C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE928891B5443330053B43C /* libsqlite3.0.dylib */; };
+		3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9288B1B547DAB0053B43C /* EventoViewController.swift */; };
 		3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */; };
 		3DFB8A181B4C218700463EA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A171B4C218700463EA4 /* User.swift */; };
 		3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */; };
@@ -485,6 +486,7 @@
 		3DE928851B5441660053B43C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3DE928861B5441660053B43C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3DE928891B5443330053B43C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		3DE9288B1B547DAB0053B43C /* EventoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventoViewController.swift; sourceTree = "<group>"; };
 		3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MidPoint.entitlements; sourceTree = "<group>"; };
 		3DFB8A171B4C218700463EA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
@@ -493,7 +495,7 @@
 		3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		3DFB8A231B4C53E600463EA4 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
-		3DFB8A261B4C5B0A00463EA4 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = "/Users/William/Desktop/Mid-Point/MidPoint/MidPoint/UserManager.swift"; sourceTree = "<absolute>"; };
+		3DFB8A261B4C5B0A00463EA4 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		3DFB8A2A1B4CC4A900463EA4 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
@@ -528,7 +530,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DE9288A1B5443330053B43C /* libsqlite3.0.dylib in Frameworks */,
-				3DFB8A161B4C1EEE00463EA4 /* CloudKit.framework in Frameworks */,
 				3DFB8A311B4CC4A900463EA4 /* TwitterCore.framework in Frameworks */,
 				3DE927F11B543FF70053B43C /* ParseUI.framework in Frameworks */,
 				3DE927F01B543FF70053B43C /* ParseFacebookUtils.framework in Frameworks */,
@@ -572,9 +573,8 @@
 				3DE926D51B543A470053B43C /* Model */,
 				3DE926EA1B543A470053B43C /* Views */,
 			);
-			name = JSQMessagesViewController;
-			path = "/Users/William/Desktop/Mid-Point/MidPoint/JSQMessagesViewController";
-			sourceTree = "<absolute>";
+			path = JSQMessagesViewController;
+			sourceTree = "<group>";
 		};
 		3DE926AB1B543A470053B43C /* Assets */ = {
 			isa = PBXGroup;
@@ -717,9 +717,8 @@
 				3DE9270A1B543A470053B43C /* JSQSystemSoundPlayer.h */,
 				3DE9270B1B543A470053B43C /* JSQSystemSoundPlayer.m */,
 			);
-			name = JSQSystemSoundPlayer;
-			path = "/Users/William/Desktop/Mid-Point/MidPoint/JSQSystemSoundPlayer";
-			sourceTree = "<absolute>";
+			path = JSQSystemSoundPlayer;
+			sourceTree = "<group>";
 		};
 		3DE9273C1B543FDA0053B43C /* Classes */ = {
 			isa = PBXGroup;
@@ -1232,6 +1231,7 @@
 				3DE926A61B5430840053B43C /* ChatViewController.swift */,
 				FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */,
 				3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */,
+				3DE9288B1B547DAB0053B43C /* EventoViewController.swift */,
 				3DFB8A321B4CD98D00463EA4 /* teste.png */,
 			);
 			name = ViewControllers;
@@ -1706,6 +1706,7 @@
 				3DE927151B543A470053B43C /* JSQMessagesViewController.m in Sources */,
 				3DFC96C61B4DD19F00E7041E /* FriendDAOCloudKit.swift in Sources */,
 				3DE9271B1B543A470053B43C /* JSQMessagesToolbarButtonFactory.m in Sources */,
+				3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */,
 				3DE927D81B543FDA0053B43C /* PFUser+Util.m in Sources */,
 				3DE9272D1B543A470053B43C /* JSQMessagesComposerTextView.m in Sources */,
 				3DE927DB1B543FDA0053B43C /* camera.m in Sources */,
@@ -1890,7 +1891,7 @@
 			baseConfigurationReference = F60DBEF3DF0B78476E758D8B /* Pods-MidPoint.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-                CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MidPoint/MidPoint.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
