@@ -12,42 +12,129 @@ import Fabric
 import TwitterKit
 
 
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
+    
+    var tabBarController: UITabBarController?
+    
+    var recentView: RecentView?
+    
+    var groupsView: GroupsView?
+    
+    var peopleView: PeopleView?
+    
+    var settingsView: SettingsView?
+    
+    var locationManager: CLLocationManager?
+    
+    var coordinate: CLLocationCoordinate2D?
+    
+    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         Fabric.with([Twitter()])
-
+        
+        Parse.setApplicationId("DAZbyoNRo7HoN9Pw1YQmba0YNI3vZyBzqFXM3TSG", clientKey: "Lgwgf2gZT4OFhPBuNlxoV7mMwL4V9N9pdbZT6i7q")
+        
+        
+        if(application.respondsToSelector(Selector("registerUserNotificationSettings:"))){
+            var userNotificationTypes: UIUserNotificationType = UIUserNotificationType.Badge |
+                UIUserNotificationType.Alert |
+                UIUserNotificationType.Sound
+            
+            var settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+            
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+        }
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        self.recentView = RecentView()
+        self.groupsView = GroupsView()
+        self.peopleView = PeopleView()
+        self.settingsView = SettingsView()
+        
+        
+        let navController1: NavigationController = NavigationController(rootViewController: recentView!)
+        
+        let navController2: NavigationController = NavigationController(rootViewController: groupsView!)
+        
+        let navController3: NavigationController = NavigationController(rootViewController: peopleView!)
+        
+        let navController4: NavigationController = NavigationController(rootViewController: settingsView!)
+        
+        
+        self.tabBarController = UITabBarController()
+        
+        self.tabBarController?.viewControllers = [navController1, navController2, navController3, navController4]
+        
+        self.tabBarController!.tabBar.translucent = false
+        
+        self.tabBarController?.selectedIndex = 0
+        
+        self.window?.rootViewController = self.tabBarController
+        
+        self.window?.makeKeyAndVisible()
+        
+        
         
         // Override point for customization after application launch.
         return true
     }
-
+    
+    
     func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        
     }
-
+    
     func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
     }
-
+    
     func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        
     }
+    
+    
 
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    func locationManagerStart(){
+        if(self.locationManager == nil){
+            self.locationManager = CLLocationManager()
+            self.locationManager?.delegate = self
+            self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager?.requestWhenInUseAuthorization()
+            
+        }
+        self.locationManager?.startUpdatingLocation()
+    }
+    
+    func locationManagerStop(){
+        self.locationManager?.stopUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+        self.coordinate = newLocation.coordinate
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!){
+        
     }
 
     // MARK: - Core Data stack

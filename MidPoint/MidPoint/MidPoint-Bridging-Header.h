@@ -5,4 +5,9 @@
 #import <Firebase/Firebase.h>
 #import "JSQSystemSoundPlayer.h"
 #import "JSQMessagesViewController.h"
-
+#import "AppDelegate.h"
+#import "RecentView.h"
+#import "GroupsView.h"
+#import "PeopleView.h"
+#import "SettingsView.h"
+#import "NavigationController.h"

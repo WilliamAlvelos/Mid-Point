@@ -11,8 +11,12 @@
 
 #import <UIKit/UIKit.h>
 
+
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface WelcomeView : UIViewController
 //-------------------------------------------------------------------------------------------------------------------------------------------------
+@property (strong, nonatomic) IBOutlet UITextField *userText;
+@property (strong, nonatomic) IBOutlet UITextField *passwordText;
 
 @end

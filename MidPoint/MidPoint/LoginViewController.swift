@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import TwitterKit
 
+
 class LoginViewController: UIViewController, UserManagerDelegate{
     
     @IBOutlet var nomeText: UITextField!
@@ -18,33 +19,37 @@ class LoginViewController: UIViewController, UserManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let logInButton = TWTRLogInButton(logInCompletion: {
-            (session: TWTRSession!, error: NSError!) in
-            
-            
-            // play with Twitter session
-            if session != nil{
-                println(session.userName)
-                println(session.userID)
-                println(session.authTokenSecret)
-                println(session.authToken)
-                
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("geolocation") as! GeolocationViewController
-                nextViewController.nomeUser = session.userName
-                self.presentViewController(nextViewController, animated:true, completion:nil)
-                
-                
-            }else {
-                println("error: \(error.localizedDescription)");
-            }
-        
-        })
-        
-        
+//            let logInButton = TWTRLogInButton(logInCompletion: {
+//            (session: TWTRSession!, error: NSError!) in
+//            
+//            
+//             play with Twitter session
+//            
+//
+//            if session != nil{
+//                println(session.userName)
+//                println(session.userID)
+//                println(session.authTokenSecret)
+//                println(session.authToken)
+//                
+//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("geolocation") as! GeolocationViewController
+//                nextViewController.nomeUser = session.userName
+//                self.presentViewController(nextViewController, animated:true, completion:nil)
+//                
+//                
+//            }else {
+//                println("error: \(error.localizedDescription)");
+//            }
+//        
+//        })
+//        
+//        
+//
+//        logInButton.center = self.view.center
+//        self.view.addSubview(logInButton)
+//
 
-        logInButton.center = self.view.center
-        self.view.addSubview(logInButton)
 
     }
     
@@ -95,3 +100,6 @@ class LoginViewController: UIViewController, UserManagerDelegate{
     }
 
 }
+
+
+

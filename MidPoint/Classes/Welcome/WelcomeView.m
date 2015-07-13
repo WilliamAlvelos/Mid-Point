@@ -11,6 +11,8 @@
 
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <TwitterKit/TwitterKit.h>
+
 #import "ProgressHUD.h"
 #import "UIImageView+WebCache.h"
 
@@ -31,6 +33,39 @@
 {
 	[super viewDidLoad];
 	self.title = @"Welcome";
+    
+    
+    TWTRLogInButton *logInButton = [TWTRLogInButton buttonWithLogInCompletion:^(TWTRSession *session, NSError *error) {
+        // play with Twitter session
+        
+        [ProgressHUD show:@"Signing in..." Interaction:NO];
+         
+        if(session != nil){
+        
+            //println(session.userName);
+            //println(session.userID);
+            //println(session.authTokenSecret);
+            //println(session.authToken);
+        
+            PFUser * user = [[PFUser alloc]init];
+            
+            user.username = session.userName;
+            user.sessionToken = session.authToken;
+            
+            
+            if (user[PF_USER_TWITTERID] == nil)
+            {
+                [self processTwitter:user];
+                
+            }else
+                [self userLoggedIn:user];
+             }else [ProgressHUD showError:@"Twitter login error."];
+         }];
+    
+    logInButton.center = self.view.center;
+    [self.view addSubview:logInButton];
+
+    
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
 	[self.navigationItem setBackBarButtonItem:backButton];
@@ -42,38 +77,25 @@
 - (IBAction)actionRegister:(id)sender
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	RegisterView *registerView = [[RegisterView alloc] init];
+    
+    UIStoryboard * tela = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    RegisterView * registerView = [tela instantiateViewControllerWithIdentifier:@"register"];
 	[self.navigationController pushViewController:registerView animated:YES];
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)actionLogin:(id)sender
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 {
-	LoginView *loginView = [[LoginView alloc] init];
-	[self.navigationController pushViewController:loginView animated:YES];
+
+    UIStoryboard * tela = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    RegisterView * registerView = [tela instantiateViewControllerWithIdentifier:@"login"];
+    [self.navigationController pushViewController:registerView animated:YES];
+    
 }
 
 #pragma mark - Twitter login methods
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-- (IBAction)actionTwitter:(id)sender
-//-------------------------------------------------------------------------------------------------------------------------------------------------
-{
-	[ProgressHUD show:@"Signing in..." Interaction:NO];
-	[PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error)
-	{
-		if (user != nil)
-		{
-			if (user[PF_USER_TWITTERID] == nil)
-			{
-				[self processTwitter:user];
-			}
-			else [self userLoggedIn:user];
-		}
-		else [ProgressHUD showError:@"Twitter login error."];
-	}];
-}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (void)processTwitter:(PFUser *)user
