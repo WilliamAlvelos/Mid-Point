@@ -37,6 +37,7 @@
 		3DFC96C61B4DD19F00E7041E /* FriendDAOCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFC96C51B4DD19F00E7041E /* FriendDAOCloudKit.swift */; };
 		3DFC96C81B4DD5F100E7041E /* FriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFC96C71B4DD5F100E7041E /* FriendManager.swift */; };
 		7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */; };
+		7B4D268D1B55BAE500DD86EF /* JsonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D268C1B55BAE500DD86EF /* JsonResponse.swift */; };
 		7B6085E01B548C8A002CBD54 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6085DF1B548C8A002CBD54 /* StoreKit.framework */; };
 		7B6085E21B548CB0002CBD54 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6085E11B548CB0002CBD54 /* MobileCoreServices.framework */; };
 		7B6085E41B548CB9002CBD54 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6085E31B548CB9002CBD54 /* SystemConfiguration.framework */; };
@@ -93,6 +94,7 @@
 		3DFC96C71B4DD5F100E7041E /* FriendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendManager.swift; sourceTree = "<group>"; };
 		495E9806851C4CA17E307AF9 /* libPods-MidPoint.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MidPoint.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellFriend.swift; sourceTree = "<group>"; };
+		7B4D268C1B55BAE500DD86EF /* JsonResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonResponse.swift; sourceTree = "<group>"; };
 		7B6085DF1B548C8A002CBD54 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7B6085E11B548CB0002CBD54 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		7B6085E31B548CB9002CBD54 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -157,6 +159,7 @@
 				3DACDEAE1B5222E300711E25 /* Event.swift */,
 				3DE9288D1B54815B0053B43C /* EventDAO.swift */,
 				3DE9288F1B5481F50053B43C /* EventDAOCloudKit.swift */,
+				7B4D268C1B55BAE500DD86EF /* JsonResponse.swift */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */,
 				3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */,
 				FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */,
+				7B4D268D1B55BAE500DD86EF /* JsonResponse.swift in Sources */,
 				7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */,
 				3DE928901B5481F50053B43C /* EventDAOCloudKit.swift in Sources */,
 				3DE9288E1B54815B0053B43C /* EventDAO.swift in Sources */,

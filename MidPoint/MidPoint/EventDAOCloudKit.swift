@@ -23,37 +23,36 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
     
     var delegate: EventoDAOCloudKitDelegate!
     
-    
-    func parseJSON(inputData: NSData) -> NSDictionary{
-        var error: NSError?
-        var boardsDictionary:  NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
-        return boardsDictionary
-    }
-    
-    private func createMutableRequest(url : String, bodyHttp : String, completionHandler handler: (NSURLResponse!, NSData!, NSError!) -> Void){
-        
-        var url : NSURL  = NSURL(string: url)!
-        var mutableRequest: NSMutableURLRequest  = NSMutableURLRequest(URL: url)
-        mutableRequest.cachePolicy = .UseProtocolCachePolicy
-        mutableRequest.timeoutInterval = 10.0
-        mutableRequest.HTTPBody = bodyHttp.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-        mutableRequest.HTTPMethod = "POST"
-        let queue:NSOperationQueue = NSOperationQueue()
-        
-        NSURLConnection.sendAsynchronousRequest(mutableRequest, queue: queue, completionHandler: handler)
-        
-    }
-    func saveEvent(event: Event) {
-        
-        let url : String = "http://www.alvelos.wc.lt/MidPoint/evento.php"
-        let bodyHttp = String(format: "name=%@&description=%@&date=%@", event.name!,event.descricao!,event.date!)
-        createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+    func inviteFriendsToEvent(event: Event, sender: User, friends: Array<User>){
+        var dictionary = JsonResponse.userToCall(friends)
+        let url : String = "http://www.alvelos.wc.lt/MidPoint/events/inviteToEvent.php"
+        let avent: String? = JsonResponse.dictionaryToString(JsonResponse.userToCall(friends))
+        var bodyHttp = String(format: "event_id=%d&user_to_invite=%@&sender=%d" , event.id!, avent! , sender.id!)
+        println(avent)
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 self.delegate.errorThrowed(error)
                 
                 return
             }
-            let string = self.parseJSON(data)
+            print(NSString(data: data, encoding:NSUTF8StringEncoding))
+            
+        })
+
+
+    }
+    
+    func saveEvent(event: Event, usuario: User) {
+        
+        let url : String = "http://www.alvelos.wc.lt/MidPoint/evento.php"
+        let bodyHttp = String(format: "name=%@&description=%@&date=%@", event.name!,event.descricao!,event.date!)
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                self.delegate.errorThrowed(error)
+                
+                return
+            }
+            let string = JsonResponse.parseJSON(data)
             if (string.objectForKey("error") != nil){
                 var int = string.objectForKey("error")! as! Int
                 let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
@@ -69,16 +68,16 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
         
     }
     
-    func getEvent(event: Event) {
+    func getEvent(event: Event, usuario: User) {
         
         let url : String = "http://alvelos.wc.lt/MidPoint/login.php"
         let bodyHttp = String(format: "name=%@&description=%@&date=%@", event.name!, event.descricao! ,event.date!)
-        createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 self.delegate.errorThrowed(error)
                 return
             }
-            let string = self.parseJSON(data)
+            let string = JsonResponse.parseJSON(data)
             if (string.objectForKey("error") != nil){
                 var int = string.objectForKey("error")! as! Int
                 let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)

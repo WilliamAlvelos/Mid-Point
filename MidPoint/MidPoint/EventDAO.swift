@@ -16,7 +16,7 @@ enum EventOption {
 }
 
 protocol EventoDAOProtocol{
-    func saveEvent(event:Event)
-    func getEvent(event:Event)
+    func saveEvent(event:Event, usuario: User)
+    func getEvent(event:Event, usuario: User)
     
 }

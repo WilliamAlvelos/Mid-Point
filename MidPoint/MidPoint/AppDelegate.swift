@@ -20,32 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
         
         Fabric.with([Twitter()])
-        
-        
-        
+        var event = Event()
+        event.id = 10
+        var sender = User()
+        sender.id = 15
+        var friends = JsonResponse.createArrayFakeToTest(220)
+        EventDAOCloudKit().inviteFriendsToEvent(event, sender: sender, friends: friends)
+    
         return true
     }
-    
-    
-    func applicationWillResignActive(application: UIApplication) {
-        
-    }
-    
-    func applicationDidEnterBackground(application: UIApplication) {
-        
-    }
-    
-    func applicationWillEnterForeground(application: UIApplication) {
-        
-    }
-    
-    
 
-    func applicationDidBecomeActive(application: UIApplication) {
-        
-        
-        
-    }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

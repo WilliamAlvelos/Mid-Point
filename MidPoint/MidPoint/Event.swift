@@ -16,10 +16,10 @@ class Event: NSObject {
     var descricao: String?
     var date: NSDate?
     var image: NSURL?
-    
+    var id: Int?
     override init(){
     
-    
+
     }
 
     
