@@ -25,7 +25,6 @@
 		3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1C1B4C22DD00463EA4 /* UserDAOCloudKit.swift */; };
 		3DFB8A1F1B4C381300463EA4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */; };
 		3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */; };
-		3DFB8A241B4C53E600463EA4 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A231B4C53E600463EA4 /* TransitionManager.swift */; };
 		3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A261B4C5B0A00463EA4 /* UserManager.swift */; };
 		3DFB8A2E1B4CC4A900463EA4 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A2A1B4CC4A900463EA4 /* Fabric.framework */; };
 		3DFB8A2F1B4CC4A900463EA4 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */; };
@@ -48,6 +47,8 @@
 		7B744E971B548DA000D8E783 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E961B548DA000D8E783 /* QuartzCore.framework */; };
 		7B744E991B548DA500D8E783 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E981B548DA500D8E783 /* UIKit.framework */; };
 		7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */; };
+		7BED36651B54B9430045FDB5 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED36641B54B9430045FDB5 /* TransitionManager.swift */; };
+		7BED36671B54BCC10045FDB5 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED36661B54BCC00045FDB5 /* ChatView.swift */; };
 		D37521077EBF82FDF844268D /* libPods-MidPoint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 495E9806851C4CA17E307AF9 /* libPods-MidPoint.a */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
@@ -58,7 +59,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A178091748AEFEA294FFDC6 /* Pods-MidPointTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MidPointTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MidPointTests/Pods-MidPointTests.release.xcconfig"; sourceTree = "<group>"; };
 		3D6FD8DA1B4A3C08008E70E9 /* b_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_search.png; sourceTree = "<group>"; };
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -79,7 +79,6 @@
 		3DFB8A1C1B4C22DD00463EA4 /* UserDAOCloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDAOCloudKit.swift; sourceTree = "<group>"; };
 		3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		3DFB8A231B4C53E600463EA4 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		3DFB8A261B4C5B0A00463EA4 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		3DFB8A2A1B4CC4A900463EA4 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
@@ -103,8 +102,9 @@
 		7B744E961B548DA000D8E783 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7B744E981B548DA500D8E783 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PermissionsResponse.swift; path = ../PermissionsResponse.swift; sourceTree = "<group>"; };
+		7BED36641B54B9430045FDB5 /* TransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
+		7BED36661B54BCC00045FDB5 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		82AD4BA35882CD2AED834ED0 /* Pods-MidPoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MidPoint.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MidPoint/Pods-MidPoint.debug.xcconfig"; sourceTree = "<group>"; };
-		CB2D87AE7E3D0EF74E3BE39B /* Pods-MidPointTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MidPointTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MidPointTests/Pods-MidPointTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F60DBEF3DF0B78476E758D8B /* Pods-MidPoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MidPoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-MidPoint/Pods-MidPoint.release.xcconfig"; sourceTree = "<group>"; };
 		FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC2C6E61AF935E0004B0AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -195,7 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */,
-				3DFB8A231B4C53E600463EA4 /* TransitionManager.swift */,
 			);
 			name = NSObject;
 			sourceTree = "<group>";
@@ -255,8 +254,6 @@
 			children = (
 				82AD4BA35882CD2AED834ED0 /* Pods-MidPoint.debug.xcconfig */,
 				F60DBEF3DF0B78476E758D8B /* Pods-MidPoint.release.xcconfig */,
-				CB2D87AE7E3D0EF74E3BE39B /* Pods-MidPointTests.debug.xcconfig */,
-				1A178091748AEFEA294FFDC6 /* Pods-MidPointTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -264,6 +261,8 @@
 		FFC2C6D91AF935E0004B0AA7 = {
 			isa = PBXGroup;
 			children = (
+				7BED36661B54BCC00045FDB5 /* ChatView.swift */,
+				7BED36641B54B9430045FDB5 /* TransitionManager.swift */,
 				FFC2C6E41AF935E0004B0AA7 /* MidPoint */,
 				FFC2C6FD1AF935E0004B0AA7 /* MidPointTests */,
 				FFC2C6E31AF935E0004B0AA7 /* Products */,
@@ -453,7 +452,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BED36651B54B9430045FDB5 /* TransitionManager.swift in Sources */,
 				3DFB8A1F1B4C381300463EA4 /* LoginViewController.swift in Sources */,
+				7BED36671B54BCC10045FDB5 /* ChatView.swift in Sources */,
 				3DFB8A181B4C218700463EA4 /* User.swift in Sources */,
 				FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */,
 				3DFC96C01B4D720300E7041E /* Friend.swift in Sources */,
@@ -461,30 +462,9 @@
 				3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */,
 				FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */,
 				7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */,
-				3DE927DC1B543FDA0053B43C /* common.m in Sources */,
-				3DE927271B543A470053B43C /* JSQMessagesCollectionView.m in Sources */,
-				3DE927B81B543FDA0053B43C /* PremiumView.m in Sources */,
-				3DE927DE1B543FDA0053B43C /* emoji.m in Sources */,
 				3DE928901B5481F50053B43C /* EventDAOCloudKit.swift in Sources */,
-				3DFB8A241B4C53E600463EA4 /* TransitionManager.swift in Sources */,
-				3DE927121B543A470053B43C /* UIImage+JSQMessages.m in Sources */,
 				3DE9288E1B54815B0053B43C /* EventDAO.swift in Sources */,
-				3DE9271F1B543A470053B43C /* JSQLocationMediaItem.m in Sources */,
-				3DE928791B54403C0053B43C /* SDWebImageDownloader.m in Sources */,
-				3DE927BE1B543FDA0053B43C /* CreateGroupView.m in Sources */,
-				3DE9287B1B54403C0053B43C /* SDWebImageManager.m in Sources */,
-				3DE927331B543A470053B43C /* JSQMessagesToolbarContentView.m in Sources */,
-				3DE927B51B543FDA0053B43C /* VideoMediaItem.m in Sources */,
-				3DE9271C1B543A470053B43C /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
-				3DE9271E1B543A470053B43C /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,
-				3DE927231B543A470053B43C /* JSQMessagesBubbleImage.m in Sources */,
-				3DE928811B54403C0053B43C /* UIImageView+HighlightedWebCache.m in Sources */,
-				3DE927B11B543FDA0053B43C /* NavigationController.m in Sources */,
-				3DE928701B54403C0053B43C /* MBProgressHUD.m in Sources */,
-				3DE927351B543A470053B43C /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
-				3DE927151B543A470053B43C /* JSQMessagesViewController.m in Sources */,
 				7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */,
-				3DFB8A241B4C53E600463EA4 /* TransitionManager.swift in Sources */,
 				3DFC96C61B4DD19F00E7041E /* FriendDAOCloudKit.swift in Sources */,
 				3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */,
 				3DE926A71B5430840053B43C /* ChatViewController.swift in Sources */,
