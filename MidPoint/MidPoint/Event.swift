@@ -13,22 +13,14 @@ import UIKit
 class Event: NSObject {
     
     var name: String?
-    var avaliacao: Int?
-    var local: String?
-    var horario: String?
+    var descricao: String?
+    var date: NSDate?
     var image: NSURL?
-
     
     override init(){
     
     
     }
+
     
-    init(name: String, avaliacao: Int, local: String, horario: String, image: NSURL){
-        self.name = name
-        self.avaliacao = avaliacao
-        self.local = local
-        self.horario = horario
-        self.image = image
-    }
 }

@@ -172,6 +172,8 @@
 		3DE928871B5441660053B43C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE928861B5441660053B43C /* AppDelegate.m */; };
 		3DE9288A1B5443330053B43C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE928891B5443330053B43C /* libsqlite3.0.dylib */; };
 		3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9288B1B547DAB0053B43C /* EventoViewController.swift */; };
+		3DE9288E1B54815B0053B43C /* EventDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9288D1B54815B0053B43C /* EventDAO.swift */; };
+		3DE928901B5481F50053B43C /* EventDAOCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9288F1B5481F50053B43C /* EventDAOCloudKit.swift */; };
 		3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */; };
 		3DFB8A181B4C218700463EA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A171B4C218700463EA4 /* User.swift */; };
 		3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */; };
@@ -487,6 +489,8 @@
 		3DE928861B5441660053B43C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3DE928891B5443330053B43C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		3DE9288B1B547DAB0053B43C /* EventoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventoViewController.swift; sourceTree = "<group>"; };
+		3DE9288D1B54815B0053B43C /* EventDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDAO.swift; sourceTree = "<group>"; };
+		3DE9288F1B5481F50053B43C /* EventDAOCloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDAOCloudKit.swift; sourceTree = "<group>"; };
 		3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MidPoint.entitlements; sourceTree = "<group>"; };
 		3DFB8A171B4C218700463EA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
@@ -557,6 +561,8 @@
 			isa = PBXGroup;
 			children = (
 				3DACDEAE1B5222E300711E25 /* Event.swift */,
+				3DE9288D1B54815B0053B43C /* EventDAO.swift */,
+				3DE9288F1B5481F50053B43C /* EventDAOCloudKit.swift */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -1687,8 +1693,10 @@
 				3DE927271B543A470053B43C /* JSQMessagesCollectionView.m in Sources */,
 				3DE927B81B543FDA0053B43C /* PremiumView.m in Sources */,
 				3DE927DE1B543FDA0053B43C /* emoji.m in Sources */,
+				3DE928901B5481F50053B43C /* EventDAOCloudKit.swift in Sources */,
 				3DFB8A241B4C53E600463EA4 /* TransitionManager.swift in Sources */,
 				3DE927121B543A470053B43C /* UIImage+JSQMessages.m in Sources */,
+				3DE9288E1B54815B0053B43C /* EventDAO.swift in Sources */,
 				3DE9271F1B543A470053B43C /* JSQLocationMediaItem.m in Sources */,
 				3DE928791B54403C0053B43C /* SDWebImageDownloader.m in Sources */,
 				3DE927BE1B543FDA0053B43C /* CreateGroupView.m in Sources */,

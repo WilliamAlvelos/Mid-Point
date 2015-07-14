@@ -10,6 +10,13 @@ import UIKit
 
 class EventoViewController: UIViewController {
 
+    @IBOutlet var nomeEvento: UITextField!
+    @IBOutlet var dataEvento: UITextField!
+    @IBOutlet var localEvento: UITextField!
+    @IBOutlet var descricaoEvento: UITextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
