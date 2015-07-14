@@ -7,17 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F3E94F6FDAB9EF47C88EFC1 /* libPods-MidPoint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA94772D5C4FE56AD8A76F9A /* libPods-MidPoint.a */; };
 		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
 		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
-		3DACDEB21B52274900711E25 /* CustomCellFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEB11B52274900711E25 /* CustomCellFriend.swift */; };
 		3DE926A71B5430840053B43C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE926A61B5430840053B43C /* ChatViewController.swift */; };
 		3DE927ED1B543FF70053B43C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927E81B543FF70053B43C /* FacebookSDK.framework */; };
 		3DE927EE1B543FF70053B43C /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927E91B543FF70053B43C /* Firebase.framework */; };
 		3DE927EF1B543FF70053B43C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927EA1B543FF70053B43C /* Parse.framework */; };
 		3DE927F01B543FF70053B43C /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927EB1B543FF70053B43C /* ParseFacebookUtils.framework */; };
 		3DE927F11B543FF70053B43C /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927EC1B543FF70053B43C /* ParseUI.framework */; };
-		3DE928871B5441660053B43C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE928861B5441660053B43C /* AppDelegate.m */; };
 		3DE9288A1B5443330053B43C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE928891B5443330053B43C /* libsqlite3.0.dylib */; };
 		3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9288B1B547DAB0053B43C /* EventoViewController.swift */; };
 		3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */; };
@@ -37,32 +34,24 @@
 		3DFC96C41B4DD0C300E7041E /* FriendDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFC96C31B4DD0C300E7041E /* FriendDAO.swift */; };
 		3DFC96C61B4DD19F00E7041E /* FriendDAOCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFC96C51B4DD19F00E7041E /* FriendDAOCloudKit.swift */; };
 		3DFC96C81B4DD5F100E7041E /* FriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFC96C71B4DD5F100E7041E /* FriendManager.swift */; };
+		7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */; };
+		7B6085E01B548C8A002CBD54 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6085DF1B548C8A002CBD54 /* StoreKit.framework */; };
+		7B6085E21B548CB0002CBD54 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6085E11B548CB0002CBD54 /* MobileCoreServices.framework */; };
+		7B6085E41B548CB9002CBD54 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6085E31B548CB9002CBD54 /* SystemConfiguration.framework */; };
 		7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */; };
-		FC269196ABF3C28E698C61A1 /* libPods-MidPointTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FE85EAABD9CA754BE67499 /* libPods-MidPointTests.a */; };
+		D37521077EBF82FDF844268D /* libPods-MidPoint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 495E9806851C4CA17E307AF9 /* libPods-MidPoint.a */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
 		FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */; };
 		FFC2C6F01AF935E0004B0AA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFC2C6EE1AF935E0004B0AA7 /* Main.storyboard */; };
 		FFC2C6F21AF935E0004B0AA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFC2C6F11AF935E0004B0AA7 /* Images.xcassets */; };
 		FFC2C6F51AF935E0004B0AA7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFC2C6F31AF935E0004B0AA7 /* LaunchScreen.xib */; };
-		FFC2C7011AF935E0004B0AA7 /* MidPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C7001AF935E0004B0AA7 /* MidPointTests.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		FFC2C6FB1AF935E0004B0AA7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FFC2C6DA1AF935E0004B0AA7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FFC2C6E11AF935E0004B0AA7;
-			remoteInfo = MidPoint;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1A178091748AEFEA294FFDC6 /* Pods-MidPointTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MidPointTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MidPointTests/Pods-MidPointTests.release.xcconfig"; sourceTree = "<group>"; };
 		3D6FD8DA1B4A3C08008E70E9 /* b_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_search.png; sourceTree = "<group>"; };
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		3DACDEB11B52274900711E25 /* CustomCellFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellFriend.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DE926A61B5430840053B43C /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		3DE927E81B543FF70053B43C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
@@ -70,9 +59,6 @@
 		3DE927EA1B543FF70053B43C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		3DE927EB1B543FF70053B43C /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		3DE927EC1B543FF70053B43C /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		3DE928841B54407D0053B43C /* AppConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConstant.h; sourceTree = "<group>"; };
-		3DE928851B5441660053B43C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3DE928861B5441660053B43C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3DE928891B5443330053B43C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		3DE9288B1B547DAB0053B43C /* EventoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventoViewController.swift; sourceTree = "<group>"; };
 		3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
@@ -93,10 +79,13 @@
 		3DFC96C31B4DD0C300E7041E /* FriendDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendDAO.swift; sourceTree = "<group>"; };
 		3DFC96C51B4DD19F00E7041E /* FriendDAOCloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendDAOCloudKit.swift; sourceTree = "<group>"; };
 		3DFC96C71B4DD5F100E7041E /* FriendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendManager.swift; sourceTree = "<group>"; };
+		495E9806851C4CA17E307AF9 /* libPods-MidPoint.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MidPoint.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellFriend.swift; sourceTree = "<group>"; };
+		7B6085DF1B548C8A002CBD54 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		7B6085E11B548CB0002CBD54 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		7B6085E31B548CB9002CBD54 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PermissionsResponse.swift; path = ../PermissionsResponse.swift; sourceTree = "<group>"; };
-		80FE85EAABD9CA754BE67499 /* libPods-MidPointTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MidPointTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82AD4BA35882CD2AED834ED0 /* Pods-MidPoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MidPoint.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MidPoint/Pods-MidPoint.debug.xcconfig"; sourceTree = "<group>"; };
-		CA94772D5C4FE56AD8A76F9A /* libPods-MidPoint.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MidPoint.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB2D87AE7E3D0EF74E3BE39B /* Pods-MidPointTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MidPointTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MidPointTests/Pods-MidPointTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F60DBEF3DF0B78476E758D8B /* Pods-MidPoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MidPoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-MidPoint/Pods-MidPoint.release.xcconfig"; sourceTree = "<group>"; };
 		FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,7 +96,6 @@
 		FFC2C6EF1AF935E0004B0AA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFC2C6F11AF935E0004B0AA7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FFC2C6F41AF935E0004B0AA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		FFC2C6FA1AF935E0004B0AA7 /* MidPointTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MidPointTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC2C6FF1AF935E0004B0AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFC2C7001AF935E0004B0AA7 /* MidPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidPointTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +105,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B6085E41B548CB9002CBD54 /* SystemConfiguration.framework in Frameworks */,
+				7B6085E21B548CB0002CBD54 /* MobileCoreServices.framework in Frameworks */,
+				7B6085E01B548C8A002CBD54 /* StoreKit.framework in Frameworks */,
 				3DE9288A1B5443330053B43C /* libsqlite3.0.dylib in Frameworks */,
 				3DFB8A311B4CC4A900463EA4 /* TwitterCore.framework in Frameworks */,
 				3DE927F11B543FF70053B43C /* ParseUI.framework in Frameworks */,
@@ -124,17 +115,9 @@
 				3DFB8A2E1B4CC4A900463EA4 /* Fabric.framework in Frameworks */,
 				3DE927EE1B543FF70053B43C /* Firebase.framework in Frameworks */,
 				3DFB8A2F1B4CC4A900463EA4 /* TwitterKit.framework in Frameworks */,
-				1F3E94F6FDAB9EF47C88EFC1 /* libPods-MidPoint.a in Frameworks */,
 				3DE927EF1B543FF70053B43C /* Parse.framework in Frameworks */,
 				3DE927ED1B543FF70053B43C /* FacebookSDK.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FFC2C6F71AF935E0004B0AA7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FC269196ABF3C28E698C61A1 /* libPods-MidPointTests.a in Frameworks */,
+				D37521077EBF82FDF844268D /* libPods-MidPoint.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +135,7 @@
 		3DEE4F581B4ED66600645CA1 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				3DACDEB11B52274900711E25 /* CustomCellFriend.swift */,
+				7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */,
 			);
 			name = TableView;
 			sourceTree = "<group>";
@@ -215,6 +198,9 @@
 		817B405CA456573CB0BDEE41 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B6085E31B548CB9002CBD54 /* SystemConfiguration.framework */,
+				7B6085E11B548CB0002CBD54 /* MobileCoreServices.framework */,
+				7B6085DF1B548C8A002CBD54 /* StoreKit.framework */,
 				3DE928891B5443330053B43C /* libsqlite3.0.dylib */,
 				3DFB8A2A1B4CC4A900463EA4 /* Fabric.framework */,
 				3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */,
@@ -225,8 +211,7 @@
 				3DE927EA1B543FF70053B43C /* Parse.framework */,
 				3DE927EB1B543FF70053B43C /* ParseFacebookUtils.framework */,
 				3DE927EC1B543FF70053B43C /* ParseUI.framework */,
-				CA94772D5C4FE56AD8A76F9A /* libPods-MidPoint.a */,
-				80FE85EAABD9CA754BE67499 /* libPods-MidPointTests.a */,
+				495E9806851C4CA17E307AF9 /* libPods-MidPoint.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -257,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */,
-				FFC2C6FA1AF935E0004B0AA7 /* MidPointTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -266,10 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */,
-				3DE928841B54407D0053B43C /* AppConstant.h */,
 				FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */,
-				3DE928851B5441660053B43C /* AppDelegate.h */,
-				3DE928861B5441660053B43C /* AppDelegate.m */,
 				3DFB8A191B4C221100463EA4 /* DAO */,
 				3DEE4F581B4ED66600645CA1 /* TableView */,
 				3DFB8A201B4C383300463EA4 /* ViewControllers */,
@@ -333,26 +314,6 @@
 			productReference = FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FFC2C6F91AF935E0004B0AA7 /* MidPointTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FFC2C7071AF935E0004B0AA7 /* Build configuration list for PBXNativeTarget "MidPointTests" */;
-			buildPhases = (
-				4E9AE98917CEA6CF15356F84 /* Check Pods Manifest.lock */,
-				FFC2C6F61AF935E0004B0AA7 /* Sources */,
-				FFC2C6F71AF935E0004B0AA7 /* Frameworks */,
-				FFC2C6F81AF935E0004B0AA7 /* Resources */,
-				117A28C885684BDE2DC354CE /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FFC2C6FC1AF935E0004B0AA7 /* PBXTargetDependency */,
-			);
-			name = MidPointTests;
-			productName = MidPointTests;
-			productReference = FFC2C6FA1AF935E0004B0AA7 /* MidPointTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -371,10 +332,6 @@
 							};
 						};
 					};
-					FFC2C6F91AF935E0004B0AA7 = {
-						CreatedOnToolsVersion = 6.3.1;
-						TestTargetID = FFC2C6E11AF935E0004B0AA7;
-					};
 				};
 			};
 			buildConfigurationList = FFC2C6DD1AF935E0004B0AA7 /* Build configuration list for PBXProject "MidPoint" */;
@@ -391,7 +348,6 @@
 			projectRoot = "";
 			targets = (
 				FFC2C6E11AF935E0004B0AA7 /* MidPoint */,
-				FFC2C6F91AF935E0004B0AA7 /* MidPointTests */,
 			);
 		};
 /* End PBXProject section */
@@ -410,31 +366,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FFC2C6F81AF935E0004B0AA7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		117A28C885684BDE2DC354CE /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MidPointTests/Pods-MidPointTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1B1AD89AA858C0C7F3FFC963 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -463,21 +397,6 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 813ff53536bc81411bc1c3cb59f8e1a0da6f7a3d eafcd316f8a63984bc9539c82b26f429a35218fd94797109a96eddc7b5a5d346";
 		};
-		4E9AE98917CEA6CF15356F84 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		5C4617471E9B1DB4DEAEE11D /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -504,12 +423,11 @@
 				3DFB8A181B4C218700463EA4 /* User.swift in Sources */,
 				FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */,
 				3DFC96C01B4D720300E7041E /* Friend.swift in Sources */,
-				3DACDEB21B52274900711E25 /* CustomCellFriend.swift in Sources */,
 				3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */,
 				3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */,
 				FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */,
-				3DE928871B5441660053B43C /* AppDelegate.m in Sources */,
 				7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */,
+				7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */,
 				3DFB8A241B4C53E600463EA4 /* TransitionManager.swift in Sources */,
 				3DFC96C61B4DD19F00E7041E /* FriendDAOCloudKit.swift in Sources */,
 				3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */,
@@ -524,23 +442,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FFC2C6F61AF935E0004B0AA7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FFC2C7011AF935E0004B0AA7 /* MidPointTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		FFC2C6FC1AF935E0004B0AA7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FFC2C6E11AF935E0004B0AA7 /* MidPoint */;
-			targetProxy = FFC2C6FB1AF935E0004B0AA7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FFC2C6EE1AF935E0004B0AA7 /* Main.storyboard */ = {
@@ -692,42 +594,6 @@
 			};
 			name = Release;
 		};
-		FFC2C7081AF935E0004B0AA7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB2D87AE7E3D0EF74E3BE39B /* Pods-MidPointTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = MidPointTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MidPoint.app/MidPoint";
-			};
-			name = Debug;
-		};
-		FFC2C7091AF935E0004B0AA7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A178091748AEFEA294FFDC6 /* Pods-MidPointTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = MidPointTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MidPoint.app/MidPoint";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -745,15 +611,6 @@
 			buildConfigurations = (
 				FFC2C7051AF935E0004B0AA7 /* Debug */,
 				FFC2C7061AF935E0004B0AA7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FFC2C7071AF935E0004B0AA7 /* Build configuration list for PBXNativeTarget "MidPointTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FFC2C7081AF935E0004B0AA7 /* Debug */,
-				FFC2C7091AF935E0004B0AA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

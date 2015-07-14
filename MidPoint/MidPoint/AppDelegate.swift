@@ -12,76 +12,17 @@ import Fabric
 import TwitterKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    
     var window: UIWindow?
     
-    var tabBarController: UITabBarController?
     
-    var recentView: RecentView?
-    
-    var groupsView: GroupsView?
-    
-    var peopleView: PeopleView?
-    
-    var settingsView: SettingsView?
-    
-    var locationManager: CLLocationManager?
-    
-    var coordinate: CLLocationCoordinate2D?
-    
-    
-    
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
         
         Fabric.with([Twitter()])
         
-        Parse.setApplicationId("DAZbyoNRo7HoN9Pw1YQmba0YNI3vZyBzqFXM3TSG", clientKey: "Lgwgf2gZT4OFhPBuNlxoV7mMwL4V9N9pdbZT6i7q")
         
         
-        if(application.respondsToSelector(Selector("registerUserNotificationSettings:"))){
-            var userNotificationTypes: UIUserNotificationType = UIUserNotificationType.Badge |
-                UIUserNotificationType.Alert |
-                UIUserNotificationType.Sound
-            
-            var settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
-            
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-        }
-        
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        
-        self.recentView = RecentView()
-        self.groupsView = GroupsView()
-        self.peopleView = PeopleView()
-        self.settingsView = SettingsView()
-        
-        
-        let navController1: NavigationController = NavigationController(rootViewController: recentView!)
-        
-        let navController2: NavigationController = NavigationController(rootViewController: groupsView!)
-        
-        let navController3: NavigationController = NavigationController(rootViewController: peopleView!)
-        
-        let navController4: NavigationController = NavigationController(rootViewController: settingsView!)
-        
-        
-        self.tabBarController = UITabBarController()
-        
-        self.tabBarController?.viewControllers = [navController1, navController2, navController3, navController4]
-        
-        self.tabBarController!.tabBar.translucent = false
-        
-        self.tabBarController?.selectedIndex = 0
-        
-        self.window?.rootViewController = self.tabBarController
-        
-        self.window?.makeKeyAndVisible()
-        
-        
-        
-        // Override point for customization after application launch.
         return true
     }
     
@@ -112,28 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         self.saveContext()
     }
     
-    func locationManagerStart(){
-        if(self.locationManager == nil){
-            self.locationManager = CLLocationManager()
-            self.locationManager?.delegate = self
-            self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-            self.locationManager?.requestWhenInUseAuthorization()
-            
-        }
-        self.locationManager?.startUpdatingLocation()
-    }
-    
-    func locationManagerStop(){
-        self.locationManager?.stopUpdatingLocation()
-    }
-    
-    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
-        self.coordinate = newLocation.coordinate
-    }
-    
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!){
-        
-    }
 
     // MARK: - Core Data stack
 
