@@ -19,6 +19,7 @@
 		3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9288B1B547DAB0053B43C /* EventoViewController.swift */; };
 		3DE9288E1B54815B0053B43C /* EventDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9288D1B54815B0053B43C /* EventDAO.swift */; };
 		3DE928901B5481F50053B43C /* EventDAOCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9288F1B5481F50053B43C /* EventDAOCloudKit.swift */; };
+		3DE928941B5599EE0053B43C /* DemoModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE928931B5599EE0053B43C /* DemoModelData.swift */; };
 		3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */; };
 		3DFB8A181B4C218700463EA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A171B4C218700463EA4 /* User.swift */; };
 		3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */; };
@@ -72,6 +73,7 @@
 		3DE9288B1B547DAB0053B43C /* EventoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventoViewController.swift; sourceTree = "<group>"; };
 		3DE9288D1B54815B0053B43C /* EventDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDAO.swift; sourceTree = "<group>"; };
 		3DE9288F1B5481F50053B43C /* EventDAOCloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDAOCloudKit.swift; sourceTree = "<group>"; };
+		3DE928931B5599EE0053B43C /* DemoModelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModelData.swift; sourceTree = "<group>"; };
 		3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MidPoint.entitlements; sourceTree = "<group>"; };
 		3DFB8A171B4C218700463EA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */,
+				3DE928931B5599EE0053B43C /* DemoModelData.swift */,
 			);
 			name = NSObject;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				3DE9288E1B54815B0053B43C /* EventDAO.swift in Sources */,
 				7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */,
 				3DFC96C61B4DD19F00E7041E /* FriendDAOCloudKit.swift in Sources */,
+				3DE928941B5599EE0053B43C /* DemoModelData.swift in Sources */,
 				3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */,
 				3DE926A71B5430840053B43C /* ChatViewController.swift in Sources */,
 				3DFC96C81B4DD5F100E7041E /* FriendManager.swift in Sources */,
