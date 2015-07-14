@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ChatViewController: JSQMessagesViewController{
+class ChatViewController: UIViewController{
 
     @IBOutlet var tableView: UITableView!
     
