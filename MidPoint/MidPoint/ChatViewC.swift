@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ChatViewController: UIViewController{
+class ChatViewC: UIViewController{
 
     @IBOutlet var tableView: UITableView!
     
