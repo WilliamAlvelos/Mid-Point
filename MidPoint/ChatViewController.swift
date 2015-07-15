@@ -14,11 +14,17 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     
     var demoData:DemoModelData?
     
+    // Create a reference to a Firebase location
+    let myRootRef = Firebase(url: "https://midpoint.firebaseio.com/messages")
+    var messagesRef = Firebase(url: "https://midpoint.firebaseio.com/messages")
+    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         self.collectionView.collectionViewLayout.springinessEnabled = true
+
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +32,59 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         self.senderDisplayName = "Joao Lucas"
         self.showLoadEarlierMessagesHeader = true
         self.demoData = DemoModelData()
+        setupFirebase()
+        
     }
+    
+
+    
+    func setupFirebase() {
+        // *** STEP 2: SETUP FIREBASE
+        messagesRef = Firebase(url: "https://midpoint.firebaseio.com/messages")
+        
+        // *** STEP 4: RECEIVE MESSAGES FROM FIREBASE (limited to latest 25 messages)
+        
+        messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { snapshot in
+            var text = snapshot.value["text"] as? String
+            var sender = snapshot.value["sender"] as? String
+//            let imageUrl = snapshot.value["imageUrl"] as? String
+            
+            var message = JSQMessage(senderId:"053496-4509-289", senderDisplayName: "joao", date: NSDate(), text: text)
+            
+            self.demoData?.messages?.append(message)
+            
+            self.finishReceivingMessage()
+            
+            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+            
+        })
+        
+        messagesRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
+            let title = snapshot.value.objectForKey("text") as? String
+            println("The blog post titled \(title)")
+        })
+        
+        
+        
+        messagesRef.observeEventType(.Value, withBlock: { snapshot in
+            let connected = snapshot.value as? Bool
+            if connected != nil && connected! {
+                self.title = "Connected"
+            } else {
+                self.title = "Not Connected"
+            }
+        })
+    }
+    
+    func sendMessage(text: String!, sender: String!, imageName: String!) {
+        // *** STEP 3: ADD A MESSAGE TO FIREBASE
+        messagesRef.childByAutoId().setValue([
+            "text":text,
+            "sender":sender,
+            "image":imageName
+            ])
+    }
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -34,7 +92,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: Selector("closePressed:"))
         
     }
-    
     
     
     override func  collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject!) -> Bool {
@@ -71,9 +128,14 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         NSLog("Tapped cell at %@!", NSStringFromCGPoint(touchLocation))
     }
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
+
         var message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
         self.demoData?.messages?.append(message)
         self.finishSendingMessageAnimated(true)
+        JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        sendMessage(text, sender: senderDisplayName, imageName: "demo_avatar_jobs")
+        finishSendingMessage()
+    
     }
     override func  collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
     
@@ -140,11 +202,11 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         }
         
         switch (buttonIndex) {
-            case 0:
+            case 1:
                 demoData?.addPhotoMediaMessage()
                 break;
             
-            case 1:
+            case 2:
             
                 var weak:UICollectionView = self.collectionView
                 
@@ -153,7 +215,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
                 })
             break;
             
-            case 2:
+            case 3:
                 demoData?.addVideoMediaMessage()
                 break;
             

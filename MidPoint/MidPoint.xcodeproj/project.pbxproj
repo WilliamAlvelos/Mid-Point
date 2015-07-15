@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D084DD71B56CCA30032A94B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED36661B54BCC00045FDB5 /* ChatViewController.swift */; };
 		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
 		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
 		3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE926A61B5430840053B43C /* ChatViewC.swift */; };
@@ -52,7 +53,6 @@
 		7B744E991B548DA500D8E783 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E981B548DA500D8E783 /* UIKit.framework */; };
 		7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */; };
 		7BED36651B54B9430045FDB5 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED36641B54B9430045FDB5 /* TransitionManager.swift */; };
-		7BED36671B54BCC10045FDB5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED36661B54BCC00045FDB5 /* ChatViewController.swift */; };
 		D37521077EBF82FDF844268D /* libPods-MidPoint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 495E9806851C4CA17E307AF9 /* libPods-MidPoint.a */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
@@ -464,9 +464,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D084DD71B56CCA30032A94B /* ChatViewController.swift in Sources */,
 				7BED36651B54B9430045FDB5 /* TransitionManager.swift in Sources */,
 				3DFB8A1F1B4C381300463EA4 /* LoginViewController.swift in Sources */,
-				7BED36671B54BCC10045FDB5 /* ChatViewController.swift in Sources */,
 				3DFB8A181B4C218700463EA4 /* User.swift in Sources */,
 				FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */,
 				3DFC96C01B4D720300E7041E /* Friend.swift in Sources */,

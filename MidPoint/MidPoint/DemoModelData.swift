@@ -24,6 +24,9 @@ class DemoModelData: NSObject{
     let kJSQDemoAvatarIdJobs = "707-8956784-57"
     let kJSQDemoAvatarIdWoz = "309-41802-93823"
     
+    
+    var Pessoas:[User]?
+    
     //propertys
     var messages:Array<JSQMessage!>?
     var avatars:NSDictionary?
@@ -39,7 +42,7 @@ class DemoModelData: NSObject{
         self.messages = [JSQMessage]()
         
 //        }else{
-            self.loadFakeMessages()
+            //self.loadFakeMessages()
 //
 
         
@@ -97,13 +100,11 @@ class DemoModelData: NSObject{
         addPhotoMediaMessage()
         
         
-        
-        
     }
     
 
     func addPhotoMediaMessage(){
-        var photoItem:JSQPhotoMediaItem = JSQPhotoMediaItem(image: UIImage(named: "goldengate"))
+        var photoItem:JSQPhotoMediaItem = JSQPhotoMediaItem(image: UIImage(named: "teste"))
         
         var photoMessage:JSQMessage = JSQMessage(senderId: kJSQDemoAvatarIdSquires, displayName: kJSQDemoAvatarDisplayNameSquires, media: photoItem)
         
