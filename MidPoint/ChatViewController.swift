@@ -25,6 +25,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         self.senderId = "asdasdasd"
         self.senderDisplayName = "Joao Lucas"
         self.showLoadEarlierMessagesHeader = true
+        self.demoData = DemoModelData()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -118,21 +119,11 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         return nil
         // ver depois
     }
-    //    - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
-//    {
-//
-//
-//    
-//    /**
-//    *  Don't specify attributes to use the defaults.
-//    */
-//    return [[NSAttributedString alloc] initWithString:message.senderDisplayName];
-//    }
-//    
-//    - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
-//    {
-//    return nil;
-//    }
+
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        return nil
+    }
+
     
     override func didPressAccessoryButton(sender: UIButton!) {
         var sheet:UIActionSheet = UIActionSheet(title: "Media messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Send photo", "Send location", "Send video")
