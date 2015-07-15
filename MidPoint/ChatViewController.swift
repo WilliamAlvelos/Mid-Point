@@ -116,8 +116,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
                 return nil
             }
         }
-        return nil
-        // ver depois
+        return NSAttributedString(string: message!.senderDisplayName!)
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
