@@ -39,8 +39,8 @@ class DemoModelData: NSObject{
         self.messages = [JSQMessage]()
         
 //        }else{
-//            self.loadFakeMessages
-//        }
+            self.loadFakeMessages()
+//
 
         
         var jsqImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("JSQ", backgroundColor: UIColor(white: 0.85, alpha: 1.0), textColor: UIColor(white: 0.60, alpha: 1.0), font: UIFont.systemFontOfSize(14.0), diameter:UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
@@ -91,9 +91,7 @@ class DemoModelData: NSObject{
         JSQMessage(senderId: kJSQDemoAvatarIdCook, senderDisplayName: kJSQDemoAvatarDisplayNameCook, date: NSDate.distantPast() as! NSDate, text: "It is unit-tested, free, open-source, and documented."),
         
         
-        JSQMessage(senderId: kJSQDemoAvatarIdSquires, senderDisplayName: kJSQDemoAvatarDisplayNameSquires, date: NSDate(), text: "Now with media messages!"),
-            
-            nil)
+        JSQMessage(senderId: kJSQDemoAvatarIdSquires, senderDisplayName: kJSQDemoAvatarDisplayNameSquires, date: NSDate(), text: "Now with media messages!"))
 
         
         addPhotoMediaMessage()
@@ -143,21 +141,6 @@ class DemoModelData: NSObject{
     }
     
 }
-
-
-
-//- (instancetype)init
-//{
-//    self = [super init];
-//    if (self) {
-//
-//        if ([NSUserDefaults emptyMessagesSetting]) {
-//            self.messages = [NSMutableArray new];
-//        }
-//        else {
-//            [self loadFakeMessages];
-//        }
-//
 
 
 

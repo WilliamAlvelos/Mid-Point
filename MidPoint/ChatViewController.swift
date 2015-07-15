@@ -106,6 +106,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         return nil
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        print(indexPath.item)
         var message = self.demoData?.messages![indexPath.item]
         if message?.senderId == self.senderId {
             return nil
@@ -175,7 +176,9 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         UIAlertView(title: "Custom Action", message: "", delegate: nil, cancelButtonTitle: "OK", otherButtonTitles: "","").show()
         
     }
-    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.demoData!.messages!.count
+    }
 
     
 
