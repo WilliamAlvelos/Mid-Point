@@ -20,14 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
         
         Fabric.with([Twitter()])
-        var event = Event()
-        event.id = 10
-        var sender = User()
-        sender.id = 15
-        var friends = JsonResponse.createArrayFakeToTest(220)
-        EventDAOCloudKit().inviteFriendsToEvent(event, sender: sender, friends: friends)
-    
-        return true
+       return true
     }
 
 

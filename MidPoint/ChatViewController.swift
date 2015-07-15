@@ -168,7 +168,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         return nil
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        print(indexPath.item)
         var message = self.demoData?.messages![indexPath.item]
         if message?.senderId == self.senderId {
             return nil

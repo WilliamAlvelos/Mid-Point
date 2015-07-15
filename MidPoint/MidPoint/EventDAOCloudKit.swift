@@ -26,20 +26,26 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
     func inviteFriendsToEvent(event: Event, sender: User, friends: Array<User>){
         var dictionary = JsonResponse.userToCall(friends)
         let url : String = "http://www.alvelos.wc.lt/MidPoint/events/inviteToEvent.php"
-        let avent: String? = JsonResponse.dictionaryToString(JsonResponse.userToCall(friends))
-        var bodyHttp = String(format: "event_id=%d&user_to_invite=%@&sender=%d" , event.id!, avent! , sender.id!)
-        println(avent)
+        let avent: String = JsonResponse.dictionaryToString(JsonResponse.userToCall(friends))
+        var bodyHttp = String(format: "event_id=%d&user_to_invite=%@&sender=%d" , event.id!, avent , sender.id!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 self.delegate.errorThrowed(error)
                 
                 return
             }
-            print(NSString(data: data, encoding:NSUTF8StringEncoding))
+            let string = JsonResponse.parseJSON(data)
             
+            if (string.objectForKey("error") != nil){
+                let error : NSError = NSError(domain: "Erro", code: (string.objectForKey("error")! as! Int), userInfo: nil)
+                self.delegate.errorThrowed(error)
+                return
+            }
+            if (string.objectForKey("succesfull") != nil){
+                self.delegate.saveEventFinished(event)
+                return
+            }
         })
-
-
     }
     
     func saveEvent(event: Event, usuario: User) {
@@ -53,9 +59,9 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 return
             }
             let string = JsonResponse.parseJSON(data)
+        
             if (string.objectForKey("error") != nil){
-                var int = string.objectForKey("error")! as! Int
-                let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
+                let error : NSError = NSError(domain: "Erro", code: (string.objectForKey("error")! as! Int), userInfo: nil)
                 self.delegate.errorThrowed(error)
                 return
             }
