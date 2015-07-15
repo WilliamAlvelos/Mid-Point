@@ -2,19 +2,43 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-MidPoint-JSQMessagesViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Pods-MidPoint-JSQSystemSoundPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Pods-MidPoint.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>18EBC5B2672FF11D6B052762</key>
+		<key>2941000BF8F9DB45A52A98B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>41902966C7A2F09604CF5D78</key>
+		<key>2E2C03310B3E4E8B7E4B9648</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5589D88D3C08BB2982BF556F</key>
+		<key>E9905A899F9FDD39F1DCF318</key>
 		<dict>
 			<key>primary</key>
 			<true/>

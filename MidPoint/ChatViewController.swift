@@ -28,7 +28,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.senderId = "asdasdasd"
+        self.senderId = "asdasd"
         self.senderDisplayName = "Joao Lucas"
         self.showLoadEarlierMessagesHeader = true
         self.demoData = DemoModelData()
@@ -39,50 +39,33 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
 
     
     func setupFirebase() {
-        // *** STEP 2: SETUP FIREBASE
         messagesRef = Firebase(url: "https://midpoint.firebaseio.com/messages")
-        
-        // *** STEP 4: RECEIVE MESSAGES FROM FIREBASE (limited to latest 25 messages)
         
         messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { snapshot in
             var text = snapshot.value["text"] as? String
             var sender = snapshot.value["sender"] as? String
-//            let imageUrl = snapshot.value["imageUrl"] as? String
+            var imageUrl = snapshot.value["imageUrl"] as? String
             
-            var message = JSQMessage(senderId:"053496-4509-289", senderDisplayName: "joao", date: NSDate(), text: text)
+            var message = JSQMessage(senderId:"707-8956784-57", senderDisplayName: self.senderDisplayName, date: NSDate(), text: text)
             
             self.demoData?.messages?.append(message)
             
-            self.finishReceivingMessage()
-            
             JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
             
+            self.finishReceivingMessage()
+            
         })
         
-        messagesRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
-            let title = snapshot.value.objectForKey("text") as? String
-            println("The blog post titled \(title)")
-        })
-        
-        
-        
-        messagesRef.observeEventType(.Value, withBlock: { snapshot in
-            let connected = snapshot.value as? Bool
-            if connected != nil && connected! {
-                self.title = "Connected"
-            } else {
-                self.title = "Not Connected"
-            }
-        })
     }
     
     func sendMessage(text: String!, sender: String!, imageName: String!) {
-        // *** STEP 3: ADD A MESSAGE TO FIREBASE
-        messagesRef.childByAutoId().setValue([
+
+        messagesRef.childByAppendingPath(self.senderId).setValue([
             "text":text,
             "sender":sender,
             "image":imageName
             ])
+        
     }
     
     

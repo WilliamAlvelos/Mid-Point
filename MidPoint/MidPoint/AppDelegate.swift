@@ -11,6 +11,12 @@ import CoreData
 import Fabric
 import TwitterKit
 
+
+
+
+
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -18,6 +24,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
+        // [Optional] Power your app with Local Datastore. For more info, go to
+        // https://parse.com/docs/ios_guide#localdatastore/iOS
+        //Parse.enableLocalDatastore()
+        
+        
+        
+        // Initialize Parse.
+        //Parse.setApplicationId("rpnQRmwvLdmTkuLSFkgFZTOXIhpIvjfrzM2k33vK",
+        //    clientKey: "JwLwixuhZEzE2ZJX5u5ZQHsnj1nwEo3AUxvTHQxB")
+        
+        // [Optional] Track statistics around application opens.
+        //PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
         
         Fabric.with([Twitter()])
        return true

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5589D88D3C08BB2982BF556F"
+               BlueprintIdentifier = "2E2C03310B3E4E8B7E4B9648"
                BuildableName = "libPods-MidPoint-JSQSystemSoundPlayer.a"
                BlueprintName = "Pods-MidPoint-JSQSystemSoundPlayer"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5589D88D3C08BB2982BF556F"
-            BuildableName = "libPods-MidPoint-JSQSystemSoundPlayer.a"
-            BlueprintName = "Pods-MidPoint-JSQSystemSoundPlayer"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -57,15 +48,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5589D88D3C08BB2982BF556F"
-            BuildableName = "libPods-MidPoint-JSQSystemSoundPlayer.a"
-            BlueprintName = "Pods-MidPoint-JSQSystemSoundPlayer"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

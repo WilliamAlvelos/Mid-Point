@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "41902966C7A2F09604CF5D78"
+               BlueprintIdentifier = "E9905A899F9FDD39F1DCF318"
                BuildableName = "libPods-MidPoint-JSQMessagesViewController.a"
                BlueprintName = "Pods-MidPoint-JSQMessagesViewController"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "41902966C7A2F09604CF5D78"
-            BuildableName = "libPods-MidPoint-JSQMessagesViewController.a"
-            BlueprintName = "Pods-MidPoint-JSQMessagesViewController"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -57,15 +48,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "41902966C7A2F09604CF5D78"
-            BuildableName = "libPods-MidPoint-JSQMessagesViewController.a"
-            BlueprintName = "Pods-MidPoint-JSQMessagesViewController"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -11,11 +11,7 @@
 		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
 		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
 		3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE926A61B5430840053B43C /* ChatViewC.swift */; };
-		3DE927ED1B543FF70053B43C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927E81B543FF70053B43C /* FacebookSDK.framework */; };
 		3DE927EE1B543FF70053B43C /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927E91B543FF70053B43C /* Firebase.framework */; };
-		3DE927EF1B543FF70053B43C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927EA1B543FF70053B43C /* Parse.framework */; };
-		3DE927F01B543FF70053B43C /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927EB1B543FF70053B43C /* ParseFacebookUtils.framework */; };
-		3DE927F11B543FF70053B43C /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927EC1B543FF70053B43C /* ParseUI.framework */; };
 		3DE9288A1B5443330053B43C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE928891B5443330053B43C /* libsqlite3.0.dylib */; };
 		3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9288B1B547DAB0053B43C /* EventoViewController.swift */; };
 		3DE9288E1B54815B0053B43C /* EventDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9288D1B54815B0053B43C /* EventDAO.swift */; };
@@ -67,11 +63,7 @@
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DE926A61B5430840053B43C /* ChatViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewC.swift; sourceTree = "<group>"; };
-		3DE927E81B543FF70053B43C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		3DE927E91B543FF70053B43C /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
-		3DE927EA1B543FF70053B43C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		3DE927EB1B543FF70053B43C /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		3DE927EC1B543FF70053B43C /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		3DE928891B5443330053B43C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		3DE9288B1B547DAB0053B43C /* EventoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventoViewController.swift; sourceTree = "<group>"; };
 		3DE9288D1B54815B0053B43C /* EventDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDAO.swift; sourceTree = "<group>"; };
@@ -143,13 +135,9 @@
 				7B6085E01B548C8A002CBD54 /* StoreKit.framework in Frameworks */,
 				3DE9288A1B5443330053B43C /* libsqlite3.0.dylib in Frameworks */,
 				3DFB8A311B4CC4A900463EA4 /* TwitterCore.framework in Frameworks */,
-				3DE927F11B543FF70053B43C /* ParseUI.framework in Frameworks */,
-				3DE927F01B543FF70053B43C /* ParseFacebookUtils.framework in Frameworks */,
 				3DFB8A2E1B4CC4A900463EA4 /* Fabric.framework in Frameworks */,
 				3DE927EE1B543FF70053B43C /* Firebase.framework in Frameworks */,
 				3DFB8A2F1B4CC4A900463EA4 /* TwitterKit.framework in Frameworks */,
-				3DE927EF1B543FF70053B43C /* Parse.framework in Frameworks */,
-				3DE927ED1B543FF70053B43C /* FacebookSDK.framework in Frameworks */,
 				D37521077EBF82FDF844268D /* libPods-MidPoint.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,16 +229,12 @@
 				7B744E8E1B548D7E00D8E783 /* CoreGraphics.framework */,
 				7B744E901B548D8800D8E783 /* CoreLocation.framework */,
 				3DFB8A2A1B4CC4A900463EA4 /* Fabric.framework */,
-				3DE927E81B543FF70053B43C /* FacebookSDK.framework */,
 				3DE927E91B543FF70053B43C /* Firebase.framework */,
 				7B744E921B548D8F00D8E783 /* Foundation.framework */,
 				495E9806851C4CA17E307AF9 /* libPods-MidPoint.a */,
 				3DE928891B5443330053B43C /* libsqlite3.0.dylib */,
 				7B744E941B548D9C00D8E783 /* MapKit.framework */,
 				7B6085E11B548CB0002CBD54 /* MobileCoreServices.framework */,
-				3DE927EA1B543FF70053B43C /* Parse.framework */,
-				3DE927EB1B543FF70053B43C /* ParseFacebookUtils.framework */,
-				3DE927EC1B543FF70053B43C /* ParseUI.framework */,
 				7B744E961B548DA000D8E783 /* QuartzCore.framework */,
 				7B6085DF1B548C8A002CBD54 /* StoreKit.framework */,
 				7B6085E31B548CB9002CBD54 /* SystemConfiguration.framework */,
