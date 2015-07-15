@@ -71,35 +71,68 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     }
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         var message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
+        self.demoData?.messages?.append(message)
         self.finishSendingMessageAnimated(true)
     }
+    override func  collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
     
-    
-    func receiveMessagePressed(sender: UIBarButtonItem){
-        self.showTypingIndicator = !self.showTypingIndicator
+        return self.demoData?.messages![indexPath.item]
+    }
+  
+    override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
+        let message = self.demoData?.messages![indexPath.item]
+        if message?.senderId == self.senderId {
+            return self.demoData?.outgoingBubbleImageData;
+        }
         
-        self.scrollToBottomAnimated(true)
-        
-        var copyMessage:JSQMessage = self.demoData!.messages!.last!
-        
-        copyMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, text:"First received!")
-     
-        
-        
-//        dispatch_after(dispatch_time_t(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)),dispatch_get_main_queue(),{
-//            var userIds:NSMutableArray = self.demoData?.users?.allKeys
-//            
-//            userIds.removeObject(self.senderId)
-//            
-//            var randomUserId:NSString = userIds[arc4random_uniform((int)userIds.count)]
-//                
-//            var newMessage:JSQMessage = nil
-//            
-//            //continue
-//            
-//            })
+        return self.demoData?.incomingBubbleImageData;
         
     }
+    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
+        let message = self.demoData?.messages![indexPath.item]
+        if message?.senderId == self.senderId {
+            return nil;
+        }
+        
+        return self.demoData?.avatars![message!.senderId] as! JSQMessageAvatarImageDataSource
+       
+    }
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        if indexPath.item % 3 == 0 {
+            var message = self.demoData?.messages![indexPath.item]
+            return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message?.date)
+        }
+        return nil
+    }
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        var message = self.demoData?.messages![indexPath.item]
+        if message?.senderId == self.senderId {
+            return nil
+        }
+        if indexPath.item - 1 > 0 {
+            var previousmessage = self.demoData?.messages![indexPath.item-1]
+            if (previousmessage?.senderId == message?.senderId){
+                return nil
+            }
+        }
+        return nil
+        // ver depois
+    }
+    //    - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+//    {
+//
+//
+//    
+//    /**
+//    *  Don't specify attributes to use the defaults.
+//    */
+//    return [[NSAttributedString alloc] initWithString:message.senderDisplayName];
+//    }
+//    
+//    - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
+//    {
+//    return nil;
+//    }
     
     override func didPressAccessoryButton(sender: UIButton!) {
         var sheet:UIActionSheet = UIActionSheet(title: "Media messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Send photo", "Send location", "Send video")
