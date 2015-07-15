@@ -263,21 +263,58 @@
                                 <rect key="frame" x="0.0" y="308" width="375" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <tabBarItem systemItem="favorites" id="cSr-DH-ngA"/>
-                                    <tabBarItem title="Item" id="j59-cn-CGm"/>
-                                    <tabBarItem systemItem="more" id="d3M-AF-NJf"/>
+                                    <tabBarItem systemItem="downloads" id="cSr-DH-ngA"/>
+                                    <tabBarItem systemItem="recents" id="j59-cn-CGm"/>
+                                    <tabBarItem systemItem="more" id="ikh-S1-t4A"/>
+                                    <tabBarItem systemItem="favorites" id="d3M-AF-NJf"/>
                                 </items>
                             </tabBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="npH-qO-VHI">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="275" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="npH-qO-VHI">
                                 <rect key="frame" x="0.0" y="357" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dew-0Z-QlT">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomCellProfile" rowHeight="275" id="dew-0Z-QlT" customClass="CustomCellProfile" customModule="MidPoint" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dew-0Z-QlT" id="5Wh-SV-u8r">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="teste.png" translatesAutoresizingMaskIntoConstraints="NO" id="8ls-ki-8ph">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="186.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD4-0Z-LYM">
+                                                    <rect key="frame" x="34" y="200" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LhP-st-yA5">
+                                                    <rect key="frame" x="311" y="200" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCF-r0-jt1">
+                                                    <rect key="frame" x="34" y="238" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJU-O5-MU8">
+                                                    <rect key="frame" x="292" y="8" width="61" height="30"/>
+                                                    <state key="normal" title="Favoritar">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="favoritarEvent" destination="OJU-O5-MU8" id="ceZ-o4-PjR"/>
+                                            <outlet property="imageEvent" destination="8ls-ki-8ph" id="jHA-Aj-c3R"/>
+                                            <outlet property="localHorarioEvento" destination="UCF-r0-jt1" id="vNz-w0-vbM"/>
+                                            <outlet property="numeroPessoas" destination="LhP-st-yA5" id="JXC-uX-jYN"/>
+                                            <outlet property="titleEvent" destination="VD4-0Z-LYM" id="PzW-an-SQn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -287,6 +324,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="gestureView" destination="2uC-2A-Duj" id="Do3-fG-crg"/>
+                        <outlet property="tabBar" destination="sGV-mP-dSA" id="PCI-H2-7HT"/>
+                        <outlet property="tableView" destination="npH-qO-VHI" id="NfU-dM-vu3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRm-P5-oX1" userLabel="First Responder" sceneMemberID="firstResponder"/>

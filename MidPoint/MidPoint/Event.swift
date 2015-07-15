@@ -18,8 +18,11 @@ class Event: NSObject {
     var image: NSURL?
     var id: Int?
     override init(){
-    
 
+    }
+    
+    init(name: String){
+        self.name = name
     }
 
     
