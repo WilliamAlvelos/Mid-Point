@@ -14,9 +14,10 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     
     var demoData:DemoModelData?
     
+    var conversa:String?
+    
     // Create a reference to a Firebase location
-    let myRootRef = Firebase(url: "https://midpoint.firebaseio.com/messages")
-    var messagesRef = Firebase(url: "https://midpoint.firebaseio.com/messages")
+
     
     
     override func viewDidAppear(animated: Bool) {
@@ -39,7 +40,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
 
     
     func setupFirebase() {
-        messagesRef = Firebase(url: "https://midpoint.firebaseio.com/messages")
+        
+        var messagesRef = Firebase(url: "https://midpoint.firebaseio.com/" + conversa! + "/messages")
         
         messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { snapshot in
             var text = snapshot.value["text"] as? String
@@ -60,11 +62,20 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     
     func sendMessage(text: String!, sender: String!, imageName: String!) {
 
-        messagesRef.childByAppendingPath(self.senderId).setValue([
-            "text":text,
-            "sender":sender,
-            "image":imageName
-            ])
+//        messagesRef.childByAppendingPath(self.senderId).setValue([
+//            "text":text,
+//            "sender":sender,
+//            "image":imageName
+//            ])
+        
+        
+        var messagesRef = Firebase(url: "https://midpoint.firebaseio.com/" + conversa! + "/messages")
+        
+        messagesRef.childByAutoId().setValue([
+                        "text":text,
+                        "sender":sender,
+                        "image":imageName
+                        ])
         
     }
     

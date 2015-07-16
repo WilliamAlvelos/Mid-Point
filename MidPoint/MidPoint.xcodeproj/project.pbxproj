@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3D084DD71B56CCA30032A94B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED36661B54BCC00045FDB5 /* ChatViewController.swift */; };
+		3D6A3AC01B57620C00E7948F /* ConversasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */; };
+		3D6A3AC31B576D6C00E7948F /* Conversa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC21B576D6C00E7948F /* Conversa.swift */; };
+		3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */; };
 		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
 		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
 		3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE926A61B5430840053B43C /* ChatViewC.swift */; };
@@ -59,6 +62,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversasTableViewController.swift; sourceTree = "<group>"; };
+		3D6A3AC21B576D6C00E7948F /* Conversa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversa.swift; sourceTree = "<group>"; };
+		3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellConversas.swift; sourceTree = "<group>"; };
 		3D6FD8DA1B4A3C08008E70E9 /* b_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_search.png; sourceTree = "<group>"; };
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -145,6 +151,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D6A3AC11B576C9C00E7948F /* TableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */,
+			);
+			name = TableViewController;
+			sourceTree = "<group>";
+		};
 		3DACDEB01B5222E900711E25 /* Event */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,13 +170,14 @@
 			name = Event;
 			sourceTree = "<group>";
 		};
-		3DEE4F581B4ED66600645CA1 /* TableView */ = {
+		3DEE4F581B4ED66600645CA1 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
 				7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */,
 				3DE9289A1B55D8540053B43C /* CustomCellProfile.swift */,
+				3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */,
 			);
-			name = TableView;
+			name = CustomCell;
 			sourceTree = "<group>";
 		};
 		3DFB8A191B4C221100463EA4 /* DAO */ = {
@@ -194,6 +209,7 @@
 		3DFB8A251B4C54C800463EA4 /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
+				3D6A3AC21B576D6C00E7948F /* Conversa.swift */,
 				7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */,
 				3DE928931B5599EE0053B43C /* DemoModelData.swift */,
 			);
@@ -281,7 +297,8 @@
 				3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */,
 				FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */,
 				3DFB8A191B4C221100463EA4 /* DAO */,
-				3DEE4F581B4ED66600645CA1 /* TableView */,
+				3DEE4F581B4ED66600645CA1 /* CustomCell */,
+				3D6A3AC11B576C9C00E7948F /* TableViewController */,
 				3DFB8A201B4C383300463EA4 /* ViewControllers */,
 				3DFB8A251B4C54C800463EA4 /* NSObject */,
 				FFC2C6EE1AF935E0004B0AA7 /* Main.storyboard */,
@@ -448,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D6A3AC01B57620C00E7948F /* ConversasTableViewController.swift in Sources */,
 				3D084DD71B56CCA30032A94B /* ChatViewController.swift in Sources */,
 				7BED36651B54B9430045FDB5 /* TransitionManager.swift in Sources */,
 				3DFB8A1F1B4C381300463EA4 /* LoginViewController.swift in Sources */,
@@ -469,8 +487,10 @@
 				3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */,
 				3DFC96C81B4DD5F100E7041E /* FriendManager.swift in Sources */,
 				3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */,
+				3D6A3AC31B576D6C00E7948F /* Conversa.swift in Sources */,
 				3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */,
 				3DFC96C41B4DD0C300E7041E /* FriendDAO.swift in Sources */,
+				3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */,
 				3DACDEAF1B5222E300711E25 /* Event.swift in Sources */,
 				3DE928991B55CA9E0053B43C /* ProfileViewController.swift in Sources */,
 				3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */,
