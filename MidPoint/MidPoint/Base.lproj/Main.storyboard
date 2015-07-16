@@ -381,7 +381,13 @@
                             <outlet property="delegate" destination="TCc-vx-KJQ" id="FyU-9K-v6p"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="xb0-Cq-hOM"/>
+                    <navigationItem key="navigationItem" id="xb0-Cq-hOM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Lxr-1D-IKr">
+                            <connections>
+                                <segue destination="FQe-8z-pHE" kind="show" id="v30-bY-dR6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="0Fl-3m-yPS" id="FYD-cj-v57"/>
@@ -390,6 +396,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pis-bE-mqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2868.5" y="-180.5"/>
+        </scene>
+        <!--Create Conversation View Controller-->
+        <scene sceneID="MAW-Vx-HtP">
+            <objects>
+                <viewController storyboardIdentifier="CreateConversation" id="FQe-8z-pHE" customClass="CreateConversationViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="idN-sF-UkY"/>
+                        <viewControllerLayoutGuide type="bottom" id="m6O-A4-rqE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OyT-Op-646">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titulo do grupo" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2jg-HY-SKH">
+                                <rect key="frame" x="33" y="257" width="308" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subtitulo do Grupo" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KyO-7X-5op">
+                                <rect key="frame" x="33" y="327" width="308" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amigos do grupo (fazer)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="njg-BA-DDR">
+                                <rect key="frame" x="33" y="397" width="308" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DwH-Tc-SSa">
+                                <rect key="frame" x="164" y="470" width="33" height="30"/>
+                                <state key="normal" title="Criar">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionCreateGroup:" destination="FQe-8z-pHE" eventType="touchUpInside" id="reG-le-QZi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJg-jJ-jB7">
+                                <rect key="frame" x="105" y="79" width="165" height="165"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeImage:" destination="FQe-8z-pHE" eventType="touchUpInside" id="DKX-9D-4eg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="button" destination="eJg-jJ-jB7" id="56Z-Sg-Rq1"/>
+                        <outlet property="subtitleGroup" destination="KyO-7X-5op" id="aAy-uk-eDe"/>
+                        <outlet property="titleGroup" destination="2jg-HY-SKH" id="w3X-rL-fCY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VyX-Zs-GJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3402.5" y="-214.5"/>
         </scene>
         <!--Friend View Controller-->
         <scene sceneID="Awb-j8-aky">
@@ -513,7 +578,7 @@
         <!--Navigation Controller-->
         <scene sceneID="PLo-Gd-0u2">
             <objects>
-                <navigationController id="xkZ-fb-EDL" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigationControllerConversas" id="xkZ-fb-EDL" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Whv-6h-1Zs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

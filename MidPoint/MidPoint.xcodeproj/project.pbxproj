@@ -11,6 +11,7 @@
 		3D6A3AC01B57620C00E7948F /* ConversasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */; };
 		3D6A3AC31B576D6C00E7948F /* Conversa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC21B576D6C00E7948F /* Conversa.swift */; };
 		3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */; };
+		3D6A3AC71B5774C400E7948F /* CreateConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC61B5774C400E7948F /* CreateConversationViewController.swift */; };
 		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
 		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
 		3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE926A61B5430840053B43C /* ChatViewC.swift */; };
@@ -65,6 +66,7 @@
 		3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversasTableViewController.swift; sourceTree = "<group>"; };
 		3D6A3AC21B576D6C00E7948F /* Conversa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversa.swift; sourceTree = "<group>"; };
 		3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellConversas.swift; sourceTree = "<group>"; };
+		3D6A3AC61B5774C400E7948F /* CreateConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateConversationViewController.swift; path = ../CreateConversationViewController.swift; sourceTree = "<group>"; };
 		3D6FD8DA1B4A3C08008E70E9 /* b_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_search.png; sourceTree = "<group>"; };
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		3DFB8A201B4C383300463EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3D6A3AC61B5774C400E7948F /* CreateConversationViewController.swift */,
 				3DE928981B55CA9E0053B43C /* ProfileViewController.swift */,
 				3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */,
 				7BED36661B54BCC00045FDB5 /* ChatViewController.swift */,
@@ -474,6 +477,7 @@
 				3DFC96C01B4D720300E7041E /* Friend.swift in Sources */,
 				3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */,
 				3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */,
+				3D6A3AC71B5774C400E7948F /* CreateConversationViewController.swift in Sources */,
 				FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */,
 				3DE9289B1B55D8540053B43C /* CustomCellProfile.swift in Sources */,
 				7B4D268D1B55BAE500DD86EF /* JsonResponse.swift in Sources */,
