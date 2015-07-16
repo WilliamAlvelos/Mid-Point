@@ -68,53 +68,27 @@
             </objects>
             <point key="canvasLocation" x="509.5" y="242.5"/>
         </scene>
-        <!--Chat View Controller-->
-        <scene sceneID="um1-42-deE">
+        <!--Navigation Controller-->
+        <scene sceneID="g2V-bt-VDY">
             <objects>
-                <viewController id="I9p-xk-APj" customClass="ChatViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="olY-L7-oC1"/>
-                        <viewControllerLayoutGuide type="bottom" id="KH8-nj-2bz"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Cef-40-Vo8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="h3F-VU-o79">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="470"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tDp-4o-B5r">
-                                <rect key="frame" x="16" y="478" width="343" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUW-2W-wIX">
-                                <rect key="frame" x="206" y="516" width="43" height="30"/>
-                                <state key="normal" title="Enviar">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="send:" destination="I9p-xk-APj" eventType="touchUpInside" id="UbN-Vb-99j"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                <navigationController storyboardIdentifier="navigationChat" id="fkw-jN-1da" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="E2I-GH-ceL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
                     <connections>
-                        <outlet property="tableView" destination="h3F-VU-o79" id="bLb-7H-AuZ"/>
-                        <outlet property="text" destination="tDp-4o-B5r" id="rQ4-ia-B5R"/>
+                        <segue destination="zx4-zP-wtQ" kind="relationship" relationship="rootViewController" id="nea-1R-d6u"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cfn-yN-DSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zgH-9h-xpc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="985.5" y="242.5"/>
+            <point key="canvasLocation" x="925.5" y="242.5"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="1XN-Df-fKG">
             <objects>
-                <viewController id="zx4-zP-wtQ" customClass="ChatViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="zx4-zP-wtQ" customClass="ChatViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f2l-mD-2ja"/>
                         <viewControllerLayoutGuide type="bottom" id="KBE-NU-net"/>

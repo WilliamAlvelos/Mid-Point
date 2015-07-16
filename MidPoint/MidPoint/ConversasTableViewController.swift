@@ -126,6 +126,15 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         // Return the number of rows in the section.
         return 2
     }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
+        nextViewController.conversa = "1"
+        
+        self.presentViewController(nextViewController, animated:true, completion:nil)
+    }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -161,20 +170,20 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
 
 
-    /*
+    
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
 
     }
-    */
 
-    /*
+
+    
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return NO if you do not want the item to be re-orderable.
         return true
     }
-    */
+
 
     /*
     // MARK: - Navigation
