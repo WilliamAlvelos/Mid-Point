@@ -20,7 +20,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     var navItem: UINavigationItem?
     
-    var travado: Bool?
+    var travado: Bool = false
+    
+    var searchAparecendo: Bool = true
+    
+    
+    @IBOutlet var searchBar: UISearchBar!
     
     @IBOutlet var tableView: UITableView!
 
@@ -30,8 +35,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
      override func viewDidLoad() {
         
-        data.append(event)
         
+        
+        data.append(event)
         data.append(event)
         data.append(event)
         
@@ -46,8 +52,124 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 160.0
         
+        //gestures
+        var swipeUPSearch:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipeSearch:"))
+        swipeUPSearch.direction = UISwipeGestureRecognizerDirection.Up
+        
+        var swipeDownSearch:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipeSearch:"))
+        
+        swipeDownSearch.direction = UISwipeGestureRecognizerDirection.Down
+        
+        var swipeUP:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipe:"))
+        swipeUP.direction = UISwipeGestureRecognizerDirection.Up
+        
+        var swipeDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipe:"))
+        
+        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
+        
+        self.view.addGestureRecognizer(swipeUPSearch)
+        
+        self.view.addGestureRecognizer(swipeDownSearch)
+        
+        
+        self.tabBar.addGestureRecognizer(swipeUP)
+        
+        self.tabBar.addGestureRecognizer(swipeDown)
+        
+        //pangestureReconizer
+        var pan = UIPanGestureRecognizer(target:self, action:"pan:")
+        pan.maximumNumberOfTouches = 1
+        pan.minimumNumberOfTouches = 1
+        self.view.addGestureRecognizer(pan)
+        
+    }
+
+    
+    
+    func pan(rec:UIPanGestureRecognizer) {
+        
+        var p:CGPoint = rec.locationInView(self.view)
+        var center:CGPoint = CGPointZero
+        
+        switch rec.state {
+        case .Began:
+            println("began")
+            self.view = view.hitTest(p, withEvent: nil)
+            if self.view != nil {
+                self.view.bringSubviewToFront(self.view!)
+            }
+    
+        }
+        
     }
     
+    override func viewWillAppear(animated: Bool) {
+        searchBar.center.y -= view.bounds.height
+        
+        
+        animateTable()
+        
+        UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.searchBar.center.y += self.view.bounds.height
+            
+            self.view.layoutIfNeeded()
+            
+            }, completion: nil)
+    }
+    
+    func DownSwipeSearch(gesture: UISwipeGestureRecognizer){
+        if(searchAparecendo == false){
+            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                self.searchBar.center.y += self.view.bounds.height/5
+                
+                }, completion: nil)
+                searchAparecendo = true
+        }
+    }
+    func UpSwipeSearch(gesture: UISwipeGestureRecognizer){
+        
+        if(searchAparecendo == true){
+            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                self.searchBar.center.y -= self.view.bounds.height/5
+                
+                }, completion: nil)
+            searchAparecendo = false
+        }
+    }
+
+    func DownSwipe(gesture: UISwipeGestureRecognizer){
+        if(travado == true){
+            
+            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                self.tableView.center.y += self.view.bounds.width/1.55
+                self.tabBar.center.y += self.view.bounds.width/1.55
+                
+                //self.view.backgroundColor = UIColor(red: 0, green:0 , blue: 255, alpha: 1)
+                
+                self.view.layoutIfNeeded()
+                }, completion: nil)
+            
+            travado = false
+        }
+    }
+    func UpSwipe(gesture: UISwipeGestureRecognizer){
+        
+        println("cima")
+        
+        if(travado == false){
+            
+            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                self.tableView.center.y -= self.view.bounds.width/1.55
+                self.tabBar.center.y -= self.view.bounds.width/1.55
+                //self.view.backgroundColor = UIColor(red: 0, green:0 , blue: 255, alpha: 1)
+                
+                self.view.layoutIfNeeded()
+                }, completion: nil)
+            
+            travado = true
+        }
+        
+    }
     
     func animateTable() {
         tableView.reloadData()
