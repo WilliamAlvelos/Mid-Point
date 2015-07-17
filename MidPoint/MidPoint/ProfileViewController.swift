@@ -76,32 +76,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         self.tabBar.addGestureRecognizer(swipeDown)
         
-        //pangestureReconizer
-        var pan = UIPanGestureRecognizer(target:self, action:"pan:")
-        pan.maximumNumberOfTouches = 1
-        pan.minimumNumberOfTouches = 1
-        self.view.addGestureRecognizer(pan)
-        
     }
 
     
     
-    func pan(rec:UIPanGestureRecognizer) {
-        
-        var p:CGPoint = rec.locationInView(self.view)
-        var center:CGPoint = CGPointZero
-        
-        switch rec.state {
-        case .Began:
-            println("began")
-            self.view = view.hitTest(p, withEvent: nil)
-            if self.view != nil {
-                self.view.bringSubviewToFront(self.view!)
-            }
-    
-        }
-        
-    }
+
     
     override func viewWillAppear(animated: Bool) {
         searchBar.center.y -= view.bounds.height
