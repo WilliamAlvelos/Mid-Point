@@ -61,6 +61,7 @@
 		FF36923D1B60002600C71BBC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF36923A1B60002600C71BBC /* FBSDKCoreKit.framework */; };
 		FF36923E1B60002600C71BBC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF36923B1B60002600C71BBC /* FBSDKLoginKit.framework */; };
 		FF36923F1B60002600C71BBC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF36923C1B60002600C71BBC /* FBSDKShareKit.framework */; };
+		FF3692421B60012800C71BBC /* FacebookResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3692411B60012800C71BBC /* FacebookResponder.swift */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
 		FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */; };
@@ -128,6 +129,7 @@
 		FF36923A1B60002600C71BBC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		FF36923B1B60002600C71BBC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		FF36923C1B60002600C71BBC /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		FF3692411B60012800C71BBC /* FacebookResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookResponder.swift; sourceTree = "<group>"; };
 		FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC2C6E61AF935E0004B0AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -305,6 +307,14 @@
 			name = Animations;
 			sourceTree = "<group>";
 		};
+		FF3692401B6000E700C71BBC /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				FF3692411B60012800C71BBC /* FacebookResponder.swift */,
+			);
+			name = Social;
+			sourceTree = "<group>";
+		};
 		FFC2C6D91AF935E0004B0AA7 = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +346,7 @@
 				3DFB8A201B4C383300463EA4 /* ViewControllers */,
 				3DFB8A251B4C54C800463EA4 /* NSObject */,
 				FF3692311B5FFF4E00C71BBC /* Animations */,
+				FF3692401B6000E700C71BBC /* Social */,
 				FFC2C6EE1AF935E0004B0AA7 /* Main.storyboard */,
 				FFC2C6F11AF935E0004B0AA7 /* Images.xcassets */,
 				FFC2C6F31AF935E0004B0AA7 /* LaunchScreen.xib */,
@@ -534,6 +545,7 @@
 				3DACDEAF1B5222E300711E25 /* Event.swift in Sources */,
 				3DE928991B55CA9E0053B43C /* ProfileViewController.swift in Sources */,
 				3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */,
+				FF3692421B60012800C71BBC /* FacebookResponder.swift in Sources */,
 				FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
