@@ -20,6 +20,20 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb399872570202594</string>
+				<string>midpoint://</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookDisplayName</key>
+	<string>MidPoint</string>
+	<key>FacebookAppID</key>
+	<string>399872570202594</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
