@@ -102,17 +102,9 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //        if(tableView.cellForRowAtIndexPath(indexPath)?.selected == true ){
-        //tableView.cellForRowAtIndexPath(indexPath)?.selected = false
-        //        }
-        //        else {
-        //            tableView.cellForRowAtIndexPath(indexPath)?.selected = true
-        //        }
-        
         if(tableView.cellForRowAtIndexPath(indexPath)?.accessoryType == .Checkmark){
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
             let tru = self.dataSelected.filter{ $0.id == self.data[indexPath.row].id }
-//            self.dataSelected.
             var index = find(self.dataSelected.map({ $0.id! }), self.data[indexPath.row].id!)
             self.dataSelected.removeAtIndex(index!)
             
