@@ -8,21 +8,27 @@
 
 import UIKit
 
-class ConversasTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating{
+class ConversasTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, EventoDAOCloudKitDelegate{
 
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
-    var Data:[Conversa] = []
+    var Data:[Event] = []
     
     var filteredTableData = [Conversa]()
+    
+    var eventDelegate = EventDAOCloudKit()
     
     var resultSearchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.eventDelegate.getEvent(User(id: 2), usuario: .All)
+        
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.eventDelegate.delegate = self
         self.resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
@@ -161,14 +167,14 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 //        
 //        
         if (self.resultSearchController.active) {
-            cell.textLabel?.text = filteredTableData[indexPath.row].title
-            cell.subtitleLabel.text = filteredTableData[indexPath.row].subtitle
+            cell.textLabel?.text = filteredTableData[indexPath.row].name
+            cell.subtitleLabel.text = filteredTableData[indexPath.row].descricao
             
             return cell
         }
         else {
-            cell.textLabel?.text = Data[indexPath.row].title
-            cell.subtitleLabel.text = Data[indexPath.row].subtitle
+            cell.textLabel?.text = Data[indexPath.row].name
+            cell.subtitleLabel.text = Data[indexPath.row].descricao
             
             return cell
         }
@@ -221,6 +227,20 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
         self.tableView.reloadData()
     }
+    
+    
+    func errorThrowed(error: NSError){}
+    
+    func saveEventFinished(event: Event){}
+    
+    func eventNotFound(event : Event){}
+    
+    func getEventFinished(event: Event){}
+    
+    func getEventsFinished(events: Array<(Int, Int, Int)>){
+        
+    }
+    func inviteFinished(event: Event){}
 
     /*
     // MARK:
