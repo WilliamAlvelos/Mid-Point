@@ -129,11 +129,10 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ChatViewController") as! ChatViewController
-        nextViewController.conversa = "1"
+        let nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
+        nextView.conversa = "2"
         
-        self.presentViewController(nextViewController, animated:true, completion:nil)
+        self.navigationController?.pushViewController(nextView, animated: true)
     }
 
     

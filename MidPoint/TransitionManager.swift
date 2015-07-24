@@ -18,9 +18,14 @@ class TransitionManager: NSObject {
     }
     
     init(indentifier: String, animated: Bool, view: UIViewController){
+        view.presentViewController(TransitionManager.creatView(indentifier), animated:animated, completion:nil)
+    }
+    
+    
+    class func creatView(identifier:String)->UIViewController{
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier(indentifier) as! UIViewController
-        view.presentViewController(nextViewController, animated:animated, completion:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+        return nextViewController
     }
     
     

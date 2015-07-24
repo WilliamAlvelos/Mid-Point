@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3D084DD71B56CCA30032A94B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BED36661B54BCC00045FDB5 /* ChatViewController.swift */; };
+		3D3359E71B61A79D00F22D88 /* AmigosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3359E61B61A79D00F22D88 /* AmigosTableViewController.swift */; };
+		3D3359E91B61B73400F22D88 /* CustomCellAmigosGrupo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3359E81B61B73400F22D88 /* CustomCellAmigosGrupo.swift */; };
 		3D6A3AC01B57620C00E7948F /* ConversasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */; };
 		3D6A3AC31B576D6C00E7948F /* Conversa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC21B576D6C00E7948F /* Conversa.swift */; };
 		3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */; };
@@ -71,6 +73,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D3359E61B61A79D00F22D88 /* AmigosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmigosTableViewController.swift; sourceTree = "<group>"; };
+		3D3359E81B61B73400F22D88 /* CustomCellAmigosGrupo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellAmigosGrupo.swift; sourceTree = "<group>"; };
 		3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversasTableViewController.swift; sourceTree = "<group>"; };
 		3D6A3AC21B576D6C00E7948F /* Conversa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversa.swift; sourceTree = "<group>"; };
 		3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellConversas.swift; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */,
+				3D3359E61B61A79D00F22D88 /* AmigosTableViewController.swift */,
 			);
 			name = TableViewController;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */,
+				3D3359E81B61B73400F22D88 /* CustomCellAmigosGrupo.swift */,
 				3DE9289A1B55D8540053B43C /* CustomCellProfile.swift */,
 				3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */,
 			);
@@ -533,11 +539,13 @@
 				3DE928941B5599EE0053B43C /* DemoModelData.swift in Sources */,
 				FF3692391B5FFF7E00C71BBC /* OCView.swift in Sources */,
 				FF3692381B5FFF7E00C71BBC /* UBAGlueView.swift in Sources */,
+				3D3359E71B61A79D00F22D88 /* AmigosTableViewController.swift in Sources */,
 				3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */,
 				3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */,
 				3DFC96C81B4DD5F100E7041E /* FriendManager.swift in Sources */,
 				3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */,
 				3D6A3AC31B576D6C00E7948F /* Conversa.swift in Sources */,
+				3D3359E91B61B73400F22D88 /* CustomCellAmigosGrupo.swift in Sources */,
 				3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */,
 				3DFC96C41B4DD0C300E7041E /* FriendDAO.swift in Sources */,
 				3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */,

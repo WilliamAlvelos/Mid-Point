@@ -52,9 +52,8 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
 
     @IBAction func actionCreateGroup(sender: AnyObject) {
         
-        addConversation("3", title: titleGroup.text, subtitle: subtitleGroup.text, image: "papai Noel")
+        addConversation("4", title: titleGroup.text, subtitle: subtitleGroup.text, image: "halua image")
         
-        TransitionManager(indentifier: "navigationControllerConversas", animated: false, view: self)
     }
 
     /*
