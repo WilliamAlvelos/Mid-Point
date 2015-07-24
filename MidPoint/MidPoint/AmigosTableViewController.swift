@@ -8,45 +8,33 @@
 
 import UIKit
 
-class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , UISearchResultsUpdating {
+class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , FriendDAODelegate, UISearchResultsUpdating{
  
-    @IBOutlet var seachBar: UISearchBar!
-    
-//    var Data:[Friend]?
-//    
-//    var searchActive : Bool = false
-//    
-//    var searchResults:[Friend]?
+    var daoFriend: FriendDAOCloudKit = FriendDAOCloudKit()
+
     
     var searchActive : Bool = false
-    var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
-    var filtered:[String] = []
+    var data: Array<User> = Array()
     
     var resultSearchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        daoFriend.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.clearsSelectionOnViewWillAppear = false
-        
         self.resultSearchController = ({
-            
             let controller = UISearchController(searchResultsController: nil)
-            //controller.searchResultsUpdater = self
+            controller.searchResultsUpdater = self
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.sizeToFit()
-//            controller.searchBar.barStyle = UIBarStyle.Black
-//            controller.searchBar.barTintColor = UIColor.whiteColor()
-//            controller.searchBar.backgroundColor = UIColor.clearColor()
+            
             self.tableView.tableHeaderView = controller.searchBar
             
-            
             return controller
-            
-            
         })()
+        
         self.tableView.reloadData()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action:Selector("finish"))
@@ -97,9 +85,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 2
+        return self.data.count
+        
     }
     
     
@@ -111,7 +98,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellAmigosGroupo = self.tableView.dequeueReusableCellWithIdentifier("CustomCellAmigosGroupo") as!CustomCellAmigosGroupo
         
-        cell.titleLabel?.text = "teste"
+        cell.titleLabel?.text = data[indexPath.row].name
         
         cell.imageLabel = UIImageView(image: UIImage(named: "teste"))
         
@@ -139,33 +126,19 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     }
     
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        filtered = data.filter({ (text) -> Bool in
-            let tmp: NSString = text
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
-        })
-        if(filtered.count == 0){
-            searchActive = false;
-        } else {
-            searchActive = true;
-        }
-        self.tableView.reloadData()
-    }
-    
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
-        filtered.removeAll(keepCapacity: false)
         
-        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
-        
-        let array = (data as NSArray).filteredArrayUsingPredicate(searchPredicate)
-        filtered = array as! [String]
-        
-        self.tableView.reloadData()
-        
+        self.daoFriend.getUsersWithName(searchController.searchBar.text)
+    
     }
-
+    
+    func errorThrowed(error: NSError){
+    
+    }
+    func getUsersFinished(users: Array<User>){
+        self.data = users
+        self.tableView.reloadData()
+    }
 }

@@ -17,7 +17,7 @@ class FriendDAOCloudKit{
     func getUsersWithName(name: String) {
         
         let url : String = "http://alvelos.wc.lt/MidPoint/buscaUsuario.php"
-        let bodyHttp = String(format: "name=%@", "a")
+        let bodyHttp = String(format: "name=%@", name)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 self.delegate?.errorThrowed(error)
@@ -28,8 +28,8 @@ class FriendDAOCloudKit{
             var arrayToReturn :[User]? = Array()
             for dataString in array {
                 if (dataString.objectForKey("error") != nil){
-                    var int = (dataString.objectForKey("error") as! String).toInt()
-                    let error : NSError = NSError(domain: "Erro", code: int!, userInfo: nil)
+                    var int = dataString.objectForKey("error") as! Int
+                    let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
                     self.delegate?.errorThrowed(error)
                     return
                 }
@@ -41,10 +41,17 @@ class FriendDAOCloudKit{
                 user.name = name
                 arrayToReturn!.append(user)
             }
-            self.delegate?.getUsersFinished(arrayToReturn!)
+            self.Dispatcher({ () -> () in
+                self.delegate?.getUsersFinished(arrayToReturn!)
+            })
+            
 
             
         })
         
+    }
+    private func Dispatcher(functionToRunOnMainThread: () -> ())
+    {
+        dispatch_async(dispatch_get_main_queue(), functionToRunOnMainThread)
     }
 }
