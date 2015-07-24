@@ -19,6 +19,8 @@ class LoginViewController: UIViewController, UserManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Login"
+        
 //            let logInButton = TWTRLogInButton(logInCompletion: {
 //            (session: TWTRSession!, error: NSError!) in
 //            
@@ -76,7 +78,8 @@ class LoginViewController: UIViewController, UserManagerDelegate{
     @IBAction func registerAction(sender: AnyObject) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("register") as! RegisterViewController
-        self.presentViewController(nextViewController, animated:true, completion:nil)
+        //self.presentViewController(nextViewController, animated:true, completion:nil)
+        self.navigationController?.pushViewController(nextViewController, animated: false)
         
     }
     
@@ -97,7 +100,10 @@ class LoginViewController: UIViewController, UserManagerDelegate{
     }
     func getUserFinished(user: User){
         UserDAODefault.saveLogin(user)
-        TransitionManager(indentifier: "navigationControllerConversas", animated: true, view: self)
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationControllerConversas") as! UINavigationController
+        self.presentViewController(nextViewController, animated:false, completion:nil)
     }
 
 }

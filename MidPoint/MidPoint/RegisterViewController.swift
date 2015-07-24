@@ -41,6 +41,9 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         PermissionsResponse.checkCameraPermission()
         PermissionsResponse.checkRollCameraPermission()
         
+//        passwordTextField.hidden = true
+//        emailTexteField.hidden = true
+//        confirmPasswordTextFied.hidden = true
         
         passwordTextField.center.x  -= view.bounds.width
         emailTexteField.center.x -= view.bounds.width
@@ -48,23 +51,24 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         nameTextField.center.x -= view.bounds.width
         
         
-        UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        
+        UIView.animateWithDuration(0.8, delay: 0.3, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.nameTextField.center.x += self.view.bounds.width
 
             self.view.layoutIfNeeded()
             }, completion: nil)
         
-        UIView.animateWithDuration(0.8, delay: 0.2, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.8, delay: 0.5, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.emailTexteField.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)
         
-        UIView.animateWithDuration(0.8, delay: 0.4, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.8, delay: 0.7, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.passwordTextField.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)
         
-        UIView.animateWithDuration(0.8, delay: 0.6, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.8, delay: 0.9, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.confirmPasswordTextFied.center.x += self.view.bounds.width
             self.view.layoutIfNeeded()
             }, completion: nil)

@@ -20,10 +20,11 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     var resultSearchController = UISearchController()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.eventDelegate.getEvent(User(id: 2), usuario: .All)
+        self.eventDelegate.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
         
         
         self.tableView.delegate = self
@@ -43,35 +44,33 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         })()
         
         
-//        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
+        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
 
         // Uncomment the following line to preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = false
+        //self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        //self.navigationItem.rightBarButtonItem = add
+        self.navigationItem.rightBarButtonItem = add
         //self.navigationItem.rightBarButtonItem = self.
         
         self.title = "Grupos"
-        
         
     }
     
     
     
     override func viewWillAppear(animated: Bool) {
-        if(!animated){
-            animateTable()
-        }
+        animateTable()
     }
     
-//    func createConversation(){
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
-//        self.presentViewController(nextViewController, animated:true, completion:nil)
-//    
-//    }
+    func createConversation(){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        //self.presentViewController(nextViewController, animated:true, completion:nil)
+    
+    }
     
     func setupFirebase() {
         
@@ -87,12 +86,10 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             
             
             self.Data.append(event)
-            
-            
-            
         })
         
     }
+    
     
     
     
@@ -100,11 +97,12 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         tableView.reloadData()
         
         let cells = tableView.visibleCells()
-        let tableHeight: CGFloat = tableView.bounds.size.height
+        let tableWidth: CGFloat = tableView.bounds.size.width
         
         for i in cells {
             let cell: UITableViewCell = i as! UITableViewCell
-            cell.transform = CGAffineTransformMakeTranslation(0, tableHeight)
+            //          cell.transform = CGAffineTransformMakeTranslation(0, tableHeight)
+            cell.transform = CGAffineTransformMakeTranslation(-tableWidth, 0)
         }
         
         var index = 0
@@ -155,7 +153,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
         nextView.conversa = Data[indexPath.row].id
-        
         self.navigationController?.pushViewController(nextView, animated: true)
     }
 
@@ -224,7 +221,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
         let array = (Data as NSArray).filteredArrayUsingPredicate(searchPredicate)
         filteredTableData = array as! [Event]
-        
         self.tableView.reloadData()
     }
     
@@ -239,7 +235,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     func getEventsFinished(events: Array<Event>){
         Data = events
-        self.tableView.reloadData()
+        animateTable()
     }
     func inviteFinished(event: Event){
     

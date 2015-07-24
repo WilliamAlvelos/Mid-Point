@@ -67,11 +67,12 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         tableView.reloadData()
         
         let cells = tableView.visibleCells()
-        let tableHeight: CGFloat = tableView.bounds.size.height
+        let tableWidth: CGFloat = tableView.bounds.size.width
         
         for i in cells {
             let cell: UITableViewCell = i as! UITableViewCell
-            cell.transform = CGAffineTransformMakeTranslation(0, tableHeight)
+  //          cell.transform = CGAffineTransformMakeTranslation(0, tableHeight)
+            cell.transform = CGAffineTransformMakeTranslation(tableWidth, 0)
         }
         
         var index = 0
