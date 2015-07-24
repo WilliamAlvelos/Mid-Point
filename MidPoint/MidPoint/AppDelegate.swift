@@ -24,15 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
-        var user = User()
-        user.name = "joao"
-        user.id = 123
-        user.email = "joao@joao.com"
-        var ev = Event()
-        ev.name = "evento fera"
-        ev.descricao = "descricao muito loca"
-        ev.date = NSDate(timeIntervalSinceNow: 0)
-        var event = EventDAOCloudKit().saveEvent(ev, usuario: user)
+//        var user = User()
+//        user.name = "joao"
+//        user.id = 123
+//        user.email = "joao@joao.com"
+//        var ev = Event()
+//        ev.name = "evento fera"
+//        ev.descricao = "descricao muito loca"
+//        ev.date = NSDate(timeIntervalSinceNow: 0)
+//        var event = EventDAOCloudKit().saveEvent(ev, usuario: user)
         
         
         Fabric.with([Twitter()])

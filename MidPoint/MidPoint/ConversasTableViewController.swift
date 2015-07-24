@@ -8,19 +8,32 @@
 
 import UIKit
 
-class ConversasTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource{
+class ConversasTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating{
 
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
-    var Data:[Conversa]?
+    var Data:[Conversa] = []
     
+    var filteredTableData = [Conversa]()
     
+    var resultSearchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.resultSearchController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self
+            controller.dimsBackgroundDuringPresentation = false
+            controller.searchBar.sizeToFit()
+            
+            
+            self.tableView.tableHeaderView = controller.searchBar
+            
+            return controller
+        })()
         
         
 //        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
@@ -34,8 +47,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         //self.navigationItem.rightBarButtonItem = self.
         
         self.title = "Grupos"
-        
-        addConversation("2", title: "pizzaria", subtitle: "loka", image: "PizzaIcon")
         
         
     }
@@ -65,7 +76,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             
             var conversa = Conversa(id: id!, title: title!, subtitle:subtitle!)
             
-            self.Data?.append(conversa)
+            self.Data.append(conversa)
             
             
             
@@ -122,9 +133,12 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 2
+        if (self.resultSearchController.active) {
+            return self.filteredTableData.count
+        }
+        else {
+            return self.Data.count
+        }
     }
     
     
@@ -139,13 +153,26 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellConversas = self.tableView.dequeueReusableCellWithIdentifier("CustomCellConversas") as!CustomCellConversas
         
-        cell.titleLabel?.text = "teste"
+//        cell.titleLabel?.text = "teste"
+//        
+//        cell.imageLabel = UIImageView(image: UIImage(named: "teste"))
+//        
+//        cell.subtitleLabel.text = "subtitle"
+//        
+//        
+        if (self.resultSearchController.active) {
+            cell.textLabel?.text = filteredTableData[indexPath.row].title
+            cell.subtitleLabel.text = filteredTableData[indexPath.row].subtitle
+            
+            return cell
+        }
+        else {
+            cell.textLabel?.text = Data[indexPath.row].title
+            cell.subtitleLabel.text = Data[indexPath.row].subtitle
+            
+            return cell
+        }
         
-        cell.imageLabel = UIImageView(image: UIImage(named: "teste"))
-        
-        cell.subtitleLabel.text = "subtitle"
-        
-        return cell
     }
 
     
@@ -183,9 +210,22 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         return true
     }
 
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController)
+    {
+        filteredTableData.removeAll(keepCapacity: false)
+        
+        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
+        let array = (Data as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        filteredTableData = array as! [Conversa]
+        
+        self.tableView.reloadData()
+    }
 
     /*
-    // MARK: - Navigation
+    // MARK:
+    
+    - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

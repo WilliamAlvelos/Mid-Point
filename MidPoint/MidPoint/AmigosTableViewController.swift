@@ -8,7 +8,13 @@
 
 import UIKit
 
-class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , FriendDAODelegate, UISearchResultsUpdating{
+class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , FriendDAODelegate, UISearchResultsUpdating, EventoDAOCloudKitDelegate{
+    
+    var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
+    
+    var event:Event?
+    
+    var eventDelegate:EventDAOCloudKit = EventDAOCloudKit()
     
     var daoFriend: FriendDAOCloudKit = FriendDAOCloudKit()
     
@@ -21,6 +27,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         daoFriend.delegate = self
+        eventDelegate.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.clearsSelectionOnViewWillAppear = false
@@ -44,7 +51,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     }
     
     func finish(){
-        println("finish")
+        UserDAODefault.saveLogin(User(name: "william", email: "will", id: 2))
+        eventDelegate.saveEvent(event!, usuario: UserDAODefault.getLoggedUser())
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -52,6 +60,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
             animateTable()
         }
     }
+    
     
     
     func animateTable() {
@@ -144,11 +153,31 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         self.daoFriend.getUsersWithName(searchController.searchBar.text)
     }
     
-    func errorThrowed(error: NSError){
-        
-    }
+
     func getUsersFinished(users: Array<User>){
         self.data = users
         self.tableView.reloadData()
     }
+    
+    func addConversation(id: String, title: String!, subtitle: String!, image: String!) {
+        
+        conversasRef.childByAppendingPath(id).setValue([
+            "id":id,
+            "title":title,
+            "subtitle":subtitle,
+            "image":image
+            ])
+    }
+    
+    func errorThrowed(error: NSError){}
+    func saveEventFinished(event: Event){
+        addConversation(String(format:"%d",event.id!), title: event.name, subtitle: event.descricao, image: "halua")
+        eventDelegate.inviteFriendsToEvent(event, sender: UserDAODefault.getLoggedUser(), friends: self.dataSelected)
+    }
+    func eventNotFound(event : Event){}
+    func getEventFinished(event: Event){}
+    func inviteFinished(event: Event){
+        print("funcionando e que se foda")
+    }
+
 }
