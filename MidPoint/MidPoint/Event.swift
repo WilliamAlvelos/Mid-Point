@@ -24,6 +24,11 @@ class Event: NSObject {
     init(name: String){
         self.name = name
     }
+    init(name: String, id: Int, descricao: String){
+        self.name = name
+        self.id = id
+        self.descricao = descricao
+    }
 
     
 }

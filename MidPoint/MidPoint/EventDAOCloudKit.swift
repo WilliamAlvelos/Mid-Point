@@ -14,7 +14,7 @@ protocol EventoDAOCloudKitDelegate{
     func saveEventFinished(event: Event)
     func eventNotFound(event : Event)
     func getEventFinished(event: Event)
-    func getEventsFinished(events: Array<(Int, Int, Int)>)
+    func getEventsFinished(events: Array<Event>)
 
 }
 
@@ -63,7 +63,6 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 
                 return
             }
-            let datastring = NSString(data: data, encoding:NSUTF8StringEncoding)
             let string = JsonResponse.parseJSON(data)
         
             if (string.objectForKey("error") != nil){
@@ -89,9 +88,10 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 self.delegate?.errorThrowed(error)
                 return
             }
-            
+            let datastring = NSString(data: data, encoding:NSUTF8StringEncoding)
+
             let array = JsonResponse.parseJSONToArray(data)
-            var arrayToReturn =  [(Int, Int, Int)]()
+            var arrayToReturn =  [Event]()
             for dataString in array {
                 if (dataString.objectForKey("error") != nil){
                     var int = dataString.objectForKey("error") as! Int
@@ -100,13 +100,16 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                     return
                 }
                 
-                var id = (dataString.objectForKey("evento_id") as! String).toInt()
-                var usuario_state = (dataString.objectForKey("usuario_state") as! String).toInt()
-                var usuario_sender = (dataString.objectForKey("usuario_sender") as! String).toInt()
+                var id = (dataString.objectForKey("id") as! String).toInt()
+                var event_date = (dataString.objectForKey("event_date") as! String).toInt()
+                var name = (dataString.objectForKey("name") as! String)
+                var description = (dataString.objectForKey("description") as! String)
 
-                var event = Event()
+
+                var event = Event(name: name, id: id!, descricao: description)
                 event.id = id
-                arrayToReturn.append((id!, usuario_sender!,usuario_state!))
+                
+                arrayToReturn.append(event)
                 
             }
             self.delegate.getEventsFinished(arrayToReturn)
