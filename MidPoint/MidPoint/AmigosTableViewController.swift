@@ -103,7 +103,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //        if(tableView.cellForRowAtIndexPath(indexPath)?.selected == true ){
-        //tableView.cellForRowAtIndexPath(indexPath)?.selected = false
+        tableView.cellForRowAtIndexPath(indexPath)?.selected = false
         //        }
         //        else {
         //            tableView.cellForRowAtIndexPath(indexPath)?.selected = true
@@ -115,12 +115,12 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
 //            self.dataSelected.
             var index = find(self.dataSelected.map({ $0.id! }), self.data[indexPath.row].id!)
             self.dataSelected.removeAtIndex(index!)
+
             
         }else{
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
             self.dataSelected.append(self.data[indexPath.row])
             self.dataSelected.sort({ $0.id < $1.id })
-            
             
         }
     }
