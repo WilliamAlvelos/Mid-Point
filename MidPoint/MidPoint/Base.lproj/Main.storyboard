@@ -506,6 +506,7 @@
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="seachBar" destination="A1M-Kf-Tok" id="oDz-bS-Uge"/>
                         <outlet property="searchDisplayController" destination="6ig-2i-39N" id="7Wa-TO-L93"/>
                     </connections>
                 </tableViewController>

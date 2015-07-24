@@ -8,27 +8,55 @@
 
 import UIKit
 
-class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource {
+class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , UISearchResultsUpdating {
  
+    @IBOutlet var seachBar: UISearchBar!
     
-    var Data:[Friend]?
+//    var Data:[Friend]?
+//    
+//    var searchActive : Bool = false
+//    
+//    var searchResults:[Friend]?
+    
+    var searchActive : Bool = false
+    var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
+    var filtered:[String] = []
+    
+    var resultSearchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        //        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
-        
-        // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        //self.navigationItem.rightBarButtonItem = add
-        //self.navigationItem.rightBarButtonItem = self.
+        self.resultSearchController = ({
+            
+            let controller = UISearchController(searchResultsController: nil)
+            //controller.searchResultsUpdater = self
+            controller.dimsBackgroundDuringPresentation = false
+            controller.searchBar.sizeToFit()
+//            controller.searchBar.barStyle = UIBarStyle.Black
+//            controller.searchBar.barTintColor = UIColor.whiteColor()
+//            controller.searchBar.backgroundColor = UIColor.clearColor()
+            self.tableView.tableHeaderView = controller.searchBar
+            
+            
+            return controller
+            
+            
+        })()
+        self.tableView.reloadData()
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action:Selector("finish"))
+        
+
         self.title = "Amigos"
+    }
+    
+    func finish(){
+        println("finish")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -91,5 +119,53 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         return cell
     }
     
+
+    
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        filtered = data.filter({ (text) -> Bool in
+            let tmp: NSString = text
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        if(filtered.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        self.tableView.reloadData()
+    }
+    
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
+        filtered.removeAll(keepCapacity: false)
+        
+        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
+        
+        let array = (data as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        filtered = array as! [String]
+        
+        self.tableView.reloadData()
+        
+    }
 
 }
