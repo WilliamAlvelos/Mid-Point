@@ -8,13 +8,14 @@
 
 import Foundation
 import UIKit
+
 protocol EventoDAOCloudKitDelegate{
     func errorThrowed(error: NSError)
-    func eventStillInserted(event: Event)
     func saveEventFinished(event: Event)
     func eventNotFound(event : Event)
     func getEventFinished(event: Event)
     func getEventsFinished(events: Array<Event>)
+    func inviteFinished(event: Event)
 
 }
 
@@ -35,6 +36,8 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 
                 return
             }
+            let datastring = NSString(data: data, encoding:NSUTF8StringEncoding)
+
             let string = JsonResponse.parseJSON(data)
             
             if (string.objectForKey("error") != nil){
@@ -44,10 +47,8 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
             }
             
             
-            
-            
             if (string.objectForKey("succesfull") != nil){
-                self.delegate.saveEventFinished(event)
+                self.delegate.inviteFinished(event)
                 return
             }
         })

@@ -12,7 +12,11 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
 
     var pickerLibrary : UIImagePickerController?
     
+
+    
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
+    
+    var event:Event?
     
     @IBOutlet var button: UIButton!
     
@@ -26,7 +30,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         self.title = "Criar Grupo"
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
-        
+
         button.layer.cornerRadius = button.bounds.size.width/2
         button.layer.borderWidth = 0
         button.layer.masksToBounds = true
@@ -49,12 +53,19 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
-
-    @IBAction func actionCreateGroup(sender: AnyObject) {
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        addConversation("4", title: titleGroup.text, subtitle: subtitleGroup.text, image: "halua image")
+        event = Event()
+        event?.name = self.titleGroup.text
+        event?.descricao = self.subtitleGroup.text
+        event?.date = NSDate(timeIntervalSinceNow: 0)
+        var vc = segue.destinationViewController as! AmigosTableViewController
+        vc.event = event
         
+    
     }
+
 
     /*
     // MARK: - Navigation
@@ -65,16 +76,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         // Pass the selected object to the new view controller.
     }
     */
-    
-    func addConversation(id: String!, title: String!, subtitle: String!, image: String!) {
-        
-        conversasRef.childByAppendingPath(id).setValue([
-            "id":id,
-            "title":title,
-            "subtitle":subtitle,
-            "image":image
-            ])
-    }
+
     
     
     
@@ -130,6 +132,11 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         
         return paths[0] as! NSString
     }
+    
+
+    
+    
+    
     
 
 }
