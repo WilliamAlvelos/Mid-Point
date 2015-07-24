@@ -8,15 +8,12 @@
 
 import Foundation
 
-enum EventOption {
-    case Create
-    case Edit
-    case Save
-    case Get
+enum Option: Int {
+    case Pending = 1, Refused, Accepted, Passed, Owner, All
 }
 
 protocol EventoDAOProtocol{
     func saveEvent(event:Event, usuario: User)
-    func getEvent(event:Event, usuario: User)
+    func getEvent(event:Event)
     
 }

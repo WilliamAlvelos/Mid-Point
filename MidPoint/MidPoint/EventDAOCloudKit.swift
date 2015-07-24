@@ -8,13 +8,14 @@
 
 import Foundation
 import UIKit
-
 protocol EventoDAOCloudKitDelegate{
     func errorThrowed(error: NSError)
     func eventStillInserted(event: Event)
     func saveEventFinished(event: Event)
     func eventNotFound(event : Event)
     func getEventFinished(event: Event)
+    func getEventsFinished(events: Array<(Int, Int, Int)>)
+
 }
 
 
@@ -80,8 +81,42 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
         })
         
     }
-    
-    func getEvent(event: Event, usuario: User) {
+    func getEvent(user:User, usuario: Option){
+        let url : String = "http://alvelos.wc.lt/MidPoint/events/busca.php"
+        let bodyHttp = String(format: "usuario_id=%d&usuario_state=%d", user.id!, usuario.rawValue)
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                self.delegate?.errorThrowed(error)
+                return
+            }
+            
+            let array = JsonResponse.parseJSONToArray(data)
+            var arrayToReturn =  [(Int, Int, Int)]()
+            for dataString in array {
+                if (dataString.objectForKey("error") != nil){
+                    var int = dataString.objectForKey("error") as! Int
+                    let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
+                    self.delegate?.errorThrowed(error)
+                    return
+                }
+                
+                var id = (dataString.objectForKey("evento_id") as! String).toInt()
+                var usuario_state = (dataString.objectForKey("usuario_state") as! String).toInt()
+                var usuario_sender = (dataString.objectForKey("usuario_sender") as! String).toInt()
+
+                var event = Event()
+                event.id = id
+                arrayToReturn.append((id!, usuario_sender!,usuario_state!))
+                
+            }
+            self.delegate.getEventsFinished(arrayToReturn)
+
+            
+        })
+
+    }
+
+    func getEvent(event: Event) {
         
         let url : String = "http://alvelos.wc.lt/MidPoint/login.php"
         let bodyHttp = String(format: "name=%@&description=%@&date=%@", event.name!, event.descricao! ,event.date!)
