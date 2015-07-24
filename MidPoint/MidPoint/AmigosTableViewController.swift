@@ -113,8 +113,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
             let tru = self.dataSelected.filter{ $0.id == self.data[indexPath.row].id }
 //            self.dataSelected.
-            var index = find(self.dataSelected.map({ $0.id }), self.data[indexPath.row].id)
-            self.dataSelected.removeAtIndex(index)
+            var index = find(self.dataSelected.map({ $0.id! }), self.data[indexPath.row].id!)
+            self.dataSelected.removeAtIndex(index!)
             
         }else{
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -141,6 +141,10 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         {
             cell.accessoryType = .Checkmark
         }
+        else {
+            cell.accessoryType = .None
+        }
+        cell.selectionStyle = .None
         return cell
     }
     
