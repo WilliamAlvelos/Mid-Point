@@ -9,12 +9,12 @@
 import UIKit
 
 class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , FriendDAODelegate, UISearchResultsUpdating{
- 
-    var daoFriend: FriendDAOCloudKit = FriendDAOCloudKit()
-
     
-    var searchActive : Bool = false
+    var daoFriend: FriendDAOCloudKit = FriendDAOCloudKit()
+    
     var data: Array<User> = Array()
+    
+    var dataSelected: Array<User> = Array()
     
     var resultSearchController = UISearchController()
     
@@ -39,7 +39,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action:Selector("finish"))
         
-
+        
         self.title = "Amigos"
     }
     
@@ -89,11 +89,46 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
     }
     
+    //    private func busca_binaria(Array, menor, maior, valor){
+    //        int media = maior+menor/2;
+    //
+    //        if(Array[media] >= valor)
+    //            busca_binaria(array, menor, media, valor)
+    //
+    //        else
+    //            busca_binaria(array, media, maior, valor)
+    //    }
+    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        
+        //        if(tableView.cellForRowAtIndexPath(indexPath)?.selected == true ){
+        //tableView.cellForRowAtIndexPath(indexPath)?.selected = false
+        //        }
+        //        else {
+        //            tableView.cellForRowAtIndexPath(indexPath)?.selected = true
+        //        }
+        
+        if(tableView.cellForRowAtIndexPath(indexPath)?.accessoryType == .Checkmark){
+            tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
+            let tru = self.dataSelected.filter{ $0.id == self.data[indexPath.row].id }
+//            self.dataSelected.
+            var index = find(self.dataSelected.map({ $0.id }), self.data[indexPath.row].id)
+            self.dataSelected.removeAtIndex(index)
+            
+        }else{
+            tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            self.dataSelected.append(self.data[indexPath.row])
+            self.dataSelected.sort({ $0.id < $1.id })
+            
+            
+        }
     }
     
+    
+    private func insertOrdened(functionToRunOnMainThread: () -> ()){
+        functionToRunOnMainThread()
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellAmigosGroupo = self.tableView.dequeueReusableCellWithIdentifier("CustomCellAmigosGroupo") as!CustomCellAmigosGroupo
@@ -102,40 +137,21 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         cell.imageLabel = UIImageView(image: UIImage(named: "teste"))
         
-        
+        if(contains(self.dataSelected){ x in x.id == self.data[indexPath.row].id})
+        {
+            cell.accessoryType = .Checkmark
+        }
         return cell
     }
-    
-
-    
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchActive = true;
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
     
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
-        
         self.daoFriend.getUsersWithName(searchController.searchBar.text)
-    
     }
     
     func errorThrowed(error: NSError){
-    
+        
     }
     func getUsersFinished(users: Array<User>){
         self.data = users
