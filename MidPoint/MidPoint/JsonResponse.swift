@@ -27,9 +27,17 @@ class JsonResponse {
             encoding: NSASCIIStringEncoding)
       return  String(theJSONText!)
     }
+    class func parseJSONToArray(inputData: NSData)->NSArray {
+        var error: NSError?
+
+        var jsonData:NSArray = (NSJSONSerialization.JSONObjectWithData(inputData, options:NSJSONReadingOptions.MutableContainers , error: &error) as? NSArray)!
+        return jsonData
+    }
     class func parseJSON(inputData: NSData) -> NSDictionary{
         var error: NSError?
-        var boardsDictionary:  NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
+
+        var boardsDictionary:  NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions(0), error: &error) as! NSDictionary
+        
         return boardsDictionary
     }
     

@@ -7,121 +7,44 @@
 //
 
 import Foundation
-import CloudKit
-import UIKit
-
-protocol FriendDAOCloudKitDelegate{
+protocol FriendDAODelegate{
     func errorThrowed(error: NSError)
-    func friendStillInserted(friend: Friend)
-    func saveFriendFinished(friend: Friend)
-    func friendNotFound(friend : Friend)
-    func getFriendFinished(friend: Friend)
+    func getUsersFinished(users: Array<User>)
 }
+class FriendDAOCloudKit{
+    var delegate: FriendDAODelegate?
+    
+    func getUsersWithName(name: String) {
+        
+        let url : String = "http://alvelos.wc.lt/MidPoint/buscaUsuario.php"
+        let bodyHttp = String(format: "name=%@", "a")
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                self.delegate?.errorThrowed(error)
+                return
+            }
+            
+            let array = JsonResponse.parseJSONToArray(data)
+            var arrayToReturn :[User]? = Array()
+            for dataString in array {
+                if (dataString.objectForKey("error") != nil){
+                    var int = (dataString.objectForKey("error") as! String).toInt()
+                    let error : NSError = NSError(domain: "Erro", code: int!, userInfo: nil)
+                    self.delegate?.errorThrowed(error)
+                    return
+                }
 
-class FriendDAOCloudKit: NSObject, FriendDAOProtocol{
-    
-    private var container: CKContainer
-    private var publicDB: CKDatabase
-    
-    var delegate: FriendDAOCloudKitDelegate!
-    
-    override init(){
-        container = CKContainer.defaultContainer()
-        publicDB = container.publicCloudDatabase
-    }
-    
-    
-    
-    private func getFriend(friend:Friend, option : FriendOption, predicate : NSPredicate){
-        
-        var query = CKQuery(recordType: "AMIGOS", predicate: predicate)
-        self.publicDB.performQuery(query, inZoneWithID: nil , completionHandler: { (records: [AnyObject]!, error : NSError!) in
-            if error != nil{
-                self.Dispatcher({
-                    self.delegate.errorThrowed(error)
-                })
-                
+                var id = (dataString.objectForKey("id") as! String).toInt()
+                var name = dataString.objectForKey("name") as! String
+                var user = User()
+                user.id = id
+                user.name = name
+                arrayToReturn!.append(user)
             }
-                
-            else{
-                if option == .Save{
-                    if records.count == 0{
-                        self.performQuery(friend)
-                    }else{
-                        self.Dispatcher({
-                            self.delegate.friendStillInserted(friend)
-                        })
-                    }
-                }
-                else if option == .Get{
-                    if records.count == 0{
-                        self.Dispatcher({
-                            self.delegate.friendNotFound(friend)
-                        })
-                        
-                        
-                    }else{
-                        var client : Friend = Friend()
-                        
-                        client.name = records[0].objectForKey("nome") as? String
-                        client.email = records[0].objectForKey("email") as? String
-                        client.image = records[0].objectForKey("imagem") as? NSURL
-                        
-                        self.Dispatcher({
-                            self.delegate.getFriendFinished(client)
-                        })
-                    }
-                }
-                
-                
-            }
+            self.delegate?.getUsersFinished(arrayToReturn!)
+
             
         })
         
     }
-    private func Dispatcher(functionToRunOnMainThread: () -> ())
-    {
-        dispatch_async(dispatch_get_main_queue(), functionToRunOnMainThread)
-    }
-    
-    
-    private func performQuery(friend: Friend){
-        var record:CKRecord = CKRecord(recordType: "AMIGOS")
-        record.setObject(friend.name, forKey: "nome")
-        record.setObject(friend.email, forKey: "email")
-        var asset:CKAsset = CKAsset(fileURL: friend.image)
-        record.setObject(asset, forKey: "imagem")
-        
-        self.publicDB.saveRecord(record, completionHandler: { (record:CKRecord!, error:NSError!) -> Void in
-            
-            if error != nil{
-                self.Dispatcher({
-                    self.delegate.errorThrowed(error)
-                })
-                
-                
-            }else{
-                self.Dispatcher({
-                    self.delegate.saveFriendFinished(friend)
-                })
-                
-            }
-            
-        })
-        
-    }
-    
-    func saveFriend(friend: Friend){
-        var predicate = NSPredicate(format: "email = %@ ", friend.email!, friend.name!)
-        self.getFriend(friend, option: .Save, predicate : predicate)
-        
-    }
-    
-    func getFriend(friend: Friend){
-        var predicate = NSPredicate(format: "email = %@", friend.email!)
-        
-        self.getFriend(friend, option: .Get, predicate : predicate)
-    }
-    
-    
 }

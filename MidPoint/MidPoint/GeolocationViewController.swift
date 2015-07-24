@@ -66,31 +66,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     
-    func addYourFriends(friends: [Friend]){
-        
-        
-        for(var i = 0; i < friends.count; i++){
-    
-        
-            var point: MKPointAnnotation = MKPointAnnotation()
-            
-        
-            point.title = friends[i].name
-            point.coordinate = friends[i].location!
-            
-            let pinAnnotation = MKPinAnnotationView()
-            pinAnnotation.pinColor = .Red
-            
-            pinAnnotation.annotation = point
-            
-            mapView.addAnnotation(pinAnnotation.annotation)
-            
-            
-        }
-        
-        
-    }
-    
     
     
     private func addPointsOfInterest(type: String, name: String, location: CLLocationCoordinate2D) {

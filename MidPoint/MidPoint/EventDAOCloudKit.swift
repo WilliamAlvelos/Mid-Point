@@ -41,6 +41,10 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 self.delegate.errorThrowed(error)
                 return
             }
+            
+            
+            
+            
             if (string.objectForKey("succesfull") != nil){
                 self.delegate.saveEventFinished(event)
                 return
