@@ -179,5 +179,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     func inviteFinished(event: Event){
         print("funcionando e que se foda")
     }
+    
+    func getEventsFinished(events: Array<(Int, Int, Int)>){}
 
 }

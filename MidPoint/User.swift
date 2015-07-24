@@ -33,7 +33,9 @@ class User: NSObject {
         self.email = email
         
     }
-    
+    init(id:Int) {
+        self.id = id        
+    }
     override init(){
         
     }
