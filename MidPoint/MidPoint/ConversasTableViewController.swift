@@ -12,9 +12,9 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
-    var Data:[Event] = []
+    var Data = Array<Event>()
     
-    var filteredTableData = [Conversa]()
+    var filteredTableData = [Event]()
     
     var eventDelegate = EventDAOCloudKit()
     
@@ -29,6 +29,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.eventDelegate.delegate = self
+        
         self.resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
@@ -75,14 +76,17 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     func setupFirebase() {
         
         conversasRef.observeEventType(FEventType.ChildAdded, withBlock: { snapshot in
-            var id = snapshot.value["id"] as? String
+            var id = snapshot.value["id"] as? Int
             var title = snapshot.value["text"] as? String
             var subtitle = snapshot.value["subtitle"] as? String
             var image = snapshot.value["image"] as? String
             
-            var conversa = Conversa(id: id!, title: title!, subtitle:subtitle!)
+            //var conversa = Event(id: id!, title: title!, subtitle:subtitle!)
             
-            self.Data.append(conversa)
+            var event = Event(name: title!, id: id!, descricao: subtitle!)
+            
+            
+            self.Data.append(event)
             
             
             
@@ -150,7 +154,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
-        nextView.conversa = "2"
+        nextView.conversa = Data[indexPath.row].id
         
         self.navigationController?.pushViewController(nextView, animated: true)
     }
@@ -159,21 +163,17 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellConversas = self.tableView.dequeueReusableCellWithIdentifier("CustomCellConversas") as!CustomCellConversas
         
-//        cell.titleLabel?.text = "teste"
-//        
-//        cell.imageLabel = UIImageView(image: UIImage(named: "teste"))
-//        
-//        cell.subtitleLabel.text = "subtitle"
-//        
-//        
+        
+        cell.selectionStyle = .None
+   
         if (self.resultSearchController.active) {
-            cell.textLabel?.text = filteredTableData[indexPath.row].name
+            cell.titleLabel.text = filteredTableData[indexPath.row].name
             cell.subtitleLabel.text = filteredTableData[indexPath.row].descricao
             
             return cell
         }
         else {
-            cell.textLabel?.text = Data[indexPath.row].name
+            cell.titleLabel.text = Data[indexPath.row].name
             cell.subtitleLabel.text = Data[indexPath.row].descricao
             
             return cell
@@ -223,7 +223,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
         let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
         let array = (Data as NSArray).filteredArrayUsingPredicate(searchPredicate)
-        filteredTableData = array as! [Conversa]
+        filteredTableData = array as! [Event]
         
         self.tableView.reloadData()
     }
@@ -237,10 +237,13 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     func getEventFinished(event: Event){}
     
-    func getEventsFinished(events: Array<(Int, Int, Int)>){
-        
+    func getEventsFinished(events: Array<Event>){
+        Data = events
+        self.tableView.reloadData()
     }
-    func inviteFinished(event: Event){}
+    func inviteFinished(event: Event){
+    
+    }
 
     /*
     // MARK:

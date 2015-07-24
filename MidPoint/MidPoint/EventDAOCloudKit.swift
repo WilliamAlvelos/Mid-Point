@@ -89,7 +89,6 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 self.delegate?.errorThrowed(error)
                 return
             }
-            let datastring = NSString(data: data, encoding:NSUTF8StringEncoding)
 
             let array = JsonResponse.parseJSONToArray(data)
             var arrayToReturn =  [Event]()

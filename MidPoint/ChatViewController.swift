@@ -14,7 +14,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     
     var demoData:DemoModelData?
     
-    var conversa:String?
+    var conversa:Int?
     
     // Create a reference to a Firebase location
 
@@ -29,8 +29,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.senderId = "asdasd"
-        self.senderDisplayName = "Joao Lucas"
+        self.senderId = String(format: "%d", UserDAODefault.getLoggedUser().id!)
+        self.senderDisplayName = UserDAODefault.getLoggedUser().name
         self.showLoadEarlierMessagesHeader = true
         self.demoData = DemoModelData()
         setupFirebase()
@@ -41,7 +41,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     
     func setupFirebase() {
         
-        var messagesRef = Firebase(url: "https://midpoint.firebaseio.com/" + conversa! + "/messages")
+        var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
         
         messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { snapshot in
             var text = snapshot.value["text"] as? String
@@ -68,8 +68,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
 //            "image":imageName
 //            ])
         
-        
-        var messagesRef = Firebase(url: "https://midpoint.firebaseio.com/" + conversa! + "/messages")
+        var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
         
         messagesRef.childByAutoId().setValue([
                         "text":text,

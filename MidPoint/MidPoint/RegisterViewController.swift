@@ -14,6 +14,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     var pickerLibrary : UIImagePickerController?
     var user : User?
+    private var  userManager :UserManager = UserManager()
     @IBOutlet var button: UIButton!
     
     @IBOutlet var nameTextField: UITextField!
@@ -26,6 +27,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userManager.delegate = self
+
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
         button.layer.cornerRadius = button.bounds.size.width/2
@@ -91,7 +94,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     }
     func saveUserFinished(user: User){
         //changeView("geolocation", animated: true)
-        println("oloko")
+        UserDAODefault.saveLogin(user)
+        TransitionManager(indentifier: "navigationControllerConversas", animated: true, view: self)
     }
     func userNotFound(user : User){
         println("userNotFound")
@@ -159,8 +163,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
         if((passwordTextField.text == confirmPasswordTextFied.text) || passwordTextField.text != ""){
             
-            var userManager :UserManager = UserManager()
-            userManager.delegate = self
+            
             
             var user: User = User(name: nameTextField.text, email: emailTexteField.text)
             user.image = self.user?.image
@@ -170,9 +173,5 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
     }
     
-    func changeView(indentifier: String, animated: Bool){
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier(indentifier) as! RegisterViewController
-        self.presentViewController(nextViewController, animated:animated, completion:nil)
-    }
+
 }

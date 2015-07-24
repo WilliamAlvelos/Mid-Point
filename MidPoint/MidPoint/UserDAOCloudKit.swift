@@ -33,7 +33,10 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                
                 return
             }
-         let string = JsonResponse.parseJSON(data)
+            let datastring = NSString(data: data, encoding:NSUTF8StringEncoding)
+
+            let string = JsonResponse.parseJSON(data)
+        
             if (string.objectForKey("error") != nil){
                 var int = string.objectForKey("error")! as! Int
                 let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
@@ -41,7 +44,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 return
             }
             if (string.objectForKey("succesfull") != nil){
-                var id = string.objectForKey("id")! as! Int
+                var id = (string.objectForKey("id")! as! String).toInt()
                 user.id = id
                 self.delegate.saveUserFinished(user)
                 return

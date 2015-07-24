@@ -96,7 +96,8 @@ class LoginViewController: UIViewController, UserManagerDelegate{
         println("userNotFound")
     }
     func getUserFinished(user: User){
-        println("getUserFinished")
+        UserDAODefault.saveLogin(user)
+        TransitionManager(indentifier: "navigationControllerConversas", animated: true, view: self)
     }
 
 }
