@@ -54,14 +54,15 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
     
     func saveEvent(event: Event, usuario: User) {
         
-        let url : String = "http://www.alvelos.wc.lt/MidPoint/evento.php"
-        let bodyHttp = String(format: "name=%@&description=%@&date=%@", event.name!,event.descricao!,event.date!)
+        let url : String = "http://www.alvelos.wc.lt/MidPoint/events/insereEvento.php"
+        let bodyHttp = String(format: "name=%@&description=%@&date=%@&usuario_id=%d", event.name!,event.descricao!,event.date!, usuario.id!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 self.delegate.errorThrowed(error)
                 
                 return
             }
+            let datastring = NSString(data: data, encoding:NSUTF8StringEncoding)
             let string = JsonResponse.parseJSON(data)
         
             if (string.objectForKey("error") != nil){
@@ -70,6 +71,8 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 return
             }
             if (string.objectForKey("succesfull") != nil){
+ 
+                event.id = (string.objectForKey("id_evento") as! String).toInt()
                 self.delegate.saveEventFinished(event)
                 return
             }
