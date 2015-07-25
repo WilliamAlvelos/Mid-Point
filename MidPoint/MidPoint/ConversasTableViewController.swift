@@ -44,6 +44,15 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         })()
         
         
+        //refreshControl
+        self.refreshControl = UIRefreshControl()
+        //= [[UIRefreshControl alloc] init];
+        self.refreshControl?.backgroundColor = UIColor.purpleColor()
+        self.refreshControl?.tintColor = UIColor.whiteColor()
+        self.refreshControl?.addTarget(self, action: Selector("reloadData"), forControlEvents: UIControlEvents.ValueChanged)
+
+
+        
         var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
 
         // Uncomment the following line to preserve selection between presentations
@@ -58,11 +67,12 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
     }
     
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        animateTable()
+    func reloadData(){
+        self.eventDelegate.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
+        println("will")
+        
     }
+    
     
     func createConversation(){
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -115,6 +125,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             
             index += 1
         }
+        
     }
     
     func addConversation(id: String!, title: String!, subtitle: String!, image: String!) {
@@ -141,6 +152,9 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        
+        
         if (self.resultSearchController.active) {
             return self.filteredTableData.count
         }
@@ -216,12 +230,12 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     func updateSearchResultsForSearchController(searchController: UISearchController)
     {
-        filteredTableData.removeAll(keepCapacity: false)
-        
-        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
-        let array = (Data as NSArray).filteredArrayUsingPredicate(searchPredicate)
-        filteredTableData = array as! [Event]
-        self.tableView.reloadData()
+//        filteredTableData.removeAll(keepCapacity: false)
+//        
+//        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
+//        let array = (Data as NSArray).filteredArrayUsingPredicate(searchPredicate)
+//        filteredTableData = array as! [Event]
+//        self.tableView.reloadData()
     }
     
     
@@ -235,7 +249,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     func getEventsFinished(events: Array<Event>){
         Data = events
-        animateTable()
+        //animateTable()
+        self.refreshControl?.endRefreshing()
     }
     func inviteFinished(event: Event){
     
