@@ -21,36 +21,35 @@ class LoginViewController: UIViewController, UserManagerDelegate{
         super.viewDidLoad()
         self.title = "Login"
         
-//            let logInButton = TWTRLogInButton(logInCompletion: {
-//            (session: TWTRSession!, error: NSError!) in
-//            
-//            
-//             play with Twitter session
-//            
-//
-//            if session != nil{
-//                println(session.userName)
-//                println(session.userID)
-//                println(session.authTokenSecret)
-//                println(session.authToken)
-//                
-//                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("geolocation") as! GeolocationViewController
-//                nextViewController.nomeUser = session.userName
-//                self.presentViewController(nextViewController, animated:true, completion:nil)
-//                
-//                
-//            }else {
-//                println("error: \(error.localizedDescription)");
-//            }
-//        
-//        })
-//        
-//        
-//
-//        logInButton.center = self.view.center
-//        self.view.addSubview(logInButton)
-//
+            let logInButton = TWTRLogInButton(logInCompletion: {
+            (session: TWTRSession!, error: NSError!) in
+            
+
+            if session != nil{
+                
+                var user: User = User(userIdTwitter: session.userID, userNameTwitter: session.userName)
+                println(session.userName)
+                println(session.userID)
+                println(session.authTokenSecret)
+                println(session.authToken)
+                
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("geolocation") as! GeolocationViewController
+                nextViewController.nomeUser = session.userName
+                self.presentViewController(nextViewController, animated:true, completion:nil)
+                
+                
+            }else {
+                println("error: \(error.localizedDescription)");
+            }
+        
+        })
+        
+        
+
+        logInButton.center = self.view.center
+        self.view.addSubview(logInButton)
+
 
 
     }

@@ -16,6 +16,15 @@ class User: NSObject {
     var image: UIImage?
     var id : Int?
     
+    //facebook login
+    var userIdFacebook: String?
+    var userNameFacebook: String?
+    
+    //twitter login
+    var userIdTwitter: String?
+    var userNameTwitter: String?
+    
+    
     init(name: String, email:String, image: UIImage){
         self.name = name
         self.email = email
@@ -33,6 +42,17 @@ class User: NSObject {
         self.email = email
         
     }
+    //init with Facebook
+    init(userIdFacebook: String, userNameFacebook: String){
+        self.userIdFacebook = userIdFacebook
+        self.userNameFacebook = userNameFacebook
+    }
+    //init with Twitter
+    init(userIdTwitter: String, userNameTwitter: String){
+        self.userIdTwitter = userIdTwitter
+        self.userNameTwitter = userNameTwitter
+    }
+    
     init(id:Int) {
         self.id = id        
     }

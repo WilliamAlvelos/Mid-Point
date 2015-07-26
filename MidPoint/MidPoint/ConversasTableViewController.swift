@@ -232,7 +232,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     {
 //        filteredTableData.removeAll(keepCapacity: false)
 //        
-//        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
+//        let searchPredicate = NSPredicate(format: "SELF contains[cd] %@", searchController.searchBar.text)
 //        let array = (Data as NSArray).filteredArrayUsingPredicate(searchPredicate)
 //        filteredTableData = array as! [Event]
 //        self.tableView.reloadData()

@@ -34,6 +34,11 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         localTextField.resignFirstResponder()
 
     }
+    @IBAction func groups(sender: AnyObject) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationControllerConversas") as! UINavigationController
+        self.presentViewController(nextViewController, animated:true, completion:nil)
+    }
     
     override func viewWillAppear(animated: Bool) {
         mapView.delegate = self
@@ -54,6 +59,9 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         //addLocationsFromGoogle()
         
         activity.stopAnimating()
+        
+        
+        self.title = "Mapa"
     }
     
     
@@ -258,9 +266,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         println("role Selecionado")
         
     }
-    
-    
-    
     
 
     @IBAction func actionSearch(sender: AnyObject) {
