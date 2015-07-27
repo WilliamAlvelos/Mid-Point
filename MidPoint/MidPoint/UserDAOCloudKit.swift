@@ -20,7 +20,7 @@ protocol UserDAOCloudKitDelegate{
 class UserDAOCloudKit: NSObject, UserDAOProtocol{
     
 
-    var delegate: UserDAOCloudKitDelegate!
+    var delegate: UserDAOCloudKitDelegate?
     
 
 
@@ -29,8 +29,9 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         let bodyHttp = String(format: "email=%@&password=%@&name=%@", user.email!,password,user.name!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
-                self.delegate.errorThrowed(error)
-               
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
                 return
             }
             let datastring = NSString(data: data, encoding:NSUTF8StringEncoding)
@@ -40,13 +41,17 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
             if (string.objectForKey("error") != nil){
                 var int = string.objectForKey("error")! as! Int
                 let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
-                self.delegate.errorThrowed(error)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
                 return
             }
             if (string.objectForKey("succesfull") != nil){
                 var id = (string.objectForKey("id")! as! String).toInt()
                 user.id = id
-                self.delegate.saveUserFinished(user)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.saveUserFinished(user)
+                })
                 return
             }
             
@@ -60,22 +65,28 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         let bodyHttp = String(format: "password=%@&email=%@", password ,user.email!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
-                self.delegate.errorThrowed(error)
-                
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
                 return
             }
             let string = JsonResponse.parseJSON(data)
             if (string.objectForKey("error") != nil){
                 var int = string.objectForKey("error")! as! Int
                 let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
-                self.delegate.errorThrowed(error)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
             }
             else {
                 let name = string.objectForKey("name") as! String
                 let email = string.objectForKey("email") as! String
                 let id = (string.objectForKey("id")! as! NSString).integerValue
 
-                self.delegate.getUserFinished(User(name: name, email: email, id: id))
+                
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.getUserFinished(User(name: name, email: email, id: id))
+                })
             }
             
             
