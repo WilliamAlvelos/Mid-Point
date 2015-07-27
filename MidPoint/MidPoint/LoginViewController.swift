@@ -14,22 +14,37 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDelegate {
     
-    @IBOutlet var nomeText: UITextField!
+    @IBOutlet weak var userToIconDistance: NSLayoutConstraint!
+    @IBOutlet weak var textDistances: NSLayoutConstraint!
     
+    @IBOutlet weak var appIcon: UIImageView!
+    @IBOutlet var nomeText: UITextField!
     @IBOutlet var senhaText: UITextField!
     
     var fbResponder: FacebookResponder!
     
     //MARK: View functions
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+
+        super.viewWillAppear(animated)
         self.title = "Login"
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+ 
+        userToIconDistance.constant = userToIconDistance.constant * self.view.frame.size.height / 667.0
+        textDistances.constant = textDistances.constant * self.view.frame.size.height / 667.0
         
-            let logInButton = TWTRLogInButton(logInCompletion: {
+        
+        appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0
+        
+        let logInButton = TWTRLogInButton(logInCompletion: {
             (session: TWTRSession!, error: NSError!) in
             
-
+            
             if session != nil{
                 
                 var user: User = User(userIdTwitter: session.userID, userNameTwitter: session.userName)
@@ -47,31 +62,46 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
             }else {
                 println("error: \(error.localizedDescription)");
             }
-        
+            
         })
         
         
-
-        logInButton.center = self.view.center
-        self.view.addSubview(logInButton)
-
-
         fbResponder = FacebookResponder()
         fbResponder.delegate = self
         
+        
         var fbButton = fbResponder.facebookButtonWithFrame(nomeText.frame)
+    
+        fbButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        logInButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        fbButton.frame.origin.y = self.view.frame.size.height - (fbButton.frame.size.height * 3.0)
-        
+        self.view.addSubview(logInButton)
         self.view.addSubview(fbButton)
+        
+        //Facebook button constraints
+        self.view.addConstraint(NSLayoutConstraint(item: fbButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nomeText, attribute: NSLayoutAttribute.Height, multiplier: 1.0, constant: 1.0))
+        
+        self.view.addConstraint(NSLayoutConstraint(item: fbButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nomeText, attribute: NSLayoutAttribute.Width, multiplier: 1.0, constant: 1.0))
+        
+        self.view.addConstraint(NSLayoutConstraint(item: fbButton, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: nomeText, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: textDistances.constant * -5.0))
+        
+        self.view.addConstraint(NSLayoutConstraint(item: fbButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
+        
+        
+        //Twitter button constraints
+        self.view.addConstraint(NSLayoutConstraint(item: logInButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nomeText, attribute: NSLayoutAttribute.Height, multiplier: 1.0, constant: 1.0))
+        
+        self.view.addConstraint(NSLayoutConstraint(item: logInButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nomeText, attribute: NSLayoutAttribute.Width, multiplier: 1.0, constant: 1.0))
+        
+        self.view.addConstraint(NSLayoutConstraint(item: logInButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: fbButton, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: nomeText.frame.size.height + textDistances.constant))
+        
+        self.view.addConstraint(NSLayoutConstraint(item: logInButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
 
     }
 
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
-        
-        fbResponder.inviteUserFriends()
     }
     
     //MARK: LogIn and SignIn
