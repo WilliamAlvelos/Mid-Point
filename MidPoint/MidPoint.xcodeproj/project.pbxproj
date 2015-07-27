@@ -46,6 +46,7 @@
 		7B6315581B66C9A600D13DE5 /* DispatcherClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6315571B66C9A600D13DE5 /* DispatcherClass.swift */; };
 		7B63155A1B66D04700D13DE5 /* PictureCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6315591B66D04700D13DE5 /* PictureCloudKit.swift */; };
 		7B63155C1B66D07100D13DE5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B63155B1B66D07100D13DE5 /* CloudKit.framework */; };
+		7B6315601B66D7A400D13DE5 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B63155F1B66D7A400D13DE5 /* GlobalConstants.swift */; };
 		7B744E8D1B548D7900D8E783 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E8C1B548D7900D8E783 /* AudioToolbox.framework */; };
 		7B744E8F1B548D7E00D8E783 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E8E1B548D7E00D8E783 /* CoreGraphics.framework */; };
 		7B744E911B548D8800D8E783 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E901B548D8800D8E783 /* CoreLocation.framework */; };
@@ -118,6 +119,7 @@
 		7B6315571B66C9A600D13DE5 /* DispatcherClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatcherClass.swift; sourceTree = "<group>"; };
 		7B6315591B66D04700D13DE5 /* PictureCloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureCloudKit.swift; sourceTree = "<group>"; };
 		7B63155B1B66D07100D13DE5 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		7B63155F1B66D7A400D13DE5 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		7B744E8C1B548D7900D8E783 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7B744E8E1B548D7E00D8E783 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7B744E901B548D8800D8E783 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -334,6 +336,7 @@
 		FFC2C6D91AF935E0004B0AA7 = {
 			isa = PBXGroup;
 			children = (
+				7B63155F1B66D7A400D13DE5 /* GlobalConstants.swift */,
 				7B6315591B66D04700D13DE5 /* PictureCloudKit.swift */,
 				7BED36641B54B9430045FDB5 /* TransitionManager.swift */,
 				FFC2C6E41AF935E0004B0AA7 /* MidPoint */,
@@ -537,6 +540,7 @@
 				3D084DD71B56CCA30032A94B /* ChatViewController.swift in Sources */,
 				7BED36651B54B9430045FDB5 /* TransitionManager.swift in Sources */,
 				FF3692461B6296DA00C71BBC /* ETBScrollView.swift in Sources */,
+				7B6315601B66D7A400D13DE5 /* GlobalConstants.swift in Sources */,
 				3DFB8A1F1B4C381300463EA4 /* LoginViewController.swift in Sources */,
 				3DFB8A181B4C218700463EA4 /* User.swift in Sources */,
 				FF3692441B60723D00C71BBC /* FacebookUser.swift in Sources */,

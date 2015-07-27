@@ -15,9 +15,9 @@ class UserDAODefault {
     class func saveLogin(user: User){
         let userFixo = NSUserDefaults.standardUserDefaults()
         
-        userFixo.setObject(user.name, forKey: "user_name")
-        userFixo.setInteger(user.id!, forKey: "user_id")
-        userFixo.setObject(user.email, forKey: "user_email")
+        userFixo.setObject(user.name, forKey: UserGlobalConstants.NameUser)
+        userFixo.setInteger(user.id!, forKey: UserGlobalConstants.IdUser)
+        userFixo.setObject(user.email, forKey: UserGlobalConstants.EmailUser)
         userFixo.setObject(user.image, forKey: "user_image")
         userFixo.synchronize()
     }
@@ -27,9 +27,9 @@ class UserDAODefault {
         let userFixo = NSUserDefaults.standardUserDefaults()
         var user:User = User()
         
-        user.name = userFixo.objectForKey("user_name") as? String
-        user.id = userFixo.objectForKey("user_id") as? Int
-        user.email = userFixo.objectForKey("user_email") as? String
+        user.name = userFixo.objectForKey(UserGlobalConstants.NameUser) as? String
+        user.id = userFixo.objectForKey(UserGlobalConstants.IdUser) as? Int
+        user.email = userFixo.objectForKey(UserGlobalConstants.EmailUser) as? String
         return user
     }
 }

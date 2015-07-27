@@ -26,7 +26,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
 
     func saveUser(user: User, password : String){
         let url : String = "http://www.alvelos.wc.lt/MidPoint/cadastro.php"
-        let bodyHttp = String(format: "email=%@&password=%@&name=%@", user.email!,password,user.name!)
+        let bodyHttp = String(format: "\(UserGlobalConstants.EmailUser)=%@&\(UserGlobalConstants.PasswordUser)=%@&\(UserGlobalConstants.NameUser)=%@", user.email!,password,user.name!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 DispatcherClass.dispatcher({ () -> () in
@@ -34,7 +34,6 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
                 return
             }
-            let datastring = NSString(data: data, encoding:NSUTF8StringEncoding)
 
             let string = JsonResponse.parseJSON(data)
         
@@ -47,7 +46,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 return
             }
             if (string.objectForKey("succesfull") != nil){
-                var id = (string.objectForKey("id")! as! String).toInt()
+                var id = (string.objectForKey("\(UserGlobalConstants.IdUser)")! as! String).toInt()
                 user.id = id
                 DispatcherClass.dispatcher({ () -> () in
                     self.delegate?.saveUserFinished(user)
@@ -62,7 +61,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
     func getUser(user: User, password : String){
 
         let url : String = "http://alvelos.wc.lt/MidPoint/login.php"
-        let bodyHttp = String(format: "password=%@&email=%@", password ,user.email!)
+        let bodyHttp = String(format: "\(UserGlobalConstants.PasswordUser)=%@&\(UserGlobalConstants.EmailUser)=%@", password ,user.email!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 DispatcherClass.dispatcher({ () -> () in
@@ -79,9 +78,9 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
             }
             else {
-                let name = string.objectForKey("name") as! String
-                let email = string.objectForKey("email") as! String
-                let id = (string.objectForKey("id")! as! NSString).integerValue
+                let name = string.objectForKey("\(UserGlobalConstants.NameUser)") as! String
+                let email = string.objectForKey("\(UserGlobalConstants.EmailUser)") as! String
+                let id = (string.objectForKey("\(UserGlobalConstants.IdUser)")! as! NSString).integerValue
 
                 
                 DispatcherClass.dispatcher({ () -> () in
