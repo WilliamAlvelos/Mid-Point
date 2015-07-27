@@ -25,6 +25,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     @IBOutlet var confirmPasswordTextFied: UITextField!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userManager.delegate = self

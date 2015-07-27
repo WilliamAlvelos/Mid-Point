@@ -41,23 +41,27 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         
         appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0
         
+        
+        
+
+        
         let logInButton = TWTRLogInButton(logInCompletion: {
             (session: TWTRSession!, error: NSError!) in
             
-            
             if session != nil{
                 
-                var user: User = User(userIdTwitter: session.userID, userNameTwitter: session.userName)
-                println(session.userName)
-                println(session.userID)
-                println(session.authTokenSecret)
-                println(session.authToken)
+                let shareEmailViewController = TWTRShareEmailViewController() { email, error in
+                    println("Email \(email), Error: \(error)")
+                    
                 
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("geolocation") as! GeolocationViewController
-                nextViewController.nomeUser = session.userName
-                self.presentViewController(nextViewController, animated:true, completion:nil)
-                
+                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! RegisterViewController
+                    
+                nextViewController.emailTexteField.text = email
+                nextViewController.nameTextField.text = session.userName
+                    
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+                }
                 
             }else {
                 println("error: \(error.localizedDescription)");
@@ -120,7 +124,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("register") as! RegisterViewController
         //self.presentViewController(nextViewController, animated:true, completion:nil)
-        self.navigationController?.pushViewController(nextViewController, animated: false)
+        self.navigationController?.pushViewController(nextViewController, animated: true)
         
     }
     
@@ -145,7 +149,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         UserDAODefault.saveLogin(user)
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationControllerConversas") as! UINavigationController
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
         self.presentViewController(nextViewController, animated:false, completion:nil)
     }
     
@@ -157,6 +161,21 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         //Login Successful
         if error == nil {
             
+            
+//            var usuario: UserManager = UserManager()
+//            usuario.delegate = self
+//            
+//            var user: User = User(name:, email: nomeText.text)
+//            
+//            usuario.getUserDatabase(user, password: self.senhaText.text)
+//            
+//            usuario.insertUserDatabase(<#user: User#>, password: <#String#>)
+//            
+//            UserDAODefault.saveLogin(user)
+            
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
+            self.presentViewController(nextViewController, animated:true, completion:nil)
         }
         
         //Login Failed
