@@ -249,6 +249,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     func getEventsFinished(events: Array<Event>){
         Data = events
+        self.tableView.reloadData()
         //animateTable()
         self.refreshControl?.endRefreshing()
     }

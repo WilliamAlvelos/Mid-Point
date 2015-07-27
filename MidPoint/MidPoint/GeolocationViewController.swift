@@ -36,8 +36,10 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     @IBAction func groups(sender: AnyObject) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationControllerConversas") as! UINavigationController
-        self.presentViewController(nextViewController, animated:true, completion:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ConversasTableView") as! ConversasTableViewController
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -59,7 +61,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         //addLocationsFromGoogle()
         
         activity.stopAnimating()
-        
         
         self.title = "Mapa"
     }

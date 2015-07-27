@@ -48,7 +48,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
             var sender = snapshot.value["sender"] as? String
             var imageUrl = snapshot.value["imageUrl"] as? String
             
-            var message = JSQMessage(senderId:"707-8956784-57", senderDisplayName: self.senderDisplayName, date: NSDate(), text: text)
+            var message = JSQMessage(senderId:self.senderId, senderDisplayName: self.senderDisplayName, date: NSDate(), text: text)
             
             self.demoData?.messages?.append(message)
             
@@ -123,7 +123,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
 
         var message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
-        self.demoData?.messages?.append(message)
+        //self.demoData?.messages?.append(message)
         self.finishSendingMessageAnimated(true)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         sendMessage(text, sender: senderDisplayName, imageName: "demo_avatar_jobs")

@@ -402,7 +402,7 @@
         <!--Conversas Table View Controller-->
         <scene sceneID="zxF-wJ-ptv">
             <objects>
-                <tableViewController id="TCc-vx-KJQ" customClass="ConversasTableViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ConversasTableView" id="TCc-vx-KJQ" customClass="ConversasTableViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="102" sectionHeaderHeight="22" sectionFooterHeight="22" id="0Fl-3m-yPS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -717,12 +717,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="TCc-vx-KJQ" kind="relationship" relationship="rootViewController" id="yXI-nm-hd6"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Re4-2e-d28"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72v-A1-61n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2238.5" y="-180.5"/>
+            <point key="canvasLocation" x="66.5" y="242.5"/>
         </scene>
         <!--Evento View Controller-->
         <scene sceneID="mDr-aD-NG8">
