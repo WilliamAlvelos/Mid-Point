@@ -17,7 +17,7 @@ class FriendDAOCloudKit{
     func getUsersWithName(name: String) {
         
         let url : String = "http://alvelos.wc.lt/MidPoint/buscaUsuario.php"
-        let bodyHttp = String(format: "\(UserGlobalConstants.NameUser)=%@", name)
+        let bodyHttp = String(format: "\(UserGlobalConstants.Name)=%@", name)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 DispatcherClass.dispatcher({ () -> () in
@@ -38,8 +38,8 @@ class FriendDAOCloudKit{
                     return
                 }
 
-                var id = (dataString.objectForKey("\(UserGlobalConstants.IdUser)") as! String).toInt()
-                var name = dataString.objectForKey("\(UserGlobalConstants.NameUser)") as! String
+                var id = (dataString.objectForKey("\(UserGlobalConstants.Id)") as! String).toInt()
+                var name = dataString.objectForKey("\(UserGlobalConstants.Name)") as! String
                 var user = User()
                 user.id = id
                 user.name = name

@@ -8,10 +8,11 @@
 
 import Foundation
 struct UserGlobalConstants {
-    static let IdUser = "user_id"
-    static let NameUser = "user_name"
-    static let EmailUser = "user_email"
-    static let PasswordUser = "user_password"
+    static let Id = "user_id"
+    static let Name = "user_name"
+    static let Email = "user_email"
+    static let Password = "user_password"
+    static let Image = "user_picture"
     
 }
 struct EventGlobalConstants {
@@ -23,4 +24,12 @@ struct EventGlobalConstants {
     static let UserSender = "user_sender"
     static let UserState = "user_state"
 
+}
+
+struct CloudKitGlobalConstants {
+    
+    static let EventTable = "EVENT_PICTURE"
+    static let ProfileTable = "PROFILE_PICTURE"
+    
+    
 }
