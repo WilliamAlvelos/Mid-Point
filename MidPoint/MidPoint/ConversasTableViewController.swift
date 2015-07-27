@@ -59,8 +59,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         //self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        self.navigationItem.rightBarButtonItem = add
+        self.navigationItem.rightBarButtonItem = editButtonItem()
         //self.navigationItem.rightBarButtonItem = self.
         
         self.title = "Grupos"
@@ -73,14 +72,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
     }
     
-    
-    func createConversation(){
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
-        self.navigationController?.pushViewController(nextViewController, animated: true)
-        //self.presentViewController(nextViewController, animated:true, completion:nil)
-    
-    }
+
     
     func setupFirebase() {
         
@@ -167,6 +159,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
         nextView.conversa = Data[indexPath.row].id
+        nextView.name = Data[indexPath.row].name
         self.navigationController?.pushViewController(nextView, animated: true)
     }
 

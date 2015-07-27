@@ -53,6 +53,23 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     func finish(){
         UserDAODefault.saveLogin(User(name: "william", email: "will", id: 2))
         eventDelegate.saveEvent(event!, usuario: UserDAODefault.getLoggedUser())
+        
+        var alert = UIAlertController(title: "Sucesso", message: "Grupo Criado Com Sucesso", preferredStyle: UIAlertControllerStyle.Alert)
+
+        
+        
+        var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
+            self.presentViewController(nextViewController, animated:false, completion:nil)
+        }
+        
+        alert.addAction(okAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
     }
     
     override func viewWillAppear(animated: Bool) {

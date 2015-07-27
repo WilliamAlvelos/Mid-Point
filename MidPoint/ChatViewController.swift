@@ -16,6 +16,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     
     var conversa:Int?
     
+    var name:String?
+    
     // Create a reference to a Firebase location
 
     
@@ -34,6 +36,9 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         self.showLoadEarlierMessagesHeader = true
         self.demoData = DemoModelData()
         setupFirebase()
+        
+        
+        self.title = name
         
     }
     

@@ -95,7 +95,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zgH-9h-xpc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="925.5" y="242.5"/>
+            <point key="canvasLocation" x="-6.5" y="235.5"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="1XN-Df-fKG">
@@ -446,11 +446,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="xb0-Cq-hOM">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Lxr-1D-IKr">
-                            <connections>
-                                <segue destination="FQe-8z-pHE" kind="show" id="v30-bY-dR6"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Lxr-1D-IKr"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -460,20 +456,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pis-bE-mqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2868.5" y="-180.5"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="QEh-uk-6wq">
-            <objects>
-                <navigationController id="Edd-V9-3z7" sceneMemberID="viewController">
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zXo-Eo-M4d">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nlT-qN-KIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3276.5" y="-892.5"/>
         </scene>
         <!--Create Conversation View Controller-->
         <scene sceneID="MAW-Vx-HtP">
@@ -488,17 +470,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titulo do grupo" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2jg-HY-SKH">
-                                <rect key="frame" x="33" y="257" width="308" height="30"/>
+                                <rect key="frame" x="33" y="244" width="308" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subtitulo do Grupo" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KyO-7X-5op">
-                                <rect key="frame" x="33" y="327" width="308" height="30"/>
+                                <rect key="frame" x="33" y="308" width="308" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJg-jJ-jB7">
-                                <rect key="frame" x="105" y="79" width="165" height="165"/>
+                                <rect key="frame" x="105" y="71" width="165" height="165"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -506,21 +488,17 @@
                                     <action selector="changeImage:" destination="FQe-8z-pHE" eventType="touchUpInside" id="DKX-9D-4eg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DwH-Tc-SSa">
-                                <rect key="frame" x="157" y="582" width="61" height="30"/>
-                                <state key="normal" title="Seguinte">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Zqp-Md-cG1" kind="show" id="0Qk-jg-JEC"/>
-                                </connections>
-                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4Fd-IK-n7p">
+                                <rect key="frame" x="30" y="369" width="314" height="290"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="DBI-lT-TV2"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="button" destination="eJg-jJ-jB7" id="56Z-Sg-Rq1"/>
+                        <outlet property="mapView" destination="4Fd-IK-n7p" id="jMl-Vx-E3B"/>
                         <outlet property="searchDisplayController" destination="QJd-Jl-Cvn" id="4HC-nT-vxw"/>
                         <outlet property="subtitleGroup" destination="KyO-7X-5op" id="aAy-uk-eDe"/>
                         <outlet property="titleGroup" destination="2jg-HY-SKH" id="w3X-rL-fCY"/>
