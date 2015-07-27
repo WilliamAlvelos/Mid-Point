@@ -42,6 +42,13 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     }
     
+    
+    override func viewDidLoad() {
+//        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
+//        
+//        self.navigationItem.rightBarButtonItem = add
+    }
+    
     override func viewWillAppear(animated: Bool) {
         mapView.delegate = self
         locationManager.delegate = self
@@ -63,6 +70,13 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         activity.stopAnimating()
         
         self.title = "Mapa"
+    }
+    
+    
+    func createConversation(){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     
@@ -240,20 +254,31 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                     pinView!.pinColor = .Purple
                 
                 
+                    annotation.coordinate
+                
+                
                 
                     let roleButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
                 
                     roleButton.addTarget(self, action: "selectRole:", forControlEvents: UIControlEvents.TouchUpInside)
+                
                 
                     roleButton.frame.size.width = 44
                     roleButton.frame.size.height = 44
                     roleButton.backgroundColor = UIColor.redColor()
                     roleButton.setImage(UIImage(named: "teste.png"), forState: .Normal)
                 
+                
+                
+                //var rightButton :UIButton = UIButton.buttonWithType(UIButtonType.InfoDark) as! UIButton
+                
+                
+                
                     pinView!.rightCalloutAccessoryView = roleButton
                 
                     var icon = UIImageView(image: UIImage(named: "teste.png"))
                     pinView!.leftCalloutAccessoryView = icon
+                
             }
             else {
                 pinView!.annotation = annotation
@@ -264,8 +289,37 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     
     func selectRole (sender : UIButton!) {
-        println("role Selecionado")
         
+        
+//        
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
+//        
+//        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+    }
+    
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        
+        print("william alvelos")
+        
+        var annView = view.annotation
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
+        nextViewController.location = annView.coordinate
+        nextViewController.nameRole = annView.title
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+        
+//        annotation *annView = view.annotation;
+//        detailedViewOfList *detailView = [[detailedViewOfList alloc]init];
+//        detailView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//        detailView.address = annView.address;
+//        detailView.phoneNumber = annView.phonenumber;
+//        [self presentModalViewController:detailView animated:YES];
     }
     
 
