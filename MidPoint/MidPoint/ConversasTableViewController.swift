@@ -252,6 +252,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.tableView.reloadData()
         //animateTable()
         self.refreshControl?.endRefreshing()
+        self.tableView.reloadData()
+        self.animateTable()
     }
     func inviteFinished(event: Event){
     

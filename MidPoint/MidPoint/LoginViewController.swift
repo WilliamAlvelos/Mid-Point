@@ -20,6 +20,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     @IBOutlet weak var appIcon: UIImageView!
     @IBOutlet var nomeText: UITextField!
     @IBOutlet var senhaText: UITextField!
+    var usuario: UserManager = UserManager()
     
     var fbResponder: FacebookResponder!
     
@@ -31,7 +32,11 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         self.title = "Login"
 
     }
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        usuario.delegate = self
+
+    }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
  
@@ -111,9 +116,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     //MARK: LogIn and SignIn
     
     @IBAction func logInAction(sender: AnyObject) {
-        var usuario: UserManager = UserManager()
-        usuario.delegate = self
-        
+
         var user: User = User(name: nomeText.text, email: nomeText.text)
         
         usuario.getUserDatabase(user, password: self.senhaText.text)
@@ -150,7 +153,8 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
-        self.presentViewController(nextViewController, animated:false, completion:nil)
+        self.presentViewController(nextViewController, animated:true, completion:nil)
+
     }
     
     

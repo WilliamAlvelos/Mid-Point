@@ -20,7 +20,9 @@ class FriendDAOCloudKit{
         let bodyHttp = String(format: "name=%@", name)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
-                self.delegate?.errorThrowed(error)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
                 return
             }
             
@@ -30,7 +32,9 @@ class FriendDAOCloudKit{
                 if (dataString.objectForKey("error") != nil){
                     var int = dataString.objectForKey("error") as! Int
                     let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
-                    self.delegate?.errorThrowed(error)
+                    DispatcherClass.dispatcher({ () -> () in
+                        self.delegate?.errorThrowed(error)
+                    })
                     return
                 }
 
@@ -41,7 +45,7 @@ class FriendDAOCloudKit{
                 user.name = name
                 arrayToReturn!.append(user)
             }
-            self.Dispatcher({ () -> () in
+            DispatcherClass.dispatcher({ () -> () in
                 self.delegate?.getUsersFinished(arrayToReturn!)
             })
             
@@ -50,8 +54,5 @@ class FriendDAOCloudKit{
         })
         
     }
-    private func Dispatcher(functionToRunOnMainThread: () -> ())
-    {
-        dispatch_async(dispatch_get_main_queue(), functionToRunOnMainThread)
-    }
+   
 }

@@ -23,7 +23,7 @@ protocol EventoDAOCloudKitDelegate{
 class EventDAOCloudKit: NSObject, EventoDAOProtocol{
     
     
-    var delegate: EventoDAOCloudKitDelegate!
+    var delegate: EventoDAOCloudKitDelegate?
     
     func inviteFriendsToEvent(event: Event, sender: User, friends: Array<User>){
         var dictionary = JsonResponse.userToCall(friends)
@@ -32,8 +32,10 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
         var bodyHttp = String(format: "event_id=%d&user_to_invite=%@&sender=%d" , event.id!, avent , sender.id!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
-                self.delegate.errorThrowed(error)
-                
+            DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+            })
+
                 return
             }
             let datastring = NSString(data: data, encoding:NSUTF8StringEncoding)
@@ -42,13 +44,19 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
             
             if (string.objectForKey("error") != nil){
                 let error : NSError = NSError(domain: "Erro", code: (string.objectForKey("error")! as! Int), userInfo: nil)
-                self.delegate.errorThrowed(error)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+
                 return
             }
             
             
             if (string.objectForKey("succesfull") != nil){
-                self.delegate.inviteFinished(event)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.inviteFinished(event)
+                })
+
                 return
             }
         })
@@ -60,7 +68,10 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
         let bodyHttp = String(format: "name=%@&description=%@&date=%@&usuario_id=%d", event.name!,event.descricao!,event.date!, usuario.id!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
-                self.delegate.errorThrowed(error)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+
                 
                 return
             }
@@ -68,13 +79,17 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
         
             if (string.objectForKey("error") != nil){
                 let error : NSError = NSError(domain: "Erro", code: (string.objectForKey("error")! as! Int), userInfo: nil)
-                self.delegate.errorThrowed(error)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
                 return
             }
             if (string.objectForKey("succesfull") != nil){
  
                 event.id = (string.objectForKey("id_evento") as! String).toInt()
-                self.delegate.saveEventFinished(event)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.saveEventFinished(event)
+                })
                 return
             }
             
@@ -86,7 +101,10 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
         let bodyHttp = String(format: "usuario_id=%d&usuario_state=%d", user.id!, usuario.rawValue)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
-                self.delegate?.errorThrowed(error)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+
                 return
             }
 
@@ -96,7 +114,9 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 if (dataString.objectForKey("error") != nil){
                     var int = dataString.objectForKey("error") as! Int
                     let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
-                    self.delegate?.errorThrowed(error)
+                    DispatcherClass.dispatcher({ () -> () in
+                        self.delegate?.errorThrowed(error)
+                    })
                     return
                 }
                 
@@ -112,7 +132,9 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 arrayToReturn.append(event)
                 
             }
-            self.delegate.getEventsFinished(arrayToReturn)
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.getEventsFinished(arrayToReturn)
+            })
 
             
         })
@@ -125,21 +147,27 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
         let bodyHttp = String(format: "name=%@&description=%@&date=%@", event.name!, event.descricao! ,event.date!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
-                self.delegate.errorThrowed(error)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+
                 return
             }
             let string = JsonResponse.parseJSON(data)
             if (string.objectForKey("error") != nil){
                 var int = string.objectForKey("error")! as! Int
                 let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
-                self.delegate.errorThrowed(error)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
             }
             else {
                 let name = string.objectForKey("name") as! String
                 let email = string.objectForKey("email") as! String
                 let id = (string.objectForKey("id")! as! NSString).integerValue
-                
-                self.delegate.saveEventFinished(event)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.saveEventFinished(event)
+                })
             }
             
             
