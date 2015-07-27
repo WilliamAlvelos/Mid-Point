@@ -10,16 +10,78 @@ import UIKit
 import FBSDKLoginKit
 import FBSDKShareKit
 
+@objc protocol FBResponderDelegate {
+    
+    func loggedIn(error:NSError!)
+    func loggedOut()
+    optional func userFriendsReceived(friends:[FacebookUser], error:NSError!)
+    optional func loginStatus()
+    
+}
+
 class FacebookResponder: NSObject, FBSDKLoginButtonDelegate, FBSDKAppInviteDialogDelegate {
    
-    
+    var isLoggedIn: Bool!
     var fbButton: FBSDKLoginButton!
+    var delegate = FBResponderDelegate?()
     
-    func logOutFromFacebook() {
+    
+    func inviteUserFriends() {
         
+        let content = FBSDKAppInviteContent()
+        content.appLinkURL = NSURL(string: "https://fb.me/399922950197556")
+        content.appInvitePreviewImageURL = NSURL()
+        
+        FBSDKAppInviteDialog.showWithContent(content, delegate: self)
     }
     
+    
+    func getUserFacebookFriends()->[FacebookUser] {
+        
+        var array = [FacebookUser]()
+        
+        //Get user friends
+        let dic = Dictionary(dictionaryLiteral: ("name",""))
+        
+        var request = FBSDKGraphRequest(graphPath:"me/friends?fields=id,name", parameters: nil, HTTPMethod:"GET")
+        
+        request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+            
+            if error == nil {
+                
+                let dic = result as! NSDictionary
+                let data = dic.objectForKey("data") as! NSArray
+                
+                for var x = 0; x < data.count; x++ {
+                    let object = data[x] as! NSDictionary
+                    
+                    var name = object.objectForKey("name") as! String
+                    var id = object.objectForKey("id") as! String
+                    
+                    var new = FacebookUser(name: name, id: id)
+                    
+                    array.append(new)
+                }
+                
+                self.delegate?.userFriendsReceived!(array,error:nil)
+                
+            }
+            
+            else {
+                
+                println("Error Getting Friends \(error)")
+                
+                self.delegate?.userFriendsReceived!(array, error:error)
+            }
+        }
+        
+        return array
+    }
+
+    
     func facebookButtonWithFrame(frame:CGRect)->FBSDKLoginButton {
+        
+        isLoggedIn = false
         
         fbButton = FBSDKLoginButton()
         fbButton.delegate = self
@@ -32,46 +94,23 @@ class FacebookResponder: NSObject, FBSDKLoginButtonDelegate, FBSDKAppInviteDialo
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
+        delegate?.loggedIn(error)
+        
         if error == nil {
-            //Login succesfull
-            
-            //App invite test
-            //            let content = FBSDKAppInviteContent()
-            //            content.appLinkURL = NSURL(string: "https://fb.me/399922950197556")
-            //            content.appInvitePreviewImageURL = NSURL()
-            //
-            //            FBSDKAppInviteDialog.showWithContent(content, delegate: self)
-            
-            //Get user friends
-            let dic = Dictionary(dictionaryLiteral: ("name",""))
-            var request = FBSDKGraphRequest(graphPath:"me/friends?fields=id,name", parameters: nil, HTTPMethod:"GET");
-            
-            request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
-                if error == nil {
-                    //println("Friends are : \(result)")
-                    
-                    let dic = result as! NSDictionary
-                    let data = dic.objectForKey("data") as! NSArray
-                    
-                    for var x = 0; x < data.count; x++ {
-                        let object = data[x] as! NSDictionary
-                        
-                        println("name:" + (object.objectForKey("name") as! String))
-                    }
-                    
-                } else {
-                    println("Error Getting Friends \(error)");
-                }
-            }
+        
+            isLoggedIn = true
         }
             
         else {
-            
+            println(error)
         }
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         
+        isLoggedIn = false
+
+        delegate?.loggedOut()
     }
     
     

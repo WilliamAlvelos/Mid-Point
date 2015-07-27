@@ -9,13 +9,18 @@
 import Foundation
 import UIKit
 import TwitterKit
+import FBSDKLoginKit
 
 
-class LoginViewController: UIViewController, UserManagerDelegate{
+class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDelegate {
     
     @IBOutlet var nomeText: UITextField!
     
     @IBOutlet var senhaText: UITextField!
+    
+    var fbResponder: FacebookResponder!
+    
+    //MARK: View functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,18 +56,25 @@ class LoginViewController: UIViewController, UserManagerDelegate{
         self.view.addSubview(logInButton)
 
 
+        fbResponder = FacebookResponder()
+        fbResponder.delegate = self
+        
+        var fbButton = fbResponder.facebookButtonWithFrame(nomeText.frame)
+        
+        fbButton.frame.origin.y = self.view.frame.size.height - (fbButton.frame.size.height * 3.0)
+        
+        self.view.addSubview(fbButton)
 
     }
-    
-    override func  viewWillAppear(animated: Bool) {
-        
-    }
-    
+
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
+        
+        fbResponder.inviteUserFriends()
     }
     
+    //MARK: LogIn and SignIn
     
     @IBAction func logInAction(sender: AnyObject) {
         var usuario: UserManager = UserManager()
@@ -81,6 +93,8 @@ class LoginViewController: UIViewController, UserManagerDelegate{
         self.navigationController?.pushViewController(nextViewController, animated: false)
         
     }
+    
+    //MARK: UserManager Delegate
     
     func errorThrowed(error: NSError){
         
@@ -103,6 +117,40 @@ class LoginViewController: UIViewController, UserManagerDelegate{
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationControllerConversas") as! UINavigationController
         self.presentViewController(nextViewController, animated:false, completion:nil)
+    }
+    
+    
+    //MARK: FBResponder Delegate
+    
+    func loggedIn(error: NSError!) {
+        
+        //Login Successful
+        if error == nil {
+            
+        }
+        
+        //Login Failed
+        else {
+            
+        }
+    }
+    
+    func loggedOut() {
+        
+    }
+    
+    func userFriendsReceived(friends: [FacebookUser], error: NSError!) {
+        
+        if error == nil {
+        
+            for var x = 0; x < friends.count; x++ {
+                println(friends[x].name)
+            }
+        }
+        
+        else {
+            
+        }
     }
 
 }

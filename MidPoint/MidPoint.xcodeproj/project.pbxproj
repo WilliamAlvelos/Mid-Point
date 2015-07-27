@@ -62,6 +62,10 @@
 		FF36923E1B60002600C71BBC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF36923B1B60002600C71BBC /* FBSDKLoginKit.framework */; };
 		FF36923F1B60002600C71BBC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF36923C1B60002600C71BBC /* FBSDKShareKit.framework */; };
 		FF3692421B60012800C71BBC /* FacebookResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3692411B60012800C71BBC /* FacebookResponder.swift */; };
+		FF3692441B60723D00C71BBC /* FacebookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3692431B60723D00C71BBC /* FacebookUser.swift */; };
+		FF3692461B6296DA00C71BBC /* ETBScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3692451B6296DA00C71BBC /* ETBScrollView.swift */; };
+		FF3692481B62A4DF00C71BBC /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3692471B62A4DF00C71BBC /* TestVC.swift */; };
+		FF36924B1B66845500C71BBC /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = FF36924A1B66845500C71BBC /* test.png */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
 		FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */; };
@@ -130,6 +134,10 @@
 		FF36923B1B60002600C71BBC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		FF36923C1B60002600C71BBC /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		FF3692411B60012800C71BBC /* FacebookResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookResponder.swift; sourceTree = "<group>"; };
+		FF3692431B60723D00C71BBC /* FacebookUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookUser.swift; sourceTree = "<group>"; };
+		FF3692451B6296DA00C71BBC /* ETBScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETBScrollView.swift; sourceTree = "<group>"; };
+		FF3692471B62A4DF00C71BBC /* TestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
+		FF36924A1B66845500C71BBC /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC2C6E61AF935E0004B0AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -299,10 +307,12 @@
 		FF3692311B5FFF4E00C71BBC /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				FF3692451B6296DA00C71BBC /* ETBScrollView.swift */,
 				FF3692321B5FFF7E00C71BBC /* UBAView.swift */,
 				FF3692331B5FFF7E00C71BBC /* UBAButton.swift */,
 				FF3692341B5FFF7E00C71BBC /* UBAGlueView.swift */,
 				FF3692351B5FFF7E00C71BBC /* OCView.swift */,
+				FF3692471B62A4DF00C71BBC /* TestVC.swift */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -311,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				FF3692411B60012800C71BBC /* FacebookResponder.swift */,
+				FF3692431B60723D00C71BBC /* FacebookUser.swift */,
 			);
 			name = Social;
 			sourceTree = "<group>";
@@ -351,6 +362,7 @@
 				FFC2C6F11AF935E0004B0AA7 /* Images.xcassets */,
 				FFC2C6F31AF935E0004B0AA7 /* LaunchScreen.xib */,
 				FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */,
+				FF36924A1B66845500C71BBC /* test.png */,
 				3D6FD8DA1B4A3C08008E70E9 /* b_search.png */,
 				FFC2C6E51AF935E0004B0AA7 /* Supporting Files */,
 				3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */,
@@ -451,6 +463,7 @@
 			files = (
 				FFC2C6F01AF935E0004B0AA7 /* Main.storyboard in Resources */,
 				FFC2C6F51AF935E0004B0AA7 /* LaunchScreen.xib in Resources */,
+				FF36924B1B66845500C71BBC /* test.png in Resources */,
 				3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */,
 				FFC2C6F21AF935E0004B0AA7 /* Images.xcassets in Resources */,
 				3DFB8A301B4CC4A900463EA4 /* TwitterKitResources.bundle in Resources */,
@@ -514,8 +527,10 @@
 				3D6A3AC01B57620C00E7948F /* ConversasTableViewController.swift in Sources */,
 				3D084DD71B56CCA30032A94B /* ChatViewController.swift in Sources */,
 				7BED36651B54B9430045FDB5 /* TransitionManager.swift in Sources */,
+				FF3692461B6296DA00C71BBC /* ETBScrollView.swift in Sources */,
 				3DFB8A1F1B4C381300463EA4 /* LoginViewController.swift in Sources */,
 				3DFB8A181B4C218700463EA4 /* User.swift in Sources */,
+				FF3692441B60723D00C71BBC /* FacebookUser.swift in Sources */,
 				FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */,
 				3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */,
 				3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */,
@@ -543,6 +558,7 @@
 				3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */,
 				FF3692361B5FFF7E00C71BBC /* UBAView.swift in Sources */,
 				3DACDEAF1B5222E300711E25 /* Event.swift in Sources */,
+				FF3692481B62A4DF00C71BBC /* TestVC.swift in Sources */,
 				3DE928991B55CA9E0053B43C /* ProfileViewController.swift in Sources */,
 				3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */,
 				FF3692421B60012800C71BBC /* FacebookResponder.swift in Sources */,

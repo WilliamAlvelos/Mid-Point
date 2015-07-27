@@ -28,6 +28,10 @@ class UBAButton: UIButton {
     
     //MARK: parameters from UBA
     
+    var buttonSelector:Selector!
+    
+    var buttonClicked:Bool!
+    
     //radius of the U shape
     var uRadius: CGFloat!
     
@@ -60,16 +64,31 @@ class UBAButton: UIButton {
         self.buttonIndex = buttonIndex
         movementType = UBMovement.LeftVerticalMovement
         positionOnCircle = 0.0
+        buttonClicked = false
     }
     
     //MARK: touches functions
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        buttonClicked = true
+        
         delegate?.buttonWasTouched(buttonIndex)
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        delegate?.touchStopped(buttonIndex)
+        
+        //That means that the button was clicked
+        if buttonClicked == true {
+            
+            if buttonSelector != nil {
+                var timer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: buttonSelector!, userInfo: nil, repeats: false)
+                
+                let mainLoop = NSRunLoop.mainRunLoop()
+                mainLoop.addTimer(timer, forMode: NSDefaultRunLoopMode)
+            }
+            
+        }
+        
     }
     
     override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
@@ -129,6 +148,8 @@ class UBAButton: UIButton {
     }
     
     func moveButtonBy(distance: CGFloat, decelerationRate: Double!) {
+        
+        buttonClicked = false
         
         movementsExecuting = movementsExecuting + 1
         

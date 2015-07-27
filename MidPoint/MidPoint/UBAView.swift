@@ -214,6 +214,12 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
     }
     
     
+    func addSelectorToButton(index:Int!, selector:Selector!) {
+        
+        buttonArray[index].buttonSelector = selector
+    }
+    
+    
     //Pan gesture to move the buttons
     func fingerMoved(recognizer:UIPanGestureRecognizer) {
         

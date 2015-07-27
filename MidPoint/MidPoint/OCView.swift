@@ -13,8 +13,11 @@ import UIKit
 
 class OCView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
-    let halfOpenDuration = 0.4
+    let halfOpenDuration = 0.3
     let intervalOpen = 0.02
+    
+    
+    var animationTimer: NSTimer!
     
     var animationState:Int!
     var leftOpen: Bool!
@@ -101,17 +104,17 @@ class OCView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         var leftInside1 = UIImageView(frame: leftCover.frame)
         leftInside1.image = array.first
         leftInside1.frame = leftCover.frame
-        leftInside1.frame.size.width = leftCover.frame.size.width / 2.0
+        //leftInside1.frame.size.width = leftCover.frame.size.width / 2.0
         
         var leftInside2 = UIImageView(frame: leftInside1.frame)
         leftInside2.image = array.last
         leftInside2.frame.origin.x = leftInside1.frame.size.width
         
         rollingInside.addSubview(leftInside1)
-        rollingInside.addSubview(leftInside2)
+        //rollingInside.addSubview(leftInside2)
         
         insideScrollView.layer.zPosition = -1.0
-        rollingInside.layer.zPosition = 60.0
+        rollingInside.layer.zPosition = 59.0
         rollingCover.layer.zPosition = 60.0
         leftCover.layer.zPosition = 70.0
         
@@ -150,8 +153,8 @@ class OCView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
 
     override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
-        animationState = animationState + 1
-        callNextAnimation()
+//        animationState = animationState + 1
+//        callNextAnimation()
     }
     
     
@@ -163,7 +166,7 @@ class OCView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     }
     
     
-    private func callNextAnimation() {
+    func callNextAnimation() {
         
         // Will open
         if animationState == 1 {
@@ -174,40 +177,44 @@ class OCView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
             firstOpen.toValue = M_PI / 2.0
             firstOpen.delegate = self
             
-            var rf = rollingCover.frame
-            var rif = rollingInside.frame
-            
+            rollingInside.layer.transform = CATransform3DMakeRotation(0.0, 0.0, 1.0, 0.0)
             rollingCover.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI / 2.0), 0.0, 1.0, 0.0)
+            
             rollingCover.layer.addAnimation(firstOpen, forKey: "firstOpen")
+            
+            
+            animationState = 2
+            animationTimer = NSTimer.scheduledTimerWithTimeInterval(halfOpenDuration, target: self, selector: Selector("callNextAnimation"), userInfo: nil, repeats: false)
         }
         
-        if animationState == 2 {
+        else if animationState == 2 {
+            
+            var secondOpen = CABasicAnimation(keyPath: "transform.rotation.y")
+            secondOpen.duration = halfOpenDuration * 0.5
+            secondOpen.fromValue = -M_PI / 2.0
+            secondOpen.toValue = 0.0
+            secondOpen.delegate = self
+            
+            self.addSubview(rollingInside)
+            rollingInside.layer.addAnimation(secondOpen, forKey: "open")
             
             rollingCover.removeFromSuperview()
             
             leftCover.layer.zPosition = 50.0
             
-            var secondOpen = CABasicAnimation(keyPath: "transform.rotation.y")
-            secondOpen.duration = halfOpenDuration
-            secondOpen.fromValue = (2.0 * M_PI) - (M_PI / 2.0)
-            secondOpen.toValue = 2.0 * M_PI
-            secondOpen.delegate = self
-            
-            self.addSubview(rollingInside)
-            
-            rollingInside.layer.transform = CATransform3DMakeRotation(0.0, 0.0, 1.0, 0.0)
-            rollingInside.layer.addAnimation(secondOpen, forKey: "open")
+            animationState = 3
+            animationTimer = NSTimer.scheduledTimerWithTimeInterval(halfOpenDuration * 0.1, target: self, selector: Selector("callNextAnimation"), userInfo: nil, repeats: false)
         }
         
         // Its open!
-        if animationState == 3 {
+        else if animationState == 3 {
             
             rollingInside.removeFromSuperview()
             leftCover.removeFromSuperview()
         }
         
         // Will close
-        if animationState == 4 {
+        else if animationState == 4 {
             self.addSubview(leftCover)
             self.addSubview(rollingInside)
             
@@ -219,9 +226,13 @@ class OCView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
             
             rollingInside.layer.transform = CATransform3DMakeRotation(CGFloat(-(M_PI / 2.0)), 0.0, 1.0, 0.0)
             rollingInside.layer.addAnimation(firstClose, forKey: "firstClose")
+            
+            animationState = 5
+            callNextAnimation()
+            //animationTimer = NSTimer.scheduledTimerWithTimeInterval(halfOpenDuration * 0.0, target: self, selector: Selector("callNextAnimation"), userInfo: nil, repeats: false)
         }
         
-        if animationState == 5 {
+        else if animationState == 5 {
             
             leftCover.layer.zPosition = 70.0
             
@@ -238,10 +249,13 @@ class OCView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
             rollingCover.layer.transform = CATransform3DMakeRotation(0.0, 0.0, 1.0, 0.0)
             rollingCover.layer.addAnimation(secondClose, forKey: "secondClose")
             
+            animationState = 6
+            animationTimer = NSTimer.scheduledTimerWithTimeInterval(halfOpenDuration, target: self, selector: Selector("callNextAnimation"), userInfo: nil, repeats: false)
+            
         }
         
         // Its close!
-        if animationState == 6 {
+        else if animationState == 6 {
             animationState = 0
         }
 
