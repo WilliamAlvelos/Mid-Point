@@ -64,7 +64,7 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
     func saveEvent(event: Event, usuario: User) {
         
         let url : String = "http://www.alvelos.wc.lt/MidPoint/events/insereEvento.php"
-        let bodyHttp = String(format: "\(EventGlobalConstants.Name)=%@&\(EventGlobalConstants.Description)=%@&\(EventGlobalConstants.Date)=%@&\(UserGlobalConstants.IdUser)=%d", event.name!,event.descricao!,event.date!, usuario.id!)
+        let bodyHttp = String(format: "\(EventGlobalConstants.Name)=%@&\(EventGlobalConstants.Description)=%@&\(EventGlobalConstants.Date)=%@&\(UserGlobalConstants.Id)=%d", event.name!,event.descricao!,event.date!, usuario.id!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 DispatcherClass.dispatcher({ () -> () in
@@ -99,7 +99,7 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
     }
     func getEvent(user:User, usuario: Option){
         let url : String = "http://alvelos.wc.lt/MidPoint/events/busca.php"
-        let bodyHttp = String(format: "\(UserGlobalConstants.IdUser)=%d&\(EventGlobalConstants.UserState)=%d", user.id!, usuario.rawValue)
+        let bodyHttp = String(format: "\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.UserState)=%d", user.id!, usuario.rawValue)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 DispatcherClass.dispatcher({ () -> () in

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import CloudKit
+
 class CreateConversationViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate{
 
     var pickerLibrary : UIImagePickerController?
@@ -224,7 +226,15 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
         data.writeToFile(self.imagePathURL().path!, atomically: true)
         println("%@", self.imagePathURL().path!)
+        let perRecordProgressionBlock = { (record : CKRecord!, double : Double) -> Void in
+            print("\(double)\n")
+        }
+        let perRecordCompletionBlock = { (record : CKRecord!, error: NSError!) -> Void in
+            print("terminou\n")
+
+        }
         
+            PictureCloudKit().uploadProfile(self.imagePathURL(), id: 10, perRecordProgressBlock: perRecordProgressionBlock, perRecordCompletionBlock: perRecordCompletionBlock)
         button.setBackgroundImage(image, forState: .Normal)
         self.dismissViewControllerAnimated(true, completion: nil)
         
