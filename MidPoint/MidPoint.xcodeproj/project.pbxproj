@@ -244,7 +244,6 @@
 				3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */,
 				7BED36661B54BCC00045FDB5 /* ChatViewController.swift */,
 				3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */,
-				7B6315571B66C9A600D13DE5 /* DispatcherClass.swift */,
 				3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */,
 				3DE926A61B5430840053B43C /* ChatViewC.swift */,
 				FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */,
@@ -257,6 +256,7 @@
 		3DFB8A251B4C54C800463EA4 /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
+				7B6315571B66C9A600D13DE5 /* DispatcherClass.swift */,
 				3D50F3761B6700700029C4B9 /* ProgressView.swift */,
 				3D6A3AC21B576D6C00E7948F /* Conversa.swift */,
 				7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */,

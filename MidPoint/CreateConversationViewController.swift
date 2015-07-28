@@ -52,9 +52,9 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .Done, target: self, action: "next")
         
-        
         // Do any additional setup after loading the view.
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

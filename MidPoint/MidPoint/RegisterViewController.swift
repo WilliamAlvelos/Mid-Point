@@ -37,6 +37,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
         
+        IHKeyboardAvoiding.setAvoidingView(self.view)
+        
         button.layer.cornerRadius = button.bounds.size.width/2
         button.layer.borderWidth = 0
         button.layer.masksToBounds = true
@@ -48,40 +50,43 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         PermissionsResponse.checkCameraPermission()
         PermissionsResponse.checkRollCameraPermission()
         
+        
 //        passwordTextField.hidden = true
 //        emailTexteField.hidden = true
 //        confirmPasswordTextFied.hidden = true
         
-        passwordTextField.center.x  -= view.bounds.width
-        emailTexteField.center.x -= view.bounds.width
-        confirmPasswordTextFied.center.x -= view.bounds.width
-        nameTextField.center.x -= view.bounds.width
-        
-        
-        
-        UIView.animateWithDuration(0.8, delay: 0.3, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.nameTextField.center.x += self.view.bounds.width
 
-            self.view.layoutIfNeeded()
-            }, completion: nil)
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        UIView.animateWithDuration(0.8, delay: 0.5, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.emailTexteField.center.x += self.view.bounds.width
-            self.view.layoutIfNeeded()
-            }, completion: nil)
-        
-        UIView.animateWithDuration(0.8, delay: 0.7, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.passwordTextField.center.x += self.view.bounds.width
-            self.view.layoutIfNeeded()
-            }, completion: nil)
-        
-        UIView.animateWithDuration(0.8, delay: 0.9, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.confirmPasswordTextFied.center.x += self.view.bounds.width
-            self.view.layoutIfNeeded()
-            }, completion: nil)
-
-
-
+//        self.passwordTextField.center.x -= view.bounds.width * 2
+//        self.emailTexteField.center.x -= view.bounds.width * 2
+//        self.confirmPasswordTextFied.center.x -= view.bounds.width * 2
+//        self.nameTextField.center.x -= view.bounds.width * 2
+//        
+//
+//        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+//            self.nameTextField.center.x += self.view.bounds.width
+//            self.view.layoutIfNeeded()
+//            }, completion: nil)
+//        
+//        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+//            self.emailTexteField.center.x += self.view.bounds.width
+//            self.view.layoutIfNeeded()
+//            }, completion: nil)
+//        
+//        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+//            self.passwordTextField.center.x += self.view.bounds.width
+//            self.view.layoutIfNeeded()
+//            }, completion: nil)
+//        
+//        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+//            self.confirmPasswordTextFied.center.x += self.view.bounds.width
+//            self.view.layoutIfNeeded()
+//            }, completion: nil)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -104,10 +109,12 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.nameTextField.hidden = true
-        self.emailTexteField.hidden = true
-        self.passwordTextField.hidden = true
-        self.confirmPasswordTextFied.hidden = true
+        self.view.endEditing(true)
+        
+//        self.nameTextField.hidden = true
+//        self.emailTexteField.hidden = true
+//        self.passwordTextField.hidden = true
+//        self.confirmPasswordTextFied.hidden = true
         
     }
     
@@ -118,7 +125,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         //changeView("geolocation", animated: true)
         UserDAODefault.saveLogin(user)
         PictureCloudKit().uploadImageUser(user)
-       TransitionManager(indentifier: "navigationHome", animated: true, view: self)
+        TransitionManager(indentifier: "navigationHome", animated: true, view: self)
     }
     func userNotFound(user : User){
         println("userNotFound")
