@@ -70,7 +70,7 @@ class DemoModelData: NSObject{
     
         var bubbleFactory:JSQMessagesBubbleImageFactory = JSQMessagesBubbleImageFactory()
         
-        self.outgoingBubbleImageData = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleRedColor())
+        self.outgoingBubbleImageData = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1))
         
         self.incomingBubbleImageData = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
     

@@ -426,7 +426,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             else {
                 
                 for(var x = 0; x < response.routes.count; x++) {
-                    
+                     
                     println(response.routes[x].distance)
                 }
                 

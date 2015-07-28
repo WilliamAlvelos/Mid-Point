@@ -94,7 +94,6 @@ class PictureCloudKit : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDe
     }
     func connectionDidFinishLoading(connection: NSURLConnection)
     {
-        var dataString = NSString(data: self.data!, encoding:NSUTF8StringEncoding)
 
         let array = JsonResponse.parseJSON(self.data!)
         if (array.objectForKey("error") != nil){
