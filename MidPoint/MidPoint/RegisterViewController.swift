@@ -100,6 +100,17 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
     }
     
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.nameTextField.hidden = true
+        self.emailTexteField.hidden = true
+        self.passwordTextField.hidden = true
+        self.confirmPasswordTextFied.hidden = true
+        
+    }
+    
     func userStillInserted(user: User){
         println("userStillInserted")
     }
