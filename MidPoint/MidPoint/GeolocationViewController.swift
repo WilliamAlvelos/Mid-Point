@@ -344,7 +344,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             //var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
             
             
-            
             addPointsOfInterest("", name: string, location: geoLocation);
             locationManager.startUpdatingLocation()
         }

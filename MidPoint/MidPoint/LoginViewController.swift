@@ -35,6 +35,8 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     override func viewDidLoad() {
         super.viewDidLoad()
         usuario.delegate = self
+        
+        appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0
 
     }
     override func viewDidAppear(animated: Bool) {
@@ -42,11 +44,6 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
  
         userToIconDistance.constant = userToIconDistance.constant * self.view.frame.size.height / 667.0
         textDistances.constant = textDistances.constant * self.view.frame.size.height / 667.0
-        
-        
-        appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0
-        
-        
         
 
         

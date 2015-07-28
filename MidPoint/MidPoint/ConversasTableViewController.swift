@@ -93,8 +93,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
     
     
-    
-    
     func animateTable() {
         tableView.reloadData()
         
@@ -230,7 +228,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         let target = sb.text
         self.filteredTableData = self.Data.filter {
             s in
-            
             let options = NSStringCompareOptions.CaseInsensitiveSearch
             let found = s.name!.rangeOfString(target, options: options)
             return (found != nil)

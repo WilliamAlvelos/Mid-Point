@@ -28,7 +28,6 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     var initialProgress:Double = 0.0
     
-    
 
     @IBOutlet var progressLabel: UILabel!
     
@@ -153,7 +152,11 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         cell.titleLabel?.text = data[indexPath.row].name
         
-        cell.imageLabel = UIImageView(image: UIImage(named: "teste"))
+
+        
+//        var url:NSURL = NSURL.URLWithString(string)
+//        var data:NSData = NSData.dataWithContentsOfURL(url, options: nil, error: nil)
+//        cell.imageLabel = UIImage.imageWithData(data)
         
         if(contains(self.dataSelected){ x in x.id == self.data[indexPath.row].id})
         {
