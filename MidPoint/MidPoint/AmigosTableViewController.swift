@@ -8,7 +8,7 @@
 
 import UIKit
 import CloudKit
-class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , FriendDAODelegate, UISearchResultsUpdating, EventoDAOCloudKitDelegate{
+class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , FriendDAODelegate, UISearchResultsUpdating, EventManagerDelegate{
     
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
@@ -16,7 +16,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     var imagePath : NSURL?
     
-    var eventDelegate:EventDAOCloudKit = EventDAOCloudKit()
+    var eventDelegate:EventManager = EventManager()
     
     var daoFriend: FriendDAOCloudKit = FriendDAOCloudKit()
     
@@ -173,12 +173,38 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         self.daoFriend.getUsersWithName(searchController.searchBar.text)
     }
-    
+    func errorThrowed(error: NSError){
+        
+    }
+    func eventNotFound(event : Event){
+        
+    }
+    func getEventFinished(event: Event){
+        
+    }
+    func getEventsFinished(events: Array<Event>){
+        
+    }
+    func inviteFinished(event: Event){
+        
+    }
+    func uploadImageFinished(){
+            println("upload finished")
+    }
+    func progressUpload(float : Float){
+        println(float)
+    }
 
     func getUsersFinished(users: Array<User>){
         self.data = users
         self.tableView.reloadData()
     }
+
+    func saveEventFinished(event: Event){
+        addConversation(String(format:"%d",event.id!), title: event.name, subtitle: event.descricao, image: "halua")
+        eventDelegate.inviteFriendsToEvent(event, sender: UserDAODefault.getLoggedUser(), friends: self.dataSelected)
+    }
+    
     
     func addConversation(id: String, title: String!, subtitle: String!, image: String!) {
         
@@ -190,71 +216,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
             ])
     }
     
-    func errorThrowed(error: NSError){}
-    func saveEventFinished(event: Event){
-        addConversation(String(format:"%d",event.id!), title: event.name, subtitle: event.descricao, image: "halua")
-        eventDelegate.inviteFriendsToEvent(event, sender: UserDAODefault.getLoggedUser(), friends: self.dataSelected)
-    }
-    func eventNotFound(event : Event){}
-    func getEventFinished(event: Event){}
-    func inviteFinished(event: Event){
-        let perRecordProgressBlock = { (record : CKRecord!, progress : Double) -> Void in
-            DispatcherClass.dispatcher({ () -> () in
-                
-                self.navigationController?.navigationBarHidden = true
-                
-                //self.initialProgress = progress
-            
-                var progressView: ProgressView = ProgressView(frame: self.view.frame)
-                
-                //progressView.backgroundColor = UIColor.whiteColor()
-                
-                progressView.animateProgressView(self.initialProgress , valueFinal: progress)
-                
-                self.view = progressView
-                
-                //self.presentViewController(progressView, animated: true, completion: nil)
-
-            })
-
-           
-        }
-        let perRecordCompletionBlock = { (record : CKRecord!, error: NSError!) -> Void in
-            DispatcherClass.dispatcher({ () -> () in
-                
-                var alert = UIAlertController(title: "Sucesso", message: "Grupo Criado Com Sucesso", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                
-                
-                var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
-                    UIAlertAction in
-                    
-                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                    let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
-                    self.presentViewController(nextViewController, animated:false, completion:nil)
-                }
-                
-                alert.addAction(okAction)
-                
-                self.presentViewController(alert, animated: true, completion: nil)
-                
-                
-//                
-//                var progressView: ProgressView = ProgressView(frame: self.view.frame)
-//                
-//                progressView.animateProgressView()
-//                
-//                self.view = progressView
-
-            })
-        }
-        PictureCloudKit().uploadEventImage(self.imagePath!, id: event.id!, perRecordProgressBlock: perRecordProgressBlock, perRecordCompletionBlock: perRecordCompletionBlock)
-        
-    }
-    
-    func getEventsFinished(events: Array<Event>){
-        
-    }
+  
     
 
 }

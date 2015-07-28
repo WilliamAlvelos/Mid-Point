@@ -7,70 +7,114 @@
 //
 
 import Foundation
-import CloudKit
 protocol PictureCloudKitDelegate{
     func errorCloudKit(error: NSError)
+    func progressUpload(float : Float)
+    func saveImageFinished()
 }
-class PictureCloudKit : NSObject{
-    private var container: CKContainer
-    private var publicDB: CKDatabase
-    
+class PictureCloudKit : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate{
+
+    var saveImageUserConnection : NSURLConnection?
+    var saveImageEventConnection : NSURLConnection?
     var delegate: PictureCloudKitDelegate?
-    
+    var data: NSData?
     override init(){
-        container = CKContainer.defaultContainer()
-        publicDB = container.publicCloudDatabase
+     
     }
     func downloadProfileImage(user: User){
-        let predicate = NSPredicate(format: "\(UserGlobalConstants.Id)) == %d", user.id!)
         
-        let query = CKQuery(recordType: "\(CloudKitGlobalConstants.ProfileTable)", predicate: predicate)
-
-        self.publicDB.performQuery(query, inZoneWithID: nil) { (records: [AnyObject]!, error: NSError!) -> Void in
-            if error != nil {
-                self.delegate?.errorCloudKit(error)
-                return
-            }
-                let picture = records[0] as! CKRecord
-                user.image = picture.objectForKey("\(UserGlobalConstants.Image)") as? UIImage
-        }
     }
     func downloadEventImage(event: Event){
-        let predicate = NSPredicate(format: "\(EventGlobalConstants.Id)) == %d", event.id!)
+    }
+    
+    func uploadImageUser(user : User){
+        var imageData = UIImageJPEGRepresentation(user.image, 0.5)
         
-        let query = CKQuery(recordType: "\(CloudKitGlobalConstants.EventTable)", predicate: predicate)
-        
-        self.publicDB.performQuery(query, inZoneWithID: nil) { (records: [AnyObject]!, error: NSError!) -> Void in
-            if error != nil {
-                self.delegate?.errorCloudKit(error)
-                return
-            }
-            let picture = records[0] as! CKRecord
-            event.image = picture.objectForKey("\(EventGlobalConstants.Image)") as? UIImage
+        if imageData != nil{
+            var request = NSMutableURLRequest(URL: NSURL(string:"http://alvelos.wc.lt/MidPoint/uploadImage.php")!)
+            
+            request.HTTPMethod = "POST"
+            
+            var boundary = String(format: "---------------------------14737809831466499882746641449")
+            var contentType = String(format: "multipart/form-data; boundary=%@",boundary)
+            //  println("Content Type \(contentType)")
+            request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+            
+            var body = NSMutableData.alloc()
+            // Image
+            body.appendData(String(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(String(format:"Content-Disposition: form-data; name=\"uploadedfile\"; filename=\"\(user.id!).jpg\"\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(String(format: "Content-Type: application/octet-stream\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(imageData)
+            body.appendData(String(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            
+            
+            
+            request.HTTPBody = body
+            
+            
+            self.saveImageUserConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
+            self.saveImageUserConnection!.start()
+           
         }
     }
-    func uploadProfileImage(url : NSURL , id : Int, perRecordProgressBlock: ((CKRecord!, Double) -> Void),  perRecordCompletionBlock: ((CKRecord!, NSError!) -> Void)) {
-        let imageAsset = CKAsset(fileURL: url)
-        let record = CKRecord(recordType: "\(CloudKitGlobalConstants.ProfileTable)")
-        record.setObject(id, forKey: "\(UserGlobalConstants.Id)")
-        record.setObject(imageAsset, forKey: "\(UserGlobalConstants.Image)")
+    func uploadImageEvent(event : Event){
+        var imageData = UIImageJPEGRepresentation(event.image, 0.5)
         
-        let modifyOperation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
-        modifyOperation.perRecordCompletionBlock = perRecordCompletionBlock
-        modifyOperation.perRecordProgressBlock = perRecordProgressBlock
-        self.publicDB.addOperation(modifyOperation)
-        
+        if imageData != nil{
+            var request = NSMutableURLRequest(URL: NSURL(string:"http://alvelos.wc.lt/MidPoint/events/uploadImage.php")!)
+            
+            request.HTTPMethod = "POST"
+            
+            var boundary = String(format: "---------------------------14737809831466499882746641449")
+            var contentType = String(format: "multipart/form-data; boundary=%@",boundary)
+            //  println("Content Type \(contentType)")
+            request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+            
+            var body = NSMutableData.alloc()
+            // Image
+            body.appendData(String(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(String(format:"Content-Disposition: form-data; name=\"uploadedfile\"; filename=\"\(event.id!).jpg\"\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(String(format: "Content-Type: application/octet-stream\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(imageData)
+            body.appendData(String(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            
+            
+            
+            request.HTTPBody = body
+            
+            
+            self.saveImageEventConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
+            self.saveImageEventConnection!.start()
+            
+        }
     }
-    func uploadEventImage(url : NSURL , id : Int, perRecordProgressBlock: ((CKRecord!, Double) -> Void),  perRecordCompletionBlock: ((CKRecord!, NSError!) -> Void)) {
-        let imageAsset = CKAsset(fileURL: url)
-        let record = CKRecord(recordType: "\(CloudKitGlobalConstants.EventTable)")
-        record.setObject(id, forKey: "\(EventGlobalConstants.Id)")
-        record.setObject(imageAsset, forKey: "\(EventGlobalConstants.Image)")
-        
-        let modifyOperation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
-        modifyOperation.perRecordCompletionBlock = perRecordCompletionBlock
-        modifyOperation.perRecordProgressBlock = perRecordProgressBlock
-        self.publicDB.addOperation(modifyOperation)
-        
+    func connection(connection: NSURLConnection, didReceiveData data: NSData){
+        self.data = data
     }
+    func connectionDidFinishLoading(connection: NSURLConnection)
+    {
+        let array = JsonResponse.parseJSON(self.data!)
+        if (array.objectForKey("error") != nil){
+            let error : NSError = NSError(domain: "Erro", code: (array.objectForKey("error")! as! Int), userInfo: nil)
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.errorCloudKit(error)
+            })
+            return
+        }
+        if (array.objectForKey("succesfull") != nil){
+            
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.saveImageFinished()
+            })
+            return
+        }
+
+    }
+    func connection(connection: NSURLConnection, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
+        DispatcherClass.dispatcher { () -> () in
+            self.delegate?.progressUpload(Float(totalBytesWritten)/Float(totalBytesExpectedToWrite))
+        }
+    }
+    
 }

@@ -16,7 +16,7 @@ class FriendDAOCloudKit{
     
     func getUsersWithName(name: String) {
         
-        let url : String = "http://alvelos.wc.lt/MidPoint/buscaUsuario.php"
+        let url : String = "\(LinkAccessGlobalConstants.LinkUsers)buscaUsuario.php"
         let bodyHttp = String(format: "\(UserGlobalConstants.Name)=%@", name)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {

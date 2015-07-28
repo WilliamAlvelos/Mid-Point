@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversasTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, EventoDAOCloudKitDelegate{
+class ConversasTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, EventManagerDelegate{
 
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
@@ -16,7 +16,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     var filteredTableData = [Event]()
     
-    var eventDelegate = EventDAOCloudKit()
+    var eventDelegate = EventManager()
     
     var resultSearchController = UISearchController()
     
@@ -68,7 +68,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     func reloadData(){
         self.eventDelegate.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
-        println("will")
+        
         
     }
     
@@ -258,17 +258,5 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     func inviteFinished(event: Event){
     
     }
-
-    /*
-    // MARK:
-    
-    - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

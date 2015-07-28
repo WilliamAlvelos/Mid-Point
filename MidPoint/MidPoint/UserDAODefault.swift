@@ -18,7 +18,7 @@ class UserDAODefault {
         userFixo.setObject(user.name, forKey: UserGlobalConstants.Name)
         userFixo.setInteger(user.id!, forKey: UserGlobalConstants.Id)
         userFixo.setObject(user.email, forKey: UserGlobalConstants.Email)
-        userFixo.setObject(user.image, forKey: "user_image")
+       // userFixo.setObject(user.image, forKey: "user_image")
         userFixo.synchronize()
     }
     

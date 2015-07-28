@@ -25,7 +25,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
 
 
     func saveUser(user: User, password : String){
-        let url : String = "http://www.alvelos.wc.lt/MidPoint/cadastro.php"
+        let url : String = "\(LinkAccessGlobalConstants.LinkUsers)cadastro.php"
         let bodyHttp = String(format: "\(UserGlobalConstants.Email)=%@&\(UserGlobalConstants.Password)=%@&\(UserGlobalConstants.Name)=%@", user.email!,password,user.name!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
@@ -60,7 +60,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
     
     func getUser(user: User, password : String){
 
-        let url : String = "http://alvelos.wc.lt/MidPoint/login.php"
+        let url : String = "\(LinkAccessGlobalConstants.LinkUsers)login.php"
         let bodyHttp = String(format: "\(UserGlobalConstants.Password)=%@&\(UserGlobalConstants.Email)=%@", password ,user.email!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {

@@ -11,23 +11,33 @@ import UIKit
 
 @objc protocol UserManagerDelegate{
     func errorThrowed(error: NSError)
-    func userNotFound(user : User)
+    optional func userNotFound(user : User)
     optional func getUserFinished(user: User)
     optional func userStillInserted(user: User)
-    optional func saveUserFinished(user: User)
+    optional func saveUserFinished()
+    optional func progressUpload(float : Float)
+    
 }
 
-class UserManager: UserDAOCloudKitDelegate{
+class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     
     private var userDao: UserDAOCloudKit?
-    
+    private var pictureDao : PictureCloudKit?
     var delegate:UserManagerDelegate?
     
     init(){
         userDao = UserDAOCloudKit()
         userDao?.delegate = self
+        pictureDao = PictureCloudKit()
+        pictureDao?.delegate = self
     }
     
+    func errorCloudKit(error: NSError){
+        self.delegate?.errorThrowed(error)
+    }
+    func progressUpload(float : Float){
+        self.delegate?.progressUpload?(float)
+    }
     
     func errorThrowed(error: NSError){
         self.delegate?.errorThrowed(error)
@@ -38,29 +48,25 @@ class UserManager: UserDAOCloudKitDelegate{
     }
     
     func saveUserFinished(user: User){
-        self.delegate?.saveUserFinished!(user)
+        pictureDao?.uploadImageUser(user)
     }
     
     func userNotFound(user : User){
-        self.delegate?.userNotFound(user)
+        self.delegate?.userNotFound?(user)
     }
     
     func getUserFinished(user: User){
-        self.delegate?.getUserFinished!(user)
+        self.delegate?.getUserFinished?(user)
     }
-
-    
-    func createUser()->User{
-        return User()
-    }
-    
     func insertUserDatabase(user:User, password : String){
         userDao?.saveUser(user, password: password)
     }
-    
     func getUserDatabase(user:User, password : String){
         userDao?.getUser(user, password: password)
     }
-    
+    func saveImageFinished(){
+        self.delegate?.saveUserFinished?()
+    }
+
     
 }

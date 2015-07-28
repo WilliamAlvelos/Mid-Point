@@ -28,10 +28,10 @@ struct EventGlobalConstants {
 
 }
 
-struct CloudKitGlobalConstants {
+struct LinkAccessGlobalConstants {
     
-    static let EventTable = "EVENT_PICTURE"
-    static let ProfileTable = "PROFILE_PICTURE"
+    static let LinkEvents = "http://alvelos.wc.lt/MidPoint/events/"
+    static let LinkUsers = "http://www.alvelos.wc.lt/MidPoint/users/"
     
-    
+
 }

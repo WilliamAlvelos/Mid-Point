@@ -40,6 +40,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         button.layer.cornerRadius = button.bounds.size.width/2
         button.layer.borderWidth = 0
         button.layer.masksToBounds = true
+        user = User()
     }
     
     override func  viewWillAppear(animated: Bool) {
@@ -105,7 +106,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     func saveUserFinished(user: User){
         //changeView("geolocation", animated: true)
         UserDAODefault.saveLogin(user)
-        TransitionManager(indentifier: "navigationControllerConversas", animated: true, view: self)
+        PictureCloudKit().uploadImageUser(user)
+       // TransitionManager(indentifier: "navigationControllerConversas", animated: true, view: self)
     }
     func userNotFound(user : User){
         println("userNotFound")
@@ -148,7 +150,6 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!){
         let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
         data.writeToFile(self.imagePathURL().path!, atomically: true)
-        println("%@", self.imagePathURL().path!)
         
         button.setBackgroundImage(image, forState: .Normal)
         user?.image = image
@@ -174,14 +175,18 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         if((passwordTextField.text == confirmPasswordTextFied.text) || passwordTextField.text != ""){
             
             
-            
-            var user: User = User(name: nameTextField.text, email: emailTexteField.text)
-            user.image = self.user?.image
-            userManager.insertUserDatabase(user, password : passwordTextField.text)
+            self.user?.name = nameTextField.text
+            self.user?.email = emailTexteField.text
+            userManager.insertUserDatabase(self.user!, password : passwordTextField.text)
             
         }
         
     }
-    
+    func progressUpload(float: Float) {
+        println(float)
+    }
+    func saveUserFinished() {
+        
+    }
 
 }
