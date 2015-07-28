@@ -26,6 +26,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     var resultSearchController = UISearchController()
     
+    var initialProgress:Double = 0.0
+    
     
 
     @IBOutlet var progressLabel: UILabel!
@@ -193,19 +195,20 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         let perRecordProgressBlock = { (record : CKRecord!, progress : Double) -> Void in
             DispatcherClass.dispatcher({ () -> () in
                 
+                self.navigationController?.navigationBarHidden = true
                 
-                var initialProgress:Double = 0.0
+                //self.initialProgress = progress
             
                 var progressView: ProgressView = ProgressView(frame: self.view.frame)
                 
-                progressView.animateProgressView(initialProgress , valueFinal: progress)
+                //progressView.backgroundColor = UIColor.whiteColor()
+                
+                progressView.animateProgressView(self.initialProgress , valueFinal: progress)
                 
                 self.view = progressView
                 
-                self.navigationController?.hidesBarsOnSwipe = true
-                
-                initialProgress += progress
-                
+                //self.presentViewController(progressView, animated: true, completion: nil)
+
             })
 
            
