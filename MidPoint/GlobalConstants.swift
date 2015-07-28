@@ -30,6 +30,8 @@ struct EventGlobalConstants {
 
 struct LinkAccessGlobalConstants {
     
+    static let LinkImagesUsers = "http://alvelos.wc.lt/MidPoint/users/user_images/"
+    static let LinkImagesEvents = "http://alvelos.wc.lt/MidPoint/events/events_images/"
     static let LinkEvents = "http://alvelos.wc.lt/MidPoint/events/"
     static let LinkUsers = "http://www.alvelos.wc.lt/MidPoint/users/"
     

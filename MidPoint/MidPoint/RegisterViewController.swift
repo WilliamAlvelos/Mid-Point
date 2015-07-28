@@ -107,7 +107,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         //changeView("geolocation", animated: true)
         UserDAODefault.saveLogin(user)
         PictureCloudKit().uploadImageUser(user)
-       // TransitionManager(indentifier: "navigationControllerConversas", animated: true, view: self)
+       TransitionManager(indentifier: "navigationHome", animated: true, view: self)
     }
     func userNotFound(user : User){
         println("userNotFound")

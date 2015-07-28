@@ -165,18 +165,34 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:CustomCellConversas = self.tableView.dequeueReusableCellWithIdentifier("CustomCellConversas") as!CustomCellConversas
+        var cell:CustomCellConversas = self.tableView.dequeueReusableCellWithIdentifier("CustomCellConversas") as! CustomCellConversas
         
         
         cell.selectionStyle = .None
+        
+        
+        cell.imageLabel.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
    
         if (self.resultSearchController.active) {
             cell.titleLabel.text = filteredTableData[indexPath.row].name
             cell.subtitleLabel.text = filteredTableData[indexPath.row].descricao
             
+            var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(filteredTableData[indexPath.row].id).jpg")!
+            var data:NSData = NSData(contentsOfURL: url)!
+            
+            cell.imageLabel?.image = UIImage(data: data)
+            
             return cell
         }
         else {
+            
+            var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(Data[indexPath.row].id!).jpg")!
+            
+            //var url:NSURL = NSURL(string: "http://alvelos.wc.lt/MidPoint/events/events_images/12.jpg")!
+            var data:NSData = NSData(contentsOfURL: url)!
+            
+            cell.imageLabel?.image = UIImage(data: data)
+            
             cell.titleLabel.text = Data[indexPath.row].name
             cell.subtitleLabel.text = Data[indexPath.row].descricao
             
