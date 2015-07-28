@@ -524,6 +524,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="YSf-Fb-oSI">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaK-5K-OSX">
+                                    <rect key="frame" x="131" y="8" width="42" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomCellAmigosGroupo" rowHeight="91" id="r1u-GC-Ijr" customClass="CustomCellAmigosGroupo" customModule="MidPoint" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -554,6 +567,8 @@
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="progressLabel" destination="aaK-5K-OSX" id="4Ei-wA-bmb"/>
+                        <outlet property="progressLayer" destination="YSf-Fb-oSI" id="oeC-jF-j2w"/>
                         <outlet property="searchDisplayController" destination="6ig-2i-39N" id="7Wa-TO-L93"/>
                     </connections>
                 </tableViewController>

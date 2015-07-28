@@ -26,6 +26,12 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     var resultSearchController = UISearchController()
     
+    
+
+    @IBOutlet var progressLabel: UILabel!
+    
+    @IBOutlet var progressLayer: CALayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         daoFriend.delegate = self
@@ -50,6 +56,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         
         self.title = "Amigos"
+        
     }
     
     func finish(){
@@ -149,6 +156,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         }
         cell.selectionStyle = .None
         return cell
+        
+        
     }
     
     
@@ -182,6 +191,23 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     func getEventFinished(event: Event){}
     func inviteFinished(event: Event){
         let perRecordProgressBlock = { (record : CKRecord!, progress : Double) -> Void in
+            DispatcherClass.dispatcher({ () -> () in
+                
+                
+                var initialProgress:Double = 0.0
+            
+                var progressView: ProgressView = ProgressView(frame: self.view.frame)
+                
+                progressView.animateProgressView(initialProgress , valueFinal: progress)
+                
+                self.view = progressView
+                
+                self.navigationController?.hidesBarsOnSwipe = true
+                
+                initialProgress += progress
+                
+            })
+
            
         }
         let perRecordCompletionBlock = { (record : CKRecord!, error: NSError!) -> Void in
@@ -202,6 +228,15 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
                 alert.addAction(okAction)
                 
                 self.presentViewController(alert, animated: true, completion: nil)
+                
+                
+//                
+//                var progressView: ProgressView = ProgressView(frame: self.view.frame)
+//                
+//                progressView.animateProgressView()
+//                
+//                self.view = progressView
+
             })
         }
         PictureCloudKit().uploadEventImage(self.imagePath!, id: event.id!, perRecordProgressBlock: perRecordProgressBlock, perRecordCompletionBlock: perRecordCompletionBlock)
@@ -211,5 +246,6 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     func getEventsFinished(events: Array<Event>){
         
     }
+    
 
 }

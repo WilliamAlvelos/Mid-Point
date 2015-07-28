@@ -11,7 +11,7 @@
 		3D31FD311B61FE1300C17F0F /* UserDAODefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D31FD301B61FE1300C17F0F /* UserDAODefault.swift */; };
 		3D3359E71B61A79D00F22D88 /* AmigosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3359E61B61A79D00F22D88 /* AmigosTableViewController.swift */; };
 		3D3359E91B61B73400F22D88 /* CustomCellAmigosGrupo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3359E81B61B73400F22D88 /* CustomCellAmigosGrupo.swift */; };
-		3D50F3771B6700700029C4B9 /* GradientProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D50F3761B6700700029C4B9 /* GradientProgressView.swift */; };
+		3D50F3771B6700700029C4B9 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D50F3761B6700700029C4B9 /* ProgressView.swift */; };
 		3D6A3AC01B57620C00E7948F /* ConversasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */; };
 		3D6A3AC31B576D6C00E7948F /* Conversa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC21B576D6C00E7948F /* Conversa.swift */; };
 		3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */; };
@@ -82,7 +82,7 @@
 		3D31FD301B61FE1300C17F0F /* UserDAODefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDAODefault.swift; sourceTree = "<group>"; };
 		3D3359E61B61A79D00F22D88 /* AmigosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmigosTableViewController.swift; sourceTree = "<group>"; };
 		3D3359E81B61B73400F22D88 /* CustomCellAmigosGrupo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellAmigosGrupo.swift; sourceTree = "<group>"; };
-		3D50F3761B6700700029C4B9 /* GradientProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientProgressView.swift; sourceTree = "<group>"; };
+		3D50F3761B6700700029C4B9 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversasTableViewController.swift; sourceTree = "<group>"; };
 		3D6A3AC21B576D6C00E7948F /* Conversa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversa.swift; sourceTree = "<group>"; };
 		3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellConversas.swift; sourceTree = "<group>"; };
@@ -193,6 +193,7 @@
 			children = (
 				3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */,
 				3D3359E61B61A79D00F22D88 /* AmigosTableViewController.swift */,
+				3D50F3761B6700700029C4B9 /* ProgressView.swift */,
 			);
 			name = TableViewController;
 			sourceTree = "<group>";
@@ -250,7 +251,6 @@
 		3DFB8A251B4C54C800463EA4 /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
-				3D50F3761B6700700029C4B9 /* GradientProgressView.swift */,
 				3D6A3AC21B576D6C00E7948F /* Conversa.swift */,
 				7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */,
 				3DE928931B5599EE0053B43C /* DemoModelData.swift */,
@@ -557,7 +557,7 @@
 				7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */,
 				FF3692371B5FFF7E00C71BBC /* UBAButton.swift in Sources */,
 				3DE928901B5481F50053B43C /* EventDAOCloudKit.swift in Sources */,
-				3D50F3771B6700700029C4B9 /* GradientProgressView.swift in Sources */,
+				3D50F3771B6700700029C4B9 /* ProgressView.swift in Sources */,
 				3DE9288E1B54815B0053B43C /* EventDAO.swift in Sources */,
 				7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */,
 				3DFC96C61B4DD19F00E7041E /* FriendDAOCloudKit.swift in Sources */,
