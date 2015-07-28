@@ -34,6 +34,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        IHKeyboardAvoiding.setAvoidingView(self.view)
         usuario.delegate = self
         
         appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0
@@ -177,6 +178,10 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.endEditing(true)
+    }
     func loggedOut() {
         
     }
