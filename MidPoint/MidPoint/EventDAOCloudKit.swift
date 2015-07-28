@@ -74,7 +74,6 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 
                 return
             }
-            let datastring = NSString(data: data, encoding:NSUTF8StringEncoding)
 
             let string = JsonResponse.parseJSON(data)
         
@@ -142,6 +141,52 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
 
     }
     
-    
-    
+   class  func uploadImageOne(image : UIImage){
+        var imageData = UIImagePNGRepresentation(image)
+        
+        if imageData != nil{
+            var request = NSMutableURLRequest(URL: NSURL(string:"http://alvelos.wc.lt/MidPoint/events/uploadImage.php")!)
+            var session = NSURLSession.sharedSession()
+            
+            request.HTTPMethod = "POST"
+            
+            var boundary = String(format: "---------------------------14737809831466499882746641449")
+            var contentType = String(format: "multipart/form-data; boundary=%@",boundary)
+            //  println("Content Type \(contentType)")
+            request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+            
+            var body = NSMutableData.alloc()
+            
+            // Title
+            body.appendData(String(format: "\r\n--%@\r\n",boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(String(format:"Content-Disposition: form-data; name=\"title\"\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Hello World".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)
+            
+            // Title
+            body.appendData(String(format: "\r\n--%@\r\n",boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(String(format:"Content-Disposition: form-data; name=\"title\"\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Hello World".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)
+            
+            // Image
+            body.appendData(String(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(String(format:"Content-Disposition: form-data; name=\"uploadedfile\"; filename=\"test.png\"\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(String(format: "Content-Type: application/octet-stream\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(imageData)
+            body.appendData(String(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+            
+            
+            
+            request.HTTPBody = body
+            
+            
+            var returnData = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil)
+            
+            var returnString = NSString(data: returnData!, encoding: NSUTF8StringEncoding)
+            
+            println("returnString \(returnString!)")
+            
+        }
+        
+        
+    }
 }

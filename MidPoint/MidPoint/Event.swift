@@ -15,12 +15,11 @@ class Event: NSObject {
     var name: String?
     var descricao: String?
     var date: NSDate?
-    var image: NSURL?
+    var image: UIImage?
     var id: Int?
-    override init(){
-
+    override init() {
+        
     }
-    
     init(name: String){
         self.name = name
     }
