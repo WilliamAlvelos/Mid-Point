@@ -50,8 +50,17 @@
                                 <rect key="frame" x="169" y="233" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayt-2d-KCF">
+                                <rect key="frame" x="28" y="376" width="67" height="67"/>
+                                <state key="normal" image="users">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="profile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1r2-g6-Vgm"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTo-qi-lWa">
-                                <rect key="frame" x="24" y="457" width="74" height="71"/>
+                                <rect key="frame" x="24" y="468" width="74" height="71"/>
                                 <state key="normal" image="group">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -295,7 +304,7 @@
         <!--Profile View Controller-->
         <scene sceneID="nKf-Nq-0mL">
             <objects>
-                <viewController id="qSW-lh-OWn" customClass="ProfileViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileView" id="qSW-lh-OWn" customClass="ProfileViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gIV-Dn-pzZ"/>
                         <viewControllerLayoutGuide type="bottom" id="tae-NH-ZFf"/>
@@ -531,7 +540,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaK-5K-OSX">
                                     <rect key="frame" x="131" y="8" width="42" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -762,5 +771,6 @@
         <image name="demo_avatar_jobs" width="64" height="64"/>
         <image name="group" width="64" height="64"/>
         <image name="teste.png" width="26" height="20"/>
+        <image name="users" width="128" height="128"/>
     </resources>
 </document>

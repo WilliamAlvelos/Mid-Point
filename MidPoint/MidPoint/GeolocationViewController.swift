@@ -42,6 +42,15 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     }
     
+    @IBAction func profile(sender: AnyObject) {
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ProfileView") as! ProfileViewController
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+        
+    }
     
     override func viewDidLoad() {
 //        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
@@ -333,8 +342,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             var string = localTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "%20", options:  NSStringCompareOptions.LiteralSearch, range: nil)
             
             //var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
-            
-            
             
             
             

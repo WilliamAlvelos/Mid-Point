@@ -145,8 +145,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        
-        
+
         if (self.resultSearchController.active) {
             return self.filteredTableData.count
         }
@@ -155,6 +154,9 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         }
     }
     
+    
+    
+
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
@@ -221,16 +223,21 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
 
     
-    func updateSearchResultsForSearchController(searchController: UISearchController)
-    {
-//        filteredTableData.removeAll(keepCapacity: false)
-//        
-//        let searchPredicate = NSPredicate(format: "SELF contains[cd] %@", searchController.searchBar.text)
-//        let array = (Data as NSArray).filteredArrayUsingPredicate(searchPredicate)
-//        filteredTableData = array as! [Event]
-//        self.tableView.reloadData()
-    }
     
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        println("here")
+        let sb = searchController.searchBar
+        let target = sb.text
+        self.filteredTableData = self.Data.filter {
+            s in
+            
+            let options = NSStringCompareOptions.CaseInsensitiveSearch
+            let found = s.name!.rangeOfString(target, options: options)
+            return (found != nil)
+        }
+        self.tableView.reloadData()
+    }
+
     
     func errorThrowed(error: NSError){}
     
