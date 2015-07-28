@@ -10,7 +10,7 @@ import Foundation
 
 
 
-class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
+class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     var demoData:DemoModelData?
     
@@ -18,10 +18,14 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     
     var name:String?
     
+    var pickerLibrary : UIImagePickerController?
+    
+    var locationManager = CLLocationManager()
+    
     // Create a reference to a Firebase location
     
     //propriedades
-    var messages:Array<JSQMessage!>?
+    var messages:Array<JSQMessage!> = []
     var avatars:NSDictionary?
     var outgoingBubbleImageData: JSQMessagesBubbleImage?
     var incomingBubbleImageData: JSQMessagesBubbleImage?
@@ -39,6 +43,13 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pickerLibrary = UIImagePickerController()
+        pickerLibrary?.delegate = self
+        
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        
         self.senderId = String(format: "%d", UserDAODefault.getLoggedUser().id!)
         self.senderDisplayName = UserDAODefault.getLoggedUser().name
         self.showLoadEarlierMessagesHeader = true
@@ -57,6 +68,33 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         
     }
     
+    
+
+    
+    func locationManager(manager: CLLocationManager!,
+        didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+            
+            var shouldIAllow = false
+            
+            switch status {
+            case CLAuthorizationStatus.AuthorizedAlways:
+                shouldIAllow = true
+            default:
+                //LOCATION IS RESTRICTED ********
+                //LOCATION IS RESTRICTED ********
+                //LOCATION IS RESTRICTED ********
+                return
+            }
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("LabelHasbeenUpdated", object: nil)
+            
+            if (shouldIAllow == true) {
+                // Start location services
+                locationManager.startUpdatingLocation()
+            }
+            
+    }
+    
 
     
     func setupFirebase() {
@@ -70,7 +108,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
             
             var message = JSQMessage(senderId:self.senderId, senderDisplayName: self.senderDisplayName, date: NSDate(), text: text)
             
-            self.messages?.append(message)
+            self.messages.append(message)
             
             JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
             
@@ -101,6 +139,10 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
+        PermissionsResponse.checkCameraPermission()
+        PermissionsResponse.checkRollCameraPermission()
         
 //        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: Selector("closePressed:"))
         
@@ -152,41 +194,41 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     }
     override func  collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
     
-        return self.demoData?.messages![indexPath.item]
+        return self.messages[indexPath.item]
     }
   
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
-        let message = self.demoData?.messages![indexPath.item]
+        let message = self.messages[indexPath.item]
         if message?.senderId == self.senderId {
-            return self.demoData?.outgoingBubbleImageData;
+            return self.outgoingBubbleImageData;
         }
         
-        return self.demoData?.incomingBubbleImageData;
+        return self.incomingBubbleImageData;
         
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
-        let message = self.demoData?.messages![indexPath.item]
+        let message = self.messages[indexPath.item]
         if message?.senderId == self.senderId {
             return nil;
         }
         
-        return self.demoData?.avatars![message!.senderId] as! JSQMessageAvatarImageDataSource
+        return self.avatars![message!.senderId] as! JSQMessageAvatarImageDataSource
        
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         if indexPath.item % 3 == 0 {
-            var message = self.demoData?.messages![indexPath.item]
+            var message = self.messages[indexPath.item]
             return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message?.date)
         }
         return nil
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        var message = self.demoData?.messages![indexPath.item]
+        var message = self.messages[indexPath.item]
         if message?.senderId == self.senderId {
             return nil
         }
         if indexPath.item - 1 > 0 {
-            var previousmessage = self.demoData?.messages![indexPath.item-1]
+            var previousmessage = self.messages[indexPath.item-1]
             if (previousmessage?.senderId == message?.senderId){
                 return nil
             }
@@ -200,7 +242,23 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
 
     
     override func didPressAccessoryButton(sender: UIButton!) {
-        var sheet:UIActionSheet = UIActionSheet(title: "Media messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Send photo", "Send location", "Send video")
+        var sheet:UIActionSheet = UIActionSheet(title: "Media messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Camera", "Rolo de Camera", "Send location", "Send video")
+        
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .Default,handler: { (alert: UIAlertAction!) -> Void in
+            
+            self.pickerLibrary?.sourceType = .Camera
+            self.pickerLibrary?.allowsEditing = true
+            self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
+        })
+        
+        let roloCamera = UIAlertAction(title: "Rolo de camera", style: .Default,handler: { (alert: UIAlertAction!) -> Void in
+            self.pickerLibrary?.sourceType = .PhotoLibrary
+            self.pickerLibrary?.allowsEditing = true
+            self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
+        })
+
+        
         
         
         sheet.showFromToolbar(self.inputToolbar)
@@ -215,10 +273,21 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         
         switch (buttonIndex) {
             case 1:
-                addPhotoMediaMessage()
+                
+                self.pickerLibrary?.sourceType = .Camera
+                self.pickerLibrary?.allowsEditing = true
+                self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
+                
                 break;
             
             case 2:
+            
+                
+                self.pickerLibrary?.sourceType = .PhotoLibrary
+                self.pickerLibrary?.allowsEditing = true
+                self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
+            
+            case 3:
             
                 var weak:UICollectionView = self.collectionView
                 
@@ -227,10 +296,9 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
                 })
             break;
             
-            case 3:
+            case 4:
                 addVideoMediaMessage()
                 break;
-            
             
             default:
                 break
@@ -251,17 +319,17 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         
     }
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.messages!.count
+        return self.messages.count
     }
 
     
-    func addPhotoMediaMessage(){
+    func addPhotoMediaMessage(image: UIImage){
         
-        var photoItem:JSQPhotoMediaItem = JSQPhotoMediaItem(image: UIImage(named: "teste"))
+        var photoItem:JSQPhotoMediaItem = JSQPhotoMediaItem(image: image)
         
         var photoMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: photoItem)
         
-        self.messages?.append(photoMessage)
+        self.messages.append(photoMessage)
         
     }
     
@@ -273,11 +341,11 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         var locationItem: JSQLocationMediaItem = JSQLocationMediaItem()
         
         
-        locationItem.setLocation(ferryBuildingInSF, withCompletionHandler:completion)
+        locationItem.setLocation(self.locationManager.location, withCompletionHandler:completion)
         
         var locationMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: locationItem)
         
-        self.messages?.append(locationMessage)
+        self.messages.append(locationMessage)
         
     }
     
@@ -290,9 +358,33 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         
         var videoMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: videoItem)
         
-        self.messages?.append(videoMessage)
+        self.messages.append(videoMessage)
         
     }
+    
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!){
+        let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
+        data.writeToFile(self.imagePathURL().path!, atomically: true)
+        println("%@", self.imagePathURL().path!)
+        
+        addPhotoMediaMessage(image)
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    
+    private func imagePathURL()->NSURL{
+        return NSURL.fileURLWithPath(NSString(format: "%@%@", aplicationDocumentsDirectory(),"/groupPhoto.JPG") as String)!
+    }
+    
+    private func aplicationDocumentsDirectory()->NSString{
+        var paths :NSArray = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        
+        return paths[0] as! NSString
+    }
+
     
 
     

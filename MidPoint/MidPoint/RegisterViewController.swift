@@ -13,8 +13,11 @@ import UIKit
 class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     var pickerLibrary : UIImagePickerController?
+    
     var user : User?
+    
     private var  userManager :UserManager = UserManager()
+    
     @IBOutlet var button: UIButton!
     
     @IBOutlet var nameTextField: UITextField!
@@ -33,6 +36,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
 
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
+        
         button.layer.cornerRadius = button.bounds.size.width/2
         button.layer.borderWidth = 0
         button.layer.masksToBounds = true
