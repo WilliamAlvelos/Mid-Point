@@ -193,7 +193,6 @@
 			children = (
 				3D6A3ABF1B57620C00E7948F /* ConversasTableViewController.swift */,
 				3D3359E61B61A79D00F22D88 /* AmigosTableViewController.swift */,
-				3D50F3761B6700700029C4B9 /* ProgressView.swift */,
 			);
 			name = TableViewController;
 			sourceTree = "<group>";
@@ -251,6 +250,7 @@
 		3DFB8A251B4C54C800463EA4 /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
+				3D50F3761B6700700029C4B9 /* ProgressView.swift */,
 				3D6A3AC21B576D6C00E7948F /* Conversa.swift */,
 				7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */,
 				3DE928931B5599EE0053B43C /* DemoModelData.swift */,

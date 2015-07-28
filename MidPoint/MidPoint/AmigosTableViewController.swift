@@ -63,6 +63,12 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     func finish(){
         eventDelegate.saveEvent(event!, usuario: UserDAODefault.getLoggedUser())
+        
+        var progressView: ProgressView = ProgressView(frame: self.view.frame)
+        
+        self.view = progressView
+        
+        self.navigationController?.navigationBarHidden = true
 
         
     }

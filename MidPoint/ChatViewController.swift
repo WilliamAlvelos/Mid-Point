@@ -22,6 +22,9 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
     var locationManager = CLLocationManager()
     
+    
+    var base64String: NSString?
+    
     // Create a reference to a Firebase location
     
     //propriedades
@@ -38,8 +41,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         self.collectionView.collectionViewLayout.springinessEnabled = true
         
         
-
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         self.showLoadEarlierMessagesHeader = true
         self.demoData = DemoModelData()
         setupFirebase()
+        setupImageFirebase()
         
         
         self.title = name
@@ -97,6 +99,25 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
 
     
+    
+    func setupImageFirebase(){
+        var ref = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages/imageMensage", conversa!))
+        
+        ref.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) -> Void in
+            var string = snapshot.value["string"] as? String
+            
+            var decodedData = NSData(base64EncodedString: string!, options: NSDataBase64DecodingOptions())
+            var decodedImage = UIImage(data: decodedData!)!
+            
+            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+            
+            self.addPhotoMediaMessage(decodedImage)
+            
+            self.finishReceivingMessage()
+        })
+    
+    }
+    
     func setupFirebase() {
         
         var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
@@ -104,17 +125,25 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { snapshot in
             var text = snapshot.value["text"] as? String
             var sender = snapshot.value["sender"] as? String
-            var imageUrl = snapshot.value["imageUrl"] as? String
+            var imageUrl = snapshot.value["image"] as? String
             
-            var message = JSQMessage(senderId:self.senderId, senderDisplayName: self.senderDisplayName, date: NSDate(), text: text)
-            
-            self.messages.append(message)
+
             
             JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+            if(text != nil){
             
-            self.finishReceivingMessage()
+                var message = JSQMessage(senderId:self.senderId, senderDisplayName: self.senderDisplayName, date: NSDate(), text: text)
+                
+                self.messages.append(message)
+                    
+                self.finishReceivingMessage()
+                
+            }
+            
             
         })
+        
+        
         
     }
     
@@ -126,13 +155,43 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
 //            "image":imageName
 //            ])
         
+        
+        
         var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
         
         messagesRef.childByAutoId().setValue([
                         "text":text,
                         "sender":sender,
-                        "image":imageName
+                        "image":imageName,
+                        "imageMensage":""
                         ])
+        
+    }
+    
+    func sendImage(image: UIImage!, sender:String!){
+        
+        var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
+    
+        var uploadImage = image
+        
+        var imageData: NSData = UIImagePNGRepresentation(uploadImage)
+        
+        self.base64String = imageData.base64EncodedStringWithOptions(.allZeros)
+        
+        var quoteString = ["string": self.base64String]
+        
+//        messagesRef.childByAppendingPath("imageMensage").setValue(["imageMensage": self.base64String])
+        
+        messagesRef.childByAppendingPath("imageMensage").childByAutoId().setValue(["string": self.base64String!])
+        
+        //var users = ["imageMensage": quoteString]
+        
+
+        
+//        messagesRef.childByAutoId().setValue([
+//            "sender":sender,
+//            "imageMensage": self.base64String!
+//            ])
         
     }
     
@@ -331,6 +390,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         
         self.messages.append(photoMessage)
         
+        
     }
     
     func addLocationMediaMessageCompletion(completion: JSQLocationMediaItemCompletionBlock){
@@ -369,6 +429,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         println("%@", self.imagePathURL().path!)
         
         addPhotoMediaMessage(image)
+        
+        sendImage(image, sender: self.senderId)
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
