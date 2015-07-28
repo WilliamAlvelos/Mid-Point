@@ -72,6 +72,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("AmigosViewController") as! AmigosTableViewController
         nextViewController.event = event
+        nextViewController.imagePath = self.imagePathURL()
         self.navigationController?.pushViewController(nextViewController, animated: true)
         //var vc = segue.destinationViewController as! AmigosTableViewController
 
@@ -225,16 +226,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!){
         let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
         data.writeToFile(self.imagePathURL().path!, atomically: true)
-        println("%@", self.imagePathURL().path!)
-        let perRecordProgressionBlock = { (record : CKRecord!, double : Double) -> Void in
-            print("\(double)\n")
-        }
-        let perRecordCompletionBlock = { (record : CKRecord!, error: NSError!) -> Void in
-            print("terminou\n")
-
-        }
-        
-            PictureCloudKit().uploadProfile(self.imagePathURL(), id: 10, perRecordProgressBlock: perRecordProgressionBlock, perRecordCompletionBlock: perRecordCompletionBlock)
         button.setBackgroundImage(image, forState: .Normal)
         self.dismissViewControllerAnimated(true, completion: nil)
         
@@ -242,7 +233,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     
     
     private func imagePathURL()->NSURL{
-        return NSURL.fileURLWithPath(NSString(format: "%@%@", aplicationDocumentsDirectory(),"/userPhoto.JPG") as String)!
+        return NSURL.fileURLWithPath(NSString(format: "%@%@", aplicationDocumentsDirectory(),"/groupPhoto.JPG") as String)!
     }
     
     private func aplicationDocumentsDirectory()->NSString{

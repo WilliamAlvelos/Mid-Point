@@ -7,12 +7,14 @@
 //
 
 import UIKit
-
+import CloudKit
 class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , FriendDAODelegate, UISearchResultsUpdating, EventoDAOCloudKitDelegate{
     
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
     var event:Event?
+    
+    var imagePath : NSURL?
     
     var eventDelegate:EventDAOCloudKit = EventDAOCloudKit()
     
@@ -51,24 +53,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     }
     
     func finish(){
-        UserDAODefault.saveLogin(User(name: "william", email: "will", id: 2))
         eventDelegate.saveEvent(event!, usuario: UserDAODefault.getLoggedUser())
-        
-        var alert = UIAlertController(title: "Sucesso", message: "Grupo Criado Com Sucesso", preferredStyle: UIAlertControllerStyle.Alert)
 
-        
-        
-        var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
-            self.presentViewController(nextViewController, animated:false, completion:nil)
-        }
-        
-        alert.addAction(okAction)
-        
-        self.presentViewController(alert, animated: true, completion: nil)
         
     }
     
@@ -195,7 +181,31 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     func eventNotFound(event : Event){}
     func getEventFinished(event: Event){}
     func inviteFinished(event: Event){
-        print("funcionando e que se foda")
+        let perRecordProgressBlock = { (record : CKRecord!, progress : Double) -> Void in
+           
+        }
+        let perRecordCompletionBlock = { (record : CKRecord!, error: NSError!) -> Void in
+            DispatcherClass.dispatcher({ () -> () in
+                
+                var alert = UIAlertController(title: "Sucesso", message: "Grupo Criado Com Sucesso", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                
+                
+                var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                    UIAlertAction in
+                    
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
+                    self.presentViewController(nextViewController, animated:false, completion:nil)
+                }
+                
+                alert.addAction(okAction)
+                
+                self.presentViewController(alert, animated: true, completion: nil)
+            })
+        }
+        PictureCloudKit().uploadEventImage(self.imagePath!, id: event.id!, perRecordProgressBlock: perRecordProgressBlock, perRecordCompletionBlock: perRecordCompletionBlock)
+        
     }
     
     func getEventsFinished(events: Array<Event>){

@@ -23,6 +23,8 @@ struct EventGlobalConstants {
     static let UserToInvite = "user_to_invite"
     static let UserSender = "user_sender"
     static let UserState = "user_state"
+    static let Image = "event_picture"
+
 
 }
 
