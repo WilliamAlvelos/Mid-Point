@@ -8,7 +8,7 @@
 
 import UIKit
 import CloudKit
-class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , FriendDAODelegate, UISearchResultsUpdating, EventManagerDelegate{
+class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , UISearchResultsUpdating, EventManagerDelegate, UserManagerDelegate{
     
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
@@ -18,7 +18,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     var eventDelegate:EventManager = EventManager()
     
-    var daoFriend: FriendDAOCloudKit = FriendDAOCloudKit()
+    var daoFriend: UserManager = UserManager()
     
     var data: Array<User> = Array()
     
@@ -173,19 +173,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         self.daoFriend.getUsersWithName(searchController.searchBar.text)
     }
-    func errorThrowed(error: NSError){
-        
-    }
-    func eventNotFound(event : Event){
-        
-    }
-    func getEventFinished(event: Event){
-        
-    }
-    func getEventsFinished(events: Array<Event>){
-        
-    }
-    func inviteFinished(event: Event){
+    func errorThrowedSystem(error: NSError) {
         
     }
     func uploadImageFinished(){
@@ -194,7 +182,6 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     func progressUpload(float : Float){
         println(float)
     }
-
     func getUsersFinished(users: Array<User>){
         self.data = users
         self.tableView.reloadData()

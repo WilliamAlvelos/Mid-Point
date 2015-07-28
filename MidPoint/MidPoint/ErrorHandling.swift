@@ -12,6 +12,8 @@ class ErrorHandling {
     class func stringForError(error : NSError)-> String{
         switch error.code
         {
+        case -1:
+            return "Internal error"
         case 0:
             return "Internal error"
         case 1:

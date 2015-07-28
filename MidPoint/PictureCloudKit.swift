@@ -31,7 +31,7 @@ class PictureCloudKit : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDe
         var imageData = UIImageJPEGRepresentation(user.image, 0.5)
         
         if imageData != nil{
-            var request = NSMutableURLRequest(URL: NSURL(string:"http://alvelos.wc.lt/MidPoint/uploadImage.php")!)
+            var request = NSMutableURLRequest(URL: NSURL(string:"\(LinkAccessGlobalConstants.LinkUsers)uploadImage.php")!)
             
             request.HTTPMethod = "POST"
             
@@ -62,7 +62,7 @@ class PictureCloudKit : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDe
         var imageData = UIImageJPEGRepresentation(event.image, 0.5)
         
         if imageData != nil{
-            var request = NSMutableURLRequest(URL: NSURL(string:"http://alvelos.wc.lt/MidPoint/events/uploadImage.php")!)
+            var request = NSMutableURLRequest(URL: NSURL(string:"\(LinkAccessGlobalConstants.LinkEvents)uploadImage.php")!)
             
             request.HTTPMethod = "POST"
             
@@ -94,6 +94,8 @@ class PictureCloudKit : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDe
     }
     func connectionDidFinishLoading(connection: NSURLConnection)
     {
+        var dataString = NSString(data: self.data!, encoding:NSUTF8StringEncoding)
+
         let array = JsonResponse.parseJSON(self.data!)
         if (array.objectForKey("error") != nil){
             let error : NSError = NSError(domain: "Erro", code: (array.objectForKey("error")! as! Int), userInfo: nil)

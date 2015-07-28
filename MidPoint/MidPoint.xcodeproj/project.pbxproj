@@ -39,7 +39,6 @@
 		3DFB8A301B4CC4A900463EA4 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */; };
 		3DFB8A311B4CC4A900463EA4 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */; };
 		3DFB8A331B4CD98D00463EA4 /* teste.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB8A321B4CD98D00463EA4 /* teste.png */; };
-		3DFC96C61B4DD19F00E7041E /* FriendDAOCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFC96C51B4DD19F00E7041E /* FriendDAOCloudKit.swift */; };
 		7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */; };
 		7B4D268D1B55BAE500DD86EF /* JsonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D268C1B55BAE500DD86EF /* JsonResponse.swift */; };
 		7B6085E21B548CB0002CBD54 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6085E11B548CB0002CBD54 /* MobileCoreServices.framework */; };
@@ -114,7 +113,6 @@
 		3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		3DFB8A321B4CD98D00463EA4 /* teste.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teste.png; sourceTree = "<group>"; };
-		3DFC96C51B4DD19F00E7041E /* FriendDAOCloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendDAOCloudKit.swift; sourceTree = "<group>"; };
 		495E9806851C4CA17E307AF9 /* libPods-MidPoint.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MidPoint.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellFriend.swift; sourceTree = "<group>"; };
 		7B4D268C1B55BAE500DD86EF /* JsonResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonResponse.swift; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 		3DFC96C21B4D722400E7041E /* Friends */ = {
 			isa = PBXGroup;
 			children = (
-				3DFC96C51B4DD19F00E7041E /* FriendDAOCloudKit.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -567,7 +564,6 @@
 				3D50F3771B6700700029C4B9 /* ProgressView.swift in Sources */,
 				3DE9288E1B54815B0053B43C /* EventDAO.swift in Sources */,
 				7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */,
-				3DFC96C61B4DD19F00E7041E /* FriendDAOCloudKit.swift in Sources */,
 				3DE928941B5599EE0053B43C /* DemoModelData.swift in Sources */,
 				7B6315581B66C9A600D13DE5 /* DispatcherClass.swift in Sources */,
 				3D31FD311B61FE1300C17F0F /* UserDAODefault.swift in Sources */,

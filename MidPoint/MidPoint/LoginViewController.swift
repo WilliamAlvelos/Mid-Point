@@ -133,18 +133,10 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     
     //MARK: UserManager Delegate
     
-    func errorThrowed(error: NSError){
+    func errorThrowedSystem(error: NSError) {
         
-        if error.code == 3 || error.code == 4{
-            println("BAD INTERNET")
-        }else if error.code == 9 || error.code == 1{
-            println("nao esta logado no icloud fdp")
-        }else{
-            println("internal error")
-        }
-
     }
-
+    
     func userNotFound(user : User){
         println("userNotFound")
     }

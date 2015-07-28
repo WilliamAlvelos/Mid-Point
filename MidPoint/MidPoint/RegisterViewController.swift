@@ -188,5 +188,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     func saveUserFinished() {
         
     }
-
+    func errorThrowedSystem(error: NSError) {
+        
+    }
+    
 }

@@ -10,13 +10,14 @@ import Foundation
 import UIKit
 
 @objc protocol UserManagerDelegate{
-    func errorThrowed(error: NSError)
+    func errorThrowedSystem(error: NSError)
+
     optional func userNotFound(user : User)
     optional func getUserFinished(user: User)
     optional func userStillInserted(user: User)
     optional func saveUserFinished()
     optional func progressUpload(float : Float)
-    
+    optional func getUsersFinished(users: Array<User>)
 }
 
 class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
@@ -33,14 +34,14 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     
     func errorCloudKit(error: NSError){
-        self.delegate?.errorThrowed(error)
+        //tratar os erros
     }
     func progressUpload(float : Float){
         self.delegate?.progressUpload?(float)
     }
     
     func errorThrowed(error: NSError){
-        self.delegate?.errorThrowed(error)
+        self.delegate?.errorThrowedSystem(error)
     }
     
     func userStillInserted(user: User){
@@ -64,9 +65,16 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     func getUserDatabase(user:User, password : String){
         userDao?.getUser(user, password: password)
     }
+    func getUsersWithName(name : String){
+        userDao?.getUsersWithName(name)
+    }
     func saveImageFinished(){
         self.delegate?.saveUserFinished?()
     }
+    func getUsersFinished(users: Array<User>){
+        self.delegate?.getUsersFinished?(users)
+    }
+
 
     
 }

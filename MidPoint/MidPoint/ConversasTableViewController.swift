@@ -238,15 +238,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.tableView.reloadData()
     }
 
-    
-    func errorThrowed(error: NSError){}
-    
-    func saveEventFinished(event: Event){}
-    
-    func eventNotFound(event : Event){}
-    
-    func getEventFinished(event: Event){}
-    
     func getEventsFinished(events: Array<Event>){
         Data = events
         self.tableView.reloadData()
@@ -255,8 +246,10 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.tableView.reloadData()
         self.animateTable()
     }
-    func inviteFinished(event: Event){
     
+    func errorThrowedSystem(error: NSError){
+        
     }
+    
 
 }

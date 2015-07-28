@@ -15,6 +15,7 @@ protocol UserDAOCloudKitDelegate{
     func saveUserFinished(user: User)
     func userNotFound(user : User)
     func getUserFinished(user: User)
+    func getUsersFinished(users: Array<User>)
 }
 
 class UserDAOCloudKit: NSObject, UserDAOProtocol{
@@ -91,6 +92,45 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
             
         })
     
+    }
+    func getUsersWithName(name: String) {
+        
+        let url : String = "\(LinkAccessGlobalConstants.LinkUsers)buscaUsuario.php"
+        let bodyHttp = String(format: "\(UserGlobalConstants.Name)=%@", name)
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+                return
+            }
+            let array = JsonResponse.parseJSONToArray(data)
+            var arrayToReturn :[User]? = Array()
+            for dataString in array {
+                if (dataString.objectForKey("error") != nil){
+                    var int = dataString.objectForKey("error") as! Int
+                    let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
+                    DispatcherClass.dispatcher({ () -> () in
+                        self.delegate?.errorThrowed(error)
+                    })
+                    return
+                }
+                
+                var id = (dataString.objectForKey("\(UserGlobalConstants.Id)") as! String).toInt()
+                var name = dataString.objectForKey("\(UserGlobalConstants.Name)") as! String
+                var user = User()
+                user.id = id
+                user.name = name
+                arrayToReturn!.append(user)
+            }
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.getUsersFinished(arrayToReturn!)
+            })
+            
+            
+            
+        })
+        
     }
 
     

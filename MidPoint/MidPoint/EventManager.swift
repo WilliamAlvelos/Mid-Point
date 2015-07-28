@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 FDJ. All rights reserved.
 //
 @objc protocol EventManagerDelegate{
-    func errorThrowedServer(error: NSError)
     optional func saveEventFinished(event: Event)
     optional func eventNotFound(event : Event)
     optional func getEventFinished(event: Event)
@@ -22,12 +21,13 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     var delegate : EventManagerDelegate?
     init(){
         eventDao = EventDAOCloudKit()
+
         eventDao?.delegate = self
         pictureDao = PictureCloudKit()
         pictureDao?.delegate = self
     }
     func errorThrowed(error: NSError){
-        self.delegate?.errorThrowedServer(error)
+        //tratar erros aqui
     }
     func saveEventFinished(event: Event){
         self.delegate?.saveEventFinished?(event)

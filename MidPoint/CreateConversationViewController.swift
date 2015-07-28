@@ -38,7 +38,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         self.title = "Criar Grupo"
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
-        
+        event = Event()
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
@@ -64,7 +64,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     
     func next(){
     
-        event = Event()
         event?.name = self.titleGroup.text
         event?.descricao = self.subtitleGroup.text
         event?.date = NSDate(timeIntervalSinceNow: 0)
@@ -166,8 +165,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        event = Event()
         event?.name = self.titleGroup.text
         event?.descricao = self.subtitleGroup.text
         event?.date = NSDate(timeIntervalSinceNow: 0)
