@@ -14,6 +14,7 @@
     optional func uploadImageFinished()
     optional func progressUpload(float : Float)
     func errorThrowedSystem(error: NSError)
+    optional func downloadImageFinished(image: Array<UIImage!>)
 }
 class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     private var eventDao : EventDAOCloudKit?
@@ -21,7 +22,7 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     var delegate : EventManagerDelegate?
     init(){
         eventDao = EventDAOCloudKit()
-
+        
         eventDao?.delegate = self
         pictureDao = PictureCloudKit()
         pictureDao?.delegate = self
@@ -70,7 +71,13 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
         }
         eventDao?.inviteFriendsToEvent(event, sender: sender, friends: friends)
     }
-    
+    func getImages(events : Array<Event>){
+        var array : Array<UIImage!> = Array()
+            for event in events{
+                array.append( self.eventDao?.downloadImage(event.id!))
+        }
+        self.delegate?.downloadImageFinished?(array)
+    }
 }
 //
 //import Foundation
@@ -83,45 +90,45 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
 //    optional func userStillInserted(user: User)
 //    optional func saveUserFinished()
 //    optional func progressUpload(float : Float)
-//    
+//
 //}
 //
 //class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
-//    
+//
 //    private var userDao: UserDAOCloudKit?
 //    private var pictureDao : PictureCloudKit?
 //    var delegate:UserManagerDelegate?
-//    
+//
 //    init(){
 //        userDao = UserDAOCloudKit()
 //        userDao?.delegate = self
 //        pictureDao = PictureCloudKit()
 //        pictureDao?.delegate = self
 //    }
-//    
+//
 //    func errorCloudKit(error: NSError){
 //        self.delegate?.errorThrowed(error)
 //    }
 //    func progressUpload(float : Float){
 //        self.delegate?.progressUpload?(float)
 //    }
-//    
+//
 //    func errorThrowed(error: NSError){
 //        self.delegate?.errorThrowed(error)
 //    }
-//    
+//
 //    func userStillInserted(user: User){
 //        self.delegate?.userStillInserted!(user)
 //    }
-//    
+//
 //    func saveUserFinished(user: User){
 //        pictureDao?.uploadImageUser(user)
 //    }
-//    
+//
 //    func userNotFound(user : User){
 //        self.delegate?.userNotFound?(user)
 //    }
-//    
+//
 //    func getUserFinished(user: User){
 //        self.delegate?.getUserFinished!(user)
 //    }
@@ -134,6 +141,6 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
 //    func saveImageFinished(){
 //        self.delegate?.saveUserFinished?()
 //    }
-//    
+//
 //    
 //}

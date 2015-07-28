@@ -185,14 +185,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             return cell
         }
         else {
-            
-            var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(Data[indexPath.row].id!).jpg")!
-            
-            //var url:NSURL = NSURL(string: "http://alvelos.wc.lt/MidPoint/events/events_images/12.jpg")!
-            var data:NSData = NSData(contentsOfURL: url)!
-            
-            cell.imageLabel?.image = UIImage(data: data)
-            
+
             cell.titleLabel.text = Data[indexPath.row].name
             cell.subtitleLabel.text = Data[indexPath.row].descricao
             
@@ -256,13 +249,25 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.tableView.reloadData()
         //animateTable()
         self.refreshControl?.endRefreshing()
-        self.tableView.reloadData()
+        DispatcherClass.dispatcher { () -> () in
+            self.eventDelegate.getImages(events)
+        }
         self.animateTable()
+        
     }
     
     func errorThrowedSystem(error: NSError){
         
     }
+    func downloadImageFinished(image: Array<UIImage!>){
+        
+        for var x  = 0 ; x < image.count ; x++ {
+            let indexPath = NSIndexPath(forRow: x, inSection: 0)
+            let customCell = self.tableView.cellForRowAtIndexPath(indexPath) as! CustomCellConversas
+            customCell.imageLabel.image = image[x]
+        }
+    }
+
     
 
 }

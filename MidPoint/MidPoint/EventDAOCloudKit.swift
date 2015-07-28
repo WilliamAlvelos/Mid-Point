@@ -138,6 +138,11 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
         })
 
     }
+    func downloadImage(id : Int)->UIImage?{
+        
+        return UIImage(data: NSData(contentsOfURL: NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(id).jpg")!)!)
+        
+    }
     
     
 }
