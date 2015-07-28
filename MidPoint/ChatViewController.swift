@@ -19,13 +19,21 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
     var name:String?
     
     // Create a reference to a Firebase location
-
+    
+    //propriedades
+    var messages:Array<JSQMessage!>?
+    var avatars:NSDictionary?
+    var outgoingBubbleImageData: JSQMessagesBubbleImage?
+    var incomingBubbleImageData: JSQMessagesBubbleImage?
+    var users: NSDictionary?
     
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         self.collectionView.collectionViewLayout.springinessEnabled = true
+        
+        
 
         
     }
@@ -39,6 +47,13 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         
         
         self.title = name
+        
+        
+        var bubbleFactory:JSQMessagesBubbleImageFactory = JSQMessagesBubbleImageFactory()
+        
+        self.outgoingBubbleImageData = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleRedColor())
+        
+        self.incomingBubbleImageData = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
         
     }
     
@@ -55,7 +70,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
             
             var message = JSQMessage(senderId:self.senderId, senderDisplayName: self.senderDisplayName, date: NSDate(), text: text)
             
-            self.demoData?.messages?.append(message)
+            self.messages?.append(message)
             
             JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
             
@@ -200,20 +215,20 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         
         switch (buttonIndex) {
             case 1:
-                demoData?.addPhotoMediaMessage()
+                addPhotoMediaMessage()
                 break;
             
             case 2:
             
                 var weak:UICollectionView = self.collectionView
                 
-                self.demoData?.addLocationMediaMessageCompletion({ () -> Void in
+                self.addLocationMediaMessageCompletion({ () -> Void in
                     weak.reloadData()
                 })
             break;
             
             case 3:
-                demoData?.addVideoMediaMessage()
+                addVideoMediaMessage()
                 break;
             
             
@@ -236,9 +251,48 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate{
         
     }
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.demoData!.messages!.count
+        return self.messages!.count
     }
 
+    
+    func addPhotoMediaMessage(){
+        
+        var photoItem:JSQPhotoMediaItem = JSQPhotoMediaItem(image: UIImage(named: "teste"))
+        
+        var photoMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: photoItem)
+        
+        self.messages?.append(photoMessage)
+        
+    }
+    
+    func addLocationMediaMessageCompletion(completion: JSQLocationMediaItemCompletionBlock){
+        
+        
+        var ferryBuildingInSF: CLLocation = CLLocation(latitude: 37.795313, longitude: -122.393757)
+        
+        var locationItem: JSQLocationMediaItem = JSQLocationMediaItem()
+        
+        
+        locationItem.setLocation(ferryBuildingInSF, withCompletionHandler:completion)
+        
+        var locationMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: locationItem)
+        
+        self.messages?.append(locationMessage)
+        
+    }
+    
+    
+    
+    func addVideoMediaMessage(){
+        var videoURL:NSURL = NSURL(string: "file://")!
+        
+        var videoItem:JSQVideoMediaItem = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay: true)
+        
+        var videoMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: videoItem)
+        
+        self.messages?.append(videoMessage)
+        
+    }
     
 
     
