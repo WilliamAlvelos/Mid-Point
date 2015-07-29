@@ -160,6 +160,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         let nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
         nextView.conversa = Data[indexPath.row].id
         nextView.name = Data[indexPath.row].name
+        nextView.event = Data[indexPath.row]
+        
         self.navigationController?.pushViewController(nextView, animated: true)
     }
 

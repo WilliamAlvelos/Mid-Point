@@ -13,7 +13,7 @@ import Foundation
 class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     var demoData:DemoModelData?
-    
+    var event: Event?
     var conversa:Int?
     
     var name:String?

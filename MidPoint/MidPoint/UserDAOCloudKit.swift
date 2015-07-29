@@ -132,7 +132,46 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         })
         
     }
-
+    func getUsersFrom(event: Event) {
+        
+        let url : String = "\(LinkAccessGlobalConstants.LinkUsers)busca.php"
+        let bodyHttp = String(format: "\(EventGlobalConstants.Id)=%d", event.id!)
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+                return
+            }
+            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
+            let array = JsonResponse.parseJSONToArray(data)
+            var arrayToReturn :[User]? = Array()
+            for dataString in array {
+                if (dataString.objectForKey("error") != nil){
+                    var int = dataString.objectForKey("error") as! Int
+                    let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
+                    DispatcherClass.dispatcher({ () -> () in
+                        self.delegate?.errorThrowed(error)
+                    })
+                    return
+                }
+                
+                var id = (dataString.objectForKey("\(UserGlobalConstants.Id)") as! String).toInt()
+                var name = dataString.objectForKey("\(UserGlobalConstants.Name)") as! String
+                var user = User()
+                user.id = id
+                user.name = name
+                arrayToReturn!.append(user)
+            }
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.getUsersFinished(arrayToReturn!)
+            })
+            
+            
+            
+        })
+        
+    }
     
     
 }

@@ -75,6 +75,8 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
         self.delegate?.getUsersFinished?(users)
     }
 
-
+    func getUsersFrom(event: Event){
+        userDao?.getUsersFrom(event)
+    }
     
 }
