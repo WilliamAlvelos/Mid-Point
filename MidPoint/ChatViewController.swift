@@ -159,6 +159,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
     }
     
+    
+    
     func setupFirebase() {
         
         var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
@@ -167,19 +169,41 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
             var text = snapshot.value["text"] as? String
             var sender = snapshot.value["sender"] as? String
             var name = snapshot.value["name"] as? String
+            var image = snapshot.value["imageMensage"] as? String
+            var geolatitude = snapshot.value["geolatitude"] as? Double
+            var geolongitude = snapshot.value["geolongitude"] as? Double
+            
             
 
             
             JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
-            if(text != nil){
-
+            
+            
+            if(text != ""){
                 var message = JSQMessage(senderId: sender, senderDisplayName: name, date: NSDate(), text: text)
                 
                 self.messages.append(message)
-                    
-                self.finishReceivingMessage()
+                
+            }else if(geolatitude != nil){
+                
+                self.addLocationMediaMessage(geolatitude!, longitude: geolongitude!, id: sender, name: name)
                 
             }
+            
+            
+            
+            else if(image != nil){
+                var decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions())
+                var decodedImage = UIImage(data: decodedData!)!
+                
+                self.addPhotoMediaMessage(decodedImage)
+            }
+            
+            
+
+
+            
+            self.finishReceivingMessage()
             
             
         })
@@ -204,36 +228,50 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
                         "text":text,
                         "sender":sender,
                         "name":name,
-                        "imageMensage":""
-                        ])
+                        "imageMensage":"",
+                        "geolatitude":0.0,
+                        "geolongitude":0.0
+            ])
         
     }
     
-    func sendImage(image: UIImage!, sender:String!){
+    func sendImage(image: UIImage!, sender:String!, name: String!){
         
         var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
-    
+        
+        
         var uploadImage = image
         
         var imageData: NSData = UIImagePNGRepresentation(uploadImage)
         
         self.base64String = imageData.base64EncodedStringWithOptions(.allZeros)
         
-        var quoteString = ["string": self.base64String]
-        
-//        messagesRef.childByAppendingPath("imageMensage").setValue(["imageMensage": self.base64String])
-        
-        messagesRef.childByAppendingPath("imageMensage").childByAutoId().setValue(["string": self.base64String!])
-        
-        //var users = ["imageMensage": quoteString]
-        
 
+        messagesRef.childByAutoId().setValue([
+            "text":"",
+            "sender":sender,
+            "name":name,
+            "imageMensage": self.base64String!,
+            "geolatitude":0.0,
+            "geolongitude":0.0
+            ])
+
+    }
+    
+    
+    func sendLocation(latitude: Double, longitude:Double, sender:String!, name: String!){
+    
+    
+        var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
         
-//        messagesRef.childByAutoId().setValue([
-//            "sender":sender,
-//            "imageMensage": self.base64String!
-//            ])
-        
+        messagesRef.childByAutoId().setValue([
+            "text":"",
+            "sender":sender,
+            "name":name,
+            "imageMensage": "",
+            "geolatitude":latitude,
+            "geolongitude":longitude
+            ])
     }
     
     
@@ -444,10 +482,36 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         
         locationItem.setLocation(self.locationManager.location, withCompletionHandler:completion)
         
+        
+        sendLocation(self.locationManager.location.coordinate.latitude, longitude:self.locationManager.location.coordinate.longitude, sender: self.senderId, name: self.senderDisplayName)
+        
         var locationMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: locationItem)
         
         self.messages.append(locationMessage)
         
+        
+
+        
+    }
+    
+    
+    
+    func addLocationMediaMessage(latitude: Double, longitude: Double, id: String!, name: String!){
+        
+        var location: CLLocation = CLLocation(latitude: latitude, longitude: longitude)
+        
+        var locationItem: JSQLocationMediaItem = JSQLocationMediaItem()
+        
+        
+        locationItem.setLocation(location, withCompletionHandler: { () -> Void in
+            
+        })
+        
+        
+        var locationMessage:JSQMessage = JSQMessage(senderId: id, displayName: name, media: locationItem)
+        
+        self.messages.append(locationMessage)
+    
     }
     
     
@@ -471,7 +535,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         
         //addPhotoMediaMessage(image)
         
-        sendImage(image, sender: self.senderId)
+        sendImage(image, sender: self.senderId, name: self.senderDisplayName)
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
