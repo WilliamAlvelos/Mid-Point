@@ -239,8 +239,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
 //            "image":imageName
 //            ])
         
-        
-        
         var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
         
         messagesRef.childByAutoId().setValue([

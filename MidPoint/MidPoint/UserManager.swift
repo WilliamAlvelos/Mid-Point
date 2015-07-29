@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Parse
 
 @objc protocol UserManagerDelegate{
     func errorThrowedSystem(error: NSError)
@@ -47,6 +48,13 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     
     func saveUserFinished(user: User){
+        let installation = PFInstallation.currentInstallation()
+
+//        
+        installation["id"] = "\(user.id!)"
+        let data = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken") as? NSData
+        installation.setDeviceTokenFromData(data)
+        installation.saveInBackground()
         pictureDao?.uploadImageUser(user)
     }
     

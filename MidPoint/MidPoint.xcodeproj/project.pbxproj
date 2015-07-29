@@ -28,6 +28,7 @@
 		3DA699FC1B695FE40021FBF1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA699FB1B695FE40021FBF1 /* Accounts.framework */; };
 		3DA699FE1B695FEB0021FBF1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA699FD1B695FEB0021FBF1 /* Social.framework */; };
 		3DA69A001B6960610021FBF1 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA699FF1B6960610021FBF1 /* Bolts.framework */; };
+		3DA69A021B6967AE0021FBF1 /* PushResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA69A011B6967AE0021FBF1 /* PushResponse.swift */; };
 		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
 		3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE926A61B5430840053B43C /* ChatViewC.swift */; };
 		3DE927EE1B543FF70053B43C /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927E91B543FF70053B43C /* Firebase.framework */; };
@@ -112,6 +113,7 @@
 		3DA699FB1B695FE40021FBF1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		3DA699FD1B695FEB0021FBF1 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3DA699FF1B6960610021FBF1 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		3DA69A011B6967AE0021FBF1 /* PushResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushResponse.swift; sourceTree = "<group>"; };
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DE926A61B5430840053B43C /* ChatViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewC.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				3DA699EB1B6946220021FBF1 /* EventInfoViewController.swift */,
 				3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */,
 				3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */,
+				3DA69A011B6967AE0021FBF1 /* PushResponse.swift */,
 				3DE926A61B5430840053B43C /* ChatViewC.swift */,
 				FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */,
 				3DE9288B1B547DAB0053B43C /* EventoViewController.swift */,
@@ -607,6 +610,7 @@
 				3DFB8A181B4C218700463EA4 /* User.swift in Sources */,
 				FF3692441B60723D00C71BBC /* FacebookUser.swift in Sources */,
 				FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */,
+				3DA69A021B6967AE0021FBF1 /* PushResponse.swift in Sources */,
 				3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */,
 				3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */,
 				7BE9F2A71B6828F900AAD032 /* IHKeyboardAvoiding.m in Sources */,
