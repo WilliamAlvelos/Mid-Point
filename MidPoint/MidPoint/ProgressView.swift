@@ -81,7 +81,7 @@ class ProgressView: UIView {
         progressLabel.text = "Load content"
     }
     
-    func animateProgressView(valueInitial: Double, valueFinal: Double) {
+    func animateProgressView(valueFinal: Float) {
         
         var percent: Int = Int(valueFinal * 100.0)
         
@@ -92,13 +92,13 @@ class ProgressView: UIView {
         progressLayer.strokeStart = CGFloat(0.0)
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = CGFloat(valueInitial)
+        animation.fromValue = CGFloat(0.0)
         animation.toValue = CGFloat(valueFinal)
-        animation.duration = 0.0
+        animation.duration = 0.2
         animation.delegate = self
         animation.removedOnCompletion = false
         animation.additive = false
-        animation.fillMode = kCAFillModeForwards
+        animation.fillMode = kCAFillModeBackwards
         progressLayer.addAnimation(animation, forKey: "strokeEnd")
     }
     
