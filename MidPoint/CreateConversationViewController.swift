@@ -63,17 +63,124 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     
     
     func next(){
-    
-        event?.name = self.titleGroup.text
-        event?.descricao = self.subtitleGroup.text
-        event?.date = NSDate(timeIntervalSinceNow: 0)
         
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("AmigosViewController") as! AmigosTableViewController
-        nextViewController.event = event
-        nextViewController.imagePath = self.imagePathURL()
-        self.navigationController?.pushViewController(nextViewController, animated: true)
-        //var vc = segue.destinationViewController as! AmigosTableViewController
+        
+        if(self.titleGroup.text == ""){
+            // Create the alert controller
+            var inputTextField: UITextField?
+            
+            var alertController = UIAlertController(title: "Cuidado", message: "O titulo do Grupo está vazio", preferredStyle: .Alert)
+            
+            // Create the actions
+            
+            alertController.addTextFieldWithConfigurationHandler({ textField -> Void in
+
+                textField.placeholder = "Digite o Titulo do Grupo"
+                inputTextField = textField
+            })
+
+            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                UIAlertAction in
+                self.titleGroup.text = inputTextField?.text
+            }
+            
+            
+            // Add the actions
+            alertController.addAction(okAction)
+            
+            // Present the controller
+            self.presentViewController(alertController, animated: true, completion: nil)
+        
+        
+        }
+        
+        
+        
+        
+        if(self.subtitleGroup.text == ""){
+            // Create the alert controller
+            
+            var inputTextField: UITextField?
+            
+            var alertController = UIAlertController(title: "Cuidado", message: "O titulo do Grupo está vazio", preferredStyle: .Alert)
+            
+            // Create the actions
+            
+            alertController.addTextFieldWithConfigurationHandler({ textField -> Void in
+                textField.placeholder = "Digite o Titulo do Grupo"
+                inputTextField = textField
+            })
+            
+            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                UIAlertAction in
+                self.subtitleGroup.text = inputTextField?.text
+            }
+            
+            
+            // Add the actions
+            alertController.addAction(okAction)
+            
+            // Present the controller
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        }
+        
+        
+        if(self.button.imageView?.image == nil){
+            
+            var alertController = UIAlertController(title: "Cuidado", message: "O Grupo não possui imagem", preferredStyle: .Alert)
+            
+            // Create the actions
+            
+            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel) {
+                UIAlertAction in
+                
+                self.event?.name = self.titleGroup.text
+                self.event?.descricao = self.subtitleGroup.text
+                self.event?.date = NSDate(timeIntervalSinceNow: 0)
+                
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("AmigosViewController") as! AmigosTableViewController
+                nextViewController.event = self.event
+                nextViewController.imagePath = self.imagePathURL()
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+                
+            }
+            
+            
+            var takeAction = UIAlertAction(title: "Tirar Foto", style: UIAlertActionStyle.Default) {
+                UIAlertAction in
+                
+                self.pickerLibrary?.sourceType = .Camera
+                self.pickerLibrary?.allowsEditing = true
+                self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
+                
+            }
+
+            
+            // Add the actions
+
+            alertController.addAction(okAction)
+            alertController.addAction(takeAction)
+
+            
+            // Present the controller
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        if(self.titleGroup.text != "" && self.subtitleGroup.text != "" && self.button.imageView?.image != nil){
+            
+            event?.name = self.titleGroup.text
+            event?.descricao = self.subtitleGroup.text
+            event?.date = NSDate(timeIntervalSinceNow: 0)
+            
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("AmigosViewController") as! AmigosTableViewController
+            nextViewController.event = event
+            nextViewController.imagePath = self.imagePathURL()
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+            //var vc = segue.destinationViewController as! AmigosTableViewController
+        }
 
         
     }
@@ -225,6 +332,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         data.writeToFile(self.imagePathURL().path!, atomically: true)
         //EventDAOCloudKit().uploadImageOne(UIImage(contentsOfFile: self.imagePathURL().path!)!)
         button.setBackgroundImage(image, forState: .Normal)
+        button.setTitle("", forState: UIControlState.Normal)
         event?.image = UIImage(contentsOfFile: self.imagePathURL().path!)
         self.dismissViewControllerAnimated(true, completion: nil)
         
