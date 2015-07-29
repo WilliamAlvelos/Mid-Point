@@ -171,7 +171,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         cell.selectionStyle = .None
         
         
-        cell.imageLabel.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
+        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0
    
         if (self.resultSearchController.active) {
             cell.titleLabel.text = filteredTableData[indexPath.row].name
@@ -182,12 +182,18 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             
             cell.imageLabel?.image = UIImage(data: data)
             
+            
             return cell
         }
         else {
 
             cell.titleLabel.text = Data[indexPath.row].name
             cell.subtitleLabel.text = Data[indexPath.row].descricao
+            
+            var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(Data[indexPath.row].id).jpg")!
+            var data:NSData = NSData(contentsOfURL: url)!
+            
+            cell.imageLabel?.image = UIImage(data: data)
             
             return cell
         }

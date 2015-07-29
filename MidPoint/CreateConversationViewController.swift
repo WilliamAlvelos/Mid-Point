@@ -126,7 +126,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         }
         
         
-        if(self.button.imageView?.image == nil){
+        if(self.button.imageView?.image ==  nil){
             
             var alertController = UIAlertController(title: "Cuidado", message: "O Grupo não possui imagem", preferredStyle: .Alert)
             
@@ -156,7 +156,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
                 self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
                 
             }
-
             
             // Add the actions
 
@@ -168,7 +167,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         
-        if(self.titleGroup.text != "" && self.subtitleGroup.text != "" && self.button.imageView?.image != nil){
+        if(self.titleGroup.text != "" && self.subtitleGroup.text != ""){
             
             event?.name = self.titleGroup.text
             event?.descricao = self.subtitleGroup.text

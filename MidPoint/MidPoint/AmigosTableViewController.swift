@@ -150,9 +150,9 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellAmigosGroupo = self.tableView.dequeueReusableCellWithIdentifier("CustomCellAmigosGroupo") as!CustomCellAmigosGroupo
         
-        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
+        //cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
         
-        //cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0
+        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0
         
         cell.titleLabel?.text = data[indexPath.row].name
         var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesUsers)\(data[indexPath.row].id!).jpg")!
@@ -162,7 +162,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         var dados:NSData = NSData(contentsOfURL: url)!
         cell.imageLabel?.image = UIImage(data: dados)
         
-        
+        //cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
 
         
 //        var url:NSURL = NSURL.URLWithString(string)
