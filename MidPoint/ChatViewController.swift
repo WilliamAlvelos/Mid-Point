@@ -80,6 +80,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         buttonEdit.setImage(self.imageEvent, forState: UIControlState.Normal)
         buttonEdit.layer.cornerRadius = buttonEdit.frame.size.height / 2.0
         
+        buttonEdit.layer.masksToBounds = true
+        
         buttonEdit.addTarget(self, action: "viewEvent:", forControlEvents: UIControlEvents.TouchUpInside)
         
         var rightBarButtonItemEdit: UIBarButtonItem = UIBarButtonItem(customView: buttonEdit)

@@ -49,11 +49,25 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         return 2
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if(indexPath.section == 0){
+            return 213
+        
+        }
+        return 50
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if(section == 0){
+            return 50
+        }
+        
+        return 5
+    }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section == 0){
-            return "Evento"
-        
+            return ""
         }
         
         return "Participantes \(self.dataPessoas.count) de 1000"
@@ -66,7 +80,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             return 1
         }
         
-        return self.dataPessoas.count
+        return self.dataPessoas.count + 1
         
     }
     
@@ -85,6 +99,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             
             
             cell.imageLabel.image = imagemDoEvent
+            
+            cell.imageLabel.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
+            
+            cell.imageLabel.layer.masksToBounds = true
             
             cell.titleLabel.text = nameEvent
             

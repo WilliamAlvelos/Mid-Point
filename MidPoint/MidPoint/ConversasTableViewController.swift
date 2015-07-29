@@ -178,7 +178,9 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         cell.selectionStyle = .None
         
         
-        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0
+        cell.imageLabel.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0
+        
+        cell.imageLabel.layer.masksToBounds = true
    
         if (self.resultSearchController.active) {
             cell.titleLabel.text = filteredTableData[indexPath.row].name
