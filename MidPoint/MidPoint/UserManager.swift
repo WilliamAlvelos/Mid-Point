@@ -18,7 +18,7 @@ import UIKit
     optional func saveUserFinished()
     optional func progressUpload(float : Float)
     optional func getUsersFinished(users: Array<User>)
-    optional func downloadImageFinished(image: Array<UIImage!>)
+    optional func downloadImageFinished(image: Array<User>)
 }
 
 class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
@@ -71,19 +71,25 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     func getUsersFinished(users: Array<User>){
         self.delegate?.getUsersFinished?(users)
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            self.getImages(users)
+        }
+        
+
     
     }
 
     func getUsersFrom(event: Event){
         userDao?.getUsersFrom(event)
     }
-    func getImages(users : Array<Event>){
-        var array : Array<UIImage!> = Array()
-        for user in users{
-            array.append( self.userDao?.downloadImage(user.id!))
+    func getImages(users : Array<User>){
+        for var x = 0 ; x < users.count ; x++ {
+            users[x].image = self.userDao?.downloadImage(users[x].id!)
         }
+
         DispatcherClass.dispatcher { () -> () in
-            self.delegate?.downloadImageFinished?(array)
+            self.delegate?.downloadImageFinished?(users)
         }
     }
 

@@ -16,7 +16,7 @@
     func errorThrowedSystem(error: NSError)
     optional func errorThrowedServer(stringError: String)
 
-    optional func downloadImageFinished(image: Array<UIImage!>)
+    optional func downloadImageFinished(images: Array<Event>)
 }
 class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     private var eventDao : EventDAOCloudKit?
@@ -43,6 +43,10 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     func getEventsFinished(events: Array<Event>){
         self.delegate?.getEventsFinished?(events)
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            self.getImages(events)
+        }
     }
     func inviteFinished(event: Event){
         self.delegate?.inviteFinished?(event)
@@ -62,17 +66,17 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     func getEvent(user : User, usuario : Option){
         eventDao?.getEvent(user, usuario: usuario)
+        
     }
     func inviteFriendsToEvent(event : Event, sender : User,  friends : Array<User>){
         eventDao?.inviteFriendsToEvent(event, sender: sender, friends: friends)
     }
     func getImages(events : Array<Event>){
-        var array : Array<UIImage!> = Array()
-            for event in events{
-                array.append( self.eventDao?.downloadImage(event.id!))
+        for var x = 0 ; x < events.count ; x++ {
+            events[x].image = self.eventDao?.downloadImage(events[x].id!)
         }
         DispatcherClass.dispatcher { () -> () in
-            self.delegate?.downloadImageFinished?(array)
+            self.delegate?.downloadImageFinished?(events)
         }
     }
 }

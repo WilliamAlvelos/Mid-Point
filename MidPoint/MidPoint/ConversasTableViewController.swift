@@ -14,7 +14,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     var Data = Array<Event>()
     
-    var images = Array<UIImage!>()
     
     var filteredTableData = [Event]()
     
@@ -193,11 +192,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             cell.titleLabel.text = Data[indexPath.row].name
             cell.subtitleLabel.text = Data[indexPath.row].descricao
             cell.imageLabel.image = Data[indexPath.row].image
-                
-
-            if !(indexPath.row >= self.images.count) {
-                cell.imageLabel.image = images[indexPath.row]
-            }
 
             return cell
         }
@@ -250,10 +244,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.refreshControl?.endRefreshing()
 
 
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            self.eventDelegate.getImages(events)
-        }
+      
         
 
         self.animateTable()
@@ -266,16 +257,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     func errorThrowedServer(stringError: String) {
         println(stringError)
     }
-    func downloadImageFinished(image: Array<UIImage!>){
-
-        
-        for var x  = 0 ; x < image.count ; x++ {
-//            let indexPath = NSIndexPath(forRow: x, inSection: 0)
-//            let customCell = self.tableView.cellForRowAtIndexPath(indexPath) as! CustomCellConversas
-//            customCell.imageLabel.image = image[x]
-            
-            Data[x].image = image[x]
-        }
+    func downloadImageFinished(images: Array<Event>){
+        self.Data = images
         self.tableView.reloadData()
     }
 

@@ -68,7 +68,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         
         self.senderId = String(format: "%d", UserDAODefault.getLoggedUser().id!)
         self.senderDisplayName = UserDAODefault.getLoggedUser().name
-        self.showLoadEarlierMessagesHeader = true
+        self.showLoadEarlierMessagesHeader = false
         self.demoData = DemoModelData()
         setupFirebase()
         setupImageFirebase()
