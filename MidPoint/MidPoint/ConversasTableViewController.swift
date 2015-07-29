@@ -166,6 +166,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         nextView.conversa = Data[indexPath.row].id
         nextView.name = Data[indexPath.row].name
         nextView.event = Data[indexPath.row]
+        nextView.imageEvent = Data[indexPath.row].image
         
         self.navigationController?.pushViewController(nextView, animated: true)
     }
@@ -183,7 +184,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         if (self.resultSearchController.active) {
             cell.titleLabel.text = filteredTableData[indexPath.row].name
             cell.subtitleLabel.text = filteredTableData[indexPath.row].descricao
-
+            cell.imageLabel.image = filteredTableData[indexPath.row].image
             
             return cell
         }
@@ -191,6 +192,9 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 
             cell.titleLabel.text = Data[indexPath.row].name
             cell.subtitleLabel.text = Data[indexPath.row].descricao
+            cell.imageLabel.image = Data[indexPath.row].image
+                
+
             if !(indexPath.row >= self.images.count) {
                 cell.imageLabel.image = images[indexPath.row]
             }

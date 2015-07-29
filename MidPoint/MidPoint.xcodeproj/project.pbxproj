@@ -17,6 +17,8 @@
 		3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */; };
 		3D6A3AC71B5774C400E7948F /* CreateConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6A3AC61B5774C400E7948F /* CreateConversationViewController.swift */; };
 		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
+		3DA699EC1B6946220021FBF1 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA699EB1B6946220021FBF1 /* EventInfoViewController.swift */; };
+		3DA699EE1B69497D0021FBF1 /* UsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA699ED1B69497D0021FBF1 /* UsersTableViewCell.swift */; };
 		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
 		3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE926A61B5430840053B43C /* ChatViewC.swift */; };
 		3DE927EE1B543FF70053B43C /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927E91B543FF70053B43C /* Firebase.framework */; };
@@ -90,6 +92,8 @@
 		3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellConversas.swift; sourceTree = "<group>"; };
 		3D6A3AC61B5774C400E7948F /* CreateConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateConversationViewController.swift; path = ../CreateConversationViewController.swift; sourceTree = "<group>"; };
 		3D6FD8DA1B4A3C08008E70E9 /* b_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_search.png; sourceTree = "<group>"; };
+		3DA699EB1B6946220021FBF1 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
+		3DA699ED1B69497D0021FBF1 /* UsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewCell.swift; sourceTree = "<group>"; };
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DE926A61B5430840053B43C /* ChatViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewC.swift; sourceTree = "<group>"; };
@@ -219,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */,
+				3DA699ED1B69497D0021FBF1 /* UsersTableViewCell.swift */,
 				3D3359E81B61B73400F22D88 /* CustomCellAmigosGrupo.swift */,
 				3DE9289A1B55D8540053B43C /* CustomCellProfile.swift */,
 				3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */,
@@ -243,6 +248,7 @@
 				3DE928981B55CA9E0053B43C /* ProfileViewController.swift */,
 				3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */,
 				7BED36661B54BCC00045FDB5 /* ChatViewController.swift */,
+				3DA699EB1B6946220021FBF1 /* EventInfoViewController.swift */,
 				3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */,
 				3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */,
 				3DE926A61B5430840053B43C /* ChatViewC.swift */,
@@ -558,6 +564,7 @@
 				3D6A3AC01B57620C00E7948F /* ConversasTableViewController.swift in Sources */,
 				3D084DD71B56CCA30032A94B /* ChatViewController.swift in Sources */,
 				7BE9F2A21B680FDE00AAD032 /* EventManager.swift in Sources */,
+				3DA699EC1B6946220021FBF1 /* EventInfoViewController.swift in Sources */,
 				7BED36651B54B9430045FDB5 /* TransitionManager.swift in Sources */,
 				FF3692461B6296DA00C71BBC /* ETBScrollView.swift in Sources */,
 				7B6315601B66D7A400D13DE5 /* GlobalConstants.swift in Sources */,
@@ -593,6 +600,7 @@
 				3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */,
 				3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */,
 				FF3692361B5FFF7E00C71BBC /* UBAView.swift in Sources */,
+				3DA699EE1B69497D0021FBF1 /* UsersTableViewCell.swift in Sources */,
 				7B63155A1B66D04700D13DE5 /* PictureCloudKit.swift in Sources */,
 				3DACDEAF1B5222E300711E25 /* Event.swift in Sources */,
 				FF3692481B62A4DF00C71BBC /* TestVC.swift in Sources */,

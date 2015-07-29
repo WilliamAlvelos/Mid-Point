@@ -15,6 +15,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     var demoData:DemoModelData?
     var event: Event?
     var conversa:Int?
+    var imageEvent: UIImage?
     
     var name:String?
     
@@ -72,12 +73,19 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         setupFirebase()
         setupImageFirebase()
         
-        
         self.title = name
         
+        let buttonEdit: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        buttonEdit.frame = CGRectMake(0, 0, 40, 40)
+        buttonEdit.setImage(self.imageEvent, forState: UIControlState.Normal)
+        buttonEdit.layer.cornerRadius = buttonEdit.frame.size.height / 2.0
+        
+        buttonEdit.addTarget(self, action: "viewEvent:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        var rightBarButtonItemEdit: UIBarButtonItem = UIBarButtonItem(customView: buttonEdit)
         
         
-        
+        self.navigationItem.rightBarButtonItem = rightBarButtonItemEdit
         
         var jsqImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("JSQ", backgroundColor: UIColor(white: 0.85, alpha: 1.0), textColor: UIColor(white: 0.60, alpha: 1.0), font: UIFont.systemFontOfSize(14.0), diameter:UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
         
@@ -109,6 +117,13 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         
         
         
+    }
+    
+    
+    func viewEvent(sender:AnyObject){
+        var nextView = TransitionManager.creatView("infoEvent") as! EventInfoViewController
+        
+    
     }
     
     
@@ -380,7 +395,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
 
     
     override func didPressAccessoryButton(sender: UIButton!) {
-        var sheet:UIActionSheet = UIActionSheet(title: "Media messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Camera", "Rolo de Camera", "Send location", "Send video")
+        var sheet:UIActionSheet = UIActionSheet(title: "Media messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Camera", "Rolo de Camera", "Send location")
         
         
         let cameraAction = UIAlertAction(title: "Camera", style: .Default,handler: { (alert: UIAlertAction!) -> Void in
@@ -395,9 +410,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
             self.pickerLibrary?.allowsEditing = true
             self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
         })
-
-        
-        
         
         sheet.showFromToolbar(self.inputToolbar)
     }
@@ -433,10 +445,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
                     weak.reloadData()
                 })
             break;
-            
-            case 4:
-                addVideoMediaMessage()
-                break;
             
             default:
                 break
@@ -516,16 +524,16 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
     
     
-    func addVideoMediaMessage(){
-        var videoURL:NSURL = NSURL(string: "file://")!
-        
-        var videoItem:JSQVideoMediaItem = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay: true)
-        
-        var videoMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: videoItem)
-        
-        self.messages.append(videoMessage)
-        
-    }
+//    func addVideoMediaMessage(){
+//        var videoURL:NSURL = NSURL(string: "file://")!
+//        
+//        var videoItem:JSQVideoMediaItem = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay: true)
+//        
+//        var videoMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: videoItem)
+//        
+//        self.messages.append(videoMessage)
+//        
+//    }
     
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!){
