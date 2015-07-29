@@ -14,6 +14,8 @@
     optional func uploadImageFinished()
     optional func progressUpload(float : Float)
     func errorThrowedSystem(error: NSError)
+    optional func errorThrowedServer(stringError: String)
+
     optional func downloadImageFinished(image: Array<UIImage!>)
 }
 class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
@@ -28,7 +30,7 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
         pictureDao?.delegate = self
     }
     func errorThrowed(error: NSError){
-        //tratar erros aqui
+        self.delegate?.errorThrowedServer?(ErrorHandling.stringForError(error))
     }
     func saveEventFinished(event: Event){
         self.delegate?.saveEventFinished?(event)
@@ -46,9 +48,7 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
         self.delegate?.inviteFinished?(event)
         pictureDao?.uploadImageEvent(event)
     }
-    func errorCloudKit(error: NSError){
-        
-    }
+
     func progressUpload(float : Float){
         self.delegate?.progressUpload?(float)
     }
@@ -64,11 +64,6 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
         eventDao?.getEvent(user, usuario: usuario)
     }
     func inviteFriendsToEvent(event : Event, sender : User,  friends : Array<User>){
-        if(friends.count == 0 ){
-            let error : NSError = NSError(domain: "God damn it", code: 3, userInfo: nil)
-            self.delegate?.errorThrowedSystem(error)
-            return
-        }
         eventDao?.inviteFriendsToEvent(event, sender: sender, friends: friends)
     }
     func getImages(events : Array<Event>){

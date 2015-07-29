@@ -8,7 +8,8 @@
 
 import Foundation
 protocol PictureCloudKitDelegate{
-    func errorCloudKit(error: NSError)
+    func errorThrowed(error: NSError)
+    
     func progressUpload(float : Float)
     func saveImageFinished()
 }
@@ -21,12 +22,6 @@ class PictureCloudKit : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDe
     override init(){
      
     }
-    func downloadProfileImage(user: User){
-        
-    }
-    func downloadEventImage(event: Event){
-    }
-    
     func uploadImageUser(user : User){
         var imageData = UIImageJPEGRepresentation(user.image, 0.5)
         
@@ -99,7 +94,7 @@ class PictureCloudKit : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDe
         if (array.objectForKey("error") != nil){
             let error : NSError = NSError(domain: "Erro", code: (array.objectForKey("error")! as! Int), userInfo: nil)
             DispatcherClass.dispatcher({ () -> () in
-                self.delegate?.errorCloudKit(error)
+                self.delegate?.errorThrowed(error)
             })
             return
         }
@@ -111,6 +106,9 @@ class PictureCloudKit : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDe
             return
         }
 
+    }
+    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+        self.delegate?.errorThrowed(error)
     }
     func connection(connection: NSURLConnection, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int) {
         DispatcherClass.dispatcher { () -> () in

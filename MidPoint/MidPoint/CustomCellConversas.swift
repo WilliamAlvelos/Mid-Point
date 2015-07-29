@@ -15,5 +15,4 @@ class CustomCellConversas: UITableViewCell {
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var imageLabel: UIImageView!
 
-
 }

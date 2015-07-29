@@ -228,7 +228,9 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         addConversation(String(format:"%d",event.id!), title: event.name, subtitle: event.descricao, image: "halua")
         eventDelegate.inviteFriendsToEvent(event, sender: UserDAODefault.getLoggedUser(), friends: self.dataSelected)
     }
-    
+    func errorThrowedServer(stringError: String) {
+        println(stringError)
+    }
     
     func addConversation(id: String, title: String!, subtitle: String!, image: String!) {
         

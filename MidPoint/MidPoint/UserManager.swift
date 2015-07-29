@@ -11,7 +11,7 @@ import UIKit
 
 @objc protocol UserManagerDelegate{
     func errorThrowedSystem(error: NSError)
-
+    func errorThrowedServer(stringError : String)
     optional func userNotFound(user : User)
     optional func getUserFinished(user: User)
     optional func userStillInserted(user: User)
@@ -33,15 +33,12 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
         pictureDao?.delegate = self
     }
     
-    func errorCloudKit(error: NSError){
-        //tratar os erros
-    }
     func progressUpload(float : Float){
         self.delegate?.progressUpload?(float)
     }
     
     func errorThrowed(error: NSError){
-        self.delegate?.errorThrowedSystem(error)
+        self.delegate?.errorThrowedServer(ErrorHandling.stringForError(error))
     }
     
     func userStillInserted(user: User){

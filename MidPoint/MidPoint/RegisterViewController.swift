@@ -248,5 +248,9 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     func errorThrowedSystem(error: NSError) {
         
     }
+    func errorThrowedServer(stringError : String){
+        println(stringError)
+    }
+
     
 }

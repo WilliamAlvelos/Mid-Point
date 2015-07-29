@@ -13,4 +13,9 @@ class DispatcherClass {
     {
         dispatch_async(dispatch_get_main_queue(), functionToRunOnMainThread)
     }
+    class func concurrentThread(functionToRunOnMainThread: () -> ())
+    {
+        
+    }
+    
 }

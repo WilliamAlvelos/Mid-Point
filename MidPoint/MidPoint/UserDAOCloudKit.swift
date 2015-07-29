@@ -65,6 +65,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         let bodyHttp = String(format: "\(UserGlobalConstants.Password)=%@&\(UserGlobalConstants.Email)=%@", password ,user.email!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
+                print(error.code)
                 DispatcherClass.dispatcher({ () -> () in
                     self.delegate?.errorThrowed(error)
                 })
@@ -143,7 +144,6 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
                 return
             }
-            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
             let array = JsonResponse.parseJSONToArray(data)
             var arrayToReturn :[User]? = Array()
             for dataString in array {

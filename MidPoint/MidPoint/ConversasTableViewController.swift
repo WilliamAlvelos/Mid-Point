@@ -242,13 +242,15 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 
     func getEventsFinished(events: Array<Event>){
         Data = events
-        self.tableView.reloadData()
         //animateTable()
         self.refreshControl?.endRefreshing()
+
+
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             self.eventDelegate.getImages(events)
         }
+        
 
         self.animateTable()
         
@@ -256,6 +258,9 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     func errorThrowedSystem(error: NSError){
         
+    }
+    func errorThrowedServer(stringError: String) {
+        println(stringError)
     }
     func downloadImageFinished(image: Array<UIImage!>){
 

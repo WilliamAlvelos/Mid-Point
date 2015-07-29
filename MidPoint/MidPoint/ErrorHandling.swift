@@ -13,26 +13,25 @@ class ErrorHandling {
         switch error.code
         {
         case -1:
-            return "Internal error"
+            return "Não conseguiu conectar com o banco de dados"
         case 0:
-            return "Internal error"
+            return "Falha interna"
         case 1:
             return "Dados incompletos"
         case 2:
             return "Usuário não encontrado ou senha errada"
         case 3:
-            return "Array vazio"
+            return "Upload falhou"
         case 4:
-            return "Internal error"
+            return "Usuario Já existe"
         case 5:
-            return "Internal error"
+            return "Nenhum evento achado"
         case 6:
-            return "Internal error"
-        case 7:
-            return "Internal error"
-        case 8:
-            return "Internal error"
-            
+            return "Evento sem nenhuma pessoa"
+        case -1009:
+            return "Conexão com a internet parece estar offline"
+        case -1001:
+            return "Conexão com a internet ruim"
         default:
             return "Internal error"
             

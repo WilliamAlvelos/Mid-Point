@@ -194,6 +194,10 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
             
         }
     }
+    func errorThrowedServer(stringError : String){
+        println(stringError)
+    }
+
 
 }
 
