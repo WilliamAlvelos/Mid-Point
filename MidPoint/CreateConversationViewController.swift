@@ -142,7 +142,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("AmigosViewController") as! AmigosTableViewController
                 nextViewController.event = self.event
-                nextViewController.imagePath = self.imagePathURL()
+                
                 self.navigationController?.pushViewController(nextViewController, animated: true)
                 
             }
@@ -176,7 +176,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("AmigosViewController") as! AmigosTableViewController
             nextViewController.event = event
-            nextViewController.imagePath = self.imagePathURL()
             self.navigationController?.pushViewController(nextViewController, animated: true)
             //var vc = segue.destinationViewController as! AmigosTableViewController
         }

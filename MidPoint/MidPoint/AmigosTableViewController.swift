@@ -14,8 +14,6 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     var event:Event?
     
-    var imagePath : NSURL?
-    
     var eventDelegate:EventManager = EventManager()
     
     var daoFriend: UserManager = UserManager()

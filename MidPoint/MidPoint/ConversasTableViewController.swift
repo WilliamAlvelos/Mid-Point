@@ -177,11 +177,10 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             cell.titleLabel.text = filteredTableData[indexPath.row].name
             cell.subtitleLabel.text = filteredTableData[indexPath.row].descricao
             
-            var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(filteredTableData[indexPath.row].id).jpg")!
-            var data:NSData = NSData(contentsOfURL: url)!
-            
-            cell.imageLabel?.image = UIImage(data: data)
-            
+//            var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(filteredTableData[indexPath.row].id).jpg")!
+//            var data:NSData = NSData(contentsOfURL: url)!
+//            
+//            cell.imageLabel?.image = UIImage(data: data)
             
             return cell
         }
@@ -190,10 +189,10 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             cell.titleLabel.text = Data[indexPath.row].name
             cell.subtitleLabel.text = Data[indexPath.row].descricao
             
-            var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(Data[indexPath.row].id).jpg")!
-            var data:NSData = NSData(contentsOfURL: url)!
+            //var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(Data[indexPath.row].id).jpg")!
+            //var data:NSData = NSData(contentsOfURL: url)!
             
-            cell.imageLabel?.image = UIImage(data: data)
+            //cell.imageLabel?.image = UIImage(data: data)
             
             return cell
         }

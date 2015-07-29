@@ -52,21 +52,16 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
             (session: TWTRSession!, error: NSError!) in
             
             if session != nil{
-                
-                let shareEmailViewController = TWTRShareEmailViewController() { email, error in
-                    println("Email \(email), Error: \(error)")
                     
                 
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! RegisterViewController
-                    
-                nextViewController.emailTexteField.text = email
-                nextViewController.nameTextField.text = session.userName
+                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("register") as! RegisterViewController
+                    println(session.userName)
+
+                nextViewController.nomeUser = session.userName
                     
                 self.navigationController?.pushViewController(nextViewController, animated: true)
-                }
-                
-            }else {
+                }else {
                 println("error: \(error.localizedDescription)");
             }
             

@@ -16,6 +16,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     var user : User?
     
+    var nomeUser: String?
+    
     private var  userManager :UserManager = UserManager()
     
     @IBOutlet var button: UIButton!
@@ -95,6 +97,9 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
             self.confirmPasswordTextFied.center.x = self.view.bounds.width/2
             self.view.layoutIfNeeded()
             }, completion: nil)
+        
+        
+        self.nameTextField.text = nomeUser
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

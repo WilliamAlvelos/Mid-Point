@@ -12,11 +12,6 @@ import Fabric
 import TwitterKit
 import FBSDKCoreKit
 
-
-
-
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
