@@ -19,6 +19,9 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var dataPessoas = Array<User>()
     
+    var imagemDoEvent: UIImage?
+    
+    var nameEvent: String?
     
     
     override func viewDidLoad() {
@@ -26,6 +29,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+//        
+//        self.imageEvent.image = imagemDoEvent
+//        self.labelEventName.text = nameEvent
 
         // Do any additional setup after loading the view.
     }
@@ -39,13 +46,28 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 1
+        return 2
     }
     
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if(section == 0){
+            return "Evento"
+        
+        }
+        
+        return "Participantes \(self.dataPessoas.count) de 1000"
+    }
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if(section == 0){
+            return 1
+        }
+        
         return self.dataPessoas.count
+        
     }
     
     
@@ -56,7 +78,23 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
+        if(indexPath.section == 0){
+            var cell:EventoInfoCellCustom = self.tableView.dequeueReusableCellWithIdentifier("EventoInfoCellCustom") as!EventoInfoCellCustom
+            
+            
+            cell.imageLabel.image = imagemDoEvent
+            
+            cell.titleLabel.text = nameEvent
+            
+            return cell
+        }
+        
         var cell:UsersTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("UsersTableViewCell") as!UsersTableViewCell
+        
+        
+        cell.titleLabel.text = "teste"
 //
 //        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
 //

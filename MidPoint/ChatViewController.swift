@@ -122,8 +122,10 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
     func viewEvent(sender:AnyObject){
         var nextView = TransitionManager.creatView("infoEvent") as! EventInfoViewController
+        nextView.imagemDoEvent = imageEvent
+        nextView.nameEvent = self.name
         
-    
+        self.navigationController?.pushViewController(nextView, animated: true)
     }
     
     

@@ -19,6 +19,7 @@
 		3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6FD8DA1B4A3C08008E70E9 /* b_search.png */; };
 		3DA699EC1B6946220021FBF1 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA699EB1B6946220021FBF1 /* EventInfoViewController.swift */; };
 		3DA699EE1B69497D0021FBF1 /* UsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA699ED1B69497D0021FBF1 /* UsersTableViewCell.swift */; };
+		3DA699F01B6951FB0021FBF1 /* EventoInfoCellCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA699EF1B6951FB0021FBF1 /* EventoInfoCellCustom.swift */; };
 		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
 		3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE926A61B5430840053B43C /* ChatViewC.swift */; };
 		3DE927EE1B543FF70053B43C /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927E91B543FF70053B43C /* Firebase.framework */; };
@@ -94,6 +95,7 @@
 		3D6FD8DA1B4A3C08008E70E9 /* b_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_search.png; sourceTree = "<group>"; };
 		3DA699EB1B6946220021FBF1 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		3DA699ED1B69497D0021FBF1 /* UsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewCell.swift; sourceTree = "<group>"; };
+		3DA699EF1B6951FB0021FBF1 /* EventoInfoCellCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventoInfoCellCustom.swift; sourceTree = "<group>"; };
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DE926A61B5430840053B43C /* ChatViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewC.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			children = (
 				7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */,
 				3DA699ED1B69497D0021FBF1 /* UsersTableViewCell.swift */,
+				3DA699EF1B6951FB0021FBF1 /* EventoInfoCellCustom.swift */,
 				3D3359E81B61B73400F22D88 /* CustomCellAmigosGrupo.swift */,
 				3DE9289A1B55D8540053B43C /* CustomCellProfile.swift */,
 				3D6A3AC41B5771D200E7948F /* CustomCellConversas.swift */,
@@ -606,6 +609,7 @@
 				FF3692481B62A4DF00C71BBC /* TestVC.swift in Sources */,
 				3DE928991B55CA9E0053B43C /* ProfileViewController.swift in Sources */,
 				3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */,
+				3DA699F01B6951FB0021FBF1 /* EventoInfoCellCustom.swift in Sources */,
 				FF3692421B60012800C71BBC /* FacebookResponder.swift in Sources */,
 				FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */,
 			);
