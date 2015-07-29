@@ -172,6 +172,22 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         })
         
     }
-    
+    func downloadImage(id : Int)->UIImage?{
+        let url = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesUsers)\(id).jpg")
+        let request = NSMutableURLRequest(URL: url!)
+        request.timeoutInterval = 4
+        var response: NSURLResponse?
+        var error: NSError?
+        let urlData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
+        
+        if urlData == nil || error != nil  || NSString(data: urlData!, encoding:NSUTF8StringEncoding) != nil {
+            return UIImage(named: "logo")
+        }
+        
+        
+        
+        return UIImage(data: urlData!)
+        
+    }
     
 }
