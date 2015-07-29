@@ -10,12 +10,14 @@ import Foundation
 
 
 
-class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UserManagerDelegate{
     
     var demoData:DemoModelData?
     var event: Event?
     var conversa:Int?
     var imageEvent: UIImage?
+    
+    var userManager: UserManager?
     
     var name:String?
     
@@ -62,6 +64,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         
         pickerLibrary = UIImagePickerController()
         pickerLibrary?.delegate = self
+        self.userManager?.delegate = self
+        
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -560,7 +564,13 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         return paths[0] as! NSString
     }
 
+    func errorThrowedSystem(error: NSError) {
+        
+    }
     
+    func errorThrowedServer(stringError: String) {
+        
+    }
 
     
     
