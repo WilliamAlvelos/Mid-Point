@@ -258,7 +258,15 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
     }
     func downloadImageFinished(image: Array<UIImage!>){
-        self.images = image
+
+        
+        for var x  = 0 ; x < image.count ; x++ {
+//            let indexPath = NSIndexPath(forRow: x, inSection: 0)
+//            let customCell = self.tableView.cellForRowAtIndexPath(indexPath) as! CustomCellConversas
+//            customCell.imageLabel.image = image[x]
+            
+            Data[x].image = image[x]
+        }
         self.tableView.reloadData()
     }
 
