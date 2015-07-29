@@ -76,71 +76,8 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
             for event in events{
                 array.append( self.eventDao?.downloadImage(event.id!))
         }
-        self.delegate?.downloadImageFinished?(array)
+        DispatcherClass.dispatcher { () -> () in
+            self.delegate?.downloadImageFinished?(array)
+        }
     }
 }
-//
-//import Foundation
-//import UIKit
-//
-//@objc protocol UserManagerDelegate{
-//    func errorThrowed(error: NSError)
-//    optional func userNotFound(user : User)
-//    optional func getUserFinished(user: User)
-//    optional func userStillInserted(user: User)
-//    optional func saveUserFinished()
-//    optional func progressUpload(float : Float)
-//
-//}
-//
-//class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
-//
-//    private var userDao: UserDAOCloudKit?
-//    private var pictureDao : PictureCloudKit?
-//    var delegate:UserManagerDelegate?
-//
-//    init(){
-//        userDao = UserDAOCloudKit()
-//        userDao?.delegate = self
-//        pictureDao = PictureCloudKit()
-//        pictureDao?.delegate = self
-//    }
-//
-//    func errorCloudKit(error: NSError){
-//        self.delegate?.errorThrowed(error)
-//    }
-//    func progressUpload(float : Float){
-//        self.delegate?.progressUpload?(float)
-//    }
-//
-//    func errorThrowed(error: NSError){
-//        self.delegate?.errorThrowed(error)
-//    }
-//
-//    func userStillInserted(user: User){
-//        self.delegate?.userStillInserted!(user)
-//    }
-//
-//    func saveUserFinished(user: User){
-//        pictureDao?.uploadImageUser(user)
-//    }
-//
-//    func userNotFound(user : User){
-//        self.delegate?.userNotFound?(user)
-//    }
-//
-//    func getUserFinished(user: User){
-//        self.delegate?.getUserFinished!(user)
-//    }
-//    func insertUserDatabase(user:User, password : String){
-//        userDao?.saveUser(user, password: password)
-//    }
-//    func getUserDatabase(user:User, password : String){
-//        userDao?.getUser(user, password: password)
-//    }
-//    func saveImageFinished(){
-//        self.delegate?.saveUserFinished?()
-//    }
-//
-//    
-//}

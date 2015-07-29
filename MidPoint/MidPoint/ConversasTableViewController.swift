@@ -14,7 +14,12 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     var Data = Array<Event>()
     
+    var images = Array<UIImage!>()
+    
     var filteredTableData = [Event]()
+    
+    var filteredImageData = [UIImage]()
+    
     
     var eventDelegate = EventManager()
     
@@ -178,11 +183,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         if (self.resultSearchController.active) {
             cell.titleLabel.text = filteredTableData[indexPath.row].name
             cell.subtitleLabel.text = filteredTableData[indexPath.row].descricao
-            
-//            var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(filteredTableData[indexPath.row].id).jpg")!
-//            var data:NSData = NSData(contentsOfURL: url)!
-//            
-//            cell.imageLabel?.image = UIImage(data: data)
+
             
             return cell
         }
@@ -190,12 +191,10 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 
             cell.titleLabel.text = Data[indexPath.row].name
             cell.subtitleLabel.text = Data[indexPath.row].descricao
-            
-            //var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(Data[indexPath.row].id).jpg")!
-            //var data:NSData = NSData(contentsOfURL: url)!
-            
-            //cell.imageLabel?.image = UIImage(data: data)
-            
+            if !(indexPath.row >= self.images.count) {
+                cell.imageLabel.image = images[indexPath.row]
+            }
+
             return cell
         }
         
@@ -220,15 +219,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-
-
-    
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-
-
     
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -239,7 +229,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        println("here")
         let sb = searchController.searchBar
         let target = sb.text
         self.filteredTableData = self.Data.filter {
@@ -256,9 +245,11 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.tableView.reloadData()
         //animateTable()
         self.refreshControl?.endRefreshing()
-        DispatcherClass.dispatcher { () -> () in
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
             self.eventDelegate.getImages(events)
         }
+
         self.animateTable()
         
     }
@@ -267,12 +258,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
     }
     func downloadImageFinished(image: Array<UIImage!>){
-        
-        for var x  = 0 ; x < image.count ; x++ {
-            let indexPath = NSIndexPath(forRow: x, inSection: 0)
-            let customCell = self.tableView.cellForRowAtIndexPath(indexPath) as! CustomCellConversas
-            customCell.imageLabel.image = image[x]
-        }
+        self.images = image
+        self.tableView.reloadData()
     }
 
     
