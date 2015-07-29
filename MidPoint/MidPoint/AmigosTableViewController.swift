@@ -61,6 +61,9 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     }
     
     func finish(){
+        
+        //if(event?.image)
+        
         eventDelegate.saveEvent(event!, usuario: UserDAODefault.getLoggedUser())
         
         var progressView: ProgressView = ProgressView(frame: self.view.frame)

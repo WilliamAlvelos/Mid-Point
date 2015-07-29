@@ -43,6 +43,9 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         button.layer.borderWidth = 0
         button.layer.masksToBounds = true
         user = User()
+        
+        
+
     }
     
     override func  viewWillAppear(animated: Bool) {
@@ -50,10 +53,10 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         PermissionsResponse.checkCameraPermission()
         PermissionsResponse.checkRollCameraPermission()
         
-        
-//        passwordTextField.hidden = true
-//        emailTexteField.hidden = true
-//        confirmPasswordTextFied.hidden = true
+        self.nameTextField.hidden = true
+        self.emailTexteField.hidden = true
+        self.passwordTextField.hidden = true
+        self.confirmPasswordTextFied.hidden = true
         
 
     }
@@ -62,31 +65,36 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-//        self.passwordTextField.center.x -= view.bounds.width * 2
-//        self.emailTexteField.center.x -= view.bounds.width * 2
-//        self.confirmPasswordTextFied.center.x -= view.bounds.width * 2
-//        self.nameTextField.center.x -= view.bounds.width * 2
-//        
-//
-//        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-//            self.nameTextField.center.x += self.view.bounds.width
-//            self.view.layoutIfNeeded()
-//            }, completion: nil)
-//        
-//        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-//            self.emailTexteField.center.x += self.view.bounds.width
-//            self.view.layoutIfNeeded()
-//            }, completion: nil)
-//        
-//        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-//            self.passwordTextField.center.x += self.view.bounds.width
-//            self.view.layoutIfNeeded()
-//            }, completion: nil)
-//        
-//        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-//            self.confirmPasswordTextFied.center.x += self.view.bounds.width
-//            self.view.layoutIfNeeded()
-//            }, completion: nil)
+        
+        self.nameTextField.hidden = false
+        self.emailTexteField.hidden = false
+        self.passwordTextField.hidden = false
+        self.confirmPasswordTextFied.hidden = false
+        
+        self.passwordTextField.center.x -= view.bounds.width
+        self.emailTexteField.center.x -= view.bounds.width
+        self.confirmPasswordTextFied.center.x -= view.bounds.width
+        self.nameTextField.center.x -= view.bounds.width
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.nameTextField.center.x = self.view.bounds.width/2
+            //self.view.layoutIfNeeded()
+            }, completion: nil)
+        
+        UIView.animateWithDuration(0.5, delay: 0.2, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.emailTexteField.center.x = self.view.bounds.width/2
+            //self.view.layoutIfNeeded()
+            }, completion: nil)
+        
+        UIView.animateWithDuration(0.5, delay: 0.4, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.passwordTextField.center.x = self.view.bounds.width/2
+            //self.view.layoutIfNeeded()
+            }, completion: nil)
+        
+        UIView.animateWithDuration(0.5, delay: 0.6, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.confirmPasswordTextFied.center.x = self.view.bounds.width/2
+            self.view.layoutIfNeeded()
+            }, completion: nil)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -108,13 +116,12 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
         self.view.endEditing(true)
         
-//        self.nameTextField.hidden = true
-//        self.emailTexteField.hidden = true
-//        self.passwordTextField.hidden = true
-//        self.confirmPasswordTextFied.hidden = true
+        self.nameTextField.hidden = true
+        self.emailTexteField.hidden = true
+        self.passwordTextField.hidden = true
+        self.confirmPasswordTextFied.hidden = true
         
     }
     
@@ -170,6 +177,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         data.writeToFile(self.imagePathURL().path!, atomically: true)
         
         button.setBackgroundImage(image, forState: .Normal)
+        button.setTitle("", forState: .Normal)
         user?.image = image
         self.dismissViewControllerAnimated(true, completion: nil)
         
@@ -190,9 +198,35 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     @IBAction func registerAction(sender: AnyObject) {
         
+        
+        if(self.nameTextField.text == ""){
+            // Create the alert controller
+            
+            var inputTextField: UITextField?
+            
+            var alertController = UIAlertController(title: "Cuidado", message: "O seu Nome está vazio", preferredStyle: .Alert)
+            
+            // Create the actions
+            
+            alertController.addTextFieldWithConfigurationHandler({ textField -> Void in
+                textField.placeholder = "Digite o seu Nome"
+                inputTextField = textField
+            })
+            
+            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                UIAlertAction in
+                self.nameTextField.text = inputTextField?.text
+            }
+            
+            
+            // Add the actions
+            alertController.addAction(okAction)
+            
+            // Present the controller
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
         if((passwordTextField.text == confirmPasswordTextFied.text) || passwordTextField.text != ""){
-            
-            
             self.user?.name = nameTextField.text
             self.user?.email = emailTexteField.text
             userManager.insertUserDatabase(self.user!, password : passwordTextField.text)
