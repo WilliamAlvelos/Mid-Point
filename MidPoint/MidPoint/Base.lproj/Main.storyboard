@@ -361,6 +361,26 @@
                                             <outlet property="titleLabel" destination="9JE-cf-AUY" id="hku-w4-ye2"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MidPointTableViewCell" rowHeight="70" id="ZXx-wH-FTB" customClass="MidPointTableViewCell" customModule="MidPoint" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZXx-wH-FTB" id="e66-8a-4X1">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEx-Ez-0Q9">
+                                                    <rect key="frame" x="81" y="14" width="213" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                    <state key="normal" title="Escolher Mid Point">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="tintColor" red="1" green="0.1654829545" blue="0.5448382048" alpha="1" colorSpace="calibratedRGB"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="AEx-Ez-0Q9" id="f9U-Qd-dIu"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
