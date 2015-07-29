@@ -8,8 +8,9 @@
 
 import UIKit
 
-class EventInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class EventInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UserManagerDelegate{
 
+    var userManager: UserManager?
     
     @IBOutlet var imageEvent: UIImageView!
     
@@ -19,16 +20,20 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var dataPessoas = Array<User>()
     
-    var imagemDoEvent: UIImage?
-    
-    var nameEvent: String?
-    
+    var event: Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.userManager = UserManager()
+        self.userManager?.delegate = self
+        
+        
+        
+        
+        self.userManager?.getUsersFrom(event!)
         
 //        
 //        self.imageEvent.image = imagemDoEvent
@@ -54,7 +59,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             return 213
         
         }
-        return 50
+        return 65
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -80,7 +85,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             return 1
         }
         
-        return self.dataPessoas.count + 1
+        return self.dataPessoas.count
         
     }
     
@@ -98,13 +103,13 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             var cell:EventoInfoCellCustom = self.tableView.dequeueReusableCellWithIdentifier("EventoInfoCellCustom") as!EventoInfoCellCustom
             
             
-            cell.imageLabel.image = imagemDoEvent
+            cell.imageLabel.image = event?.image
             
             cell.imageLabel.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
             
             cell.imageLabel.layer.masksToBounds = true
             
-            cell.titleLabel.text = nameEvent
+            cell.titleLabel.text = event?.name
             
             return cell
         }
@@ -112,9 +117,13 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         var cell:UsersTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("UsersTableViewCell") as!UsersTableViewCell
         
         
-        cell.titleLabel.text = "teste"
-//
-//        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
+        cell.titleLabel.text = dataPessoas[indexPath.row].name
+        
+        cell.imageLabel.image = dataPessoas[indexPath.row].image
+
+        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
+        
+        cell.imageLabel.layer.masksToBounds = true
 //
 //        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0
 //        
@@ -144,6 +153,27 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
 //        
         
+    }
+    
+    
+    func errorThrowedServer(stringError: String) {
+        
+    }
+    func errorThrowedSystem(error: NSError) {
+        
+    }
+    
+    func downloadImageFinished(image: Array<User>) {
+        self.dataPessoas = image
+        
+        self.tableView.reloadData()
+    }
+
+    
+    
+    
+    func getUsersFinished(users: Array<User>) {
+        self.dataPessoas = users
     }
     
 
