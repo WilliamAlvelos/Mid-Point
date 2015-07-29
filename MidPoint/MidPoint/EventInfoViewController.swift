@@ -51,7 +51,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 2
+        return 3
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -63,25 +63,23 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if(section == 0){
-            return 50
-        }
-        
-        return 5
+
+        return 50
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(section == 0){
+        if(section == 0 || section == 2){
             return ""
         }
-        
+
         return "Participantes \(self.dataPessoas.count) de 1000"
+
     }
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if(section == 0){
+        if(section == 0 || section == 2){
             return 1
         }
         
@@ -110,6 +108,25 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.imageLabel.layer.masksToBounds = true
             
             cell.titleLabel.text = event?.name
+            
+            return cell
+        }
+        
+        
+        if(indexPath.section == 2){
+        
+            var cell:MidPointTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("MidPointTableViewCell") as!MidPointTableViewCell
+            
+            
+            cell.button.addTarget(self, action: Selector("teste"), forControlEvents: UIControlEvents.AllEvents)
+            
+//            cell.imageLabel.image = event?.image
+//            
+//            cell.imageLabel.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
+//            
+//            cell.imageLabel.layer.masksToBounds = true
+//            
+//            cell.titleLabel.text = event?.name
             
             return cell
         }
@@ -155,6 +172,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
     }
     
+    
+    func teste(){
+        print("will")
+    }
     
     func errorThrowedServer(stringError: String) {
         
