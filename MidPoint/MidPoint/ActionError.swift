@@ -39,7 +39,7 @@ class ActionError {
     
     }
     
-    class func actionWithTextField(error: String, errorMessage:String, placeholder:String, view: CreateConversationViewController) {
+    class func actionWithTextField(error: String, errorMessage:String, placeholder:String, view: CreateConversationViewController, title: Bool) {
 
         
         var alertController = UIAlertController(title: error, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
@@ -52,14 +52,25 @@ class ActionError {
             inputTextField = textField
         })
         
-        var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
-            UIAlertAction in
-            view.subtitleGroup.text = inputTextField?.text
+        
+        if(title){
+            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                UIAlertAction in
+                view.titleGroup.text = inputTextField?.text
+            }
+        
+            
+            alertController.addAction(okAction)
+        }else{
+            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                UIAlertAction in
+                view.subtitleGroup.text = inputTextField?.text
+            }
+            
+            alertController.addAction(okAction)
         }
         
-        
 
-        alertController.addAction(okAction)
         
         
         view.presentViewController(alertController, animated: true, completion: nil)

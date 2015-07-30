@@ -161,6 +161,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.resultSearchController.active = false
+        
         let nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
         nextView.conversa = Data[indexPath.row].id
         nextView.name = Data[indexPath.row].name
