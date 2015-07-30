@@ -16,7 +16,6 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     var user : User?
     
-    
     private var  userManager :UserManager = UserManager()
     
     @IBOutlet var button: UIButton!
@@ -34,6 +33,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         self.nameTextField.text = user?.name
         self.emailTexteField.text = user?.email
         self.button.setBackgroundImage(user?.image, forState: UIControlState.Normal)
+        self.button.setTitle("", forState: UIControlState.Normal)
+        
         
     }
     override func viewDidLoad() {
@@ -58,9 +59,9 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         self.title = "Create Account"
         
         
-        var buttonRegister: UIBarButtonItem = UIBarButtonItem(title: "Register", style: UIBarButtonItemStyle.Done, target: self, action: Selector("register"))
-        
-        self.navigationItem.rightBarButtonItem = buttonRegister
+//        var buttonRegister: UIBarButtonItem = UIBarButtonItem(title: "Register", style: UIBarButtonItemStyle.Done, target: self, action: Selector("register"))
+//        
+//        self.navigationItem.rightBarButtonItem = buttonRegister
         
     }
     
@@ -111,6 +112,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
             self.confirmPasswordTextFied.center.x = self.view.bounds.width/2
             self.view.layoutIfNeeded()
             }, completion: nil)
+
+        
 
     }
     

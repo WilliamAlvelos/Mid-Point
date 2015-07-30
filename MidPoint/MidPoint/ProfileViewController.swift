@@ -31,6 +31,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
      override func viewDidLoad() {
         
+        activityIndicator.activityViewWithName(self, texto: "Buscando Eventos")
+        
         self.eventManager.delegate = self
         
         navItem = self.navigationItem
@@ -142,6 +144,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         events = images
         
         self.tableView.reloadData()
+        
+        activityIndicator.removeActivityViewWithName()
     }
     
     

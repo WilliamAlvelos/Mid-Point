@@ -54,6 +54,11 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     override func viewDidLoad() {
+        
+        activityIndicator.activityViewWithName(self, texto: "Buscando Locais")
+        
+        
+        
 //        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
 //        
 //        self.navigationItem.rightBarButtonItem = add
@@ -250,6 +255,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
             
             if annotation is MKUserLocation {
+                activityIndicator.removeActivityViewWithName()
+                
                 return nil
             }
             
@@ -294,6 +301,9 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 pinView!.annotation = annotation
             }
             
+            
+            activityIndicator.removeActivityViewWithName()
+            
             return pinView
     }
     
@@ -335,9 +345,15 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     @IBAction func actionSearch(sender: AnyObject) {
         
+        
+        
         if(localTextField.hidden){
             localTextField.hidden = false
+            
         }else{
+            
+            activityIndicator.activityViewWithName(self, texto: "Buscando Locais")
+            
             localTextField.hidden = true
             
             var string = localTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "%20", options:  NSStringCompareOptions.LiteralSearch, range: nil)

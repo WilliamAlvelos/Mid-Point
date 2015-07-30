@@ -68,6 +68,9 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         super.viewDidLoad()
         
         
+        activityIndicator.activityViewWithName(self, texto: "Buscando Mensagens")
+        
+        
         var jsqImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("WILL", backgroundColor: UIColor(white: 0.85, alpha: 1.0), textColor: UIColor(white: 0.60, alpha: 1.0), font: UIFont.systemFontOfSize(12.0), diameter:UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
 
         
@@ -198,6 +201,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
             
             JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
             
+            
+            activityIndicator.removeActivityViewWithName()
             
             if(text != ""){
                 var message = JSQMessage(senderId: sender, senderDisplayName: name, date: NSDate(), text: text)

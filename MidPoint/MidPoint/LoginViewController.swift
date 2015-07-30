@@ -13,6 +13,7 @@ import FBSDKLoginKit
 
 
 class LoginViewController: UIViewController, UserManagerDelegate {
+
     
     @IBOutlet weak var userToIconDistance: NSLayoutConstraint!
     @IBOutlet weak var textDistances: NSLayoutConstraint!
@@ -171,7 +172,6 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     
     
     //MARK: FBResponder Delegate
-    
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
