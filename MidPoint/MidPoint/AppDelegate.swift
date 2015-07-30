@@ -19,8 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    func teste(){
+        var user = User(id: 27)
+        var event = Event()
+        event.id = 7
+        var localizacao = Localizacao()
+        localizacao.latitude = 205.123
+        localizacao.longitude = 205.123
+        localizacao.name = "Nome do local"
+        
+        UserDAOCloudKit().getAllLocation(user)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
         Fabric.with([Twitter()])
+        teste()
+
         Parse.setApplicationId("rpnQRmwvLdmTkuLSFkgFZTOXIhpIvjfrzM2k33vK",
             clientKey: "JwLwixuhZEzE2ZJX5u5ZQHsnj1nwEo3AUxvTHQxB")
         if application.applicationState != UIApplicationState.Background {

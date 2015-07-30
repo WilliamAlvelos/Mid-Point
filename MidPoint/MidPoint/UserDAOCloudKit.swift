@@ -16,6 +16,9 @@ protocol UserDAOCloudKitDelegate{
     func userNotFound(user : User)
     func getUserFinished(user: User)
     func getUsersFinished(users: Array<User>)
+    func getLocationFinished(users: Array<Localizacao>)
+    func updateStateFinished()
+    func updateLocationFinished()
 }
 
 class UserDAOCloudKit: NSObject, UserDAOProtocol{
@@ -188,6 +191,117 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         
         return UIImage(data: urlData!)
         
+    }
+    func updateUserState(user: User , state : Option, event : Event){
+        let url : String = "\(LinkAccessGlobalConstants.LinkUsers)updateStateUser.php"
+        let bodyHttp = String(format: "\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.UserState)=%d&\(EventGlobalConstants.Id)=%d", user.id! ,state.rawValue, event.id!)
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+                return
+            }
+            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
+
+            let string = JsonResponse.parseJSON(data)
+            
+            if (string.objectForKey("error") != nil){
+                var int = string.objectForKey("error")! as! Int
+                let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+                return
+            }
+            if (string.objectForKey("succesfull") != nil){
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.updateStateFinished()
+                })
+                return
+            }
+            
+            
+        })
+    }
+    func updateUserLocation(user: User , location : Localizacao, event : Event){
+
+        let url : String = "\(LinkAccessGlobalConstants.LinkUsers)updateLocationUser.php"
+        let bodyHttp = String(format: "\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.Id)=%d&\(UserGlobalConstants.Latitude)=%f&\(UserGlobalConstants.Longitude)=%f&\(LocationGlobalConstants.NameLocation)=%@", user.id! ,event.id!, location.latitude!, location.longitude!, location.name!)
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+                return
+            }
+            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
+            
+            let string = JsonResponse.parseJSON(data)
+            
+
+            if (string.objectForKey("error") != nil){
+                var int = string.objectForKey("error")! as! Int
+                let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+                return
+            }
+            if (string.objectForKey("succesfull") != nil){
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.updateLocationFinished()
+                })
+                return
+            }
+            
+            
+        })
+    }
+    func getAllLocation(user: User){
+        let url : String = "\(LinkAccessGlobalConstants.LinkUsers)buscaLocalizacao.php"
+        let bodyHttp = String(format: "\(UserGlobalConstants.Id)=%d", user.id!)
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+                return
+            }
+            let array = JsonResponse.parseJSONToArray(data)
+            var arrayToReturn :[Localizacao]? = Array()
+            for dataString in array {
+                if (dataString.objectForKey("error") != nil){
+                    var int = dataString.objectForKey("error") as! Int
+                    let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
+                    DispatcherClass.dispatcher({ () -> () in
+                        self.delegate?.errorThrowed(error)
+                    })
+                    return
+                }
+                
+                var nameLocation = dataString[LocationGlobalConstants.LocationName] as! String
+                var latitude = (dataString[LocationGlobalConstants.Latitude] as! NSString).floatValue
+                var longitude = (dataString[LocationGlobalConstants.Longitude] as! NSString).floatValue
+                
+                let localizacao = Localizacao()
+                localizacao.longitude = longitude
+                localizacao.latitude = latitude
+                localizacao.name = nameLocation
+                
+                
+                
+                arrayToReturn!.append(localizacao)
+            }
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.getLocationFinished(arrayToReturn!)
+            })
+            
+            
+            
+        })
+        
+
     }
     
 }

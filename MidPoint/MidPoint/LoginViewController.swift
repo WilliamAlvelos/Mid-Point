@@ -207,23 +207,6 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     func loggedOut() {
         
     }
-    
-    
-    
-    
-//    func userFriendsReceived(friends: [FacebookUser], error: NSError!) {
-//        
-//        if error == nil {
-//        
-//            for var x = 0; x < friends.count; x++ {
-//                println(friends[x].name)
-//            }
-//        }
-//        
-//        else {
-//            
-//        }
-//    }
     func errorThrowedServer(stringError : String){
         
         var action: UIAlertController = UIAlertController(title: "Error", message: stringError, preferredStyle: UIAlertControllerStyle.Alert)
