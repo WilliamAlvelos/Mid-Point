@@ -20,6 +20,9 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     @IBOutlet weak var appIcon: UIImageView!
     @IBOutlet var nomeText: UITextField!
     @IBOutlet var senhaText: UITextField!
+    
+
+    
     var usuario: UserManager = UserManager()
     
     var fbResponder: FacebookResponder!
@@ -30,39 +33,47 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
 
         super.viewWillAppear(animated)
         self.title = "Login"
-
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        IHKeyboardAvoiding.setAvoidingView(self.view)
-        usuario.delegate = self
         
-        appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0
+        IHKeyboardAvoiding.setAvoidingView(self.view)
 
     }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
- 
+    
+    
+    func danilo(){
         userToIconDistance.constant = userToIconDistance.constant * self.view.frame.size.height / 667.0
         textDistances.constant = textDistances.constant * self.view.frame.size.height / 667.0
         
-
+        
         
         let logInButton = TWTRLogInButton(logInCompletion: {
             (session: TWTRSession!, error: NSError!) in
             
             if session != nil{
-                    
+                
                 
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("register") as! RegisterViewController
-                    println(session.userName)
-
+                println(session.userName)
+                
                 nextViewController.nomeUser = session.userName
-                    
+                
                 self.navigationController?.pushViewController(nextViewController, animated: true)
-                }else {
-                println("error: \(error.localizedDescription)");
+            }else {
+                DispatcherClass.dispatcher({ () -> () in
+                    
+                    var action: UIAlertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                        UIAlertAction in
+                    }
+                    
+                    
+                    // Add the actions
+                    action.addAction(okAction)
+                    
+                    self.presentViewController(action, animated: true, completion: nil)
+                    
+                })
             }
             
         })
@@ -73,7 +84,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         
         
         var fbButton = fbResponder.facebookButtonWithFrame(nomeText.frame)
-    
+        
         fbButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         logInButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         
@@ -99,7 +110,20 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         
         self.view.addConstraint(NSLayoutConstraint(item: logInButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
 
+    
+    
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        usuario.delegate = self
+        
+        appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0
+        
+        danilo()
+        
+    }
+
 
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -137,7 +161,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         UserDAODefault.saveLogin(user)
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ConversasTableView2") as! UINavigationController
         self.presentViewController(nextViewController, animated:true, completion:nil)
 
     }
@@ -163,7 +187,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
 //            UserDAODefault.saveLogin(user)
             
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
+            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ConversasTableView2") as! UINavigationController
             self.presentViewController(nextViewController, animated:true, completion:nil)
         }
         
@@ -181,20 +205,36 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         
     }
     
-    func userFriendsReceived(friends: [FacebookUser], error: NSError!) {
-        
-        if error == nil {
-        
-            for var x = 0; x < friends.count; x++ {
-                println(friends[x].name)
-            }
-        }
-        
-        else {
-            
-        }
-    }
+    
+    
+    
+//    func userFriendsReceived(friends: [FacebookUser], error: NSError!) {
+//        
+//        if error == nil {
+//        
+//            for var x = 0; x < friends.count; x++ {
+//                println(friends[x].name)
+//            }
+//        }
+//        
+//        else {
+//            
+//        }
+//    }
     func errorThrowedServer(stringError : String){
+        
+        var action: UIAlertController = UIAlertController(title: "Error", message: stringError, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+        }
+        
+        
+        // Add the actions
+        action.addAction(okAction)
+        
+        self.presentViewController(action, animated: true, completion: nil)
+        
         println(stringError)
     }
 

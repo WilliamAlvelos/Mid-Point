@@ -17,8 +17,7 @@ class CustomCellProfile: UITableViewCell {
     
     @IBOutlet var localHorarioEvento: UILabel!
     
-    @IBOutlet var favoritarEvent: UIButton!
-    
-    @IBOutlet var fecharEvent: UIButton!
+    @IBOutlet weak var descricao: UILabel!
+
     
 }
