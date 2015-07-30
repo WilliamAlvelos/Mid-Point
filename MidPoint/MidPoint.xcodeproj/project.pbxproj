@@ -114,7 +114,7 @@
 		3DA699FB1B695FE40021FBF1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		3DA699FD1B695FEB0021FBF1 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3DA699FF1B6960610021FBF1 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		3DA69A011B6967AE0021FBF1 /* PushResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushResponse.swift; sourceTree = "<group>"; };
+		3DA69A011B6967AE0021FBF1 /* PushResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushResponse.swift; path = MidPoint/PushResponse.swift; sourceTree = "<group>"; };
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DE926A61B5430840053B43C /* ChatViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewC.swift; sourceTree = "<group>"; };
@@ -283,7 +283,6 @@
 				3DA699EB1B6946220021FBF1 /* EventInfoViewController.swift */,
 				3DFB8A1E1B4C381300463EA4 /* LoginViewController.swift */,
 				3DFB8A211B4C392500463EA4 /* RegisterViewController.swift */,
-				3DA69A011B6967AE0021FBF1 /* PushResponse.swift */,
 				3DE926A61B5430840053B43C /* ChatViewC.swift */,
 				FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */,
 				3DE9288B1B547DAB0053B43C /* EventoViewController.swift */,
@@ -401,6 +400,7 @@
 		FFC2C6D91AF935E0004B0AA7 = {
 			isa = PBXGroup;
 			children = (
+				3DA69A011B6967AE0021FBF1 /* PushResponse.swift */,
 				7B63155F1B66D7A400D13DE5 /* GlobalConstants.swift */,
 				7B6315591B66D04700D13DE5 /* PictureCloudKit.swift */,
 				7BED36641B54B9430045FDB5 /* TransitionManager.swift */,
@@ -774,6 +774,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = MidPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_MODULE_NAME = MidPoint;
@@ -798,6 +800,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = MidPoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_MODULE_NAME = MidPoint;
