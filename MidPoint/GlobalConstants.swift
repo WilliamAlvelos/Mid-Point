@@ -27,6 +27,9 @@ struct EventGlobalConstants {
     static let Name = "event_name"
     static let Description = "event_description"
     static let Date = "event_date"
+    static let Latitude = "event_date"
+    static let Longitude = "event_date"
+
     static let UserToInvite = "user_to_invite"
     static let UserSender = "user_sender"
     static let UserState = "user_state"
@@ -52,6 +55,7 @@ struct LinkAccessGlobalConstants {
 
 struct ParseGlobalConstants {
     static let Id = "user_id"
-    static let Logged = "user_id"
+    static let Logged = "logged"
+    static let Group_id = "group_id"
     
 }

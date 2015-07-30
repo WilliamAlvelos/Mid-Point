@@ -21,6 +21,8 @@ class Event: NSObject {
     var numberOfConfirmed:Int?
     var numberOfRefused:Int?
     var numberOfPending:Int?
+    var localizacao :Localizacao?
+    
 
     override init() {
         

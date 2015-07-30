@@ -62,7 +62,7 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
     func saveEvent(event: Event, usuario: User) {
         
         let url : String = "\(LinkAccessGlobalConstants.LinkEvents)insereEvento.php"
-        let bodyHttp = String(format: "\(EventGlobalConstants.Name)=%@&\(EventGlobalConstants.Description)=%@&\(EventGlobalConstants.Date)=%@&\(UserGlobalConstants.Id)=%d", event.name!,event.descricao!,event.date!, usuario.id!)
+        let bodyHttp = String(format: "\(EventGlobalConstants.Name)=%@&\(EventGlobalConstants.Description)=%@&\(EventGlobalConstants.Date)=%@&\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.Latitude)=%d&\(EventGlobalConstants.Longitude)=%d", event.name!,event.descricao!,event.date!, usuario.id!, event.localizacao!.latitude!,event.localizacao!.longitude!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 DispatcherClass.dispatcher({ () -> () in
@@ -150,7 +150,6 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
 
             
         })
-
     }
     func downloadImage(id : Int)->UIImage?{
         let url = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesEvents)\(id).jpg")

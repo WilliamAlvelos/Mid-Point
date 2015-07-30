@@ -216,6 +216,13 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     }
     func getUsersFinished(users: Array<User>){
         self.data = users
+        let id = UserDAODefault.getLoggedUser().id!
+        for var i = 0 ; i < self.data.count ; i++ {
+            if (self.data[i].id == id){
+                self.data.removeAtIndex(i)
+                break
+            }
+        }
         self.tableView.reloadData()
     }
 

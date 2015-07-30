@@ -35,6 +35,7 @@ class PushResponse {
         if data == nil {
             return
         }
+
         let installation = PFInstallation.currentInstallation()
         installation[ParseGlobalConstants.Id] = "\(user.id!)"
         installation[ParseGlobalConstants.Logged] = true
