@@ -30,7 +30,7 @@ class ProgressView: UIView {
     
     func createLabel() {
         progressLabel = UILabel(frame: CGRectMake(0.0, 0.0, CGRectGetWidth(frame), 60.0))
-        progressLabel.textColor = .whiteColor()
+        progressLabel.textColor = UIColor(red: 19/255, green: 16/255, blue: 70/255, alpha: 1)
         progressLabel.textAlignment = .Center
         progressLabel.text = "Loading.."
         progressLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 40.0)
@@ -48,9 +48,9 @@ class ProgressView: UIView {
         
         var gradientMaskLayer = gradientMask()
         progressLayer.path = UIBezierPath(arcCenter:centerPoint, radius: CGRectGetWidth(frame)/2 - 30.0, startAngle:startAngle, endAngle:endAngle, clockwise: true).CGPath
-        progressLayer.backgroundColor = UIColor.whiteColor().CGColor
+        progressLayer.backgroundColor = UIColor(red: 19/255, green: 16/255, blue: 70/255, alpha: 1).CGColor
         progressLayer.fillColor = nil
-        progressLayer.strokeColor = UIColor.purpleColor().CGColor
+        progressLayer.strokeColor = UIColor.whiteColor().CGColor
         progressLayer.lineWidth = 4.0
         progressLayer.strokeStart = 0.0
         progressLayer.strokeEnd = 0.0
@@ -67,10 +67,12 @@ class ProgressView: UIView {
         
 //        255,20,147
         
-        let colorTop: AnyObject = UIColor(red: 255.0/255.0, green: 20.0/255.0, blue: 147.0/255.0, alpha: 1.0).CGColor
-        let colorBottom: AnyObject = UIColor(red: 255.0/255.0, green: 227.0/255.0, blue: 235.0/255.0, alpha: 1.0).CGColor
+        let colorTop: AnyObject = UIColor(red: 223/255, green: 34/255, blue: 140/255, alpha: 1).CGColor
+        let colorBottom: AnyObject = UIColor(red: 255.0/255.0, green: 200.0/255.0, blue: 235.0/255.0, alpha: 1.0).CGColor
         let arrayOfColors: [AnyObject] = [colorTop, colorBottom]
         gradientLayer.colors = arrayOfColors
+        
+
         
         return gradientLayer
     }
@@ -85,9 +87,13 @@ class ProgressView: UIView {
         
         var percent: Int = Int(valueFinal * 100.0)
         
+        progressLabel.textColor = UIColor(red: 223/255, green: 34/255, blue: 96/255, alpha: 1)
+        
         progressLabel.text = String(format: "Loading %d %%", percent)
         
         progressLayer.strokeEnd = CGFloat(valueFinal)
+        
+        self.backgroundColor = UIColor(red: 19/255, green: 16/255, blue: 70/255, alpha: 1)
         
         progressLayer.strokeStart = CGFloat(0.0)
         

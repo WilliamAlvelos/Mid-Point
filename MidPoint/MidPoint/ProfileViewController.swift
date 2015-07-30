@@ -9,21 +9,21 @@
 import Foundation
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource
+class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, EventManagerDelegate
 {
     
     //ganbs para ver se esta funfando enquanto nao recebo o Usuario
 
-    var event:Event = Event(name: "Role")
-    
-    var data: [Event] = [Event(name: "rolezin")]
-    
+
     var navItem: UINavigationItem?
     
     var travado: Bool = false
     
     var searchAparecendo: Bool = true
     
+    var eventManager : EventManager = EventManager()
+    
+    var events = Array<Event>()
     
     @IBOutlet var searchBar: UISearchBar!
     
@@ -35,11 +35,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
      override func viewDidLoad() {
         
-        
-        
-        data.append(event)
-        data.append(event)
-        data.append(event)
+        self.eventManager.delegate = self
         
         navItem = self.navigationItem
         
@@ -48,6 +44,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         
+        eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 160.0
@@ -183,7 +180,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return events.count
     }
     
     
@@ -192,11 +189,40 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     }
     
     
+    func errorThrowedServer(stringError: String) {
+        
+    }
+    
+    func errorThrowedSystem(error: NSError) {
+        
+    }
+    
+    func getEventsFinished(events: Array<Event>) {
+        self.events = events
+
+        self.tableView.reloadData()
+    }
+    
+    func downloadImageFinished(images: Array<Event>) {
+        events = images
+        
+        self.tableView.reloadData()
+    }
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellProfile = self.tableView.dequeueReusableCellWithIdentifier("CustomCellProfile") as! CustomCellProfile
         
         
-        cell.titleEvent.text = self.data[indexPath.row].name
+        cell.titleEvent.text = self.events[indexPath.row].name
+        
+        cell.imageEvent.image = self.events[indexPath.row].image
+        
+        //cell.localHorarioEvento.text = self.events[indexPath.row].date
+            
+        cell.descricao.text = self.events[indexPath.row].descricao
+        
+        
         
 //        cell.titleLabel?.text = self.data![indexPath.row]
 //        

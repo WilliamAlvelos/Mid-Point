@@ -10,12 +10,16 @@ import Foundation
 
 
 
-class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UserManagerDelegate{
     
     var demoData:DemoModelData?
     var event: Event?
     var conversa:Int?
     var imageEvent: UIImage?
+    
+    var userManager: UserManager?
+    
+    var usuarios = Array<User>()
     
     var name:String?
     
@@ -33,7 +37,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     let kJSQDemoAvatarIdCook = "2"
     let kJSQDemoAvatarIdJobs = "3"
     let kJSQDemoAvatarIdWoz = "3"
-    
+//
     
     var Pessoas:[User]?
     
@@ -43,11 +47,14 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     // Create a reference to a Firebase location
     
     //propriedades
+    
+    
+    
     var messages:Array<JSQMessage!> = []
-    var avatars:NSDictionary?
+    var avatars:NSMutableDictionary?
     var outgoingBubbleImageData: JSQMessagesBubbleImage?
     var incomingBubbleImageData: JSQMessagesBubbleImage?
-    var users: NSDictionary?
+    var users: NSMutableDictionary?
     
     
     override func viewDidAppear(animated: Bool) {
@@ -60,8 +67,26 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        var jsqImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("WILL", backgroundColor: UIColor(white: 0.85, alpha: 1.0), textColor: UIColor(white: 0.60, alpha: 1.0), font: UIFont.systemFontOfSize(12.0), diameter:UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+
+        
+        var cookImage :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named:"demo_avatar_cook"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+        var jobsImage :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named:"demo_avatar_jobs"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+        var wozImage :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named:"demo_avatar_woz"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+        
+        
+        self.avatars = [ kJSQDemoAvatarIdSquires : jsqImage,
+            kJSQDemoAvatarIdCook : cookImage,
+            kJSQDemoAvatarIdJobs : jobsImage,
+            kJSQDemoAvatarIdWoz : wozImage ]
+        
+        
+        
         pickerLibrary = UIImagePickerController()
         pickerLibrary?.delegate = self
+        self.userManager?.delegate = self
+        
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -71,7 +96,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         self.showLoadEarlierMessagesHeader = false
         self.demoData = DemoModelData()
         setupFirebase()
-        setupImageFirebase()
+        //setupImageFirebase()
         
         self.title = name
         
@@ -89,35 +114,13 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         
         self.navigationItem.rightBarButtonItem = rightBarButtonItemEdit
         
-        var jsqImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("JSQ", backgroundColor: UIColor(white: 0.85, alpha: 1.0), textColor: UIColor(white: 0.60, alpha: 1.0), font: UIFont.systemFontOfSize(14.0), diameter:UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-        
-        
-        var cookImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "demo_avatar_cook"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-        
-        
-        var jobsImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "demo_avatar_jobs"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-        
-        var wozImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "demo_avatar_woz"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-        
-        
-        self.avatars = [kJSQDemoAvatarIdSquires: jsqImage,
-            kJSQDemoAvatarIdCook : cookImage,
-            kJSQDemoAvatarIdJobs : jobsImage,
-            kJSQDemoAvatarIdWoz : wozImage]
-        
-        self.users = [kJSQDemoAvatarIdJobs : kJSQDemoAvatarDisplayNameJobs,
-            kJSQDemoAvatarIdCook : kJSQDemoAvatarDisplayNameCook,
-            kJSQDemoAvatarIdWoz : kJSQDemoAvatarDisplayNameWoz,
-            kJSQDemoAvatarIdSquires : kJSQDemoAvatarDisplayNameSquires]
-        
+
         
         var bubbleFactory:JSQMessagesBubbleImageFactory = JSQMessagesBubbleImageFactory()
         
-        self.outgoingBubbleImageData = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleRedColor())
-        
-        self.incomingBubbleImageData = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
-        
-        
+        self.outgoingBubbleImageData = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor(red: 223/255, green: 34/255, blue: 96/255, alpha: 1))
+
+        self.incomingBubbleImageData = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor(red: 19/255, green: 16/255, blue: 70/255, alpha: 1))
         
     }
     
@@ -125,6 +128,9 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     func viewEvent(sender:AnyObject){
         var nextView = TransitionManager.creatView("infoEvent") as! EventInfoViewController
         nextView.event = self.event
+        
+        //if(self.)
+        nextView.dataPessoas = self.usuarios
         self.navigationController?.pushViewController(nextView, animated: true)
     }
     
@@ -157,24 +163,24 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
 
     
-    
-    func setupImageFirebase(){
-        var ref = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages/imageMensage", conversa!))
-        
-        ref.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) -> Void in
-            var string = snapshot.value["string"] as? String
-            
-            var decodedData = NSData(base64EncodedString: string!, options: NSDataBase64DecodingOptions())
-            var decodedImage = UIImage(data: decodedData!)!
-            
-            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
-            
-            self.addPhotoMediaMessage(decodedImage)
-            
-            self.finishReceivingMessage()
-        })
-    
-    }
+//    
+//    func setupImageFirebase(){
+//        var ref = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages/imageMensage", conversa!))
+//        
+//        ref.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) -> Void in
+//            var string = snapshot.value["string"] as? String
+//            
+//            var decodedData = NSData(base64EncodedString: string!, options: NSDataBase64DecodingOptions())
+//            var decodedImage = UIImage(data: decodedData!)!
+//            
+//            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+//            
+//            self.addPhotoMediaMessage(decodedImage)
+//            
+//            self.finishReceivingMessage()
+//        })
+//    
+//    }
     
     
     
@@ -191,8 +197,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
             var geolongitude = snapshot.value["geolongitude"] as? Double
             
             
-
-            
             JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
             
             
@@ -201,24 +205,17 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
                 
                 self.messages.append(message)
                 
-            }else if(geolatitude != nil){
+            }else if(image != ""){
+                var decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions())
+                var decodedImage = UIImage(data: decodedData!)!
+                
+                self.addPhotoMediaMessage(decodedImage, sender: sender, name: name)
+            }else{
                 
                 self.addLocationMediaMessage(geolatitude!, longitude: geolongitude!, id: sender, name: name)
                 
             }
             
-            
-            
-            else if(image != nil){
-                var decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions())
-                var decodedImage = UIImage(data: decodedData!)!
-                
-                self.addPhotoMediaMessage(decodedImage)
-            }
-            
-            
-
-
             
             self.finishReceivingMessage()
             
@@ -366,7 +363,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         }
         
         return self.avatars![message!.senderId] as! JSQMessageAvatarImageDataSource
-       
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         if indexPath.item % 3 == 0 {
@@ -469,15 +465,14 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     }
 
     
-    func addPhotoMediaMessage(image: UIImage){
+    func addPhotoMediaMessage(image: UIImage, sender: String?, name:String?){
         
         var photoItem:JSQPhotoMediaItem = JSQPhotoMediaItem(image: image)
         
-        var photoMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: photoItem)
+        var photoMessage:JSQMessage = JSQMessage(senderId: sender, displayName: name, media: photoItem)
         
         self.messages.append(photoMessage)
-        
-        
+    
     }
     
     func addLocationMediaMessageCompletion(completion: JSQLocationMediaItemCompletionBlock){
@@ -560,6 +555,46 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         return paths[0] as! NSString
     }
 
+    func errorThrowedSystem(error: NSError) {
+        
+    }
+    
+    func errorThrowedServer(stringError: String) {
+        
+    }
+    
+    func downloadImageFinished(image: Array<User>) {
+        for(var i = 0; i < image.count; i++){
+            var user :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(image[i].image, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+            
+            self.avatars!.setValue(user, forKey: "\(image[i].id!)")
+        }
+        
+        self.usuarios = image
+    }
+    
+    
+    
+    
+    func getUsersFinished(users: Array<User>) {
+        for(var i = 0; i < users.count ; i++){
+            //self.users?.setValue(users[i].name, forKey: users[i].id)
+            
+            self.users?.setValue(users[i].id, forKey: users[i].name!)
+        }
+        
+        self.usuarios = users
+    }
+    
+    
+    //
+    //        self.avatars = [kJSQDemoAvatarIdSquires: jsqImage,
+    //            kJSQDemoAvatarIdCook : cookImage,
+    //            kJSQDemoAvatarIdJobs : jobsImage,
+    //            kJSQDemoAvatarIdWoz : wozImage]
+    //
+
+    
     
 
     

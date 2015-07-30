@@ -47,7 +47,13 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         user = User()
         
         
-
+        self.title = "Create Account"
+        
+        
+        var buttonRegister: UIBarButtonItem = UIBarButtonItem(title: "Register", style: UIBarButtonItemStyle.Done, target: self, action: Selector("register"))
+        
+        self.navigationItem.rightBarButtonItem = buttonRegister
+        
     }
     
     override func  viewWillAppear(animated: Bool) {
@@ -198,7 +204,34 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
         return paths[0] as! NSString
     }
-//
+
+    
+    
+    
+    
+    func register(){
+        if(self.nameTextField.text == ""){
+            // Create the alert controller
+            
+            ActionError.actionErrorWithTextField("Cuidado", errorMessage: "O seu Nome está vazio", placeholder: "Digite o seu Nome", view: self)
+            
+        }
+        
+        if((passwordTextField.text == confirmPasswordTextFied.text) || passwordTextField.text != ""){
+            self.user?.name = nameTextField.text
+            self.user?.email = emailTexteField.text
+            userManager.insertUserDatabase(self.user!, password : passwordTextField.text)
+            
+            var progressView: ProgressView = ProgressView(frame: self.view.frame)
+            
+            progressView.backgroundColor = UIColor(red: 223/255, green: 34/255, blue: 96/255, alpha: 1)
+            
+            self.view = progressView
+            
+            self.navigationController?.navigationBarHidden = true
+        }
+    
+    }
     
     
     @IBAction func registerAction(sender: AnyObject) {
@@ -241,8 +274,27 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     }
     func progressUpload(float: Float) {
         println(float)
+        
+        var progressView: ProgressView = ProgressView(frame: self.view.frame)
+        
+        self.view = progressView
+        
+        self.navigationController?.navigationBarHidden = true
+        
+        progressView.animateProgressView(float)
+        
     }
     func saveUserFinished() {
+        var alertController = UIAlertController(title: "Sucesso", message: "Usuario Criado com Sucesso", preferredStyle: .Alert)
+        
+        var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            TransitionManager(indentifier: "navigationHome", animated: false, view: self)
+        }
+        
+        alertController.addAction(okAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
         
     }
     func errorThrowedSystem(error: NSError) {

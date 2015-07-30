@@ -24,6 +24,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     var locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView!
+    
     var radius: CLLocationDistance = 300
     
     

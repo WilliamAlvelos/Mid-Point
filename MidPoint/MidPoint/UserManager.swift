@@ -48,14 +48,8 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     
     func saveUserFinished(user: User){
-        let installation = PFInstallation.currentInstallation()
-
-//        
-        installation["id"] = "\(user.id!)"
-        let data = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken") as? NSData
-        installation.setDeviceTokenFromData(data)
-        installation.saveInBackground()
-        pictureDao?.uploadImageUser(user)
+            PushResponse.createNewDeviceToPush(user)
+            pictureDao?.uploadImageUser(user)
     }
     
     func userNotFound(user : User){
