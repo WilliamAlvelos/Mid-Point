@@ -119,6 +119,12 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                     return
                 }
                 
+                var number = dataString[EventGlobalConstants.Number] as! NSDictionary
+                
+                var accepted = number[EventGlobalConstants.Accepted] as! Int
+                var total = number[EventGlobalConstants.Total] as! Int
+                var pending = number[EventGlobalConstants.Pending] as! Int
+                var refused = number[EventGlobalConstants.Refused] as! Int
                 
                 var id = (dataString.objectForKey("\(EventGlobalConstants.Id)") as! String).toInt()
                 var event_date = (dataString.objectForKey("\(EventGlobalConstants.Date)") as! String).toInt()
@@ -128,6 +134,12 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
 
                 var event = Event(name: name, id: id!, descricao: description)
                 event.id = id
+                event.numberOfConfirmed = accepted
+                event.numberOfPending = pending
+                event.numberOfPeople = total
+                event.numberOfRefused = refused
+                
+                
                 
                 arrayToReturn.append(event)
                 

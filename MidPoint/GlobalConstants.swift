@@ -31,6 +31,12 @@ struct EventGlobalConstants {
     static let UserSender = "user_sender"
     static let UserState = "user_state"
     static let Image = "event_picture"
+    static let Pending = "pending"
+    static let Total = "total"
+    static let Accepted = "accepted"
+    static let Refused = "refused"
+    static let Number = "number"
+
 
 
 }
