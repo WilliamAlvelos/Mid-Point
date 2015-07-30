@@ -38,7 +38,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         
         activityIndicator.activityViewWithName(self, texto: "Eai will")
         
-        activityIndicator.removeActivityViewWithName()
+        //activityIndicator.removeActivityViewWithName()
     }
     
     

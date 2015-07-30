@@ -109,7 +109,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 375;
+        return 200;
         
     }
     
@@ -149,15 +149,42 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         var cell:CustomCellProfile = self.tableView.dequeueReusableCellWithIdentifier("CustomCellProfile") as! CustomCellProfile
         
         
+        var image = self.events[indexPath.row].image
+        
         cell.titleEvent.text = self.events[indexPath.row].name
         
         cell.imageEvent.image = self.events[indexPath.row].image
         
         //cell.localHorarioEvento.text = self.events[indexPath.row].date
-            
         cell.descricao.text = self.events[indexPath.row].descricao
         
         
+        if(image != nil){
+
+
+        //        
+        //        var imageCortada : UIImage = UIImage(CGImage: imageRef, scale: image!.scale, orientation: image!.imageOrientation)!
+            
+
+
+            // Create a copy of the image without the imageOrientation property so it is in its native orientation (landscape)
+            let contextImage: UIImage = UIImage(CGImage: image!.CGImage)!
+            
+            // Get the size of the contextImage
+            let contextSize: CGSize = contextImage.size
+            
+            let rect: CGRect = CGRectMake(image!.size.width/4, image!.size.height/4, 375, 200)
+            
+            // Create bitmap image from context using the rect
+            let imageRef: CGImageRef = CGImageCreateWithImageInRect(contextImage.CGImage, rect)
+                
+            // Create a new image based on the imageRef and rotate back to the original orientation
+            let imageFinal: UIImage = UIImage(CGImage: imageRef, scale: image!.scale, orientation: image!.imageOrientation)!
+
+            cell.imageEvent.image = imageFinal
+            
+        
+        }
         
 //        cell.titleLabel?.text = self.data![indexPath.row]
 //        

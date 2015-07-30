@@ -75,7 +75,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         var jobsImage :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named:"demo_avatar_jobs"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
         var wozImage :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named:"demo_avatar_woz"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
         
-        
         self.avatars = [ kJSQDemoAvatarIdSquires : jsqImage,
             kJSQDemoAvatarIdCook : cookImage,
             kJSQDemoAvatarIdJobs : jobsImage,

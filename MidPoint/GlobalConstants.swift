@@ -38,7 +38,6 @@ struct EventGlobalConstants {
     static let Number = "number"
 
 
-
 }
 
 struct LinkAccessGlobalConstants {
