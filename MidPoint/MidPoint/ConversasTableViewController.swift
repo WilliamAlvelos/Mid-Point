@@ -212,10 +212,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+        if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
@@ -244,10 +241,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         Data = events
         //animateTable()
         self.refreshControl?.endRefreshing()
-
-
-      
-        
 
         self.animateTable()
         

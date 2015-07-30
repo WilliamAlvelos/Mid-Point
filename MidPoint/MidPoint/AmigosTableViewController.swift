@@ -192,24 +192,19 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
     }
     func uploadImageFinished(){
-        // Create the alert controller
+
         var alertController = UIAlertController(title: "Sucesso", message: "Grupo Criado com Sucesso", preferredStyle: .Alert)
         
-        // Create the actions
         var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
             UIAlertAction in
             TransitionManager(indentifier: "navigationHome", animated: false, view: self)
         }
 
-        
-        // Add the actions
         alertController.addAction(okAction)
         
-        // Present the controller
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     func progressUpload(float : Float){
-        
         
         var progressView: ProgressView = ProgressView(frame: self.view.frame)
         

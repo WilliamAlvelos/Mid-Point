@@ -161,7 +161,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         UserDAODefault.saveLogin(user)
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ConversasTableView2") as! UINavigationController
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
         self.presentViewController(nextViewController, animated:true, completion:nil)
 
     }
@@ -187,7 +187,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
 //            UserDAODefault.saveLogin(user)
             
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ConversasTableView2") as! UINavigationController
+            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
             self.presentViewController(nextViewController, animated:true, completion:nil)
         }
         

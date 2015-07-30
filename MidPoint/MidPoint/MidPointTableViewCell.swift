@@ -15,11 +15,6 @@ class MidPointTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        if(button == nil){
-            button.addTarget(self, action: Selector("teste"), forControlEvents: UIControlEvents.TouchUpInside)
-        }
-        
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

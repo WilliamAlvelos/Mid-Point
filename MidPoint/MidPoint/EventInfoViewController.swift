@@ -30,10 +30,12 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         self.userManager = UserManager()
         self.userManager?.delegate = self
         
-        
-        
-        
         self.userManager?.getUsersFrom(event!)
+        
+        self.tableView.reloadData()
+        
+        
+        self.title = "Grupo"
         
 //        
 //        self.imageEvent.image = imagemDoEvent
@@ -117,8 +119,11 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
             var cell:MidPointTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("MidPointTableViewCell") as!MidPointTableViewCell
             
+            //if(cell.button == nil){
             
-            cell.button.addTarget(self, action: Selector("teste"), forControlEvents: UIControlEvents.AllEvents)
+            
+             cell.button.addTarget(self, action: Selector("ChangeMidPoint"), forControlEvents: UIControlEvents.TouchDown)
+           
             
 //            cell.imageLabel.image = event?.image
 //            
@@ -172,9 +177,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
     }
     
-    
-    func teste(){
-        print("will")
+    func ChangeMidPoint(){
+        var nextView = TransitionManager.creatView("changeMidPoint") as! ChangeMidPointViewController
+        
+        self.navigationController?.pushViewController(nextView, animated: true)
     }
     
     func errorThrowedServer(stringError: String) {
@@ -195,6 +201,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func getUsersFinished(users: Array<User>) {
         self.dataPessoas = users
+        
+        self.tableView.reloadData()
     }
     
 

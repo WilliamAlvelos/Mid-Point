@@ -28,7 +28,9 @@
 		3DA699FC1B695FE40021FBF1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA699FB1B695FE40021FBF1 /* Accounts.framework */; };
 		3DA699FE1B695FEB0021FBF1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA699FD1B695FEB0021FBF1 /* Social.framework */; };
 		3DA69A001B6960610021FBF1 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA699FF1B6960610021FBF1 /* Bolts.framework */; };
-		3DA69A021B6967AE0021FBF1 /* PushResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA69A011B6967AE0021FBF1 /* PushResponse.swift */; };
+		3DA7BD801B6A22DE00882C07 /* ActionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7BD7F1B6A22DE00882C07 /* ActionError.swift */; };
+		3DA7BD821B6A2BD600882C07 /* PushResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7BD811B6A2BD600882C07 /* PushResponse.swift */; };
+		3DA7BD841B6A5BAD00882C07 /* ChangeMidPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7BD831B6A5BAD00882C07 /* ChangeMidPointViewController.swift */; };
 		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
 		3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE926A61B5430840053B43C /* ChatViewC.swift */; };
 		3DE927EE1B543FF70053B43C /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927E91B543FF70053B43C /* Firebase.framework */; };
@@ -114,7 +116,9 @@
 		3DA699FB1B695FE40021FBF1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		3DA699FD1B695FEB0021FBF1 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3DA699FF1B6960610021FBF1 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		3DA69A011B6967AE0021FBF1 /* PushResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushResponse.swift; path = MidPoint/PushResponse.swift; sourceTree = "<group>"; };
+		3DA7BD7F1B6A22DE00882C07 /* ActionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionError.swift; sourceTree = "<group>"; };
+		3DA7BD811B6A2BD600882C07 /* PushResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushResponse.swift; path = MidPoint/PushResponse.swift; sourceTree = "<group>"; };
+		3DA7BD831B6A5BAD00882C07 /* ChangeMidPointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangeMidPointViewController.swift; path = ../ChangeMidPointViewController.swift; sourceTree = "<group>"; };
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DE926A61B5430840053B43C /* ChatViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewC.swift; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 		3DFB8A201B4C383300463EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3DA7BD831B6A5BAD00882C07 /* ChangeMidPointViewController.swift */,
 				3D6A3AC61B5774C400E7948F /* CreateConversationViewController.swift */,
 				3DE928981B55CA9E0053B43C /* ProfileViewController.swift */,
 				3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */,
@@ -294,6 +299,7 @@
 		3DFB8A251B4C54C800463EA4 /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
+				3DA7BD7F1B6A22DE00882C07 /* ActionError.swift */,
 				7B6315571B66C9A600D13DE5 /* DispatcherClass.swift */,
 				3D50F3761B6700700029C4B9 /* ProgressView.swift */,
 				3D6A3AC21B576D6C00E7948F /* Conversa.swift */,
@@ -400,6 +406,7 @@
 		FFC2C6D91AF935E0004B0AA7 = {
 			isa = PBXGroup;
 			children = (
+				3DA7BD811B6A2BD600882C07 /* PushResponse.swift */,
 				3DA69A011B6967AE0021FBF1 /* PushResponse.swift */,
 				7B63155F1B66D7A400D13DE5 /* GlobalConstants.swift */,
 				7B6315591B66D04700D13DE5 /* PictureCloudKit.swift */,
@@ -606,6 +613,7 @@
 				3D084DD71B56CCA30032A94B /* ChatViewController.swift in Sources */,
 				7BE9F2A21B680FDE00AAD032 /* EventManager.swift in Sources */,
 				3DA699EC1B6946220021FBF1 /* EventInfoViewController.swift in Sources */,
+				3DA7BD821B6A2BD600882C07 /* PushResponse.swift in Sources */,
 				7BED36651B54B9430045FDB5 /* TransitionManager.swift in Sources */,
 				FF3692461B6296DA00C71BBC /* ETBScrollView.swift in Sources */,
 				7B6315601B66D7A400D13DE5 /* GlobalConstants.swift in Sources */,
@@ -613,7 +621,6 @@
 				3DFB8A181B4C218700463EA4 /* User.swift in Sources */,
 				FF3692441B60723D00C71BBC /* FacebookUser.swift in Sources */,
 				FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */,
-				3DA69A021B6967AE0021FBF1 /* PushResponse.swift in Sources */,
 				3DFB8A221B4C392500463EA4 /* RegisterViewController.swift in Sources */,
 				3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */,
 				7BE9F2A71B6828F900AAD032 /* IHKeyboardAvoiding.m in Sources */,
@@ -633,6 +640,7 @@
 				FF3692391B5FFF7E00C71BBC /* OCView.swift in Sources */,
 				7BE9F2A41B68176D00AAD032 /* ErrorHandling.swift in Sources */,
 				FF3692381B5FFF7E00C71BBC /* UBAGlueView.swift in Sources */,
+				3DA7BD801B6A22DE00882C07 /* ActionError.swift in Sources */,
 				3D3359E71B61A79D00F22D88 /* AmigosTableViewController.swift in Sources */,
 				3DE9288C1B547DAB0053B43C /* EventoViewController.swift in Sources */,
 				3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */,
@@ -647,6 +655,7 @@
 				7B63155A1B66D04700D13DE5 /* PictureCloudKit.swift in Sources */,
 				3DACDEAF1B5222E300711E25 /* Event.swift in Sources */,
 				FF3692481B62A4DF00C71BBC /* TestVC.swift in Sources */,
+				3DA7BD841B6A5BAD00882C07 /* ChangeMidPointViewController.swift in Sources */,
 				3DE928991B55CA9E0053B43C /* ProfileViewController.swift in Sources */,
 				3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */,
 				3DA699F01B6951FB0021FBF1 /* EventoInfoCellCustom.swift in Sources */,
