@@ -12,6 +12,7 @@ import TwitterKit
 import FBSDKLoginKit
 
 
+
 class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDelegate {
     
     @IBOutlet weak var userToIconDistance: NSLayoutConstraint!
@@ -44,10 +45,46 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         
         
         
+        
+        
+        
         let logInButton = TWTRLogInButton(logInCompletion: {
             (session: TWTRSession!, error: NSError!) in
             
             if session != nil{
+                
+                
+                // Swift
+                if session != nil {
+                    let shareEmailViewController = TWTRShareEmailViewController() { email, error in
+                        println("Email \(email), Error: \(error)")
+                    }
+                    self.presentViewController(shareEmailViewController, animated: true, completion: nil)
+                    
+                    
+                    Twitter.sharedInstance().APIClient.loadTweetWithID("20") { (tweet, error) -> Void in
+                        // handle the response or error
+                    }
+                    
+                    
+                    
+                    Twitter.sharedInstance().APIClient.loadUserWithID(session.userID) { (user, error) -> Void in
+                        // handle the response or error
+                    }
+                    
+                    
+                    Twitter.sharedInstance().logInGuestWithCompletion { guestSession, error in
+                        if (guestSession != nil) {
+                            guestSession
+                            // make API calls that do not require user auth
+                        } else {
+                            println("error: \(error.localizedDescription)");
+                        }
+                    }
+                    
+                } else {
+                    // TODO: Handle user not signed in (e.g. attempt to log in or show an alert)
+                }
                 
                 
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -208,7 +245,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
                     var id = result.valueForKey("id") as! String!
                     var name = result.valueForKey("name") as! String!
                     var email = result.valueForKey("email") as! String!
-                    var image = "https://graph.facebook.com/\(id!)/picture?type=large"
+                    var image = "https://graph.facebook.com/\(id)/picture?type=large"
                     
 
                     var imageFacebook : UIImage?
@@ -223,14 +260,15 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
                     if urlData == nil || error != nil || NSString(data: urlData!, encoding: NSUTF8StringEncoding) != nil{
                        imageFacebook = UIImage(named: "logo")
                     
+                    }else{
+                        imageFacebook = UIImage(data: urlData!)
                     }
-                    imageFacebook = UIImage(data: urlData!)
-                
                     DispatcherClass.dispatcher({ () -> () in
+                        
                         let nextView = TransitionManager.creatView("register") as! RegisterViewController
-                        nextView.button.imageView.image = imageFacebook!
-                        nextView.nameTextField.text = name
-                        nextView.emailTexteField.text = email
+                        nextView.imageUser = imageFacebook
+                        nextView.nomeUser = name
+                        nextView.emailUser = email
                         
                         self.navigationController?.pushViewController(nextView, animated: true)
                         

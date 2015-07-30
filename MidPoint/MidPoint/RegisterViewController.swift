@@ -16,7 +16,11 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     var user : User?
     
+    var imageUser: UIImage?
+    
     var nomeUser: String?
+    
+    var emailUser: String?
     
     private var  userManager :UserManager = UserManager()
     
@@ -107,6 +111,14 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
         if(nomeUser != nil){
             self.nameTextField.text = nomeUser
+        }
+        
+        if(imageUser != nil){
+            self.button.imageView?.image = imageUser
+        }
+        
+        if(emailUser != nil){
+            self.emailTexteField.text = emailUser
         }
 
     }
