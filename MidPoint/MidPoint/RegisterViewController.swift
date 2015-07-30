@@ -105,7 +105,10 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
             }, completion: nil)
         
         
-        self.nameTextField.text = nomeUser
+        if(nomeUser != nil){
+            self.nameTextField.text = nomeUser
+        }
+
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

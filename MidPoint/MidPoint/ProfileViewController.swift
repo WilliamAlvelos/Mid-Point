@@ -155,9 +155,20 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         cell.imageEvent.image = self.events[indexPath.row].image
         
+        cell.view.backgroundColor = Colors.Azul
+        
+        cell.selectionStyle = .None
+        
         //cell.localHorarioEvento.text = self.events[indexPath.row].date
         cell.descricao.text = self.events[indexPath.row].descricao
         
+        if(self.events[indexPath.row].numberOfPeople! > 1){
+        
+        cell.numeroPessoas.text? = String(format: "%d Pessoas", self.events[indexPath.row].numberOfPeople!)
+        
+        }else{
+            cell.numeroPessoas.text? = String(format: "%d Pessoa", self.events[indexPath.row].numberOfPeople!)
+        }
         
         if(image != nil){
 
@@ -185,6 +196,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
             
         
         }
+        
+        
+        cell.titleEvent.textColor = Colors.Rosa
+        cell.descricao.textColor = Colors.Rosa
+        cell.numeroPessoas.textColor = Colors.Rosa
         
 //        cell.titleLabel?.text = self.data![indexPath.row]
 //        

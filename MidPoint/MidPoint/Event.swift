@@ -27,6 +27,7 @@ class Event: NSObject {
     override init() {
         
     }
+    
     init(name: String){
         self.name = name
     }

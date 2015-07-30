@@ -36,9 +36,6 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         
         IHKeyboardAvoiding.setAvoidingView(self.view)
         
-        activityIndicator.activityViewWithName(self, texto: "Eai will")
-        
-        //activityIndicator.removeActivityViewWithName()
     }
     
     
@@ -136,6 +133,8 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     //MARK: LogIn and SignIn
     
     @IBAction func logInAction(sender: AnyObject) {
+        
+        activityIndicator.activityViewWithName(self, texto: "Buscando Usuário")
 
         var user: User = User(name: nomeText.text, email: nomeText.text)
         
@@ -154,15 +153,16 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     //MARK: UserManager Delegate
     
     func errorThrowedSystem(error: NSError) {
-        
+        activityIndicator.removeActivityViewWithName()
     }
     
     func userNotFound(user : User){
+        activityIndicator.removeActivityViewWithName()
         println("userNotFound")
     }
     func getUserFinished(user: User){
         UserDAODefault.saveLogin(user)
-        
+        activityIndicator.removeActivityViewWithName()
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
         self.presentViewController(nextViewController, animated:true, completion:nil)
