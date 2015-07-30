@@ -71,6 +71,7 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     func inviteFriendsToEvent(event : Event, sender : User,  friends : Array<User>){
         eventDao?.inviteFriendsToEvent(event, sender: sender, friends: friends)
     }
+
     func getImages(events : Array<Event>){
         for var x = 0 ; x < events.count ; x++ {
             events[x].image = self.eventDao?.downloadImage(events[x].id!)
