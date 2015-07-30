@@ -289,7 +289,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         
     }
     
-    
     private func imagePathURL()->NSURL{
         return NSURL.fileURLWithPath(NSString(format: "%@%@", aplicationDocumentsDirectory(),"/groupPhoto.JPG") as String)!
     }

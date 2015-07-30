@@ -11,10 +11,10 @@ import Foundation
 class activityIndicator {
     
     
-    static var boxView = UIView()
+    var boxView = UIView()
     
     
-    class func activityViewWithName(view:UINavigationController, texto: String) {
+    init(view:UINavigationController, texto: String) {
 
         
         var activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
@@ -39,8 +39,7 @@ class activityIndicator {
         view.view.addSubview(boxView)
     }
     
-    
-    class func removeActivityViewWithName(){
+    func removeActivityViewWithName(){
         boxView.removeFromSuperview()
     }
     

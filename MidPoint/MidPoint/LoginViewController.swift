@@ -23,6 +23,8 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     @IBOutlet var senhaText: UITextField!
 
     
+    var activity: activityIndicator?
+    
     var usuario: UserManager = UserManager()
     
     var fbResponder: FacebookResponder!
@@ -132,7 +134,7 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     
     @IBAction func logInAction(sender: AnyObject) {
         
-        activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Usuário")
+        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Usuário")
 
         var user: User = User(name: nomeText.text, email: nomeText.text)
         
@@ -151,16 +153,16 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     //MARK: UserManager Delegate
     
     func errorThrowedSystem(error: NSError) {
-        activityIndicator.removeActivityViewWithName()
+        activity?.removeActivityViewWithName()
     }
     
     func userNotFound(user : User){
-        activityIndicator.removeActivityViewWithName()
+        activity?.removeActivityViewWithName()
         println("userNotFound")
     }
     func getUserFinished(user: User){
         UserDAODefault.saveLogin(user)
-        activityIndicator.removeActivityViewWithName()
+        activity?.removeActivityViewWithName()
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
         self.presentViewController(nextViewController, animated:true, completion:nil)
@@ -181,6 +183,8 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         
     }
     func errorThrowedServer(stringError : String){
+        
+        activity?.removeActivityViewWithName()
         
         var action: UIAlertController = UIAlertController(title: "Error", message: stringError, preferredStyle: UIAlertControllerStyle.Alert)
         

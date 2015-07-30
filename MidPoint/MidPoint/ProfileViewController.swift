@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
      override func viewDidLoad() {
         
-        activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Eventos")
+        //activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Eventos")
         
         self.eventManager.delegate = self
         
@@ -145,7 +145,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         self.tableView.reloadData()
         
-        activityIndicator.removeActivityViewWithName()
+        //activityIndicator.removeActivityViewWithName()
     }
     
     

@@ -14,7 +14,6 @@ import CoreLocation
 
 class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
-    @IBOutlet var activity: UIActivityIndicatorView!
     @IBOutlet var localTextField: UITextField!
     
     var nomeUser: String?
@@ -26,6 +25,9 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     @IBOutlet weak var mapView: MKMapView!
     
     var radius: CLLocationDistance = 300
+    
+    
+    var activity :activityIndicator?
     
     
     var geoLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(-23.670055, -46.701234)
@@ -55,7 +57,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     override func viewDidLoad() {
         
-        activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Locais")
+        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais")
         
         
         
@@ -69,7 +71,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         locationManager.delegate = self
         mapView.showsUserLocation = true
         localTextField.hidden = true
-        showActivity()
+        //showActivity()
         
 
         
@@ -82,7 +84,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         //addPointsOfInterest("restaurant|food", name: "", location: coor2);
         //addLocationsFromGoogle()
         
-        activity.stopAnimating()
+        //activity.stopAnimating()
         
         self.title = "Mapa"
     }
@@ -95,21 +97,21 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     
-    func showActivity(){
-        activity.hidesWhenStopped = true
-        activity.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
-        activity.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-        activity.layer.cornerRadius = 10
-        activity.startAnimating()
-    }
-    
+//    func showActivity(){
+//        activity.hidesWhenStopped = true
+//        activity.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+//        activity.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+//        activity.layer.cornerRadius = 10
+//        activity.startAnimating()
+//    }
+//    
     
     
     
     private func addPointsOfInterest(type: String, name: String, location: CLLocationCoordinate2D) {
         
         mapView.removeAnnotations(mapView.annotations)
-        showActivity()
+        //showActivity()
 
         
         
@@ -242,7 +244,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 //        }
         
 
-        activity.stopAnimating()
+        //activity.stopAnimating()
     
     }
     
@@ -255,7 +257,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
             
             if annotation is MKUserLocation {
-                activityIndicator.removeActivityViewWithName()
                 
                 return nil
             }
@@ -301,8 +302,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 pinView!.annotation = annotation
             }
             
-            
-            activityIndicator.removeActivityViewWithName()
+            activity?.removeActivityViewWithName()
             
             return pinView
     }
@@ -352,7 +352,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             
         }else{
             
-            activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Locais")
+            activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais")
             
             localTextField.hidden = true
             
@@ -369,7 +369,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     func locationManager(manager: CLLocationManager!,
         didChangeAuthorizationStatus status: CLAuthorizationStatus) {
             
-            showActivity()
+            //showActivity()
             
             var shouldIAllow = false
             
@@ -390,8 +390,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 locationManager.startUpdatingLocation()
             }
             
-            activity.stopAnimating()
-    }
+               }
     
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
