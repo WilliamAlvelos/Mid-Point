@@ -19,19 +19,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     var travado: Bool = false
     
-    var searchAparecendo: Bool = true
-    
     var eventManager : EventManager = EventManager()
     
     var events = Array<Event>()
     
-    @IBOutlet var searchBar: UISearchBar!
     
     @IBOutlet var tableView: UITableView!
 
     @IBOutlet var gestureView: UIView!
     
-    @IBOutlet var tabBar: UITabBar!
     
      override func viewDidLoad() {
         
@@ -69,9 +65,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.view.addGestureRecognizer(swipeDownSearch)
         
         
-        self.tabBar.addGestureRecognizer(swipeUP)
-        
-        self.tabBar.addGestureRecognizer(swipeDown)
+//        self.tabBar.addGestureRecognizer(swipeUP)
+//        
+//        self.tabBar.addGestureRecognizer(swipeDown)
         
     }
 
@@ -80,71 +76,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
 
     
     override func viewWillAppear(animated: Bool) {
-        searchBar.center.y -= view.bounds.height
-        
         
         animateTable()
         
-        UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.searchBar.center.y += self.view.bounds.height
-            
-            self.view.layoutIfNeeded()
-            
-            }, completion: nil)
-    }
-    
-    func DownSwipeSearch(gesture: UISwipeGestureRecognizer){
-        if(searchAparecendo == false){
-            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                self.searchBar.center.y += self.view.bounds.height/5
-                
-                }, completion: nil)
-                searchAparecendo = true
-        }
-    }
-    func UpSwipeSearch(gesture: UISwipeGestureRecognizer){
-        
-        if(searchAparecendo == true){
-            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                self.searchBar.center.y -= self.view.bounds.height/5
-                
-                }, completion: nil)
-            searchAparecendo = false
-        }
-    }
 
-    func DownSwipe(gesture: UISwipeGestureRecognizer){
-        if(travado == true){
-            
-            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                self.tableView.center.y += self.view.bounds.width/1.55
-                self.tabBar.center.y += self.view.bounds.width/1.55
-                
-                //self.view.backgroundColor = UIColor(red: 0, green:0 , blue: 255, alpha: 1)
-                
-                self.view.layoutIfNeeded()
-                }, completion: nil)
-            
-            travado = false
-        }
-    }
-    func UpSwipe(gesture: UISwipeGestureRecognizer){
-        
-        println("cima")
-        
-        if(travado == false){
-            
-            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                self.tableView.center.y -= self.view.bounds.width/1.55
-                self.tabBar.center.y -= self.view.bounds.width/1.55
-                //self.view.backgroundColor = UIColor(red: 0, green:0 , blue: 255, alpha: 1)
-                
-                self.view.layoutIfNeeded()
-                }, completion: nil)
-            
-            travado = true
-        }
-        
     }
     
     func animateTable() {
@@ -174,7 +109,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 300;
+        return 375;
         
     }
     

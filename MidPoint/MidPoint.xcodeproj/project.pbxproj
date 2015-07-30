@@ -32,6 +32,7 @@
 		3DA7BD821B6A2BD600882C07 /* PushResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7BD811B6A2BD600882C07 /* PushResponse.swift */; };
 		3DA7BD841B6A5BAD00882C07 /* ChangeMidPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7BD831B6A5BAD00882C07 /* ChangeMidPointViewController.swift */; };
 		3DACDEAF1B5222E300711E25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACDEAE1B5222E300711E25 /* Event.swift */; };
+		3DC43D041B6A89B100BD8C79 /* activityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC43D031B6A89B100BD8C79 /* activityIndicator.swift */; };
 		3DE926A71B5430840053B43C /* ChatViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE926A61B5430840053B43C /* ChatViewC.swift */; };
 		3DE927EE1B543FF70053B43C /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE927E91B543FF70053B43C /* Firebase.framework */; };
 		3DE9288A1B5443330053B43C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE928891B5443330053B43C /* libsqlite3.0.dylib */; };
@@ -121,6 +122,7 @@
 		3DA7BD831B6A5BAD00882C07 /* ChangeMidPointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangeMidPointViewController.swift; path = ../ChangeMidPointViewController.swift; sourceTree = "<group>"; };
 		3DACDEAE1B5222E300711E25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3DACDEB51B532B9500711E25 /* MidPoint-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MidPoint-Bridging-Header.h"; sourceTree = "<group>"; };
+		3DC43D031B6A89B100BD8C79 /* activityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = activityIndicator.swift; sourceTree = "<group>"; };
 		3DE926A61B5430840053B43C /* ChatViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewC.swift; sourceTree = "<group>"; };
 		3DE927E91B543FF70053B43C /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		3DE928891B5443330053B43C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -299,6 +301,7 @@
 		3DFB8A251B4C54C800463EA4 /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
+				3DC43D031B6A89B100BD8C79 /* activityIndicator.swift */,
 				3DA7BD7F1B6A22DE00882C07 /* ActionError.swift */,
 				7B6315571B66C9A600D13DE5 /* DispatcherClass.swift */,
 				3D50F3761B6700700029C4B9 /* ProgressView.swift */,
@@ -407,7 +410,6 @@
 			isa = PBXGroup;
 			children = (
 				3DA7BD811B6A2BD600882C07 /* PushResponse.swift */,
-				3DA69A011B6967AE0021FBF1 /* PushResponse.swift */,
 				7B63155F1B66D7A400D13DE5 /* GlobalConstants.swift */,
 				7B6315591B66D04700D13DE5 /* PictureCloudKit.swift */,
 				7BED36641B54B9430045FDB5 /* TransitionManager.swift */,
@@ -618,6 +620,7 @@
 				FF3692461B6296DA00C71BBC /* ETBScrollView.swift in Sources */,
 				7B6315601B66D7A400D13DE5 /* GlobalConstants.swift in Sources */,
 				3DFB8A1F1B4C381300463EA4 /* LoginViewController.swift in Sources */,
+				3DC43D041B6A89B100BD8C79 /* activityIndicator.swift in Sources */,
 				3DFB8A181B4C218700463EA4 /* User.swift in Sources */,
 				FF3692441B60723D00C71BBC /* FacebookUser.swift in Sources */,
 				FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */,

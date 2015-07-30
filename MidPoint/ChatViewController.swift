@@ -220,10 +220,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
             
             self.finishReceivingMessage()
             
-            
         })
-        
-        
         
     }
     
@@ -362,7 +359,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         if message?.senderId == self.senderId {
             return nil;
         }
-        
+
         return self.avatars![message!.senderId] as! JSQMessageAvatarImageDataSource
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
@@ -565,6 +562,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     }
     
     func downloadImageFinished(image: Array<User>) {
+        self.avatars?.removeAllObjects()
+        
         for(var i = 0; i < image.count; i++){
             var user :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(image[i].image, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
             
@@ -579,6 +578,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
     
     func getUsersFinished(users: Array<User>) {
+        self.users?.removeAllObjects()
+        
         for(var i = 0; i < users.count ; i++){
             //self.users?.setValue(users[i].name, forKey: users[i].id)
             
@@ -586,9 +587,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         }
         
         self.usuarios = users
-
     }
-    
     
     //
     //        self.avatars = [kJSQDemoAvatarIdSquires: jsqImage,

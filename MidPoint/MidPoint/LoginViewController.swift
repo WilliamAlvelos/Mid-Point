@@ -35,7 +35,10 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         self.title = "Login"
         
         IHKeyboardAvoiding.setAvoidingView(self.view)
-
+        
+        activityIndicator.activityViewWithName(self, texto: "William")
+        
+        activityIndicator.removeActivityViewWithName()
     }
     
     
