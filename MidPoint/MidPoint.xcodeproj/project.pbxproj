@@ -407,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				3DA7BD811B6A2BD600882C07 /* PushResponse.swift */,
+				3DA69A011B6967AE0021FBF1 /* PushResponse.swift */,
 				7B63155F1B66D7A400D13DE5 /* GlobalConstants.swift */,
 				7B6315591B66D04700D13DE5 /* PictureCloudKit.swift */,
 				7BED36641B54B9430045FDB5 /* TransitionManager.swift */,

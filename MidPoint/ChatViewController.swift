@@ -18,7 +18,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     var imageEvent: UIImage?
     
     var userManager: UserManager?
-    
+
     var usuarios = Array<User>()
     
     var name:String?
@@ -37,7 +37,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     let kJSQDemoAvatarIdCook = "2"
     let kJSQDemoAvatarIdJobs = "3"
     let kJSQDemoAvatarIdWoz = "3"
-//
+
     
     var Pessoas:[User]?
     
@@ -206,6 +206,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
                 self.messages.append(message)
                 
             }else if(image != ""){
+
                 var decodedData = NSData(base64EncodedString: image!, options: NSDataBase64DecodingOptions())
                 var decodedImage = UIImage(data: decodedData!)!
                 
@@ -569,8 +570,9 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
             
             self.avatars!.setValue(user, forKey: "\(image[i].id!)")
         }
-        
+
         self.usuarios = image
+
     }
     
     
@@ -584,6 +586,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         }
         
         self.usuarios = users
+
     }
     
     

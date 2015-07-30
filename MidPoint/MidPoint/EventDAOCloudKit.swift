@@ -105,7 +105,8 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
 
                 return
             }
-
+            
+            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
             let array = JsonResponse.parseJSONToArray(data)
             var arrayToReturn =  [Event]()
             for dataString in array {
@@ -117,7 +118,6 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                     })
                     return
                 }
-                
                 var id = (dataString.objectForKey("\(EventGlobalConstants.Id)") as! String).toInt()
                 var event_date = (dataString.objectForKey("\(EventGlobalConstants.Date)") as! String).toInt()
                 var name = (dataString.objectForKey("\(EventGlobalConstants.Name)") as! String)

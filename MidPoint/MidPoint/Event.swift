@@ -17,6 +17,11 @@ class Event: NSObject {
     var date: NSDate?
     var image: UIImage?
     var id: Int?
+    var numberOfPeople:Int?
+    var numberOfConfirmed:Int?
+    var numberOfRefused:Int?
+    var numberOfPending:Int?
+
     override init() {
         
     }
