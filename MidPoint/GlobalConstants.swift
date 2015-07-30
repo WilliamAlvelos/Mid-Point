@@ -10,7 +10,7 @@ import Foundation
 
 struct Colors {
     static let Rosa = UIColor(red: 223/255, green: 34/255, blue: 96/255, alpha: 1)
-    static let Azul = UIColor(red: 19/255, green: 16/255, blue: 70/255, alpha: 1)
+    static let Azul = UIColor(red: 25/255, green: 28/255, blue: 87/255, alpha: 1)
 }
 
 
@@ -20,6 +20,8 @@ struct UserGlobalConstants {
     static let Email = "user_email"
     static let Password = "user_password"
     static let Image = "user_picture"
+    static let Latitude = "user_latitude"
+    static let Longitude = "user_longitude"
     
 }
 struct EventGlobalConstants {
@@ -27,8 +29,8 @@ struct EventGlobalConstants {
     static let Name = "event_name"
     static let Description = "event_description"
     static let Date = "event_date"
-    static let Latitude = "event_date"
-    static let Longitude = "event_date"
+    static let Latitude = "event_latitude"
+    static let Longitude = "event_longitude"
 
     static let UserToInvite = "user_to_invite"
     static let UserSender = "user_sender"
@@ -39,10 +41,18 @@ struct EventGlobalConstants {
     static let Accepted = "accepted"
     static let Refused = "refused"
     static let Number = "number"
+    
 
 
 }
-
+struct LocationGlobalConstants{
+    static let  NameLocation = "name_location"
+    static let  LocationName = "localizacao_name"
+    
+    static let  Latitude = "latitude"
+    static let  Longitude = "longitude"
+    
+}
 struct LinkAccessGlobalConstants {
     
     static let LinkImagesUsers = "http://alvelos.wc.lt/MidPoint/users/user_images/"

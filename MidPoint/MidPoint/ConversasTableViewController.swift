@@ -14,16 +14,13 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     var Data = Array<Event>()
     
-    
     var filteredTableData = [Event]()
     
     var filteredImageData = [UIImage]()
     
-    
     var eventDelegate = EventManager()
     
     var resultSearchController = UISearchController()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,17 +51,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.refreshControl?.backgroundColor = Colors.Azul
         self.refreshControl?.tintColor = Colors.Rosa
         self.refreshControl?.addTarget(self, action: Selector("reloadData"), forControlEvents: UIControlEvents.ValueChanged)
-
-
         
         var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
-
-        // Uncomment the following line to preserve selection between presentations
-        //self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = editButtonItem()
-        //self.navigationItem.rightBarButtonItem = self.
         
         self.title = "Grupos"
         

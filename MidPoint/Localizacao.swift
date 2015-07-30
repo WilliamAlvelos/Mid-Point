@@ -9,7 +9,8 @@
 import Foundation
 
 class Localizacao{
-    var latitude: Int?
-    var longitude: Int?
+    var latitude: Float?
+    var longitude: Float?
+    var name: String?
     
 }

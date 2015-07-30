@@ -105,7 +105,6 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
 
                 return
             }
-            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
             
             let array = JsonResponse.parseJSONToArray(data)
             var arrayToReturn =  [Event]()
@@ -162,11 +161,7 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
         if urlData == nil || error != nil  || NSString(data: urlData!, encoding:NSUTF8StringEncoding) != nil {
             return UIImage(named: "logo")
         }
-      
-
-
         return UIImage(data: urlData!)
-        
     }
     
     

@@ -20,6 +20,9 @@ import Parse
     optional func progressUpload(float : Float)
     optional func getUsersFinished(users: Array<User>)
     optional func downloadImageFinished(image: Array<User>)
+    optional func updateStateFinished()
+    optional func updateLocationFinished()
+    optional func getLocationFinished(users: Array<Localizacao>)
 }
 
 class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
@@ -94,6 +97,17 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
             self.delegate?.downloadImageFinished?(users)
         }
     }
-
+    func updateUserState(user: User , state : Option, event : Event){
+        userDao?.updateUserState(user, state: state, event: event)
+    }
+    func updateStateFinished() {
+        self.delegate?.updateStateFinished?()
+    }
+    func updateLocationFinished() {
+        self.delegate?.updateLocationFinished?()
+    }
+    func getLocationFinished(users: Array<Localizacao>) {
+        self.delegate?.getLocationFinished?(users)
+    }
     
 }

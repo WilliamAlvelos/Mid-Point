@@ -16,12 +16,6 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     var user : User?
     
-    var imageUser: UIImage?
-    
-    var nomeUser: String?
-    
-    var emailUser: String?
-    
     private var  userManager :UserManager = UserManager()
     
     @IBOutlet var button: UIButton!
@@ -35,7 +29,14 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     @IBOutlet var confirmPasswordTextFied: UITextField!
     
     
-    
+    private func preloadUser(){
+        self.nameTextField.text = user?.name
+        self.emailTexteField.text = user?.email
+        self.button.setBackgroundImage(user?.image, forState: UIControlState.Normal)
+        self.button.setTitle("", forState: UIControlState.Normal)
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         userManager.delegate = self
@@ -48,15 +49,19 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         button.layer.cornerRadius = button.bounds.size.width/2
         button.layer.borderWidth = 0
         button.layer.masksToBounds = true
-        user = User()
-        
+        if user == nil {
+            user = User()
+        }
+        else {
+            self.preloadUser()
+        }
         
         self.title = "Create Account"
         
         
-        var buttonRegister: UIBarButtonItem = UIBarButtonItem(title: "Register", style: UIBarButtonItemStyle.Done, target: self, action: Selector("register"))
-        
-        self.navigationItem.rightBarButtonItem = buttonRegister
+//        var buttonRegister: UIBarButtonItem = UIBarButtonItem(title: "Register", style: UIBarButtonItemStyle.Done, target: self, action: Selector("register"))
+//        
+//        self.navigationItem.rightBarButtonItem = buttonRegister
         
     }
     
@@ -107,19 +112,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
             self.confirmPasswordTextFied.center.x = self.view.bounds.width/2
             self.view.layoutIfNeeded()
             }, completion: nil)
+
         
-        
-        if(nomeUser != nil){
-            self.nameTextField.text = nomeUser
-        }
-        
-        if(imageUser != nil){
-            self.button.imageView?.image = imageUser
-        }
-        
-        if(emailUser != nil){
-            self.emailTexteField.text = emailUser
-        }
 
     }
     
@@ -204,7 +198,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
         button.setBackgroundImage(image, forState: .Normal)
         button.setTitle("", forState: .Normal)
-        user?.image = image
+        //user?.image = image
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }

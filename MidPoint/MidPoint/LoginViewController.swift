@@ -44,10 +44,6 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         textDistances.constant = textDistances.constant * self.view.frame.size.height / 667.0
         
         
-        
-        
-        
-        
         let logInButton = TWTRLogInButton(logInCompletion: {
             (session: TWTRSession!, error: NSError!) in
             
@@ -90,8 +86,9 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("register") as! RegisterViewController
                 println(session.userName)
-                
-                nextViewController.nomeUser = session.userName
+                let user = User()
+                user.name = session.userName
+                nextViewController.user = user
                 
                 self.navigationController?.pushViewController(nextViewController, animated: true)
             }else {
@@ -242,9 +239,10 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
                 }
                 else
                 {
-                    var id = result.valueForKey("id") as! String!
-                    var name = result.valueForKey("name") as! String!
-                    var email = result.valueForKey("email") as! String!
+
+                    var id = result.valueForKey("id") as! String
+                    var name = result.valueForKey("name") as! String
+                    var email = result.valueForKey("email") as! String
                     var image = "https://graph.facebook.com/\(id)/picture?type=large"
                     
 
@@ -258,18 +256,22 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
                     var error: NSError?
                     let urlData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
                     if urlData == nil || error != nil || NSString(data: urlData!, encoding: NSUTF8StringEncoding) != nil{
-                       imageFacebook = UIImage(named: "logo")
-                    
-                    }else{
-                        imageFacebook = UIImage(data: urlData!)
+
+                        imageFacebook = UIImage(named: "logo")
+                        
                     }
+                    imageFacebook = UIImage(data: urlData!)
+                
+                    let nextView = TransitionManager.creatView("register") as! RegisterViewController
+                    let user = User()
+                    user.name = name
+                    user.email = email
+                    user.image = imageFacebook
+                    nextView.user = user
+                    
                     DispatcherClass.dispatcher({ () -> () in
                         
-                        let nextView = TransitionManager.creatView("register") as! RegisterViewController
-                        nextView.imageUser = imageFacebook
-                        nextView.nomeUser = name
-                        nextView.emailUser = email
-                        
+                    
                         self.navigationController?.pushViewController(nextView, animated: true)
                         
                     })
@@ -294,23 +296,6 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     func loggedOut() {
         
     }
-    
-    
-    
-    
-//    func userFriendsReceived(friends: [FacebookUser], error: NSError!) {
-//        
-//        if error == nil {
-//        
-//            for var x = 0; x < friends.count; x++ {
-//                println(friends[x].name)
-//            }
-//        }
-//        
-//        else {
-//            
-//        }
-//    }
     func errorThrowedServer(stringError : String){
         
         var action: UIAlertController = UIAlertController(title: "Error", message: stringError, preferredStyle: UIAlertControllerStyle.Alert)
