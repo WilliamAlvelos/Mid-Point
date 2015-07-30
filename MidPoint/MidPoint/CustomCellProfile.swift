@@ -19,5 +19,6 @@ class CustomCellProfile: UITableViewCell {
     
     @IBOutlet weak var descricao: UILabel!
 
+    @IBOutlet var view: UIView!
     
 }

@@ -7,6 +7,13 @@
 //
 
 import Foundation
+
+struct Colors {
+    static let Rosa = UIColor(red: 223/255, green: 34/255, blue: 96/255, alpha: 1)
+    static let Azul = UIColor(red: 19/255, green: 16/255, blue: 70/255, alpha: 1)
+}
+
+
 struct UserGlobalConstants {
     static let Id = "user_id"
     static let Name = "user_name"
