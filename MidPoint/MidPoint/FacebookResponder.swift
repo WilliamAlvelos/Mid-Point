@@ -12,7 +12,7 @@ import FBSDKShareKit
 
 @objc protocol FBResponderDelegate {
     
-    func loggedIn(error:NSError!)
+    func loggedIn(result :FBSDKLoginManagerLoginResult, error:NSError!)
     func loggedOut()
     optional func userFriendsReceived(friends:[FacebookUser], error:NSError!)
     optional func loginStatus()
@@ -94,7 +94,7 @@ class FacebookResponder: NSObject, FBSDKLoginButtonDelegate, FBSDKAppInviteDialo
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
-        delegate?.loggedIn(error)
+        delegate?.loggedIn(result, error: error)
         
         if error == nil {
         

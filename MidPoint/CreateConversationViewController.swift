@@ -64,75 +64,18 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     
     func next(){
         
-        
         if(self.titleGroup.text == ""){
             
-            
-            ActionError.actionWithTextField("Cuidado", errorMessage: "O titulo do Grupo está vazio", placeholder:"Digite o Titulo do Grupo", view: self)
-            
-            
-            
-            // Create the alert controller
-            
-//            var inputTextField: UITextField?
-//            
-//            var alertController = UIAlertController(title: "Cuidado", message: "O titulo do Grupo está vazio", preferredStyle: .Alert)
-//            
-//            // Create the actions
-//            
-//            alertController.addTextFieldWithConfigurationHandler({ textField -> Void in
-//
-//                textField.placeholder = "Digite o Titulo do Grupo"
-//                inputTextField = textField
-//            })
-//
-//            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
-//                UIAlertAction in
-//                self.titleGroup.text = inputTextField?.text
-//            }
-//            
-//            
-//            // Add the actions
-//            alertController.addAction(okAction)
-//            
-//            // Present the controller
-//            self.presentViewController(alertController, animated: true, completion: nil)
-//        
-        
+            ActionError.actionWithTextField("Cuidado", errorMessage: "O titulo do Grupo está vazio", placeholder:"Digite o Titulo do Grupo", view: self, title: true)
+
         }
         
         
         
-        
         if(self.subtitleGroup.text == ""){
-            // Create the alert controller
             
-            ActionError.actionWithTextField("Cuidado", errorMessage: "O subtitulo do Grupo está vazio", placeholder:"Digite o subtitulo do Grupo", view: self)
-            
-            
-//            var inputTextField: UITextField?
-//            
-//            var alertController = UIAlertController(title: "Cuidado", message: "O titulo do Grupo está vazio", preferredStyle: .Alert)
-//            
-//            // Create the actions
-//            
-//            alertController.addTextFieldWithConfigurationHandler({ textField -> Void in
-//                textField.placeholder = "Digite o Titulo do Grupo"
-//                inputTextField = textField
-//            })
-//            
-//            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
-//                UIAlertAction in
-//                self.subtitleGroup.text = inputTextField?.text
-//            }
-//            
-//            
-//            // Add the actions
-//            alertController.addAction(okAction)
-//            
-//            // Present the controller
-//            self.presentViewController(alertController, animated: true, completion: nil)
-            
+            ActionError.actionWithTextField("Cuidado", errorMessage: "O subtitulo do Grupo está vazio", placeholder:"Digite o subtitulo do Grupo", view: self, title: false)
+
         }
         
         

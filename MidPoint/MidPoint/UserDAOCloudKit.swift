@@ -202,7 +202,6 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
                 return
             }
-            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
 
             let string = JsonResponse.parseJSON(data)
             

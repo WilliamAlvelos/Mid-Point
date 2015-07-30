@@ -20,7 +20,6 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     @IBOutlet weak var appIcon: UIImageView!
     @IBOutlet var nomeText: UITextField!
     @IBOutlet var senhaText: UITextField!
-    
 
     
     var usuario: UserManager = UserManager()
@@ -36,9 +35,6 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         
         IHKeyboardAvoiding.setAvoidingView(self.view)
         
-        activityIndicator.activityViewWithName(self, texto: "Eai will")
-        
-        //activityIndicator.removeActivityViewWithName()
     }
     
     
@@ -57,8 +53,9 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("register") as! RegisterViewController
                 println(session.userName)
-                
-                nextViewController.nomeUser = session.userName
+                let user = User()
+                user.name = session.userName
+                nextViewController.user = user
                 
                 self.navigationController?.pushViewController(nextViewController, animated: true)
             }else {
@@ -127,8 +124,9 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
         
     }
 
-
     
+    
+
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
@@ -136,6 +134,8 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     //MARK: LogIn and SignIn
     
     @IBAction func logInAction(sender: AnyObject) {
+        
+        activityIndicator.activityViewWithName(self, texto: "Buscando Usuário")
 
         var user: User = User(name: nomeText.text, email: nomeText.text)
         
@@ -154,15 +154,16 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     //MARK: UserManager Delegate
     
     func errorThrowedSystem(error: NSError) {
-        
+        activityIndicator.removeActivityViewWithName()
     }
     
     func userNotFound(user : User){
+        activityIndicator.removeActivityViewWithName()
         println("userNotFound")
     }
     func getUserFinished(user: User){
         UserDAODefault.saveLogin(user)
-        
+        activityIndicator.removeActivityViewWithName()
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
         self.presentViewController(nextViewController, animated:true, completion:nil)
@@ -170,17 +171,19 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     }
     
     
+    
+    
+    
     //MARK: FBResponder Delegate
     
-    func loggedIn(error: NSError!) {
+    func loggedIn(result:FBSDKLoginManagerLoginResult, error: NSError!) {
         
         //Login Successful
         if error == nil {
             
-            
 //            var usuario: UserManager = UserManager()
 //            usuario.delegate = self
-//            
+//
 //            var user: User = User(name:, email: nomeText.text)
 //            
 //            usuario.getUserDatabase(user, password: self.senhaText.text)
@@ -189,9 +192,60 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
 //            
 //            UserDAODefault.saveLogin(user)
             
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
-            self.presentViewController(nextViewController, animated:true, completion:nil)
+            
+            
+            
+            
+            let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: result.token.userID, parameters: nil)
+            graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+                
+                if ((error) != nil)
+                {
+                    // Process error
+                    println("Error: \(error)")
+                }
+                else
+                {
+                    var id = result.valueForKey("id") as! String
+                    var name = result.valueForKey("name") as! String
+                    var email = result.valueForKey("email") as! String
+                    var image = "https://graph.facebook.com/\(id)/picture?type=large"
+                    
+                    
+                    var imageFacebook : UIImage?
+                    
+                    let url = NSURL(string: image)
+                    
+                    var request = NSMutableURLRequest(URL: url!)
+                    request.timeoutInterval = 5
+                    var response: NSURLResponse?
+                    var error: NSError?
+                    let urlData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
+                    if urlData == nil || error != nil || NSString(data: urlData!, encoding: NSUTF8StringEncoding) != nil{
+                        imageFacebook = UIImage(named: "logo")
+                        
+                    }
+                    imageFacebook = UIImage(data: urlData!)
+                
+                    let nextView = TransitionManager.creatView("register") as! RegisterViewController
+                    let user = User()
+                    user.name = name
+                    user.email = email
+                    user.image = imageFacebook
+                    nextView.user = user
+                    
+                    DispatcherClass.dispatcher({ () -> () in
+                        
+                    
+                        self.navigationController?.pushViewController(nextView, animated: true)
+                        
+                    })
+                    
+                }
+            })
+            
+            
+
         }
         
         //Login Failed

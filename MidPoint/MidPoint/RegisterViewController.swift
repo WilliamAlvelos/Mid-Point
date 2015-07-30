@@ -16,7 +16,6 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     var user : User?
     
-    var nomeUser: String?
     
     private var  userManager :UserManager = UserManager()
     
@@ -31,7 +30,12 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     @IBOutlet var confirmPasswordTextFied: UITextField!
     
     
-    
+    private func preloadUser(){
+        self.nameTextField.text = user?.name
+        self.emailTexteField.text = user?.email
+        self.button.setBackgroundImage(user?.image, forState: UIControlState.Normal)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         userManager.delegate = self
@@ -44,8 +48,12 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         button.layer.cornerRadius = button.bounds.size.width/2
         button.layer.borderWidth = 0
         button.layer.masksToBounds = true
-        user = User()
-        
+        if user == nil {
+            user = User()
+        }
+        else {
+            self.preloadUser()
+        }
         
         self.title = "Create Account"
         
@@ -103,9 +111,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
             self.confirmPasswordTextFied.center.x = self.view.bounds.width/2
             self.view.layoutIfNeeded()
             }, completion: nil)
-        
-        
-        self.nameTextField.text = nomeUser
+
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -189,7 +195,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
         button.setBackgroundImage(image, forState: .Normal)
         button.setTitle("", forState: .Normal)
-        user?.image = image
+        //user?.image = image
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
