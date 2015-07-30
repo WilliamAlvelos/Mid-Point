@@ -55,7 +55,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     override func viewDidLoad() {
         
-        activityIndicator.activityViewWithName(self, texto: "Buscando Locais")
+        activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Locais")
         
         
         
@@ -352,7 +352,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             
         }else{
             
-            activityIndicator.activityViewWithName(self, texto: "Buscando Locais")
+            activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Locais")
             
             localTextField.hidden = true
             

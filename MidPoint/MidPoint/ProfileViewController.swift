@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
      override func viewDidLoad() {
         
-        activityIndicator.activityViewWithName(self, texto: "Buscando Eventos")
+        activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Eventos")
         
         self.eventManager.delegate = self
         

@@ -168,7 +168,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     
     @IBAction func logInAction(sender: AnyObject) {
         
-        activityIndicator.activityViewWithName(self, texto: "Buscando Usuário")
+        activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Usuário")
 
         var user: User = User(name: nomeText.text, email: nomeText.text)
         

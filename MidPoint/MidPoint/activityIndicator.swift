@@ -14,7 +14,7 @@ class activityIndicator {
     static var boxView = UIView()
     
     
-    class func activityViewWithName(view:UIViewController, texto: String) {
+    class func activityViewWithName(view:UINavigationController, texto: String) {
 
         
         var activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
