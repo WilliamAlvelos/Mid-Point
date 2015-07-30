@@ -22,8 +22,6 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
     @IBOutlet var senhaText: UITextField!
 
     
-    let facebookReadPermissions = ["public_profile", "email", "user_photos"]
-    
     var usuario: UserManager = UserManager()
     
     var fbResponder: FacebookResponder!
@@ -127,109 +125,7 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
 
     
     
-    //Some other options: "user_about_me", "user_birthday", "user_hometown", "user_likes", "user_interests", "user_photos", "friends_photos", "friends_hometown", "friends_location", "friends_education_history"
-    
-    func loginToFacebookWithSuccess(successBlock: () -> (), andFailure failureBlock: (NSError?) -> ()) {
-        
-        
-        
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/{user-id}", parameters: nil)
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            
-            if ((error) != nil)
-            {
-                // Process error
-                println("Error: \(error)")
-            }
-            else
-            {
-                var id = result.valueForKey("id") as! NSString!
-                var name = result.valueForKey("name") as! NSString!
-                var email = result.valueForKey("email") as! NSString!
-                println(result) // This works
-                
-                
-            }
-        })
-        
-//        var request:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/{user-id}", parameters: , HTTPMethod: "GET")
-//        
-//        
-//        request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, id:AnyObject!, error:NSError!) -> Void in
-//            
-//        }
 
-
-        
-        
-        if FBSDKAccessToken.currentAccessToken() != nil {
-            //For debugging, when we want to ensure that facebook login always happens
-            //FBSDKLoginManager().logOut()
-            //Otherwise do:
-            return
-        }
-        
-        FBSDKLoginManager().logInWithReadPermissions(self.facebookReadPermissions, handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
-            if error != nil {
-                //According to Facebook:
-                //Errors will rarely occur in the typical login flow because the login dialog
-                //presented by Facebook via single sign on will guide the users to resolve any errors.
-                
-                // Process error
-                FBSDKLoginManager().logOut()
-                failureBlock(error)
-            } else if result.isCancelled {
-                // Handle cancellations
-                FBSDKLoginManager().logOut()
-                failureBlock(nil)
-            } else {
-                // If you ask for multiple permissions at once, you
-                // should check if specific permissions missing
-                var allPermsGranted = true
-                
-                //result.grantedPermissions returns an array of _NSCFString pointers
-                let grantedPermissions = result.grantedPermissions
-                for permission in self.facebookReadPermissions {
-                    if !contains(grantedPermissions, permission) {
-                        allPermsGranted = false
-                        
-                        break
-                    }
-                }
-                if allPermsGranted {
-                    // Do work
-                    let fbToken = result.token.tokenString
-                    let fbUserID = result.token.userID
-                    
-                    //Send fbToken and fbUserID to your web API for processing, or just hang on to that locally if needed
-//                    self.post("myserver/myendpoint", parameters: ["token": fbToken, "userID": fbUserID]) {(error: NSError?) ->() in
-//                    	if error != nil {
-//                    		failureBlock(error)
-//                    	} else {
-//                    		successBlock(maybeSomeInfoHere?)
-//                    	}
-//                    }
-                    
-                    successBlock()
-                } else {
-                    //The user did not grant all permissions requested
-                    //Discover which permissions are granted
-                    //and if you can live without the declined ones
-                    
-                    failureBlock(nil)
-                }
-            }
-        })
-    }
-
-    
-    
-    func returnUserData()
-    {
-        
-
-    }
-    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
@@ -309,21 +205,42 @@ class LoginViewController: UIViewController, UserManagerDelegate, FBResponderDel
                 }
                 else
                 {
-                    var id = result.valueForKey("id") as! NSString!
-                    var name = result.valueForKey("name") as! NSString!
-                    var email = result.valueForKey("email") as! NSString!
-                    println(result) // This works
+                    var id = result.valueForKey("id") as! String!
+                    var name = result.valueForKey("name") as! String!
+                    var email = result.valueForKey("email") as! String!
+                    var image = "https://graph.facebook.com/\(id!)/picture?type=large"
                     
+
+                    var imageFacebook : UIImage?
+                    
+                    let url = NSURL(string: image)
+                    
+                    var request = NSMutableURLRequest(URL: url!)
+                    request.timeoutInterval = 5
+                    var response: NSURLResponse?
+                    var error: NSError?
+                    let urlData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
+                    if urlData == nil || error != nil || NSString(data: urlData!, encoding: NSUTF8StringEncoding) != nil{
+                       imageFacebook = UIImage(named: "logo")
+                    
+                    }
+                    imageFacebook = UIImage(data: urlData!)
+                
+                    DispatcherClass.dispatcher({ () -> () in
+                        let nextView = TransitionManager.creatView("register") as! RegisterViewController
+                        nextView.button.imageView.image = imageFacebook!
+                        nextView.nameTextField.text = name
+                        nextView.emailTexteField.text = email
+                        
+                        self.navigationController?.pushViewController(nextView, animated: true)
+                        
+                    })
                     
                 }
             })
             
             
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("register") as! RegisterViewController
 
-            
-            self.navigationController?.pushViewController(nextViewController, animated: true)
         }
         
         //Login Failed

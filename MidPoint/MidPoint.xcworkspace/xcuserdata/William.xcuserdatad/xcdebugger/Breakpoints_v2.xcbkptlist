@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MidPoint/LoginViewController.swift"
-            timestampString = "459982537.92232"
+            timestampString = "459984579.21288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "loginToFacebookWithSuccess(_:andFailure:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MidPoint/LoginViewController.swift"
-            timestampString = "459982539.800842"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "loginToFacebookWithSuccess(_:andFailure:)"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "loggedIn(_:error:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
