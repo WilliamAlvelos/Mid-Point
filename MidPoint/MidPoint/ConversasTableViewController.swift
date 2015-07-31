@@ -150,7 +150,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.resultSearchController.active = false
         
-        let nextView = TransitionManager.creatView("midPoint") as! ChangeMidPointViewController
+        let nextView = TransitionManager.creatView("changeMidPoint") as! ChangeMidPointViewController
         //nextView.conversa = Data[indexPath.row].id
         //nextView.name = Data[indexPath.row].name
         nextView.event = Data[indexPath.row]

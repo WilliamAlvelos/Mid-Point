@@ -49,11 +49,10 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         for(var i = 0; i < self.array.count; i++){
             var point: MKPointAnnotation = MKPointAnnotation()
             
-            //var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(self.array[i]., lon.doubleValue)
+            var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.array[i].location!.latitude!), Double(self.array[i].location!.longitude!))
             
-            point.subtitle = ""
             point.title = self.array[i].name
-            //point.coordinate = coordinate
+            point.coordinate = coordinate
             
             
             mapView.addAnnotation(point)
@@ -74,6 +73,14 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
             let reuseId = "pin"
             
             var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+            
+            
+            if(pinView?.annotation.title == "a"){
+                pinView!.pinColor = .Red
+            
+            }
+            
+            pinView?.pinColor = MKPinAnnotationColor.Green
 
             return pinView
     }
@@ -123,6 +130,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     func getUsersFinished(users: Array<User>) {
         self.array = users
+        addUsersMap()
     }
 
     
