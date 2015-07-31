@@ -65,13 +65,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 //        
 //        //Adiciona um seletor para o botão no indice passado
 //        uba.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
-        
-        
-<<<<<<< HEAD
-=======
-        ///////////////////////////////////////////////////////////////////
-        
->>>>>>> origin/master
+
 //        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
 //        
 //        self.navigationItem.rightBarButtonItem = add
