@@ -58,8 +58,7 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         //UIMPConfiguration.configureNavigationBar(self.navigationController!.navigationBar, color: Colors.Azul)
         UIMPConfiguration.configureTextField(self.nomeText, text: "qual o seu email?")
         UIMPConfiguration.configureTextField(self.senhaText, text: "e a sua senha secreta?")
-        UIMPConfiguration.addBottomLineToView(self.nomeText, bottomSize: 0.5)
-        UIMPConfiguration.addBottomLineToView(self.senhaText, bottomSize: 0.5)
+        
         UIMPConfiguration.addBorderToView(self.loginButton, color: Colors.Rosa, width: 3.0, corner: 25.0)
         UIMPConfiguration.addColorAndFontToButton(self.loginButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 20)
         UIMPConfiguration.addColorAndFontToButton(self.createAccountButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 18)
@@ -185,7 +184,7 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     func loggedOut() {
         

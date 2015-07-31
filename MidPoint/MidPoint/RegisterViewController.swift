@@ -16,6 +16,8 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     var user : User?
     
+    
+    @IBOutlet weak var buttonAdicioneUmaFoto: UIButton!
     private var  userManager :UserManager = UserManager()
     
     @IBOutlet var button: UIButton!
@@ -28,27 +30,39 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     @IBOutlet var confirmPasswordTextFied: UITextField!
     
+    @IBOutlet weak var registerButton: UIButton!
     
+    @IBOutlet weak var cancelarButton: UIButton!
     private func preloadUser(){
         self.nameTextField.text = user?.name
         self.emailTexteField.text = user?.email
         self.button.setBackgroundImage(user?.image, forState: UIControlState.Normal)
-        self.button.setTitle("", forState: UIControlState.Normal)
+    self.buttonAdicioneUmaFoto.setTitle("Foto adicionada!", forState: .Normal)
         
-        
+    }
+    @IBAction func cancelarAction(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         userManager.delegate = self
-
+        self.view.backgroundColor = Colors.Azul
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
         
         IHKeyboardAvoiding.setAvoidingView(self.view)
+         UIMPConfiguration.addBorderToView(self.registerButton, color: Colors.Rosa, width: 3.0, corner: 25.0)
+        UIMPConfiguration.addColorAndFontToButton(self.registerButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 20)
+        UIMPConfiguration.addBorderAndMakeRounded(self.button, color: Colors.Rosa, width: 2)
+
+        UIMPConfiguration.configureTextField(self.nameTextField, text: "qual o seu nome?")
+        UIMPConfiguration.configureTextField(self.emailTexteField, text: "e o seu email?")
+        UIMPConfiguration.configureTextField(self.passwordTextField, text: "crie uma super-senha")
+        UIMPConfiguration.configureTextField(self.confirmPasswordTextFied, text: "confirme ela aqui")
+        UIMPConfiguration.addColorAndFontToButton(self.buttonAdicioneUmaFoto, color: Colors.Rosa, fontName: FontName.LabelFont, fontSize: 14)
+        UIMPConfiguration.addColorAndFontToButton(self.cancelarButton, color: Colors.Rosa, fontName: FontName.LabelFont, fontSize: 14)
+        button.imageView?.alpha = 0.1
         
-        button.layer.cornerRadius = button.bounds.size.width/2
-        button.layer.borderWidth = 0
-        button.layer.masksToBounds = true
         if user == nil {
             user = User()
         }
@@ -156,14 +170,12 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     func userNotFound(user : User){
         println("userNotFound")
     }
-
-    
-    @IBAction func changeImage(sender: AnyObject) {
+    func changeImage(){
         
         var actionsheet: UIAlertController = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .ActionSheet)
         
         let cameraAction = UIAlertAction(title: "Camera", style: .Default,handler: { (alert: UIAlertAction!) -> Void in
-
+            
             self.pickerLibrary?.sourceType = .Camera
             self.pickerLibrary?.allowsEditing = true
             self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
@@ -186,17 +198,25 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
         
         self.presentViewController(actionsheet, animated: true, completion: nil)
-        
+    }
+    
+    @IBAction func changeImage(sender: AnyObject) {
+       
+        self.changeImage()
     }
     
     
+    @IBAction func tappedChangeImage(sender: AnyObject) {
+        self.changeImage()
+    }
   
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!){
         let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
         data.writeToFile(self.imagePathURL().path!, atomically: true)
         
         button.setBackgroundImage(image, forState: .Normal)
-        button.setTitle("", forState: .Normal)
+        self.buttonAdicioneUmaFoto.setTitle("Foto adicionada!", forState: .Normal)
+
         //user?.image = image
         self.dismissViewControllerAnimated(true, completion: nil)
         
