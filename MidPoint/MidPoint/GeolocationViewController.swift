@@ -57,7 +57,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     override func viewDidLoad() {
         
-        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais")
+        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse:false)
         
 //        //Inicia a UBA com o numero de botoões
 //        var uba = UBAView(buttonsQuantity: 3)
@@ -370,8 +370,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             localTextField.hidden = false
             
         }else{
-            
-            activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais")
+        
+            activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse: false)
             
             localTextField.hidden = true
             
