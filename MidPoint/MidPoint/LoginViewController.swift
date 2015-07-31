@@ -15,27 +15,24 @@ import FBSDKLoginKit
 class LoginViewController: UIViewController, UserManagerDelegate {
 
     
-    @IBOutlet weak var userToIconDistance: NSLayoutConstraint!
-    @IBOutlet weak var textDistances: NSLayoutConstraint!
-    
     @IBOutlet weak var appIcon: UIImageView!
     @IBOutlet var nomeText: UITextField!
     @IBOutlet var senhaText: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var createAccountButton: UIButton!
+    @IBOutlet weak var labelCadastre: UILabel!
+    @IBOutlet weak var labelOu: UILabel!
 
     
     var activity: activityIndicator?
     
     var usuario: UserManager = UserManager()
-    
-    var fbResponder: FacebookResponder!
-    
-    //MARK: View functions
+
     
     override func viewWillAppear(animated: Bool) {
 
         super.viewWillAppear(animated)
-        self.title = "Login"
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         IHKeyboardAvoiding.setAvoidingView(self.view)
         
     }
@@ -54,11 +51,20 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         super.viewDidLoad()
         
         usuario.delegate = self
-        
+        self.view.backgroundColor = Colors.Azul
         appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0
         
-       // danilo()
-        
+            
+        //UIMPConfiguration.configureNavigationBar(self.navigationController!.navigationBar, color: Colors.Azul)
+        UIMPConfiguration.configureTextField(self.nomeText, text: "qual o seu email?")
+        UIMPConfiguration.configureTextField(self.senhaText, text: "e a sua senha secreta?")
+        UIMPConfiguration.addBottomLineToView(self.nomeText, bottomSize: 0.5)
+        UIMPConfiguration.addBottomLineToView(self.senhaText, bottomSize: 0.5)
+        UIMPConfiguration.addBorderToView(self.loginButton, color: Colors.Rosa, width: 3.0, corner: 25.0)
+        UIMPConfiguration.addColorAndFontToButton(self.loginButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 20)
+        UIMPConfiguration.addColorAndFontToButton(self.createAccountButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 18)
+        UIMPConfiguration.addColorAndFontToLabel(self.labelCadastre, color: UIColor.whiteColor(), fontName: FontName.LabelFont, fontSize: 14)
+        UIMPConfiguration.addColorAndFontToLabel(self.labelOu, color: UIColor.whiteColor(), fontName: FontName.LabelFont, fontSize: 12)
     }
     @IBAction func btnFBLoginPressed(sender: AnyObject) {
         var fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
@@ -179,6 +185,7 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     func loggedOut() {
         

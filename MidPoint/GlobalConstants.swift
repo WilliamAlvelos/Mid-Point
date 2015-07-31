@@ -69,3 +69,8 @@ struct ParseGlobalConstants {
     static let Group_id = "group_id"
     
 }
+struct FontName{
+    static let ButtonFont = "Helvetica-Light"
+    static let LabelFont = "Helvetica-Light"
+    
+}
