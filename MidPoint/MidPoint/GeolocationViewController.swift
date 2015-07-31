@@ -322,14 +322,23 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
         
-        print("william alvelos")
         
         var annView = view.annotation
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
+        var event = Event()
+        
+        
+        event.localizacao = Localizacao()
+        event.localizacao?.name = annView.title
+        
+        event.localizacao?.latitude = NSNumber(double: annView.coordinate.latitude) as Float
+        event.localizacao?.longitude = NSNumber(double: annView.coordinate.longitude) as Float
+        
+        nextViewController.event = event
+        
         nextViewController.location = annView.coordinate
-        nextViewController.nameRole = annView.title
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
         

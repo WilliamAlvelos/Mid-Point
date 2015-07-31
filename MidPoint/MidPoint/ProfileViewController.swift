@@ -11,13 +11,13 @@ import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, EventManagerDelegate
 {
-    
-    //ganbs para ver se esta funfando enquanto nao recebo o Usuario
 
 
     var navItem: UINavigationItem?
     
     var travado: Bool = false
+    
+    var activity :activityIndicator?
     
     var eventManager : EventManager = EventManager()
     
@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
      override func viewDidLoad() {
         
-        //activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Eventos")
+        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Eventos")
         
         self.eventManager.delegate = self
         
@@ -123,6 +123,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("You selected cell #\(indexPath.row)!")
+        var nextView = TransitionManager.creatView("infoEvent") as! EventInfoViewController
+        nextView.event = self.events[indexPath.row]
+        self.navigationController?.pushViewController(nextView, animated: true)
+        
+        
     }
     
     
@@ -145,7 +150,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         self.tableView.reloadData()
         
-        //activityIndicator.removeActivityViewWithName()
+        activity?.removeActivityViewWithName()
     }
     
     

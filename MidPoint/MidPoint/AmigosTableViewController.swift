@@ -66,6 +66,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         var progressView: ProgressView = ProgressView(frame: self.view.frame)
         
+        progressView.backgroundColor = Colors.Rosa
+        
         self.view = progressView
         
         self.navigationController?.navigationBarHidden = true
@@ -154,6 +156,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         //cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
         
         cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0
+        
+        cell.imageLabel.layer.masksToBounds = true
         
         cell.titleLabel?.text = data[indexPath.row].name
         var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesUsers)\(data[indexPath.row].id!).jpg")!

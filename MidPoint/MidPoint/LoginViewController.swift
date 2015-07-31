@@ -139,6 +139,8 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         var user: User = User(name: nomeText.text, email: nomeText.text)
         
         usuario.getUserDatabase(user, password: self.senhaText.text)
+        
+        self.view.endEditing(true)
 
     }
     
@@ -174,7 +176,6 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     
     
     //MARK: FBResponder Delegate
-    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)

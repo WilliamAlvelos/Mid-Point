@@ -47,7 +47,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
         //refreshControl
         self.refreshControl = UIRefreshControl()
-        //= [[UIRefreshControl alloc] init];
         self.refreshControl?.backgroundColor = Colors.Azul
         self.refreshControl?.tintColor = Colors.Rosa
         self.refreshControl?.addTarget(self, action: Selector("reloadData"), forControlEvents: UIControlEvents.ValueChanged)

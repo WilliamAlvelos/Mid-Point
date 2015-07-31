@@ -233,7 +233,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
             
             var progressView: ProgressView = ProgressView(frame: self.view.frame)
             
-            progressView.backgroundColor = UIColor(red: 223/255, green: 34/255, blue: 96/255, alpha: 1)
+            progressView.backgroundColor = Colors.Rosa
             
             self.view = progressView
             

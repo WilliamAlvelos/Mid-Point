@@ -36,9 +36,10 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Criar Grupo"
+        
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
-        event = Event()
+        
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
@@ -61,7 +62,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         // Dispose of any resources that can be recreated.
     }
     
-    
     func next(){
         
         if(self.titleGroup.text == ""){
@@ -69,7 +69,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
             ActionError.actionWithTextField("Cuidado", errorMessage: "O titulo do Grupo está vazio", placeholder:"Digite o Titulo do Grupo", view: self, title: true)
 
         }
-        
         
         
         if(self.subtitleGroup.text == ""){
