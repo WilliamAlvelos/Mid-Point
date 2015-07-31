@@ -147,7 +147,7 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
         //Border space of the buttons
         let border = size * borderFactor
         
-        var buttonFrame = CGRectMake(border, 0.0, size, size)
+        var buttonFrame = CGRectMake(border, view.frame.height/2, size, size)
         let spacement = CGFloat(Double(size) * spaceFactor)
         
         //Radius of the rounded part of the U
@@ -188,7 +188,7 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
             
             //Insert the button on the array and in the view
             buttonArray.append(button)
-            self.addSubview(button)
+            view.addSubview(button)
             
             //The frame for the next button
             buttonFrame.origin.y = buttonFrame.origin.y + size + spacement
@@ -198,13 +198,13 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
         // touch inside one of the buttons
         var panGesture = UIPanGestureRecognizer(target: self, action: Selector("fingerMoved:"))
         panGesture.delegate = self
-        self.addGestureRecognizer(panGesture)
+        view.addGestureRecognizer(panGesture)
         
         //Prepare the glues
         //prepareGlues()
         
         //self.hidden = true
-        view.addSubview(self)
+       // view.addSubview(self)
         
         //Starts the timer for junction
         junctionTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("buttonJunction"), userInfo: nil, repeats: true)
@@ -508,6 +508,5 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
         
         
     }
-    
-
+ 
 }

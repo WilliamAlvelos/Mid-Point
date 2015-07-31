@@ -60,10 +60,10 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         //activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse:false, viewController:self)
 
 //        //Inicia a UBA com o numero de botoões
-//        var uba = UBAView(buttonsQuantity: 3)
+        var uba = UBAView(buttonsQuantity: 3)
 //        
 //        //Prepara os botões na view passada
-//        uba.prepareAnimationOnView(self.navigationController?.view)
+        uba.prepareAnimationOnView(self.view)
 //        
 //        //Adiciona um seletor para o botão no indice passado
 //        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
