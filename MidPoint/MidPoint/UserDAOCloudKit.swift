@@ -38,7 +38,6 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
                 return
             }
-            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
 
             let string = JsonResponse.parseJSON(data)
         
@@ -148,6 +147,8 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
                 return
             }
+            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
+
             let array = JsonResponse.parseJSONToArray(data)
             var arrayToReturn :[User]? = Array()
             for dataString in array {
@@ -162,9 +163,16 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 
                 var id = (dataString.objectForKey("\(UserGlobalConstants.Id)") as! String).toInt()
                 var name = dataString.objectForKey("\(UserGlobalConstants.Name)") as! String
+                var latitude = (dataString[UserGlobalConstants.Latitude]  as! NSString).doubleValue
+                var longitude = (dataString[UserGlobalConstants.Longitude]  as! NSString).doubleValue
+                let localizacao = Localizacao()
+                localizacao.latitude = Float(latitude)
+                localizacao.longitude = Float(longitude)
+                
                 var user = User()
                 user.id = id
                 user.name = name
+                user.location = localizacao
                 arrayToReturn!.append(user)
             }
             DispatcherClass.dispatcher({ () -> () in
@@ -235,7 +243,8 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
                 return
             }
-            
+            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
+
             let string = JsonResponse.parseJSON(data)
             
 
