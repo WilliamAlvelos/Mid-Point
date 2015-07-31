@@ -66,6 +66,11 @@
 		FF3692461B6296DA00C71BBC /* ETBScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3692451B6296DA00C71BBC /* ETBScrollView.swift */; };
 		FF3692481B62A4DF00C71BBC /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3692471B62A4DF00C71BBC /* TestVC.swift */; };
 		FF36924B1B66845500C71BBC /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = FF36924A1B66845500C71BBC /* test.png */; };
+		FF36924D1B66DCF700C71BBC /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF36924C1B66DCF700C71BBC /* ConfigurationViewController.swift */; };
+		FF36924F1B66DE3A00C71BBC /* UserConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF36924E1B66DE3A00C71BBC /* UserConfigurations.swift */; };
+		FF3867221B6AE58C0075E612 /* btest3.png in Resources */ = {isa = PBXBuildFile; fileRef = FF38671F1B6AE58C0075E612 /* btest3.png */; };
+		FF3867231B6AE58C0075E612 /* btest2.png in Resources */ = {isa = PBXBuildFile; fileRef = FF3867201B6AE58C0075E612 /* btest2.png */; };
+		FF3867241B6AE58C0075E612 /* btest1.png in Resources */ = {isa = PBXBuildFile; fileRef = FF3867211B6AE58C0075E612 /* btest1.png */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
 		FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */; };
@@ -138,6 +143,11 @@
 		FF3692451B6296DA00C71BBC /* ETBScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETBScrollView.swift; sourceTree = "<group>"; };
 		FF3692471B62A4DF00C71BBC /* TestVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
 		FF36924A1B66845500C71BBC /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
+		FF36924C1B66DCF700C71BBC /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
+		FF36924E1B66DE3A00C71BBC /* UserConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserConfigurations.swift; sourceTree = "<group>"; };
+		FF38671F1B6AE58C0075E612 /* btest3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btest3.png; sourceTree = "<group>"; };
+		FF3867201B6AE58C0075E612 /* btest2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btest2.png; sourceTree = "<group>"; };
+		FF3867211B6AE58C0075E612 /* btest1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btest1.png; sourceTree = "<group>"; };
 		FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC2C6E61AF935E0004B0AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -234,6 +244,7 @@
 				FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */,
 				3DE9288B1B547DAB0053B43C /* EventoViewController.swift */,
 				3DFB8A321B4CD98D00463EA4 /* teste.png */,
+				FF36924C1B66DCF700C71BBC /* ConfigurationViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -244,6 +255,7 @@
 				3D6A3AC21B576D6C00E7948F /* Conversa.swift */,
 				7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */,
 				3DE928931B5599EE0053B43C /* DemoModelData.swift */,
+				FF36924E1B66DE3A00C71BBC /* UserConfigurations.swift */,
 			);
 			name = NSObject;
 			sourceTree = "<group>";
@@ -307,6 +319,9 @@
 		FF3692311B5FFF4E00C71BBC /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				FF38671F1B6AE58C0075E612 /* btest3.png */,
+				FF3867201B6AE58C0075E612 /* btest2.png */,
+				FF3867211B6AE58C0075E612 /* btest1.png */,
 				FF3692451B6296DA00C71BBC /* ETBScrollView.swift */,
 				FF3692321B5FFF7E00C71BBC /* UBAView.swift */,
 				FF3692331B5FFF7E00C71BBC /* UBAButton.swift */,
@@ -463,10 +478,13 @@
 			files = (
 				FFC2C6F01AF935E0004B0AA7 /* Main.storyboard in Resources */,
 				FFC2C6F51AF935E0004B0AA7 /* LaunchScreen.xib in Resources */,
+				FF3867221B6AE58C0075E612 /* btest3.png in Resources */,
 				FF36924B1B66845500C71BBC /* test.png in Resources */,
 				3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */,
+				FF3867231B6AE58C0075E612 /* btest2.png in Resources */,
 				FFC2C6F21AF935E0004B0AA7 /* Images.xcassets in Resources */,
 				3DFB8A301B4CC4A900463EA4 /* TwitterKitResources.bundle in Resources */,
+				FF3867241B6AE58C0075E612 /* btest1.png in Resources */,
 				3DFB8A331B4CD98D00463EA4 /* teste.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,8 +575,10 @@
 				3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */,
 				3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */,
 				FF3692361B5FFF7E00C71BBC /* UBAView.swift in Sources */,
+				FF36924D1B66DCF700C71BBC /* ConfigurationViewController.swift in Sources */,
 				3DACDEAF1B5222E300711E25 /* Event.swift in Sources */,
 				FF3692481B62A4DF00C71BBC /* TestVC.swift in Sources */,
+				FF36924F1B66DE3A00C71BBC /* UserConfigurations.swift in Sources */,
 				3DE928991B55CA9E0053B43C /* ProfileViewController.swift in Sources */,
 				3DFB8A271B4C5B0A00463EA4 /* UserManager.swift in Sources */,
 				FF3692421B60012800C71BBC /* FacebookResponder.swift in Sources */,

@@ -16,27 +16,60 @@ class TestVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //ETBScrollView Test ---------------------
+        //* THIS CLASS IS A GIFT FOR WILL AND JOHN *
         
-//        self.view.backgroundColor = UIColor.blackColor()
-//        
-//        var b = UIView(frame:self.view.frame)
-//        b.backgroundColor = UIColor.redColor()
-//        
-//        var a = ETBScrollView(numberOfButtons: 3, images: [UIImage()])
-//        
-//        a.prepareScrollViewWithContent(b, frame: self.view.frame)
-//        
-//        self.view.addSubview(a)
+        // ** ETBScrollView ** --------------------
+        
+        //Criando uma nova ETBScrollView
+        
+        /* Cria uma nova ETB, com a quantidade de botões 
+        na barra e a imagem de cada um deles */
+        
+        var newETB = ETBScrollView(numberOfButtons: 3, images:[UIImage(named: "btest1.png")!, UIImage(named: "btest2.png")!,UIImage(named: "btest3.png")!])
+        
+        //Cor de fundo da barra
+        newETB.toolbarBackgroundColor = UIColor.blackColor()
+        
+        //Foto do usuário
+        newETB.profileImage = UIImage(named: "b_search.png")
+        
+        //Nome do usuário
+        newETB.profileName = "William Chola"
+        
+        //Local do usuário
+        newETB.profileLocation = "Terra dos feeders"
+        
+        //View de teste
+        var viewTeste = UIView(frame:self.view.frame)
+        viewTeste.backgroundColor = UIColor.redColor()
+        
+        //Prepara a ETB, passando a view com o conteúdo que ela terá normalmente e o frame da view onde a ETB será inserida
+        newETB.prepareScrollViewWithContent(viewTeste, frame: self.view.frame)
+        
+        //Mude a cor da view que irá inserir a ETB para a mesma da toolbar
+        self.view.backgroundColor = UIColor.blackColor()
+        
+        //Adiciona a ETB na view
+        //self.view.addSubview(newETB)
+        
+        //Adiciona um seletor para o botão no indice passado
+        newETB.addSelectorToButton(2,target:self, selector: Selector("holyTest"))
         
         
-        //UBA Test --------------------
+        // ** UBA ** --------------------
         
+        
+        //Inicia a UBA com o numero de botoões
         var uba = UBAView(buttonsQuantity: 3)
-        uba.prepareAnimationOnView(self.view)
+        
+        //Prepara os botões na view passada
+        //uba.prepareAnimationOnView(self.view)
+        
+        //Adiciona um seletor para o botão no indice passado
+        uba.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
         
         
-        //OCView Test --------------------------
+        // ** OCView ** --------------------
         
         var main = UIImage(named: "test.png")
         var images = [UIImage]()
@@ -48,13 +81,17 @@ class TestVC: UIViewController {
             
         }
         
-        var rect = CGRectMake(0, 350, self.view.frame.size.width, self.view.frame.size.height / 3.0)
+        var rect = CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height / 3.0)
+        
+        
+        //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
         ocView = OCView(mainImage: main, insideImages: images, frame: rect)
         
-        self.view.addSubview(ocView)
+        //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
         
         
-        
+        //Adiciona a OCView
+        //self.view.addSubview(ocView)
         
     }
     
@@ -77,6 +114,9 @@ class TestVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func holyTest() {
+        println("hell yea")
+    }
 
     /*
     // MARK: - Navigation

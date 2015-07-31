@@ -29,6 +29,7 @@ class UBAButton: UIButton {
     //MARK: parameters from UBA
     
     var buttonSelector:Selector!
+    var buttonTarget:AnyObject!
     
     var buttonClicked:Bool!
     
@@ -81,7 +82,7 @@ class UBAButton: UIButton {
         if buttonClicked == true {
             
             if buttonSelector != nil {
-                var timer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: buttonSelector!, userInfo: nil, repeats: false)
+                var timer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: buttonTarget, selector: buttonSelector!, userInfo: nil, repeats: false)
                 
                 let mainLoop = NSRunLoop.mainRunLoop()
                 mainLoop.addTimer(timer, forMode: NSDefaultRunLoopMode)

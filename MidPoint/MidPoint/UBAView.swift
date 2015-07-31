@@ -214,9 +214,15 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
     }
     
     
-    func addSelectorToButton(index:Int!, selector:Selector!) {
+    func addSelectorToButton(index:Int!, target:AnyObject!, selector:Selector!) {
+        
+        if buttonArray.count <= index {
+            return
+        }
         
         buttonArray[index].buttonSelector = selector
+        buttonArray[index].buttonTarget = target
+    
     }
     
     

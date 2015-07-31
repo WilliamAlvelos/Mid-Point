@@ -35,7 +35,9 @@ class ETBScrollView: UIScrollView, UIScrollViewDelegate {
     private let toolbarHeightFactor:CGFloat = 0.13
     
     //Factor of side button spacement
-    private let toolbarButtonSpacementFactor: CGFloat = 0.2
+    private let toolbarButtonSpacementFactor: CGFloat = 0.1
+    
+    private let toolbarButtonSpacementBorderFactor: CGFloat = 0.6
     
     //The deceleration value
     private let deceleration:CGFloat = 2.0
@@ -83,9 +85,13 @@ class ETBScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     
-    func addSelectorToButton(buttonIndex:Int!, selector:Selector) {
+    func addSelectorToButton(buttonIndex:Int!,target:AnyObject!, selector:Selector) {
         
-        toolbarButtons[buttonIndex].addTarget(self, action: selector, forControlEvents: UIControlEvents.TouchUpInside)
+        if toolbarButtons.count <= buttonIndex {
+            return
+        }
+        
+        toolbarButtons[buttonIndex].addTarget(target, action: selector, forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func prepareScrollViewWithContent(content:UIView!,frame:CGRect) {
@@ -156,24 +162,37 @@ class ETBScrollView: UIScrollView, UIScrollViewDelegate {
         yDeceleration = self.frame.size.height * decelerationStartFactor
         
         //Creates the buttons for the toolbar
+        var border = self.frame.size.width * toolbarButtonSpacementBorderFactor
         var spacement = self.frame.size.width * toolbarButtonSpacementFactor
-        var buttonWidth = self.frame.size.width - (spacement * 2.0)
+        var buttonWidth = self.frame.size.width - (spacement * CGFloat(buttonsQuantity + 1))
         buttonWidth = buttonWidth / CGFloat(buttonsQuantity)
         
-        var buttonRect = CGRectMake(spacement, 0.0, buttonWidth, toolbarView.frame.size.height)
+        var buttonSize = CGSizeMake(buttonWidth, toolbarView.frame.size.height)
+        buttonSize.height *= toolbarButtonSpacementBorderFactor
+        buttonSize.width *= toolbarButtonSpacementBorderFactor
+        
+        var buttonCenter = CGPointMake(spacement + buttonWidth / 2.0, toolbarView.frame.size.height / 2.0)
+        
+        //var buttonRect = CGRectMake(spacement, 0.0, buttonWidth, toolbarView.frame.size.height)
         
         for var x = 0; x < buttonsQuantity; x++ {
             
-            var button = UIButton(frame: buttonRect)
+            var button = UIButton()
+            button.frame.size = buttonSize
+            button.center = buttonCenter
+            
+            //var button = UIButton(frame: buttonRect)
             
             if x < buttonsImage.count {
-                button.imageView?.image = buttonsImage[x]
+                button.setImage(buttonsImage[x], forState: .Normal)
             }
             
             toolbarView.addSubview(button)
             toolbarButtons.append(button)
             
-            buttonRect.origin.x = buttonRect.origin.x + buttonWidth
+            buttonCenter.x = buttonCenter.x + spacement + buttonWidth
+            
+            //buttonRect.origin.x = buttonRect.origin.x + buttonWidth
         }
         
         //Add the views to the scrollview
