@@ -38,8 +38,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     }
     @IBAction func groups(sender: AnyObject) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ConversasTableView") as! ConversasTableViewController
+        let nextViewController = TransitionManager.creatView("ConversasTableView") as! ConversasTableViewController
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
 
@@ -47,8 +46,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     @IBAction func profile(sender: AnyObject) {
         
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ProfileView") as! ProfileViewController
+        let nextViewController = TransitionManager.creatView("ProfileView") as! ProfileViewController
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
         
@@ -58,7 +56,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     override func viewDidLoad() {
         
         activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais")
-        
         
         
 //        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
@@ -91,8 +88,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     
     func createConversation(){
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
+        let nextViewController = TransitionManager.creatView("CreateConversation") as! CreateConversationViewController
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
@@ -325,8 +321,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         var annView = view.annotation
         
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
+    
+        let nextViewController = TransitionManager.creatView("CreateConversation") as! CreateConversationViewController
         var event = Event()
         
         

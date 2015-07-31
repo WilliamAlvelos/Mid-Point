@@ -241,7 +241,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     func errorThrowedServer(stringError: String) {
         println(stringError)
     }
-    func downloadImageFinished(images: Array<Event>){
+    
+    func downloadImageEventFinished(images: Array<Event>){
         self.Data = images
         self.tableView.reloadData()
     }

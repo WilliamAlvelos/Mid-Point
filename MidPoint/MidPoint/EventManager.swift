@@ -16,7 +16,7 @@
     func errorThrowedSystem(error: NSError)
     optional func errorThrowedServer(stringError: String)
 
-    optional func downloadImageFinished(images: Array<Event>)
+    optional func downloadImageEventFinished(images: Array<Event>)
 }
 class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     private var eventDao : EventDAOCloudKit?
@@ -77,7 +77,7 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
             events[x].image = self.eventDao?.downloadImage(events[x].id!)
         }
         DispatcherClass.dispatcher { () -> () in
-            self.delegate?.downloadImageFinished?(events)
+            self.delegate?.downloadImageEventFinished?(events)
         }
     }
 }

@@ -62,7 +62,7 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
     func saveEvent(event: Event, usuario: User) {
         
         let url : String = "\(LinkAccessGlobalConstants.LinkEvents)insereEvento.php"
-        let bodyHttp = String(format: "\(EventGlobalConstants.Name)=%@&\(EventGlobalConstants.Description)=%@&\(EventGlobalConstants.Date)=%@&\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.Latitude)=%d&\(EventGlobalConstants.Longitude)=%d", event.name!,event.descricao!,event.date!, usuario.id!, event.localizacao!.latitude!,event.localizacao!.longitude!)
+        let bodyHttp = String(format: "\(EventGlobalConstants.Name)=%@&\(EventGlobalConstants.Description)=%@&\(EventGlobalConstants.Date)=%@&\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.Latitude)=%f&\(EventGlobalConstants.Longitude)=%f", event.name!,event.descricao!,event.date!, usuario.id!, event.localizacao!.latitude!,event.localizacao!.longitude!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 DispatcherClass.dispatcher({ () -> () in

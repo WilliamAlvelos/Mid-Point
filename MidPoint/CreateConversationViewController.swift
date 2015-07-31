@@ -91,8 +91,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
                 self.event?.descricao = self.subtitleGroup.text
                 self.event?.date = NSDate(timeIntervalSinceNow: 0)
                 
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("AmigosViewController") as! AmigosTableViewController
+                let nextViewController = TransitionManager.creatView("AmigosViewController") as! AmigosTableViewController
                 nextViewController.event = self.event
                 
                 self.navigationController?.pushViewController(nextViewController, animated: true)
@@ -125,8 +124,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
             event?.descricao = self.subtitleGroup.text
             event?.date = NSDate(timeIntervalSinceNow: 0)
             
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("AmigosViewController") as! AmigosTableViewController
+            let nextViewController = TransitionManager.creatView("AmigosViewController") as! AmigosTableViewController
             nextViewController.event = event
             self.navigationController?.pushViewController(nextViewController, animated: true)
             //var vc = segue.destinationViewController as! AmigosTableViewController
@@ -230,17 +228,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         
     
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     
     

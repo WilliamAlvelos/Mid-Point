@@ -538,7 +538,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!){
         let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
         data.writeToFile(self.imagePathURL().path!, atomically: true)
-        println("%@", self.imagePathURL().path!)
         
         //addPhotoMediaMessage(image)
         

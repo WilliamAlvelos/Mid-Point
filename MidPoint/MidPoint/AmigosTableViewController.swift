@@ -160,20 +160,9 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         cell.imageLabel.layer.masksToBounds = true
         
         cell.titleLabel?.text = data[indexPath.row].name
-        var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesUsers)\(data[indexPath.row].id!).jpg")!
-        //var url:NSURL = NSURL(string: "http://alvelos.wc.lt/MidPoint/users/user_images/2.jpg")!
-        
-        println(url)
-        var dados:NSData = NSData(contentsOfURL: url)!
-        cell.imageLabel?.image = UIImage(data: dados)
-        
-        //cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
 
-        
-//        var url:NSURL = NSURL.URLWithString(string)
-//        var data:NSData = NSData.dataWithContentsOfURL(url, options: nil, error: nil)
-//        cell.imageLabel = UIImage.imageWithData(data)
-        
+        cell.imageLabel.image = data[indexPath.row].image
+
         if(contains(self.dataSelected){ x in x.id == self.data[indexPath.row].id})
         {
             cell.accessoryType = .Checkmark
@@ -218,8 +207,9 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         progressView.animateProgressView(float)
     }
-    func getUsersFinished(users: Array<User>){
-        self.data = users
+   
+    func downloadImageFinished(image: Array<User>) {
+        self.data = image
         let id = UserDAODefault.getLoggedUser().id!
         for var i = 0 ; i < self.data.count ; i++ {
             if (self.data[i].id == id){
@@ -229,7 +219,6 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         }
         self.tableView.reloadData()
     }
-
     func saveEventFinished(event: Event){
         addConversation(String(format:"%d",event.id!), title: event.name, subtitle: event.descricao, image: "halua")
         eventDelegate.inviteFriendsToEvent(event, sender: UserDAODefault.getLoggedUser(), friends: self.dataSelected)

@@ -150,8 +150,9 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     }
     
     @IBAction func registerAction(sender: AnyObject) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("register") as! RegisterViewController
+        
+        
+        let nextViewController = TransitionManager.creatView("register") as! RegisterViewController
         //self.presentViewController(nextViewController, animated:true, completion:nil)
         self.navigationController?.pushViewController(nextViewController, animated: true)
         
@@ -170,8 +171,8 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     func getUserFinished(user: User){
         UserDAODefault.saveLogin(user)
         activity?.removeActivityViewWithName()
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationHome") as! UINavigationController
+        
+        let nextViewController = TransitionManager.creatView("navigationHome") as! UINavigationController
         self.presentViewController(nextViewController, animated:true, completion:nil)
 
     }

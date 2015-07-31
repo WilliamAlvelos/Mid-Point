@@ -50,8 +50,11 @@ class PictureCloudKit : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDe
             
             self.saveImageUserConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
             self.saveImageUserConnection!.start()
-           
+           return
         }
+        DispatcherClass.dispatcher({ () -> () in
+            self.delegate?.saveImageFinished()
+        })
     }
     func uploadImageEvent(event : Event){
         var imageData = UIImageJPEGRepresentation(event.image, 0.5)
@@ -81,8 +84,11 @@ class PictureCloudKit : NSObject, NSURLConnectionDelegate, NSURLConnectionDataDe
             
             self.saveImageEventConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
             self.saveImageEventConnection!.start()
-            
+         return
         }
+        DispatcherClass.dispatcher({ () -> () in
+            self.delegate?.saveImageFinished()
+        })
     }
     func connection(connection: NSURLConnection, didReceiveData data: NSData){
         self.data = data
