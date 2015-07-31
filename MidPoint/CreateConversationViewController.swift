@@ -8,15 +8,21 @@
 
 import UIKit
 
-class CreateConversationViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+import CloudKit
+
+class CreateConversationViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate{
 
     var pickerLibrary : UIImagePickerController?
     
-
+    var locationManager = CLLocationManager()
     
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
     var event:Event?
+
+    var location: CLLocationCoordinate2D?
+    
+    var nameRole: String?
     
     @IBOutlet var button: UIButton!
     
@@ -24,19 +30,31 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     
     @IBOutlet var subtitleGroup: UITextField!
     
+    @IBOutlet var mapView: MKMapView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Criar Grupo"
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
+        event = Event()
+        mapView.delegate = self
+        locationManager.delegate = self
+        mapView.showsUserLocation = true
+        
+        locationManager.requestAlwaysAuthorization()
 
         button.layer.cornerRadius = button.bounds.size.width/2
         button.layer.borderWidth = 0
         button.layer.masksToBounds = true
         
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .Done, target: self, action: "next")
+        
         // Do any additional setup after loading the view.
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -44,19 +62,167 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     }
     
     
+    func next(){
+        
+        if(self.titleGroup.text == ""){
+            
+            ActionError.actionWithTextField("Cuidado", errorMessage: "O titulo do Grupo está vazio", placeholder:"Digite o Titulo do Grupo", view: self, title: true)
+
+        }
+        
+        
+        
+        if(self.subtitleGroup.text == ""){
+            
+            ActionError.actionWithTextField("Cuidado", errorMessage: "O subtitulo do Grupo está vazio", placeholder:"Digite o subtitulo do Grupo", view: self, title: false)
+
+        }
+        
+        
+        if(self.event?.image == nil){
+            
+            var alertController = UIAlertController(title: "Cuidado", message: "O Grupo não possui imagem", preferredStyle: .Alert)
+            
+            // Create the actions
+            
+            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel) {
+                UIAlertAction in
+                
+                self.event?.name = self.titleGroup.text
+                self.event?.descricao = self.subtitleGroup.text
+                self.event?.date = NSDate(timeIntervalSinceNow: 0)
+                
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("AmigosViewController") as! AmigosTableViewController
+                nextViewController.event = self.event
+                
+                self.navigationController?.pushViewController(nextViewController, animated: true)
+                
+            }
+            
+            
+            var takeAction = UIAlertAction(title: "Tirar Foto", style: UIAlertActionStyle.Default) {
+                UIAlertAction in
+                
+                self.pickerLibrary?.sourceType = .Camera
+                self.pickerLibrary?.allowsEditing = true
+                self.presentViewController(self.pickerLibrary!, animated: true, completion: nil)
+                
+            }
+            
+            // Add the actions
+
+            alertController.addAction(okAction)
+            alertController.addAction(takeAction)
+
+            
+            // Present the controller
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        if(self.titleGroup.text != "" && self.subtitleGroup.text != ""){
+            
+            event?.name = self.titleGroup.text
+            event?.descricao = self.subtitleGroup.text
+            event?.date = NSDate(timeIntervalSinceNow: 0)
+            
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("AmigosViewController") as! AmigosTableViewController
+            nextViewController.event = event
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+            //var vc = segue.destinationViewController as! AmigosTableViewController
+        }
+
+        
+    }
+    
     override func viewWillAppear(animated: Bool) {
         
         PermissionsResponse.checkCameraPermission()
         PermissionsResponse.checkRollCameraPermission()
+        
+        var point: MKPointAnnotation = MKPointAnnotation()
+        
+        var coordinate: CLLocationCoordinate2D = self.location!
+        
+        print(self.location!)
+        
+        point.subtitle = "Role"
+        point.title = self.nameRole
+        point.coordinate = coordinate
+        
+        mapView.addAnnotation(point)
     }
+    
+    func locationManager(manager: CLLocationManager!,
+        didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+            
+            var shouldIAllow = false
+            
+            switch status {
+            case CLAuthorizationStatus.AuthorizedAlways:
+                shouldIAllow = true
+            default:
+                //LOCATION IS RESTRICTED ********
+                //LOCATION IS RESTRICTED ********
+                //LOCATION IS RESTRICTED ********
+                return
+            }
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("LabelHasbeenUpdated", object: nil)
+            
+            if (shouldIAllow == true) {
+                // Start location services
+                locationManager.startUpdatingLocation()
+            }
+        
+    }
+    
+    
+//    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+//        
+//        
+//        locationManager.stopUpdatingLocation()
+//        
+//        var locationArray = locations as NSArray
+//        var locationObj = locationArray.lastObject as! CLLocation
+//        var coord = locationObj.coordinate
+//        
+////        let region = MKCoordinateRegionMakeWithDistance(coord, radius, radius)
+////        
+////        geoLocation = coord
+////        
+////        mapView.setRegion(region, animated: true)
+//        
+//        
+//    }
+//    
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        
+        
+        locationManager.stopUpdatingLocation()
+        
+        var locationArray = locations as NSArray
+        var locationObj = locationArray.lastObject as! CLLocation
+        //var coord = locationObj.coordinate
+        
+        let region = MKCoordinateRegionMakeWithDistance(self.location!, 500, 500)
+        
+        //geoLocation = coord
+        
+        mapView.setRegion(region, animated: true)
+        
+        //mapView.userLocation.title = nomeUser
+        
+    }
+    
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        event = Event()
         event?.name = self.titleGroup.text
         event?.descricao = self.subtitleGroup.text
         event?.date = NSDate(timeIntervalSinceNow: 0)
@@ -115,16 +281,16 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!){
         let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
         data.writeToFile(self.imagePathURL().path!, atomically: true)
-        println("%@", self.imagePathURL().path!)
-        
+        //EventDAOCloudKit().uploadImageOne(UIImage(contentsOfFile: self.imagePathURL().path!)!)
         button.setBackgroundImage(image, forState: .Normal)
+        button.setTitle("", forState: UIControlState.Normal)
+        event?.image = UIImage(contentsOfFile: self.imagePathURL().path!)
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
     
-    
     private func imagePathURL()->NSURL{
-        return NSURL.fileURLWithPath(NSString(format: "%@%@", aplicationDocumentsDirectory(),"/userPhoto.JPG") as String)!
+        return NSURL.fileURLWithPath(NSString(format: "%@%@", aplicationDocumentsDirectory(),"/groupPhoto.JPG") as String)!
     }
     
     private func aplicationDocumentsDirectory()->NSString{

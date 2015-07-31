@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversasTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, EventoDAOCloudKitDelegate{
+class ConversasTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, EventManagerDelegate{
 
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
@@ -16,10 +16,11 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     var filteredTableData = [Event]()
     
-    var eventDelegate = EventDAOCloudKit()
+    var filteredImageData = [UIImage]()
+    
+    var eventDelegate = EventManager()
     
     var resultSearchController = UISearchController()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,21 +48,11 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         //refreshControl
         self.refreshControl = UIRefreshControl()
         //= [[UIRefreshControl alloc] init];
-        self.refreshControl?.backgroundColor = UIColor.purpleColor()
-        self.refreshControl?.tintColor = UIColor.whiteColor()
+        self.refreshControl?.backgroundColor = Colors.Azul
+        self.refreshControl?.tintColor = Colors.Rosa
         self.refreshControl?.addTarget(self, action: Selector("reloadData"), forControlEvents: UIControlEvents.ValueChanged)
-
-
         
         var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
-
-        // Uncomment the following line to preserve selection between presentations
-        //self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        self.navigationItem.rightBarButtonItem = add
-        //self.navigationItem.rightBarButtonItem = self.
         
         self.title = "Grupos"
         
@@ -69,18 +60,11 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     func reloadData(){
         self.eventDelegate.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
-        println("will")
+        
         
     }
     
-    
-    func createConversation(){
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
-        self.navigationController?.pushViewController(nextViewController, animated: true)
-        //self.presentViewController(nextViewController, animated:true, completion:nil)
-    
-    }
+
     
     func setupFirebase() {
         
@@ -99,8 +83,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         })
         
     }
-    
-    
     
     
     func animateTable() {
@@ -153,8 +135,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        
-        
+
         if (self.resultSearchController.active) {
             return self.filteredTableData.count
         }
@@ -164,29 +145,46 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
     
     
+    
+
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.resultSearchController.active = false
+        
         let nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
         nextView.conversa = Data[indexPath.row].id
+        nextView.name = Data[indexPath.row].name
+        nextView.event = Data[indexPath.row]
+        nextView.imageEvent = Data[indexPath.row].image
+        
         self.navigationController?.pushViewController(nextView, animated: true)
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:CustomCellConversas = self.tableView.dequeueReusableCellWithIdentifier("CustomCellConversas") as!CustomCellConversas
+        var cell:CustomCellConversas = self.tableView.dequeueReusableCellWithIdentifier("CustomCellConversas") as! CustomCellConversas
         
         
         cell.selectionStyle = .None
+        
+        
+        cell.imageLabel.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0
+        
+        cell.imageLabel.layer.masksToBounds = true
    
         if (self.resultSearchController.active) {
             cell.titleLabel.text = filteredTableData[indexPath.row].name
             cell.subtitleLabel.text = filteredTableData[indexPath.row].descricao
+            cell.imageLabel.image = filteredTableData[indexPath.row].image
             
             return cell
         }
         else {
+
             cell.titleLabel.text = Data[indexPath.row].name
             cell.subtitleLabel.text = Data[indexPath.row].descricao
-            
+            cell.imageLabel.image = Data[indexPath.row].image
+
             return cell
         }
         
@@ -204,22 +202,10 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
 
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+        if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-
-
-    
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-
-
     
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -228,44 +214,39 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
 
     
-    func updateSearchResultsForSearchController(searchController: UISearchController)
-    {
-//        filteredTableData.removeAll(keepCapacity: false)
-//        
-//        let searchPredicate = NSPredicate(format: "SELF contains[cd] %@", searchController.searchBar.text)
-//        let array = (Data as NSArray).filteredArrayUsingPredicate(searchPredicate)
-//        filteredTableData = array as! [Event]
-//        self.tableView.reloadData()
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let sb = searchController.searchBar
+        let target = sb.text
+        self.filteredTableData = self.Data.filter {
+            s in
+            let options = NSStringCompareOptions.CaseInsensitiveSearch
+            let found = s.name!.rangeOfString(target, options: options)
+            return (found != nil)
+        }
+        self.tableView.reloadData()
     }
-    
-    
-    func errorThrowed(error: NSError){}
-    
-    func saveEventFinished(event: Event){}
-    
-    func eventNotFound(event : Event){}
-    
-    func getEventFinished(event: Event){}
-    
+
     func getEventsFinished(events: Array<Event>){
         Data = events
         //animateTable()
         self.refreshControl?.endRefreshing()
+
+        self.animateTable()
+        
     }
-    func inviteFinished(event: Event){
     
+    func errorThrowedSystem(error: NSError){
+        
+    }
+    func errorThrowedServer(stringError: String) {
+        println(stringError)
+    }
+    func downloadImageFinished(images: Array<Event>){
+        self.Data = images
+        self.tableView.reloadData()
     }
 
-    /*
-    // MARK:
     
-    - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -15,10 +15,17 @@ class Event: NSObject {
     var name: String?
     var descricao: String?
     var date: NSDate?
-    var image: NSURL?
+    var image: UIImage?
     var id: Int?
-    override init(){
+    var numberOfPeople:Int?
+    var numberOfConfirmed:Int?
+    var numberOfRefused:Int?
+    var numberOfPending:Int?
+    var localizacao :Localizacao?
+    
 
+    override init() {
+        
     }
     
     init(name: String){

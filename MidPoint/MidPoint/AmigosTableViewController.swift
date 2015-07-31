@@ -7,22 +7,29 @@
 //
 
 import UIKit
-
-class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , FriendDAODelegate, UISearchResultsUpdating, EventoDAOCloudKitDelegate{
+import CloudKit
+class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , UISearchResultsUpdating, EventManagerDelegate, UserManagerDelegate{
     
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
     var event:Event?
     
-    var eventDelegate:EventDAOCloudKit = EventDAOCloudKit()
+    var eventDelegate:EventManager = EventManager()
     
-    var daoFriend: FriendDAOCloudKit = FriendDAOCloudKit()
+    var daoFriend: UserManager = UserManager()
     
     var data: Array<User> = Array()
     
     var dataSelected: Array<User> = Array()
     
     var resultSearchController = UISearchController()
+    
+    var initialProgress:Double = 0.0
+    
+
+    @IBOutlet var progressLabel: UILabel!
+    
+    @IBOutlet var progressLayer: CALayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +55,22 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         
         self.title = "Amigos"
+        
     }
     
     func finish(){
-        UserDAODefault.saveLogin(User(name: "william", email: "will", id: 2))
+        
+        //if(event?.image)
+        
         eventDelegate.saveEvent(event!, usuario: UserDAODefault.getLoggedUser())
+        
+        var progressView: ProgressView = ProgressView(frame: self.view.frame)
+        
+        self.view = progressView
+        
+        self.navigationController?.navigationBarHidden = true
+
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -133,9 +151,24 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellAmigosGroupo = self.tableView.dequeueReusableCellWithIdentifier("CustomCellAmigosGroupo") as!CustomCellAmigosGroupo
         
-        cell.titleLabel?.text = data[indexPath.row].name
+        //cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
         
-        cell.imageLabel = UIImageView(image: UIImage(named: "teste"))
+        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0
+        
+        cell.titleLabel?.text = data[indexPath.row].name
+        var url:NSURL = NSURL(string:"\(LinkAccessGlobalConstants.LinkImagesUsers)\(data[indexPath.row].id!).jpg")!
+        //var url:NSURL = NSURL(string: "http://alvelos.wc.lt/MidPoint/users/user_images/2.jpg")!
+        
+        println(url)
+        var dados:NSData = NSData(contentsOfURL: url)!
+        cell.imageLabel?.image = UIImage(data: dados)
+        
+        //cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
+
+        
+//        var url:NSURL = NSURL.URLWithString(string)
+//        var data:NSData = NSData.dataWithContentsOfURL(url, options: nil, error: nil)
+//        cell.imageLabel = UIImage.imageWithData(data)
         
         if(contains(self.dataSelected){ x in x.id == self.data[indexPath.row].id})
         {
@@ -146,6 +179,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         }
         cell.selectionStyle = .None
         return cell
+        
+        
     }
     
     
@@ -153,11 +188,50 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         self.daoFriend.getUsersWithName(searchController.searchBar.text)
     }
-    
+    func errorThrowedSystem(error: NSError) {
+        
+    }
+    func uploadImageFinished(){
 
+        var alertController = UIAlertController(title: "Sucesso", message: "Grupo Criado com Sucesso", preferredStyle: .Alert)
+        
+        var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            TransitionManager(indentifier: "navigationHome", animated: false, view: self)
+        }
+
+        alertController.addAction(okAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    func progressUpload(float : Float){
+        
+        var progressView: ProgressView = ProgressView(frame: self.view.frame)
+        
+        self.view = progressView
+        
+        self.navigationController?.navigationBarHidden = true
+        
+        progressView.animateProgressView(float)
+    }
     func getUsersFinished(users: Array<User>){
         self.data = users
+        let id = UserDAODefault.getLoggedUser().id!
+        for var i = 0 ; i < self.data.count ; i++ {
+            if (self.data[i].id == id){
+                self.data.removeAtIndex(i)
+                break
+            }
+        }
         self.tableView.reloadData()
+    }
+
+    func saveEventFinished(event: Event){
+        addConversation(String(format:"%d",event.id!), title: event.name, subtitle: event.descricao, image: "halua")
+        eventDelegate.inviteFriendsToEvent(event, sender: UserDAODefault.getLoggedUser(), friends: self.dataSelected)
+    }
+    func errorThrowedServer(stringError: String) {
+        println(stringError)
     }
     
     func addConversation(id: String, title: String!, subtitle: String!, image: String!) {
@@ -170,19 +244,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
             ])
     }
     
-    func errorThrowed(error: NSError){}
-    func saveEventFinished(event: Event){
-        addConversation(String(format:"%d",event.id!), title: event.name, subtitle: event.descricao, image: "halua")
-        eventDelegate.inviteFriendsToEvent(event, sender: UserDAODefault.getLoggedUser(), friends: self.dataSelected)
-    }
-    func eventNotFound(event : Event){}
-    func getEventFinished(event: Event){}
-    func inviteFinished(event: Event){
-        print("funcionando e que se foda")
-    }
+  
     
-    func getEventsFinished(events: Array<Event>){
-        
-    }
 
 }

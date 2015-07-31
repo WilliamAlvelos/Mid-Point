@@ -14,7 +14,6 @@ import CoreLocation
 
 class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
-    @IBOutlet var activity: UIActivityIndicatorView!
     @IBOutlet var localTextField: UITextField!
     
     var nomeUser: String?
@@ -24,7 +23,11 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     var locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView!
+    
     var radius: CLLocationDistance = 300
+    
+    
+    var activity :activityIndicator?
     
     
     var geoLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(-23.670055, -46.701234)
@@ -36,8 +39,31 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     @IBAction func groups(sender: AnyObject) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("navigationControllerConversas") as! UINavigationController
-        self.presentViewController(nextViewController, animated:true, completion:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ConversasTableView") as! ConversasTableViewController
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+
+    }
+    
+    @IBAction func profile(sender: AnyObject) {
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ProfileView") as! ProfileViewController
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+        
+    }
+    
+    override func viewDidLoad() {
+        
+        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais")
+        
+        
+        
+//        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
+//        
+//        self.navigationItem.rightBarButtonItem = add
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -45,7 +71,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         locationManager.delegate = self
         mapView.showsUserLocation = true
         localTextField.hidden = true
-        showActivity()
+        //showActivity()
         
 
         
@@ -58,28 +84,34 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         //addPointsOfInterest("restaurant|food", name: "", location: coor2);
         //addLocationsFromGoogle()
         
-        activity.stopAnimating()
-        
+        //activity.stopAnimating()
         
         self.title = "Mapa"
     }
     
     
-    func showActivity(){
-        activity.hidesWhenStopped = true
-        activity.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
-        activity.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-        activity.layer.cornerRadius = 10
-        activity.startAnimating()
+    func createConversation(){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
+    
+//    func showActivity(){
+//        activity.hidesWhenStopped = true
+//        activity.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+//        activity.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+//        activity.layer.cornerRadius = 10
+//        activity.startAnimating()
+//    }
+//    
     
     
     
     private func addPointsOfInterest(type: String, name: String, location: CLLocationCoordinate2D) {
         
         mapView.removeAnnotations(mapView.annotations)
-        showActivity()
+        //showActivity()
 
         
         
@@ -212,7 +244,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 //        }
         
 
-        activity.stopAnimating()
+        //activity.stopAnimating()
     
     }
     
@@ -225,6 +257,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
             
             if annotation is MKUserLocation {
+                
                 return nil
             }
             
@@ -239,48 +272,93 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                     pinView!.pinColor = .Purple
                 
                 
+                    annotation.coordinate
+                
+                
                 
                     let roleButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
                 
                     roleButton.addTarget(self, action: "selectRole:", forControlEvents: UIControlEvents.TouchUpInside)
+                
                 
                     roleButton.frame.size.width = 44
                     roleButton.frame.size.height = 44
                     roleButton.backgroundColor = UIColor.redColor()
                     roleButton.setImage(UIImage(named: "teste.png"), forState: .Normal)
                 
+                
+                
+                //var rightButton :UIButton = UIButton.buttonWithType(UIButtonType.InfoDark) as! UIButton
+                
+                
+                
                     pinView!.rightCalloutAccessoryView = roleButton
                 
                     var icon = UIImageView(image: UIImage(named: "teste.png"))
                     pinView!.leftCalloutAccessoryView = icon
+                
             }
             else {
                 pinView!.annotation = annotation
             }
+            
+            activity?.removeActivityViewWithName()
             
             return pinView
     }
     
     
     func selectRole (sender : UIButton!) {
-        println("role Selecionado")
         
+        
+//        
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
+//        
+//        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+    }
+    
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        
+        print("william alvelos")
+        
+        var annView = view.annotation
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("CreateConversation") as! CreateConversationViewController
+        nextViewController.location = annView.coordinate
+        nextViewController.nameRole = annView.title
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+        
+//        annotation *annView = view.annotation;
+//        detailedViewOfList *detailView = [[detailedViewOfList alloc]init];
+//        detailView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//        detailView.address = annView.address;
+//        detailView.phoneNumber = annView.phonenumber;
+//        [self presentModalViewController:detailView animated:YES];
     }
     
 
     @IBAction func actionSearch(sender: AnyObject) {
         
+        
+        
         if(localTextField.hidden){
             localTextField.hidden = false
+            
         }else{
+            
+            activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais")
+            
             localTextField.hidden = true
             
             var string = localTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "%20", options:  NSStringCompareOptions.LiteralSearch, range: nil)
             
             //var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
-            
-            
-            
             
             
             addPointsOfInterest("", name: string, location: geoLocation);
@@ -291,7 +369,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     func locationManager(manager: CLLocationManager!,
         didChangeAuthorizationStatus status: CLAuthorizationStatus) {
             
-            showActivity()
+            //showActivity()
             
             var shouldIAllow = false
             
@@ -312,8 +390,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 locationManager.startUpdatingLocation()
             }
             
-            activity.stopAnimating()
-    }
+               }
     
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -365,7 +442,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             else {
                 
                 for(var x = 0; x < response.routes.count; x++) {
-                    
+                     
                     println(response.routes[x].distance)
                 }
                 

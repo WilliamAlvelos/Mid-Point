@@ -9,37 +9,31 @@
 import Foundation
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource
+class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, EventManagerDelegate
 {
     
     //ganbs para ver se esta funfando enquanto nao recebo o Usuario
 
-    var event:Event = Event(name: "Role")
-    
-    var data: [Event] = [Event(name: "rolezin")]
-    
+
     var navItem: UINavigationItem?
     
     var travado: Bool = false
     
-    var searchAparecendo: Bool = true
+    var eventManager : EventManager = EventManager()
     
+    var events = Array<Event>()
     
-    @IBOutlet var searchBar: UISearchBar!
     
     @IBOutlet var tableView: UITableView!
 
     @IBOutlet var gestureView: UIView!
     
-    @IBOutlet var tabBar: UITabBar!
     
      override func viewDidLoad() {
         
+        //activityIndicator.activityViewWithName(self.navigationController!, texto: "Buscando Eventos")
         
-        
-        data.append(event)
-        data.append(event)
-        data.append(event)
+        self.eventManager.delegate = self
         
         navItem = self.navigationItem
         
@@ -48,6 +42,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         
+        eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 160.0
@@ -72,9 +67,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.view.addGestureRecognizer(swipeDownSearch)
         
         
-        self.tabBar.addGestureRecognizer(swipeUP)
-        
-        self.tabBar.addGestureRecognizer(swipeDown)
+//        self.tabBar.addGestureRecognizer(swipeUP)
+//        
+//        self.tabBar.addGestureRecognizer(swipeDown)
         
     }
 
@@ -83,71 +78,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
 
     
     override func viewWillAppear(animated: Bool) {
-        searchBar.center.y -= view.bounds.height
-        
         
         animateTable()
         
-        UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.searchBar.center.y += self.view.bounds.height
-            
-            self.view.layoutIfNeeded()
-            
-            }, completion: nil)
-    }
-    
-    func DownSwipeSearch(gesture: UISwipeGestureRecognizer){
-        if(searchAparecendo == false){
-            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                self.searchBar.center.y += self.view.bounds.height/5
-                
-                }, completion: nil)
-                searchAparecendo = true
-        }
-    }
-    func UpSwipeSearch(gesture: UISwipeGestureRecognizer){
-        
-        if(searchAparecendo == true){
-            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                self.searchBar.center.y -= self.view.bounds.height/5
-                
-                }, completion: nil)
-            searchAparecendo = false
-        }
-    }
 
-    func DownSwipe(gesture: UISwipeGestureRecognizer){
-        if(travado == true){
-            
-            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                self.tableView.center.y += self.view.bounds.width/1.55
-                self.tabBar.center.y += self.view.bounds.width/1.55
-                
-                //self.view.backgroundColor = UIColor(red: 0, green:0 , blue: 255, alpha: 1)
-                
-                self.view.layoutIfNeeded()
-                }, completion: nil)
-            
-            travado = false
-        }
-    }
-    func UpSwipe(gesture: UISwipeGestureRecognizer){
-        
-        println("cima")
-        
-        if(travado == false){
-            
-            UIView.animateWithDuration(0.8, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                self.tableView.center.y -= self.view.bounds.width/1.55
-                self.tabBar.center.y -= self.view.bounds.width/1.55
-                //self.view.backgroundColor = UIColor(red: 0, green:0 , blue: 255, alpha: 1)
-                
-                self.view.layoutIfNeeded()
-                }, completion: nil)
-            
-            travado = true
-        }
-        
     }
     
     func animateTable() {
@@ -177,13 +111,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 300;
+        return 200;
         
     }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return events.count
     }
     
     
@@ -192,11 +126,85 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     }
     
     
+    func errorThrowedServer(stringError: String) {
+        
+    }
+    
+    func errorThrowedSystem(error: NSError) {
+        
+    }
+    
+    func getEventsFinished(events: Array<Event>) {
+        self.events = events
+
+        self.tableView.reloadData()
+    }
+    
+    func downloadImageFinished(images: Array<Event>) {
+        events = images
+        
+        self.tableView.reloadData()
+        
+        //activityIndicator.removeActivityViewWithName()
+    }
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellProfile = self.tableView.dequeueReusableCellWithIdentifier("CustomCellProfile") as! CustomCellProfile
         
         
-        cell.titleEvent.text = self.data[indexPath.row].name
+        var image = self.events[indexPath.row].image
+        
+        cell.titleEvent.text = self.events[indexPath.row].name
+        
+        cell.imageEvent.image = self.events[indexPath.row].image
+        
+        cell.view.backgroundColor = Colors.Azul
+        
+        cell.selectionStyle = .None
+        
+        //cell.localHorarioEvento.text = self.events[indexPath.row].date
+        cell.descricao.text = self.events[indexPath.row].descricao
+        
+        if(self.events[indexPath.row].numberOfPeople! > 1){
+        
+        cell.numeroPessoas.text? = String(format: "%d Pessoas", self.events[indexPath.row].numberOfPeople!)
+        
+        }else{
+            cell.numeroPessoas.text? = String(format: "%d Pessoa", self.events[indexPath.row].numberOfPeople!)
+        }
+        
+        if(image != nil){
+
+
+        //        
+        //        var imageCortada : UIImage = UIImage(CGImage: imageRef, scale: image!.scale, orientation: image!.imageOrientation)!
+            
+
+
+            // Create a copy of the image without the imageOrientation property so it is in its native orientation (landscape)
+            let contextImage: UIImage = UIImage(CGImage: image!.CGImage)!
+            
+            // Get the size of the contextImage
+            let contextSize: CGSize = contextImage.size
+            
+            let rect: CGRect = CGRectMake(image!.size.width/4, image!.size.height/4, 375, 200)
+            
+            // Create bitmap image from context using the rect
+            let imageRef: CGImageRef = CGImageCreateWithImageInRect(contextImage.CGImage, rect)
+                
+            // Create a new image based on the imageRef and rotate back to the original orientation
+            let imageFinal: UIImage = UIImage(CGImage: imageRef, scale: image!.scale, orientation: image!.imageOrientation)!
+
+            cell.imageEvent.image = imageFinal
+            
+        
+        }
+        
+        
+        cell.titleEvent.textColor = Colors.Rosa
+        cell.descricao.textColor = Colors.Rosa
+        cell.numeroPessoas.textColor = Colors.Rosa
         
 //        cell.titleLabel?.text = self.data![indexPath.row]
 //        

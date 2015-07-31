@@ -13,8 +13,11 @@ import UIKit
 class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     var pickerLibrary : UIImagePickerController?
+    
     var user : User?
+    
     private var  userManager :UserManager = UserManager()
+    
     @IBOutlet var button: UIButton!
     
     @IBOutlet var nameTextField: UITextField!
@@ -25,15 +28,41 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     @IBOutlet var confirmPasswordTextFied: UITextField!
     
+    
+    private func preloadUser(){
+        self.nameTextField.text = user?.name
+        self.emailTexteField.text = user?.email
+        self.button.setBackgroundImage(user?.image, forState: UIControlState.Normal)
+        self.button.setTitle("", forState: UIControlState.Normal)
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         userManager.delegate = self
 
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
+        
+        IHKeyboardAvoiding.setAvoidingView(self.view)
+        
         button.layer.cornerRadius = button.bounds.size.width/2
         button.layer.borderWidth = 0
         button.layer.masksToBounds = true
+        if user == nil {
+            user = User()
+        }
+        else {
+            self.preloadUser()
+        }
+        
+        self.title = "Create Account"
+        
+        
+//        var buttonRegister: UIBarButtonItem = UIBarButtonItem(title: "Register", style: UIBarButtonItemStyle.Done, target: self, action: Selector("register"))
+//        
+//        self.navigationItem.rightBarButtonItem = buttonRegister
+        
     }
     
     override func  viewWillAppear(animated: Bool) {
@@ -41,39 +70,50 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         PermissionsResponse.checkCameraPermission()
         PermissionsResponse.checkRollCameraPermission()
         
-//        passwordTextField.hidden = true
-//        emailTexteField.hidden = true
-//        confirmPasswordTextFied.hidden = true
+        self.nameTextField.hidden = true
+        self.emailTexteField.hidden = true
+        self.passwordTextField.hidden = true
+        self.confirmPasswordTextFied.hidden = true
         
-        passwordTextField.center.x  -= view.bounds.width
-        emailTexteField.center.x -= view.bounds.width
-        confirmPasswordTextFied.center.x -= view.bounds.width
-        nameTextField.center.x -= view.bounds.width
-        
-        
-        
-        UIView.animateWithDuration(0.8, delay: 0.3, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.nameTextField.center.x += self.view.bounds.width
 
-            self.view.layoutIfNeeded()
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        self.nameTextField.hidden = false
+        self.emailTexteField.hidden = false
+        self.passwordTextField.hidden = false
+        self.confirmPasswordTextFied.hidden = false
+        
+        self.passwordTextField.center.x -= view.bounds.width
+        self.emailTexteField.center.x -= view.bounds.width
+        self.confirmPasswordTextFied.center.x -= view.bounds.width
+        self.nameTextField.center.x -= view.bounds.width
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.nameTextField.center.x = self.view.bounds.width/2
+            //self.view.layoutIfNeeded()
             }, completion: nil)
         
-        UIView.animateWithDuration(0.8, delay: 0.5, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.emailTexteField.center.x += self.view.bounds.width
-            self.view.layoutIfNeeded()
+        UIView.animateWithDuration(0.5, delay: 0.2, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.emailTexteField.center.x = self.view.bounds.width/2
+            //self.view.layoutIfNeeded()
             }, completion: nil)
         
-        UIView.animateWithDuration(0.8, delay: 0.7, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.passwordTextField.center.x += self.view.bounds.width
-            self.view.layoutIfNeeded()
+        UIView.animateWithDuration(0.5, delay: 0.4, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.passwordTextField.center.x = self.view.bounds.width/2
+            //self.view.layoutIfNeeded()
             }, completion: nil)
         
-        UIView.animateWithDuration(0.8, delay: 0.9, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-            self.confirmPasswordTextFied.center.x += self.view.bounds.width
+        UIView.animateWithDuration(0.5, delay: 0.6, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.confirmPasswordTextFied.center.x = self.view.bounds.width/2
             self.view.layoutIfNeeded()
             }, completion: nil)
 
-
+        
 
     }
     
@@ -93,13 +133,26 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
     }
     
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.endEditing(true)
+        
+        self.nameTextField.hidden = true
+        self.emailTexteField.hidden = true
+        self.passwordTextField.hidden = true
+        self.confirmPasswordTextFied.hidden = true
+        
+    }
+    
     func userStillInserted(user: User){
         println("userStillInserted")
     }
     func saveUserFinished(user: User){
         //changeView("geolocation", animated: true)
         UserDAODefault.saveLogin(user)
-        TransitionManager(indentifier: "navigationControllerConversas", animated: true, view: self)
+        PictureCloudKit().uploadImageUser(user)
+        TransitionManager(indentifier: "navigationHome", animated: true, view: self)
     }
     func userNotFound(user : User){
         println("userNotFound")
@@ -142,10 +195,10 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!){
         let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
         data.writeToFile(self.imagePathURL().path!, atomically: true)
-        println("%@", self.imagePathURL().path!)
         
         button.setBackgroundImage(image, forState: .Normal)
-        user?.image = image
+        button.setTitle("", forState: .Normal)
+        //user?.image = image
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
@@ -160,22 +213,105 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
         return paths[0] as! NSString
     }
-//
+
+    
+    
+    
+    
+    func register(){
+        if(self.nameTextField.text == ""){
+            // Create the alert controller
+            
+            ActionError.actionErrorWithTextField("Cuidado", errorMessage: "O seu Nome está vazio", placeholder: "Digite o seu Nome", view: self)
+            
+        }
+        
+        if((passwordTextField.text == confirmPasswordTextFied.text) || passwordTextField.text != ""){
+            self.user?.name = nameTextField.text
+            self.user?.email = emailTexteField.text
+            userManager.insertUserDatabase(self.user!, password : passwordTextField.text)
+            
+            var progressView: ProgressView = ProgressView(frame: self.view.frame)
+            
+            progressView.backgroundColor = UIColor(red: 223/255, green: 34/255, blue: 96/255, alpha: 1)
+            
+            self.view = progressView
+            
+            self.navigationController?.navigationBarHidden = true
+        }
+    
+    }
     
     
     @IBAction func registerAction(sender: AnyObject) {
         
+        
+        if(self.nameTextField.text == ""){
+            // Create the alert controller
+            
+            var inputTextField: UITextField?
+            
+            var alertController = UIAlertController(title: "Cuidado", message: "O seu Nome está vazio", preferredStyle: .Alert)
+            
+            // Create the actions
+            
+            alertController.addTextFieldWithConfigurationHandler({ textField -> Void in
+                textField.placeholder = "Digite o seu Nome"
+                inputTextField = textField
+            })
+            
+            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                UIAlertAction in
+                self.nameTextField.text = inputTextField?.text
+            }
+            
+            
+            // Add the actions
+            alertController.addAction(okAction)
+            
+            // Present the controller
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
         if((passwordTextField.text == confirmPasswordTextFied.text) || passwordTextField.text != ""){
-            
-            
-            
-            var user: User = User(name: nameTextField.text, email: emailTexteField.text)
-            user.image = self.user?.image
-            userManager.insertUserDatabase(user, password : passwordTextField.text)
+            self.user?.name = nameTextField.text
+            self.user?.email = emailTexteField.text
+            userManager.insertUserDatabase(self.user!, password : passwordTextField.text)
             
         }
         
     }
-    
+    func progressUpload(float: Float) {
+        println(float)
+        
+        var progressView: ProgressView = ProgressView(frame: self.view.frame)
+        
+        self.view = progressView
+        
+        self.navigationController?.navigationBarHidden = true
+        
+        progressView.animateProgressView(float)
+        
+    }
+    func saveUserFinished() {
+        var alertController = UIAlertController(title: "Sucesso", message: "Usuario Criado com Sucesso", preferredStyle: .Alert)
+        
+        var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            TransitionManager(indentifier: "navigationHome", animated: false, view: self)
+        }
+        
+        alertController.addAction(okAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    func errorThrowedSystem(error: NSError) {
+        
+    }
+    func errorThrowedServer(stringError : String){
+        println(stringError)
+    }
 
+    
 }
