@@ -13,7 +13,6 @@ class ActionError {
     
     
     
-    
     init(){
     
     }
@@ -39,7 +38,7 @@ class ActionError {
     
     }
     
-    class func actionWithTextField(error: String, errorMessage:String, placeholder:String, view: CreateConversationViewController, title: Bool) {
+    class func actionWithTextField(error: String, errorMessage:String, placeholder:String, textFieldView: UITextField, view: UIViewController) {
 
         
         var alertController = UIAlertController(title: error, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
@@ -52,56 +51,49 @@ class ActionError {
             inputTextField = textField
         })
         
-        
-        if(title){
-            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
-                UIAlertAction in
-                view.titleGroup.text = inputTextField?.text
-            }
-        
-            
-            alertController.addAction(okAction)
-        }else{
-            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
-                UIAlertAction in
-                view.subtitleGroup.text = inputTextField?.text
-            }
-            
-            alertController.addAction(okAction)
+
+        var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+            UIAlertAction in
+            textFieldView.text = inputTextField?.text
         }
         
+        alertController.addAction(okAction)
 
-        
-        
         view.presentViewController(alertController, animated: true, completion: nil)
         
     }
     
     
-    
-    class func actionErrorWithTextField(error: String, errorMessage:String, placeholder:String, view: RegisterViewController) {
+    class func actionWithTextFieldSecure(error: String, errorMessage:String, placeholder:String, textFieldView: UITextField, view: UIViewController) {
         
         
         var alertController = UIAlertController(title: error, message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
         
         var inputTextField: UITextField?
-
+        
         
         alertController.addTextFieldWithConfigurationHandler({ textField -> Void in
             textField.placeholder = placeholder
+            textField.secureTextEntry = true
             inputTextField = textField
         })
         
+        
         var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
             UIAlertAction in
-            view.nameTextField.text = inputTextField?.text
+            textFieldView.text = inputTextField?.text
         }
         
-
         alertController.addAction(okAction)
+        
+        
+        
         
         view.presentViewController(alertController, animated: true, completion: nil)
         
     }
+    
+    
+
     
 }

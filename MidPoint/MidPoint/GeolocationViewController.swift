@@ -53,6 +53,21 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }
     
+    
+    func grupos(){
+        let nextViewController = TransitionManager.creatView("ConversasTableView") as! ConversasTableViewController
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    
+    func perfil(){
+        let nextViewController = TransitionManager.creatView("ProfileView") as! ProfileViewController
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,11 +78,16 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         var uba = UBAView(buttonsQuantity: 3)
 //        
 //        //Prepara os botões na view passada
-        uba.prepareAnimationOnView(self.view)
+        uba.prepareAnimationOnView(self.view, navigation: self.navigationController!.navigationBar.frame.size)
+        
+        uba.addSelectorToButton(0, target: self, selector: Selector("perfil"), image:"users")
+        
+        uba.addSelectorToButton(1, target: self, selector: Selector("grupos"), image:"group")
+    
 //        
 //        //Adiciona um seletor para o botão no indice passado
 //        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
-//        
+//
 //        self.navigationItem.rightBarButtonItem = add
     }
     

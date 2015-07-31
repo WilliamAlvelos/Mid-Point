@@ -66,14 +66,15 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         
         if(self.titleGroup.text == ""){
             
-            ActionError.actionWithTextField("Cuidado", errorMessage: "O titulo do Grupo está vazio", placeholder:"Digite o Titulo do Grupo", view: self, title: true)
+            
+            ActionError.actionWithTextField("Cuidado", errorMessage: "O titulo do Grupo está vazio", placeholder:"Digite o Titulo do Grupo", textFieldView: self.titleGroup, view: self)
 
         }
         
         
         if(self.subtitleGroup.text == ""){
             
-            ActionError.actionWithTextField("Cuidado", errorMessage: "O subtitulo do Grupo está vazio", placeholder:"Digite o subtitulo do Grupo", view: self, title: false)
+            ActionError.actionWithTextField("Cuidado", errorMessage: "O subtitulo do Grupo está vazio", placeholder:"Digite o subtitulo do Grupo", textFieldView: self.subtitleGroup, view: self)
 
         }
         

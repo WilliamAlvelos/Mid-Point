@@ -43,6 +43,7 @@
 		3DE928991B55CA9E0053B43C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE928981B55CA9E0053B43C /* ProfileViewController.swift */; };
 		3DE9289B1B55D8540053B43C /* CustomCellProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9289A1B55D8540053B43C /* CustomCellProfile.swift */; };
 		3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */; };
+		3DF050C01B6C0786003E4B2A /* activityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF050BF1B6C0786003E4B2A /* activityCell.swift */; };
 		3DFB8A181B4C218700463EA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A171B4C218700463EA4 /* User.swift */; };
 		3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */; };
 		3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1C1B4C22DD00463EA4 /* UserDAOCloudKit.swift */; };
@@ -139,6 +140,7 @@
 		3DE928981B55CA9E0053B43C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3DE9289A1B55D8540053B43C /* CustomCellProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellProfile.swift; sourceTree = "<group>"; };
 		3DEE4F591B4ED86100645CA1 /* FriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
+		3DF050BF1B6C0786003E4B2A /* activityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = activityCell.swift; sourceTree = "<group>"; };
 		3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MidPoint.entitlements; sourceTree = "<group>"; };
 		3DFB8A171B4C218700463EA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
 		3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDAO.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				3DC43D031B6A89B100BD8C79 /* activityIndicator.swift */,
+				3DF050BF1B6C0786003E4B2A /* activityCell.swift */,
 				3DA7BD7F1B6A22DE00882C07 /* ActionError.swift */,
 				7B6315571B66C9A600D13DE5 /* DispatcherClass.swift */,
 				3D50F3761B6700700029C4B9 /* ProgressView.swift */,
@@ -655,6 +658,7 @@
 				FF3692371B5FFF7E00C71BBC /* UBAButton.swift in Sources */,
 				3DE928901B5481F50053B43C /* EventDAOCloudKit.swift in Sources */,
 				3D50F3771B6700700029C4B9 /* ProgressView.swift in Sources */,
+				3DF050C01B6C0786003E4B2A /* activityCell.swift in Sources */,
 				3DE9288E1B54815B0053B43C /* EventDAO.swift in Sources */,
 				7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */,
 				3DE928941B5599EE0053B43C /* DemoModelData.swift in Sources */,

@@ -44,7 +44,7 @@
                                     <action selector="actionSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QLr-RZ-Pfg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayt-2d-KCF">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayt-2d-KCF">
                                 <rect key="frame" x="28" y="376" width="67" height="67"/>
                                 <state key="normal" image="users">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -53,7 +53,7 @@
                                     <action selector="profile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1r2-g6-Vgm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTo-qi-lWa">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTo-qi-lWa">
                                 <rect key="frame" x="24" y="468" width="74" height="71"/>
                                 <state key="normal" image="group">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -122,7 +122,7 @@
         <!--Change Mid Point View Controller-->
         <scene sceneID="bvo-OG-uch">
             <objects>
-                <viewController storyboardIdentifier="changeMidPoint" id="bfv-ZM-xdP" customClass="ChangeMidPointViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="midPoint" storyboardIdentifier="changeMidPoint" id="bfv-ZM-xdP" customClass="ChangeMidPointViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5jr-nC-tk8"/>
                         <viewControllerLayoutGuide type="bottom" id="2IW-cL-ly6"/>
@@ -464,32 +464,33 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dew-0Z-QlT" id="5Wh-SV-u8r">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="demo_avatar_jobs" translatesAutoresizingMaskIntoConstraints="NO" id="8ls-ki-8ph">
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lw0-NJ-4Fe">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
-                                                </imageView>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                                 <imageView userInteractionEnabled="NO" alpha="0.89999999999999991" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="barraTableViewProfile" translatesAutoresizingMaskIntoConstraints="NO" id="eQf-Vw-JhE">
                                                     <rect key="frame" x="0.0" y="119" width="367" height="81"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGS-Gw-dg9">
-                                                    <rect key="frame" x="26" y="149" width="174" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD4-0Z-LYM">
-                                                    <rect key="frame" x="26" y="126" width="174" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCF-r0-jt1">
-                                                    <rect key="frame" x="26" y="170" width="174" height="21"/>
+                                                    <rect key="frame" x="8" y="145" width="174" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LhP-st-yA5">
-                                                    <rect key="frame" x="220" y="170" width="122" height="21"/>
+                                                    <rect key="frame" x="215" y="166" width="122" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGS-Gw-dg9">
+                                                    <rect key="frame" x="8" y="175" width="174" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD4-0Z-LYM">
+                                                    <rect key="frame" x="8" y="123" width="174" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -498,11 +499,10 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="descricao" destination="oGS-Gw-dg9" id="hJz-GL-ddb"/>
-                                            <outlet property="imageEvent" destination="8ls-ki-8ph" id="jHA-Aj-c3R"/>
                                             <outlet property="localHorarioEvento" destination="UCF-r0-jt1" id="vNz-w0-vbM"/>
                                             <outlet property="numeroPessoas" destination="LhP-st-yA5" id="JXC-uX-jYN"/>
                                             <outlet property="titleEvent" destination="VD4-0Z-LYM" id="PzW-an-SQn"/>
-                                            <outlet property="view" destination="5Wh-SV-u8r" id="L2S-rS-23V"/>
+                                            <outlet property="view" destination="lw0-NJ-4Fe" id="xpG-kS-J80"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -543,7 +543,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZLz-mQ-d2Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2272" y="-180"/>
+            <point key="canvasLocation" x="2350" y="-205"/>
         </scene>
         <!--Conversas Table View Controller-->
         <scene sceneID="zxF-wJ-ptv">
@@ -903,7 +903,6 @@
     <resources>
         <image name="b_search.png" width="155" height="155"/>
         <image name="barraTableViewProfile" width="567" height="140"/>
-        <image name="demo_avatar_jobs" width="64" height="64"/>
         <image name="group" width="64" height="64"/>
         <image name="login_fb" width="206" height="206"/>
         <image name="login_tt" width="206" height="206"/>

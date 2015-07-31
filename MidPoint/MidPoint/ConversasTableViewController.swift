@@ -150,11 +150,11 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.resultSearchController.active = false
         
-        let nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
-        nextView.conversa = Data[indexPath.row].id
-        nextView.name = Data[indexPath.row].name
+        let nextView = TransitionManager.creatView("midPoint") as! ChangeMidPointViewController
+        //nextView.conversa = Data[indexPath.row].id
+        //nextView.name = Data[indexPath.row].name
         nextView.event = Data[indexPath.row]
-        nextView.imageEvent = Data[indexPath.row].image
+        //nextView.imageEvent = Data[indexPath.row].image
         
         self.navigationController?.pushViewController(nextView, animated: true)
     }

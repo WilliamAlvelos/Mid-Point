@@ -8,21 +8,33 @@
 
 import UIKit
 
-class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UserManagerDelegate{
 
+    
+    var userManager: UserManager?
     
     @IBOutlet var mapView: MKMapView!
     
+    var event : Event?
+    
     var locationManager = CLLocationManager()
+    
+    var array = Array<User>()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userManager = UserManager()
         
+        userManager!.delegate = self
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
         
         self.title = "MID POINT"
+
+        
+        userManager!.getUsersFrom(event!)
         
     }
 
@@ -31,6 +43,24 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    func addUsersMap(){
+        for(var i = 0; i < self.array.count; i++){
+            var point: MKPointAnnotation = MKPointAnnotation()
+            
+            //var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(self.array[i]., lon.doubleValue)
+            
+            point.subtitle = ""
+            point.title = self.array[i].name
+            //point.coordinate = coordinate
+            
+            
+            mapView.addAnnotation(point)
+        
+        }
+    
+    }
     
     
     
@@ -86,6 +116,21 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         mapView.setRegion(region, animated: true)
         
         mapView.userLocation.title = "user"
+        
+    }
+    
+
+    
+    func getUsersFinished(users: Array<User>) {
+        self.array = users
+    }
+
+    
+    func errorThrowedServer(stringError: String) {
+        
+    }
+    
+    func errorThrowedSystem(error: NSError) {
         
     }
 

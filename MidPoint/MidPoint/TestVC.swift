@@ -60,13 +60,13 @@ class TestVC: UIViewController {
         
         
         //Inicia a UBA com o numero de botoões
-        var uba = UBAView(buttonsQuantity: 3)
+        //var uba = UBAView(buttonsQuantity: 3)
         
         //Prepara os botões na view passada
         //uba.prepareAnimationOnView(self.view)
         
         //Adiciona um seletor para o botão no indice passado
-        uba.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
+       // uba.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
         
         
         // ** OCView ** --------------------

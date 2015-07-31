@@ -239,13 +239,18 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     func register(){
         if(self.nameTextField.text == ""){
-            // Create the alert controller
             
-            ActionError.actionErrorWithTextField("Cuidado", errorMessage: "O seu Nome está vazio", placeholder: "Digite o seu Nome", view: self)
+            ActionError.actionWithTextField("Cuidado", errorMessage: "O seu Nome está vazio", placeholder: "Digite o seu Nome", textFieldView: self.nameTextField, view: self)
             
         }
         
-        if((passwordTextField.text == confirmPasswordTextFied.text) || passwordTextField.text != ""){
+        if(self.emailTexteField.text == ""){
+            
+            ActionError.actionWithTextField("Cuidado", errorMessage:"O email está Vazio", placeholder:"Digite seu email", textFieldView: self.emailTexteField, view: self)
+            
+        }
+        
+        if(passwordTextField.text == confirmPasswordTextFied.text || passwordTextField.text != ""){
             self.user?.name = nameTextField.text
             self.user?.email = emailTexteField.text
             userManager.insertUserDatabase(self.user!, password : passwordTextField.text)
@@ -266,31 +271,27 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
         
         if(self.nameTextField.text == ""){
-            // Create the alert controller
             
-            var inputTextField: UITextField?
+            ActionError.actionWithTextField("Cuidado", errorMessage: "O seu Nome está vazio", placeholder: "Digite o seu Nome", textFieldView: self.nameTextField, view: self)
             
-            var alertController = UIAlertController(title: "Cuidado", message: "O seu Nome está vazio", preferredStyle: .Alert)
-            
-            // Create the actions
-            
-            alertController.addTextFieldWithConfigurationHandler({ textField -> Void in
-                textField.placeholder = "Digite o seu Nome"
-                inputTextField = textField
-            })
-            
-            var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
-                UIAlertAction in
-                self.nameTextField.text = inputTextField?.text
-            }
-            
-            
-            // Add the actions
-            alertController.addAction(okAction)
-            
-            // Present the controller
-            self.presentViewController(alertController, animated: true, completion: nil)
         }
+        
+        if(self.emailTexteField.text == ""){
+            
+            ActionError.actionWithTextField("Cuidado", errorMessage:"O email está Vazio", placeholder:"Digite seu email", textFieldView: self.emailTexteField, view: self)
+            
+        }
+        
+        if(self.passwordTextField.text == ""){
+            
+            ActionError.actionWithTextFieldSecure("Cuidado", errorMessage:"A Senha está Vazia", placeholder:"Digite sua Senha", textFieldView: self.passwordTextField, view: self)
+        }
+        
+        if(self.confirmPasswordTextFied.text == ""){
+            
+            ActionError.actionWithTextFieldSecure("Cuidado", errorMessage:"A Confirmaçāo da senha está Vazia", placeholder:"Digite sua Senha", textFieldView: self.confirmPasswordTextFied, view: self)
+        }
+        
         
         if((passwordTextField.text == confirmPasswordTextFied.text) || passwordTextField.text != ""){
             self.user?.name = nameTextField.text

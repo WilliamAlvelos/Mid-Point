@@ -122,6 +122,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     func reloadData(){
         eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
         self.tableView.reloadData()
+
     }
 
     
@@ -192,25 +193,30 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
 
         self.tableView.reloadData()
     }
-    
-    func downloadImageFinished(images: Array<Event>) {
+    func downloadImageEventFinished(images: Array<Event>) {
         events = images
         
         self.tableView.reloadData()
         
-
+        self.refreshControl!.endRefreshing()
     }
-    
+  
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellProfile = self.tableView.dequeueReusableCellWithIdentifier("CustomCellProfile") as! CustomCellProfile
         
         
+        
+        var activity: activityCell?
+        
+        
+        activity = activityCell(view: cell.view, inverse: true)
+        
         var image = self.events[indexPath.row].image
         
         cell.titleEvent.text = self.events[indexPath.row].name
         
-        cell.imageEvent.image = self.events[indexPath.row].image
+        //cell.imageEvent.image = self.events[indexPath.row].image
         
         cell.selectionStyle = .None
         
@@ -220,7 +226,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         
         //Inicia a UBA com o numero de botoões
-        var uba = UBAView(buttonsQuantity: 0)
+//        var uba = UBAView(buttonsQuantity: 0)
         
         //Prepara os botões na view passada
         //uba.prepareAnimationOnView(self.view)
@@ -229,29 +235,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         //uba.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
         
         
-        // ** OCView ** --------------------
-        
-        var main = self.events[indexPath.row].image
-        var images = [UIImage]()
-        
-        for var x = 0.3; x < 1.0; x = x + 0.2 {
-            
-            var newImage = getImageWithColor(UIColor(red: 0.8, green: 0.2, blue: CGFloat(x), alpha: 1.0), size: CGSizeMake(100.0,100.0))
-            images.append(newImage)
-            
-        }
-        
-        var rect = CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height / 3.0)
-        
-        
-        //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
-        ocView = OCView(mainImage: main, insideImages: images, frame: rect)
-        
-        //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
-        
-        //Adiciona a OCView
-        //cell.view.addSubview(ocView)
-        
+
         if(self.events[indexPath.row].numberOfPeople! > 1){
         
         cell.numeroPessoas.text? = String(format: "%d Pessoas", self.events[indexPath.row].numberOfPeople!)
@@ -266,7 +250,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         //        
         //        var imageCortada : UIImage = UIImage(CGImage: imageRef, scale: image!.scale, orientation: image!.imageOrientation)!
             
-
+            activity!.removeActivityViewWithName(cell.view)
 
             // Create a copy of the image without the imageOrientation property so it is in its native orientation (landscape)
             let contextImage: UIImage = UIImage(CGImage: image!.CGImage)!
@@ -274,7 +258,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
             // Get the size of the contextImage
             let contextSize: CGSize = contextImage.size
             
-            let rect: CGRect = CGRectMake(image!.size.width/4, image!.size.height/4, 375, 200)
+            var rect: CGRect = CGRectMake(image!.size.width/4, image!.size.height/4, 375, 200)
+            
+            
+
             
             // Create bitmap image from context using the rect
             let imageRef: CGImageRef = CGImageCreateWithImageInRect(contextImage.CGImage, rect)
@@ -282,7 +269,32 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
             // Create a new image based on the imageRef and rotate back to the original orientation
             let imageFinal: UIImage = UIImage(CGImage: imageRef, scale: image!.scale, orientation: image!.imageOrientation)!
 
-            cell.imageEvent.image = imageFinal
+            //cell.imageEvent.image = imageFinal
+            
+            // ** OCView ** --------------------
+            
+            //var main = self.events[indexPath.row].image
+            var images = [UIImage]()
+            
+            for var x = 0.3; x < 1.0; x = x + 0.2 {
+                
+                var newImage = getImageWithColor(UIColor(red: 0.8, green: 0.2, blue: CGFloat(x), alpha: 1.0), size: CGSizeMake(100.0,100.0))
+                images.append(newImage)
+                
+            }
+            
+            
+            
+            rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
+            
+            //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
+            ocView = OCView(mainImage: imageFinal, insideImages: images, frame: rect)
+            
+            //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
+            
+            //Adiciona a OCView
+            cell.view.addSubview(ocView)
+            
             
         
         }

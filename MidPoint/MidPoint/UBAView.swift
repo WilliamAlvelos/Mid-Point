@@ -131,7 +131,7 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
         
     }
     
-    func prepareAnimationOnView(view:UIView!) {
+    func prepareAnimationOnView(view:UIView!, navigation: CGSize) {
         
         //Rect of view
         let animationWidth = view.frame.size.width
@@ -154,12 +154,12 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
         let radius = size * radiusFactor
         
         //Points of the U shape
-        let pointA = CGPointMake(buttonFrame.origin.x, buttonFrame.origin.y)
-        let pointB = CGPointMake(border, self.frame.size.height - radius - border - size)
-        let pointC = CGPointMake(border + radius, self.frame.size.height - border - size)
+        let pointA = CGPointMake(buttonFrame.origin.x, buttonFrame.origin.y + self.frame.size.height/2 + navigation.height)
+        let pointB = CGPointMake(border, self.frame.size.height - radius - border - size + self.frame.size.height/2 + navigation.height)
+        let pointC = CGPointMake(border + radius, self.frame.size.height - border - size + self.frame.size.height/2 + navigation.height)
         let pointD = CGPointMake(self.frame.size.width - border - radius - size, pointC.y)
         let pointE = CGPointMake(self.frame.size.width - border - size, pointB.y)
-        let pointF = CGPointMake(pointE.x, pointA.y)
+        let pointF = CGPointMake(pointE.x, pointA.y )
         
         //Space between the buttons y origin
         buttonSpacement = size + spacement
@@ -184,7 +184,7 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
             button.uRadius = radius
             
             //@ TEST-ONLY
-            button.backgroundColor = UIColor.purpleColor()
+            button.backgroundColor = Colors.Azul
             
             //Insert the button on the array and in the view
             buttonArray.append(button)
@@ -214,7 +214,7 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
     }
     
     
-    func addSelectorToButton(index:Int!, target:AnyObject!, selector:Selector!) {
+    func addSelectorToButton(index:Int!, target:AnyObject!, selector:Selector!, image:String) {
         
         if buttonArray.count <= index {
             return
@@ -222,7 +222,7 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
         
         buttonArray[index].buttonSelector = selector
         buttonArray[index].buttonTarget = target
-    
+        buttonArray[index].setImage(UIImage(named: image), forState: UIControlState.Normal)
     }
     
     
