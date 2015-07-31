@@ -55,9 +55,23 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     override func viewDidLoad() {
         
-        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais")
+        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse:false)
+        
+//        //Inicia a UBA com o numero de botoões
+//        var uba = UBAView(buttonsQuantity: 3)
+//        
+//        //Prepara os botões na view passada
+//        uba.prepareAnimationOnView(self.navigationController?.view)
+//        
+//        //Adiciona um seletor para o botão no indice passado
+//        uba.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
         
         
+<<<<<<< HEAD
+=======
+        ///////////////////////////////////////////////////////////////////
+        
+>>>>>>> origin/master
 //        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
 //        
 //        self.navigationItem.rightBarButtonItem = add
@@ -356,8 +370,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             localTextField.hidden = false
             
         }else{
-            
-            activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais")
+        
+            activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse: false)
             
             localTextField.hidden = true
             

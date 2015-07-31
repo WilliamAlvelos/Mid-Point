@@ -70,7 +70,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         super.viewDidLoad()
         
         
-        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Mensagens")
+        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Mensagens", inverse: false)
         
         
         var jsqImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("WILL", backgroundColor: UIColor(white: 0.85, alpha: 1.0), textColor: UIColor(white: 0.60, alpha: 1.0), font: UIFont.systemFontOfSize(12.0), diameter:UInt(kJSQMessagesCollectionViewAvatarSizeDefault))

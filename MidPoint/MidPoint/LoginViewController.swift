@@ -139,7 +139,7 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     
     @IBAction func logInAction(sender: AnyObject) {
         
-        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Usuário")
+        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Usuário", inverse: true)
 
         var user: User = User(name: nomeText.text, email: nomeText.text)
         
