@@ -56,9 +56,11 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
-        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse:false)
         
+        //activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse:false, viewController:self)
+
 //        //Inicia a UBA com o numero de botoões
 //        var uba = UBAView(buttonsQuantity: 3)
 //        
@@ -67,7 +69,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 //        
 //        //Adiciona um seletor para o botão no indice passado
 //        uba.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
-        
+//        
         
         ///////////////////////////////////////////////////////////////////
         
@@ -76,14 +78,17 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 //        self.navigationItem.rightBarButtonItem = add
     }
     
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+    }
+    
     override func viewWillAppear(animated: Bool) {
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
         localTextField.hidden = true
-        //showActivity()
-        
-
         
         locationManager.requestAlwaysAuthorization()
         
@@ -203,6 +208,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             
         }
         
+        
+        activity?.removeActivityViewWithName(self)
 //        let data1: NSData?
 //        
 //        data1 = NSData(contentsOfURL: NSURL(string: url!)!)
@@ -269,6 +276,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             if annotation is MKUserLocation {
                 
                 return nil
+                
             }
             
             let reuseId = "pin"
@@ -312,7 +320,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 pinView!.annotation = annotation
             }
             
-            activity?.removeActivityViewWithName()
             
             return pinView
     }
@@ -371,7 +378,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             
         }else{
         
-            activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse: false)
+            activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse: false, viewController: self)
             
             localTextField.hidden = true
             
@@ -413,7 +420,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        
+
         
         locationManager.stopUpdatingLocation()
 
@@ -433,6 +440,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         
         addPointsOfInterest("", name: string, location: coord);
+        
 
     }
 

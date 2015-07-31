@@ -53,7 +53,6 @@
 		3DFB8A2F1B4CC4A900463EA4 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */; };
 		3DFB8A301B4CC4A900463EA4 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */; };
 		3DFB8A311B4CC4A900463EA4 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */; };
-		3DFB8A331B4CD98D00463EA4 /* teste.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB8A321B4CD98D00463EA4 /* teste.png */; };
 		7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */; };
 		7B2DADD71B6AAD0F009D2C50 /* Localizacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2DADD61B6AAD0F009D2C50 /* Localizacao.swift */; };
 		7B486A041B6AF2F5007AED22 /* UIMPConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B486A031B6AF2F5007AED22 /* UIMPConfiguration.swift */; };
@@ -151,7 +150,6 @@
 		3DFB8A2B1B4CC4A900463EA4 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
-		3DFB8A321B4CD98D00463EA4 /* teste.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teste.png; sourceTree = "<group>"; };
 		495E9806851C4CA17E307AF9 /* libPods-MidPoint.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MidPoint.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellFriend.swift; sourceTree = "<group>"; };
 		7B2DADD61B6AAD0F009D2C50 /* Localizacao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizacao.swift; sourceTree = "<group>"; };
@@ -307,7 +305,6 @@
 				3DE926A61B5430840053B43C /* ChatViewC.swift */,
 				FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */,
 				3DE9288B1B547DAB0053B43C /* EventoViewController.swift */,
-				3DFB8A321B4CD98D00463EA4 /* teste.png */,
 				FF36924C1B66DCF700C71BBC /* ConfigurationViewController.swift */,
 			);
 			name = ViewControllers;
@@ -578,7 +575,6 @@
 				FFC2C6F21AF935E0004B0AA7 /* Images.xcassets in Resources */,
 				3DFB8A301B4CC4A900463EA4 /* TwitterKitResources.bundle in Resources */,
 				FF3867241B6AE58C0075E612 /* btest1.png in Resources */,
-				3DFB8A331B4CD98D00463EA4 /* teste.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
