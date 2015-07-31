@@ -139,7 +139,7 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     
     @IBAction func logInAction(sender: AnyObject) {
         
-        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Usuário", inverse: true)
+        activity = activityIndicator(view: self.navigationController!, texto: "Buscando Usuário", inverse: true, viewController: self)
 
         var user: User = User(name: nomeText.text, email: nomeText.text)
         
@@ -161,18 +161,19 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     //MARK: UserManager Delegate
     
     func errorThrowedSystem(error: NSError) {
-        activity?.removeActivityViewWithName()
+        activity?.removeActivityViewWithName(self)
     }
     
     func userNotFound(user : User){
-        activity?.removeActivityViewWithName()
+        activity?.removeActivityViewWithName(self)
         println("userNotFound")
     }
     func getUserFinished(user: User){
         UserDAODefault.saveLogin(user)
-        activity?.removeActivityViewWithName()
         
         let nextViewController = TransitionManager.creatView("navigationHome") as! UINavigationController
+        activity?.removeActivityViewWithName(self)
+
         self.presentViewController(nextViewController, animated:true, completion:nil)
 
     }
@@ -192,7 +193,7 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     }
     func errorThrowedServer(stringError : String){
         
-        activity?.removeActivityViewWithName()
+        activity?.removeActivityViewWithName(self)
         
         var action: UIAlertController = UIAlertController(title: "Error", message: stringError, preferredStyle: UIAlertControllerStyle.Alert)
         

@@ -12,6 +12,7 @@ import UIKit
 class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, EventManagerDelegate
 {
 
+    var ocView: OCView!
 
     var navItem: UINavigationItem?
     
@@ -72,11 +73,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.view.backgroundColor = Colors.Azul
         
         //Adiciona a ETB na view
-        viewTeste.addSubview(newETB)
+        //self.navigationController?.view.addSubview(newETB)
         
         //Adiciona um seletor para o botão no indice passado
         newETB.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
-        
         
         self.eventManager.delegate = self
         
@@ -89,39 +89,39 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
         
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 160.0
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 200.0
         
-        //gestures
-        var swipeUPSearch:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipeSearch:"))
-        swipeUPSearch.direction = UISwipeGestureRecognizerDirection.Up
-        
-        var swipeDownSearch:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipeSearch:"))
-        
-        swipeDownSearch.direction = UISwipeGestureRecognizerDirection.Down
-        
-        var swipeUP:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipe:"))
-        swipeUP.direction = UISwipeGestureRecognizerDirection.Up
-        
-        var swipeDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipe:"))
-        
-        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
-        
-        self.view.addGestureRecognizer(swipeUPSearch)
-        
-        self.view.addGestureRecognizer(swipeDownSearch)
-        
-        
-//        self.tabBar.addGestureRecognizer(swipeUP)
+//        //gestures
+//        var swipeUPSearch:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipeSearch:"))
+//        swipeUPSearch.direction = UISwipeGestureRecognizerDirection.Up
 //        
-//        self.tabBar.addGestureRecognizer(swipeDown)
+//        var swipeDownSearch:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipeSearch:"))
+//        
+//        swipeDownSearch.direction = UISwipeGestureRecognizerDirection.Down
+//        
+//        var swipeUP:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipe:"))
+//        swipeUP.direction = UISwipeGestureRecognizerDirection.Up
+//        
+//        var swipeDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipe:"))
+//        
+//        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
+//        
+//        self.view.addGestureRecognizer(swipeUPSearch)
+//        
+//        self.view.addGestureRecognizer(swipeDownSearch)
+//        
+//        
+////        self.tabBar.addGestureRecognizer(swipeUP)
+////        
+////        self.tabBar.addGestureRecognizer(swipeDown)
         
     }
 
     
     func reloadData(){
+        eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
         self.tableView.reloadData()
-    
     }
 
     
@@ -217,6 +217,41 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         //cell.localHorarioEvento.text = self.events[indexPath.row].date
         cell.descricao.text = self.events[indexPath.row].descricao
         
+        
+        
+        //Inicia a UBA com o numero de botoões
+        var uba = UBAView(buttonsQuantity: 0)
+        
+        //Prepara os botões na view passada
+        //uba.prepareAnimationOnView(self.view)
+        
+        //Adiciona um seletor para o botão no indice passado
+        //uba.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
+        
+        
+        // ** OCView ** --------------------
+        
+        var main = self.events[indexPath.row].image
+        var images = [UIImage]()
+        
+        for var x = 0.3; x < 1.0; x = x + 0.2 {
+            
+            var newImage = getImageWithColor(UIColor(red: 0.8, green: 0.2, blue: CGFloat(x), alpha: 1.0), size: CGSizeMake(100.0,100.0))
+            images.append(newImage)
+            
+        }
+        
+        var rect = CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height / 3.0)
+        
+        
+        //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
+        ocView = OCView(mainImage: main, insideImages: images, frame: rect)
+        
+        //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
+        
+        //Adiciona a OCView
+        //cell.view.addSubview(ocView)
+        
         if(self.events[indexPath.row].numberOfPeople! > 1){
         
         cell.numeroPessoas.text? = String(format: "%d Pessoas", self.events[indexPath.row].numberOfPeople!)
@@ -265,6 +300,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         return cell
     }
-
+    
+    func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
+        var rect = CGRectMake(0, 0, size.width, size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
     
 }

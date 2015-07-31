@@ -14,8 +14,10 @@ class activityIndicator {
     var boxView = UIView()
     
     
-    init(view:UINavigationController, texto: String, inverse: Bool) {
+    init(view:UINavigationController, texto: String, inverse: Bool, viewController: UIViewController) {
 
+        
+        viewController.view.alpha = 0.5
         
         var activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
@@ -48,7 +50,8 @@ class activityIndicator {
         view.view.addSubview(boxView)
     }
     
-    func removeActivityViewWithName(){
+    func removeActivityViewWithName(view: UIViewController){
+        view.view.alpha = 1
         boxView.removeFromSuperview()
     }
     
