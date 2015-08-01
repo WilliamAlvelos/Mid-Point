@@ -192,7 +192,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     func downloadImageUserFinished(user: User) {
         //achar aonde o cara esta e colocar a imagem dele
     }
-    
+
     func getUsersFinished(users: Array<User>) {
         self.dataPessoas = users
         for user in users {

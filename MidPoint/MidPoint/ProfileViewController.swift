@@ -9,22 +9,27 @@
 import Foundation
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, EventManagerDelegate
+class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, EventManagerDelegate, UserManagerDelegate
 {
 
     var ocView: OCView!
 
     var navItem: UINavigationItem?
     
-    var travado: Bool = false
+    var userManager: UserManager?
+    
+    var carregou: Bool = false
     
     var eventManager : EventManager = EventManager()
     
     var events = Array<Event>()
     
+    var imageUsers = Array<User>()
+    
     var user:User?
     
-    
+    var quantidade = 0
+ 
     @IBOutlet var tableView: UITableView!
 
     @IBOutlet var gestureView: UIView!
@@ -35,6 +40,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
      override func viewDidLoad() {
     
         user = UserDAODefault.getLoggedUser()
+        
+        
+        self.userManager = UserManager()
+        
+        self.userManager!.delegate = self
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.backgroundColor = Colors.Azul
@@ -83,25 +93,35 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         navItem?.title = user!.name
         
+        
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         reloadData()
         tableView.estimatedRowHeight = 200.0
-        
     }
 
     
     func reloadData(){
         eventManager.getEventsFromUser(UserDAODefault.getLoggedUser(), usuario: .All)
-
+        //eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
+        animateTable()
+    }
+    
+    func imagesUser(){
+        self.quantidade = self.events.count
+        
+        for(var i = 0 ; i < self.events.count; i++){
+            self.userManager!.getUsersFrom(self.events[i])
+        }
     }
 
     
     override func viewWillAppear(animated: Bool) {
         
         animateTable()
-        
+        self.carregou = false
 
     }
     
@@ -150,17 +170,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         
     }
-    
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellProfile = self.tableView.dequeueReusableCellWithIdentifier("CustomCellProfile") as! CustomCellProfile
         
         
         
-        var activity: activityCell?
+        //var activity: activityCell?
         
         
-        activity = activityCell(view: cell.view, inverse: true)
+        //activity = activityCell(view: cell.view, inverse: true)
         
         var image = self.events[indexPath.row].image
         
@@ -169,6 +188,108 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         cell.selectionStyle = .None
     
         cell.descricao.text = self.events[indexPath.row].descricao
+        
+        var auxDouble:Double = NSNumber(float: self.events[indexPath.row].localizacao!.latitude!).doubleValue
+
+        var aux:Double = NSNumber(float: self.events[indexPath.row].localizacao!.latitude!).doubleValue
+        
+        var latitude: CLLocationDegrees = auxDouble
+        var longitude: CLLocationDegrees = aux
+
+        var location = CLLocation(latitude: latitude, longitude: longitude)
+        //println(location)
+        
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+            var placemark:CLPlacemark!
+            
+            if error == nil && placemarks.count > 0 {
+                placemark = placemarks[0] as! CLPlacemark
+                
+                var addressString : String = ""
+//                if placemark.ISOcountryCode == "BR" /*Address Format in Brazil*/ {
+//                    if placemark.country != nil {
+//                        addressString = placemark.country
+//                    }
+//                    if placemark.subAdministrativeArea != nil {
+//                        addressString = addressString + placemark.subAdministrativeArea + ", "
+//                    }
+//                    if placemark.postalCode != nil {
+//                        addressString = addressString + placemark.postalCode + " "
+//                    }
+//                    if placemark.locality != nil {
+//                        addressString = addressString + placemark.locality
+//                    }
+//                    if placemark.thoroughfare != nil {
+//                        addressString = addressString + placemark.thoroughfare
+//                    }
+//                    if placemark.subThoroughfare != nil {
+//                        addressString = addressString + placemark.subThoroughfare
+//                    }
+//                } else {
+//                    if placemark.subThoroughfare != nil {
+//                        addressString = placemark.subThoroughfare + " "
+//                    }
+//                    if placemark.thoroughfare != nil {
+//                        addressString = addressString + placemark.thoroughfare + ", "
+//                    }
+                    if placemark.locality != nil {
+                        addressString = addressString + placemark.locality + ", "
+                    }
+//                    if placemark.administrativeArea != nil {
+//                        addressString = addressString + placemark.administrativeArea + " "
+//                    }
+                    if placemark.country != nil {
+                        addressString = addressString + placemark.country
+                    }
+                    else{
+                        addressString = addressString + "Local não encontrado"
+                        
+                    }
+               // }
+                
+                    cell.localHorarioEvento.text = addressString
+                }
+            })
+        
+//        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+//            let placeArray = placemarks as? [CLPlacemark]
+//            
+//            
+//            // Place details
+//            var placeMark: CLPlacemark!
+//            placeMark = placeArray?[0]
+//            
+//            // Address dictionary
+//            println(placeMark.addressDictionary)
+//            
+//            // Location name
+//            if let locationName = placeMark.addressDictionary["Name"] as? NSString {
+//                println(locationName)
+//            }
+//            
+//            // Street address
+//            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
+//                println(street)
+//            }
+//            
+//            // City
+//            if let city = placeMark.addressDictionary["City"] as? NSString {
+//                println(city)
+//            }
+//            
+//            // Zip code
+//            if let zip = placeMark.addressDictionary["ZIP"] as? NSString {
+//                println(zip)
+//            }
+//            
+//            // Country
+//            if let country = placeMark.addressDictionary["Country"] as? NSString {
+//                println(country)
+//            }
+//            
+//        })
+
+
 
         if(self.events[indexPath.row].numberOfPeople! > 1){
         
@@ -179,7 +300,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         }
         
         if(image != nil){
-            activity!.removeActivityViewWithName(cell.view)
+
 
             let contextImage: UIImage = UIImage(CGImage: image!.CGImage)!
             
@@ -191,30 +312,61 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
 
             var images = [UIImage]()
             
-            for var x = 0.3; x < 1.0; x = x + 0.2 {
+            if(self.carregou == true){
                 
-                var newImage = getImageWithColor(UIColor(red: 0.8, green: 0.2, blue: CGFloat(x), alpha: 1.0), size: CGSizeMake(100.0,100.0))
-                images.append(newImage)
+                for(var x = 0; x <= self.events[indexPath.row].numberOfPeople!; x++){
+                    images.append(self.imageUsers.removeAtIndex(0).image!)
+                }
+                
+                
+                
+                rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
+                
+                //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
+                ocView = OCView(mainImage: imageFinal, insideImages: images, frame: rect)
+                
+                //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
+                
+                //Adiciona a OCView
+                cell.view.addSubview(ocView)
+
+            }
+            else{
+                cell.view.backgroundColor = UIColor(patternImage: self.events[indexPath.row].image!)
                 
             }
-            
             
             
             rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
             
             ocView = OCView(mainImage: imageFinal, insideImages: images, frame: rect)
             cell.view.addSubview(ocView)
-            
-            
-        
-        }
-        
+   }
         
         cell.titleEvent.textColor = Colors.Rosa
         cell.descricao.textColor = Colors.Rosa
         cell.numeroPessoas.textColor = Colors.Rosa
-
+        cell.localHorarioEvento.textColor = Colors.Rosa
+        
         return cell
+    }
+    
+    
+
+
+    func getUsersFinished(users: Array<User>) {
+    }
+
+    func downloadImageFinished(image: Array<User>) {
+        for(var i = 0; i < image.count; i++){
+            self.imageUsers.append(image[i])
+        }
+        self.quantidade--
+        
+        if(self.quantidade == 0){
+            animateTable()
+            self.carregou = true
+        }
     }
     
     func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {

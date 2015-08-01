@@ -21,6 +21,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     var array = Array<User>()
     
+    var activity: activityIndicator?
     
     var pins = Array<MKPointAnnotation>()
     
@@ -67,6 +68,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     }
     func tap(recognizer: UITapGestureRecognizer){
         
+        activity = activityIndicator(view: self.navigationController!, texto: "Enviando localizaçāo", inverse: false, viewController: self)
+        
         var point: CGPoint = recognizer.locationInView(self.mapView)
         
         var tapPoint: CLLocationCoordinate2D = self.mapView.convertPoint(point, toCoordinateFromView: self.view)
@@ -90,6 +93,10 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
 //    
     }
     
+    
+    override func viewWillDisappear(animated: Bool) {
+        activity?.removeActivityViewWithName(self)
+    }
     
     func acepted(){
         self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Accepted, event: event!)
@@ -120,9 +127,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     func addUsersMap(){
         
         
-        mapView.removeAnnotations(self.pins)
-
-        
+        mapView.removeAnnotations(self.mapView.annotations)
         
         for(var i = 0; i < self.array.count; i++){
             var point: MKPointAnnotation = MKPointAnnotation()
@@ -137,8 +142,6 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         
         }
         
-        
-        
         var point: MKPointAnnotation = MKPointAnnotation()
         
         var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.event!.localizacao!.latitude!), Double(self.event!.localizacao!.longitude!))
@@ -150,6 +153,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         mapView.addAnnotation(point)
         
         self.pins.append(point)
+        
+        activity?.removeActivityViewWithName(self)
     
     }
     
@@ -165,14 +170,32 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
             let reuseId = "pin"
             
             var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-            
-            
-            if(pinView?.annotation.title == event!.localizacao?.name){
-                pinView!.pinColor = .Red
-            
+            if pinView == nil {
+                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                pinView!.canShowCallout = true
+                pinView!.animatesDrop = true
+                pinView!.canBecomeFirstResponder()
+                pinView!.pinColor = .Purple
+                
+
+                
+                pinView?.pinColor = MKPinAnnotationColor.Green
+                
+                if(pinView?.annotation.title == event!.localizacao?.name){
+                    pinView!.pinColor = .Red
+                    
+                }
+                
+                
+
+                
+            }
+            else {
+                pinView!.annotation = annotation
             }
             
-            pinView?.pinColor = MKPinAnnotationColor.Green
+            
+            
 
             return pinView
     }
