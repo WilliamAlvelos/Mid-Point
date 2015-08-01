@@ -16,6 +16,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
 
     var navItem: UINavigationItem?
     
+    var activity : activityIndicator?
+    
     var userManager: UserManager?
     
     var carregou: Bool = false
@@ -29,6 +31,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     var user:User?
     
     var quantidade = 0
+    
+    var eventosCarregados = Array<Event>()
+    
+    
+    var j = 0
  
     @IBOutlet var tableView: UITableView!
 
@@ -40,6 +47,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
      override func viewDidLoad() {
     
         user = UserDAODefault.getLoggedUser()
+        
+        activity = activityIndicator(view: self.navigationController!, texto: "Carregando Eventos", inverse: false, viewController: self)
         
         
         self.userManager = UserManager()
@@ -102,6 +111,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         tableView.estimatedRowHeight = 200.0
     }
 
+    
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.activity?.removeActivityViewWithName(self)
+    }
     
     func reloadData(){
         eventManager.getEventsFromUser(UserDAODefault.getLoggedUser(), usuario: .All)
@@ -167,8 +181,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         var nextView = TransitionManager.creatView("infoEvent") as! EventInfoViewController
         nextView.event = self.events[indexPath.row]
         self.navigationController?.pushViewController(nextView, animated: true)
-        
-        
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -312,10 +324,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
 
             var images = [UIImage]()
             
-            if(self.carregou == true){
+            if(self.eventosCarregados[indexPath.row].pessoas.count > 0){
                 
-                for(var x = 0; x <= self.events[indexPath.row].numberOfPeople!; x++){
-                    images.append(self.imageUsers.removeAtIndex(0).image!)
+                for(var x = 0; x <= self.eventosCarregados[indexPath.row].numberOfPeople!; x++){
+                    images.append(self.eventosCarregados[indexPath.row].pessoas[x].image!)
                 }
                 
                 
@@ -352,22 +364,39 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     }
     
     
-
-
-    func getUsersFinished(users: Array<User>) {
-    }
-
-    func downloadImageFinished(image: Array<User>) {
-        for(var i = 0; i < image.count; i++){
-            self.imageUsers.append(image[i])
-        }
-        self.quantidade--
+    func getEventsFinished(events: Array<Event>) {
+        self.events = events
         
-        if(self.quantidade == 0){
-            animateTable()
-            self.carregou = true
-        }
+        self.tableView.reloadData()
+        self.eventManager.getImages(events)
+        
+        
     }
+    
+    
+    func getEventFinished(event: Event) {
+        self.userManager?.getUsersFrom(event)
+        
+    }
+    
+    
+    func downloadImageUsersFinished(users: Array<User>, event: Event) {
+        event.pessoas = users
+        self.eventosCarregados.append(event)
+        self.tableView.reloadData()
+    }
+
+    func getUsersFinished(users: Array<User>, event: Event) {
+        self.userManager?.getImages(users, event: event)
+
+    }
+    
+    func getUsersFinished(users: Array<User>) {
+        
+
+    }
+
+
     
     func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
         var rect = CGRectMake(0, 0, size.width, size.height)
@@ -385,14 +414,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     func errorThrowedSystem(error: NSError) {
         
     }
-    func getEventsFinished(events: Array<Event>) {
-        self.events = events
-        for event in events {
-            self.eventManager.getImage(event)
-        }
-        self.animateTable()
+    func downloadImageEventsFinshed(images: Array<Event>) {
+        self.events = images
+        self.activity?.removeActivityViewWithName(self)
+        self.tableView.reloadData()
     }
+    
     func downloadImageEventFinshed(event: Event) {
+
         //descobrir aonde esta esse evento na table view e entao recarregar
     }
 }

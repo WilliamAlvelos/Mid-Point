@@ -15,6 +15,7 @@ protocol UserDAOCloudKitDelegate{
     func saveUserFinished(user: User)
     func userNotFound(user : User)
     func getUserFinished(user: User)
+    func getUsersFinished(users: Array<User>, event: Event)
     func getUsersFinished(users: Array<User>)
     func getLocationFinished(users: Array<Localizacao>)
     func updateStateFinished()
@@ -190,7 +191,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 arrayToReturn!.append(user)
             }
             DispatcherClass.dispatcher({ () -> () in
-                self.delegate?.getUsersFinished(arrayToReturn!)
+                self.delegate?.getUsersFinished(arrayToReturn!, event:event)
             })
             
             
@@ -209,8 +210,6 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         if urlData == nil || error != nil  || NSString(data: urlData!, encoding:NSUTF8StringEncoding) != nil {
             return UIImage(named: "logo")
         }
-        
-        
         
         return UIImage(data: urlData!)
         

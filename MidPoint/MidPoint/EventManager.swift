@@ -16,7 +16,7 @@
     func errorThrowedSystem(error: NSError)
     optional func errorThrowedServer(stringError: String)
     optional func downloadImageEventFinshed(event: Event)
-    //ptional func downloadImageEventFinished(images: Array<Event>)
+    optional func downloadImageEventsFinshed(images: Array<Event>)
 }
 class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     private var eventDao : EventDAOCloudKit?
@@ -81,4 +81,25 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
         })
     
     }
+    
+    func getImages(events : Array<Event>){
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        
+    
+        dispatch_async(backgroundQueue, {
+            for event in events{
+                event.image = self.eventDao?.downloadImage(event.id!)
+                
+            }
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.downloadImageEventsFinshed?(events)
+            })
+        })
+        
+    }
+
+    
+    
+    //downloadImageEventFinished(images: Array<Event>)
 }

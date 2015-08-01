@@ -24,6 +24,8 @@ import Parse
     optional func updateLocationFinished()
     optional func getLocationFinished(users: Array<Localizacao>)
     optional func insertLocationFinished()
+    optional func getUsersFinished(users: Array<User>, event: Event)
+    optional func downloadImageUsersFinished(users:Array<User>, event: Event)
 }
 
 class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
@@ -50,6 +52,12 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     func userStillInserted(user: User){
         self.delegate?.userStillInserted!(user)
     }
+    
+    
+    func getUsersFinished(users: Array<User>, event: Event){
+        self.delegate?.getUsersFinished?(users, event: event)
+    }
+
     
     func saveUserFinished(user: User){
             PushResponse.createNewDeviceToPush(user)
@@ -88,6 +96,8 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     func getUsersFrom(event: Event){
         userDao?.getUsersFrom(event)
     }
+    
+    
     func getImage(user : User){
         
         
@@ -102,6 +112,27 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
         })
 
     }
+    
+    
+    func getImages(users : Array<User> , event: Event){
+        
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        
+        dispatch_async(backgroundQueue, {
+
+            for user in users {
+                user.image = self.userDao?.downloadImage(user.id!)
+            }
+        
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.downloadImageUsersFinished!(users, event: event)
+            })
+            
+        })
+        
+    }
+    
     func updateUserLocationAndState(user: User , location : Localizacao?, event : Event, state: Option){
         userDao?.updateUserLocationAndState(user, location: location, event: event, state: state)
     }
