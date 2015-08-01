@@ -9,14 +9,14 @@
     optional func saveEventFinished(event: Event)
     optional func eventNotFound(event : Event)
     optional func getEventFinished(event: Event)
-    optional func getEventsFinished(events: Array<Event>)
-    optional func inviteFinished(event: Event)
+   optional func getEventsFinished(events: Array<Event>)
+    //optional func inviteFinished(event: Event)
     optional func uploadImageFinished()
     optional func progressUpload(float : Float)
     func errorThrowedSystem(error: NSError)
     optional func errorThrowedServer(stringError: String)
-
-    optional func downloadImageEventFinished(images: Array<Event>)
+    optional func downloadImageEventFinshed(event: Event)
+    //ptional func downloadImageEventFinished(images: Array<Event>)
 }
 class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     private var eventDao : EventDAOCloudKit?
@@ -33,6 +33,7 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
         self.delegate?.errorThrowedServer?(ErrorHandling.stringForError(error))
     }
     func saveEventFinished(event: Event){
+        self.pictureDao?.uploadImageEvent(event)
         self.delegate?.saveEventFinished?(event)
     }
     func eventNotFound(event : Event){
@@ -43,16 +44,7 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     func getEventsFinished(events: Array<Event>){
         self.delegate?.getEventsFinished?(events)
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            self.getImages(events)
-        }
     }
-    func inviteFinished(event: Event){
-        self.delegate?.inviteFinished?(event)
-        pictureDao?.uploadImageEvent(event)
-    }
-
     func progressUpload(float : Float){
         self.delegate?.progressUpload?(float)
     }
@@ -61,23 +53,32 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     
     
-    func saveEvent(event : Event, usuario : User){
-        eventDao?.saveEvent(event, usuario: usuario)
-    }
-    func getEvent(user : User, usuario : Option){
-        eventDao?.getEvent(user, usuario: usuario)
+     func saveEvent(event: Event, usuario: User, friends: Array<User>, localizacaoUsuario: Localizacao ){
+        if friends.count == 0 {
+            let error = NSError(domain: "Event error", code: 1, userInfo: nil)
+            self.delegate?.errorThrowedSystem(error)
+            return
+        }
+        eventDao?.saveEvent(event, usuario: usuario, friends : friends, localizacaoUsuario : localizacaoUsuario)
         
     }
-    func inviteFriendsToEvent(event : Event, sender : User,  friends : Array<User>){
-        eventDao?.inviteFriendsToEvent(event, sender: sender, friends: friends)
+    func getEventsFromUser(user : User, usuario : Option){
+        eventDao?.getEventsFromUser(user, usuario: usuario)
     }
-
-    func getImages(events : Array<Event>){
-        for var x = 0 ; x < events.count ; x++ {
-            events[x].image = self.eventDao?.downloadImage(events[x].id!)
-        }
-        DispatcherClass.dispatcher { () -> () in
-            self.delegate?.downloadImageEventFinished?(events)
-        }
+    
+    func getEventInformations(event: Event){
+        eventDao?.getEventInformations(event)
+    }
+    func getImage(event :Event){
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, {
+            event.image = self.eventDao?.downloadImage(event.id!)
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.downloadImageEventFinshed?(event)
+            })
+        
+        })
+    
     }
 }

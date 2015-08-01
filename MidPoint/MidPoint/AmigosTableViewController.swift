@@ -8,7 +8,7 @@
 
 import UIKit
 import CloudKit
-class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , UISearchResultsUpdating, EventManagerDelegate, UserManagerDelegate{
+class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITableViewDataSource , EventManagerDelegate, UserManagerDelegate, UISearchControllerDelegate, UISearchBarDelegate{
     
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
@@ -19,14 +19,14 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     var daoFriend: UserManager = UserManager()
     
     var data: Array<User> = Array()
+
     
     var dataSelected: Array<User> = Array()
     
     var resultSearchController = UISearchController()
     
     var initialProgress:Double = 0.0
-    
-
+    var progressView: ProgressView?
     @IBOutlet var progressLabel: UILabel!
     
     @IBOutlet var progressLayer: CALayer!
@@ -38,17 +38,17 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.clearsSelectionOnViewWillAppear = false
+        progressView = ProgressView(frame: self.view.frame)
+
         self.resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)
-            controller.searchResultsUpdater = self
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.sizeToFit()
-            
+            controller.searchBar.delegate = self
             self.tableView.tableHeaderView = controller.searchBar
             
             return controller
         })()
-        
         self.tableView.reloadData()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action:Selector("finish"))
@@ -57,22 +57,22 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         self.title = "Amigos"
         
     }
-    
-    func finish(){
-        
-        //if(event?.image)
-        
-        eventDelegate.saveEvent(event!, usuario: UserDAODefault.getLoggedUser())
-        
-        var progressView: ProgressView = ProgressView(frame: self.view.frame)
-        
-        progressView.backgroundColor = Colors.Rosa
+    func showProgresView(){
+        progressView!.backgroundColor = Colors.Rosa
         
         self.view = progressView
         
         self.navigationController?.navigationBarHidden = true
 
+    }
+    func finish(){
+        //mostrar para o usuario selecionar partir de uma localizacao
+        let localizacao = Localizacao()
+        localizacao.longitude = 102.2
+        localizacao.latitude = 102.2
         
+        eventDelegate.saveEvent(event!, usuario: UserDAODefault.getLoggedUser(), friends: self.dataSelected, localizacaoUsuario: localizacao)
+        self.showProgresView()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -91,7 +91,6 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         for i in cells {
             let cell: UITableViewCell = i as! UITableViewCell
-  //          cell.transform = CGAffineTransformMakeTranslation(0, tableHeight)
             cell.transform = CGAffineTransformMakeTranslation(tableWidth, 0)
         }
         
@@ -109,8 +108,6 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
     
@@ -118,17 +115,6 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         return self.data.count
         
     }
-    
-    //    private func busca_binaria(Array, menor, maior, valor){
-    //        int media = maior+menor/2;
-    //
-    //        if(Array[media] >= valor)
-    //            busca_binaria(array, menor, media, valor)
-    //
-    //        else
-    //            busca_binaria(array, media, maior, valor)
-    //    }
-    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(tableView.cellForRowAtIndexPath(indexPath)?.accessoryType == .Checkmark){
@@ -144,12 +130,10 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
             
         }
     }
-    
-    
-    private func insertOrdened(functionToRunOnMainThread: () -> ()){
-        functionToRunOnMainThread()
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+
+        self.daoFriend.getUsersWithName(searchBar.text)
     }
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellAmigosGroupo = self.tableView.dequeueReusableCellWithIdentifier("CustomCellAmigosGroupo") as!CustomCellAmigosGroupo
         
@@ -175,12 +159,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
         
     }
-    
-    
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        
-        self.daoFriend.getUsersWithName(searchController.searchBar.text)
-    }
+
     func errorThrowedSystem(error: NSError) {
         
     }
@@ -192,39 +171,33 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
             UIAlertAction in
             TransitionManager(indentifier: "navigationHome", animated: false, view: self)
         }
-
         alertController.addAction(okAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     func progressUpload(float : Float){
-        
-        var progressView: ProgressView = ProgressView(frame: self.view.frame)
-        
-        self.view = progressView
-        
-        self.navigationController?.navigationBarHidden = true
-        
-        progressView.animateProgressView(float)
+        self.progressView!.animateProgressView(float)
     }
-   
-    func downloadImageFinished(image: Array<User>) {
-        self.data = image
-        let id = UserDAODefault.getLoggedUser().id!
-        for var i = 0 ; i < self.data.count ; i++ {
-            if (self.data[i].id == id){
-                self.data.removeAtIndex(i)
-                break
-            }
-        }
-        self.tableView.reloadData()
+    func downloadImageEventFinshed(event: Event) {
+            //descobrir aonde esta esse evento na table view, e entao atualizar somente a celula
     }
     func saveEventFinished(event: Event){
-        addConversation(String(format:"%d",event.id!), title: event.name, subtitle: event.descricao, image: "halua")
-        eventDelegate.inviteFriendsToEvent(event, sender: UserDAODefault.getLoggedUser(), friends: self.dataSelected)
+        println("terminou de salvar a porra toda, fazendo upload da imagem em background o novo id é \(event.id!)")
     }
     func errorThrowedServer(stringError: String) {
         println(stringError)
+    }
+    func getUsersFinished(users: Array<User>) {
+        self.data = users
+        for user in users {
+            self.daoFriend.getImage(user)
+        }
+        self.tableView.reloadData()
+    }
+    func downloadImageUserFinished(user: User) {
+
+
+        
     }
     
     func addConversation(id: String, title: String!, subtitle: String!, image: String!) {
@@ -236,8 +209,5 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
             "image":image
             ])
     }
-    
-  
-    
 
 }

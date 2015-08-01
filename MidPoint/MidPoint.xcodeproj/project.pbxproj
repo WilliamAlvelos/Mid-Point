@@ -55,6 +55,7 @@
 		3DFB8A301B4CC4A900463EA4 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB8A2C1B4CC4A900463EA4 /* TwitterKitResources.bundle */; };
 		3DFB8A311B4CC4A900463EA4 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */; };
 		7B0C72451B548B03009B29A4 /* CustomCellFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */; };
+		7B227C811B6C92CA00EE562A /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B227C801B6C92CA00EE562A /* State.swift */; };
 		7B2DADD71B6AAD0F009D2C50 /* Localizacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2DADD61B6AAD0F009D2C50 /* Localizacao.swift */; };
 		7B486A041B6AF2F5007AED22 /* UIMPConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B486A031B6AF2F5007AED22 /* UIMPConfiguration.swift */; };
 		7B4D268D1B55BAE500DD86EF /* JsonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D268C1B55BAE500DD86EF /* JsonResponse.swift */; };
@@ -154,6 +155,7 @@
 		3DFB8A2D1B4CC4A900463EA4 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		495E9806851C4CA17E307AF9 /* libPods-MidPoint.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MidPoint.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B0C72441B548B03009B29A4 /* CustomCellFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellFriend.swift; sourceTree = "<group>"; };
+		7B227C801B6C92CA00EE562A /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		7B2DADD61B6AAD0F009D2C50 /* Localizacao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizacao.swift; sourceTree = "<group>"; };
 		7B486A031B6AF2F5007AED22 /* UIMPConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIMPConfiguration.swift; path = MidPoint/UIMPConfiguration.swift; sourceTree = "<group>"; };
 		7B4D268C1B55BAE500DD86EF /* JsonResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonResponse.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 		FFC2C6D91AF935E0004B0AA7 = {
 			isa = PBXGroup;
 			children = (
+				7B227C801B6C92CA00EE562A /* State.swift */,
 				3DA7BD811B6A2BD600882C07 /* PushResponse.swift */,
 				7B63155F1B66D7A400D13DE5 /* GlobalConstants.swift */,
 				7B2DADD61B6AAD0F009D2C50 /* Localizacao.swift */,
@@ -636,6 +639,7 @@
 			files = (
 				3D6A3AC01B57620C00E7948F /* ConversasTableViewController.swift in Sources */,
 				3D084DD71B56CCA30032A94B /* ChatViewController.swift in Sources */,
+				7B227C811B6C92CA00EE562A /* State.swift in Sources */,
 				7BE9F2A21B680FDE00AAD032 /* EventManager.swift in Sources */,
 				3DA699EC1B6946220021FBF1 /* EventInfoViewController.swift in Sources */,
 				3DA7BD821B6A2BD600882C07 /* PushResponse.swift in Sources */,

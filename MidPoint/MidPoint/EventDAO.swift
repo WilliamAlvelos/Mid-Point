@@ -11,8 +11,3 @@ import Foundation
 enum Option: Int {
     case Pending = 1, Refused, Accepted, Passed, Owner, All
 }
-
-protocol EventoDAOProtocol{
-    func saveEvent(event:Event, usuario: User)
-    
-}

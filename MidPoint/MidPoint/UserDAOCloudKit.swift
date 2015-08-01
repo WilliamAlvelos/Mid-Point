@@ -97,10 +97,13 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         })
     
     }
+    
     func getUsersWithName(name: String) {
         
+        let emailCurrent = UserDAODefault.getLoggedUser().email
+        
         let url : String = "\(LinkAccessGlobalConstants.LinkUsers)buscaUsuario.php"
-        let bodyHttp = String(format: "\(UserGlobalConstants.Name)=%@", name)
+        let bodyHttp = String(format: "\(UserGlobalConstants.Name)=%@&\(UserGlobalConstants.Email)=%@", name, emailCurrent!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 DispatcherClass.dispatcher({ () -> () in
@@ -149,6 +152,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
             }
             var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
 
+            
             let array = JsonResponse.parseJSONToArray(data)
             var arrayToReturn :[User]? = Array()
             for dataString in array {
@@ -165,6 +169,13 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 var name = dataString.objectForKey("\(UserGlobalConstants.Name)") as! String
                 var latitude = (dataString[UserGlobalConstants.Latitude]  as! NSString).doubleValue
                 var longitude = (dataString[UserGlobalConstants.Longitude]  as! NSString).doubleValue
+                var state = (dataString[EventGlobalConstants.UserState] as! String).toInt()
+
+                let stateFinal = State()
+                stateFinal.event = event
+                stateFinal.state = Option(rawValue: state!)
+                //ver como funciona o state
+                
                 let localizacao = Localizacao()
                 localizacao.latitude = Float(latitude)
                 localizacao.longitude = Float(longitude)
@@ -173,6 +184,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 user.id = id
                 user.name = name
                 user.location = localizacao
+                user.state = stateFinal
                 arrayToReturn!.append(user)
             }
             DispatcherClass.dispatcher({ () -> () in

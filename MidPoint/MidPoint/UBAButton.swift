@@ -468,7 +468,7 @@ class UBAButton: UIButton {
         var distance: CGFloat = 0.0
         
         if movementType != button.movementType {
-            NSLog("This function can't be called if the two buttons doesn't have the same types.")
+            NSLog("This function can't be called if the two buttons don't have the same type.")
             
             return distance
         }

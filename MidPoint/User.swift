@@ -16,6 +16,7 @@ class User: NSObject {
     var image: UIImage?
     var id : Int?
     var location: Localizacao?
+    var state: State?
     
     //facebook login
     var userIdFacebook: String?

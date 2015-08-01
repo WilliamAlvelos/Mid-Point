@@ -20,14 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func teste(){
-        var user = User(id: 29)
-        var localizacao = Localizacao()
-        localizacao.latitude = 12.123
-        localizacao.longitude = 12.123
-        localizacao.name = "Nome do local"
-        var event = Event()
-        event.id = 10;
-        EventDAOCloudKit().getEvent(user, usuario: .All)
+//        var user = User(id: 29)
+//        var localizacao = Localizacao()
+//        localizacao.latitude = 12.123
+//        localizacao.longitude = 12.123
+//        localizacao.name = "Nome do local"
+//        var event = Event()
+//        event.id = 10;
+//        UserDAOCloudKit().getUsersFrom(event)
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    
+        
 
 
     

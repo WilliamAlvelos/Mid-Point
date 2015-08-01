@@ -19,7 +19,7 @@ import Parse
     optional func saveUserFinished()
     optional func progressUpload(float : Float)
     optional func getUsersFinished(users: Array<User>)
-    optional func downloadImageFinished(image: Array<User>)
+    optional func downloadImageUserFinished(user: User)
     optional func updateStateFinished()
     optional func updateLocationFinished()
     optional func getLocationFinished(users: Array<Localizacao>)
@@ -69,6 +69,11 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
         userDao?.getUser(user, password: password)
     }
     func getUsersWithName(name : String){
+        if name == "" {
+            let error = NSError(domain: "Event error", code: 1, userInfo: nil)
+            self.delegate?.errorThrowedSystem(error)
+            return
+        }
         userDao?.getUsersWithName(name)
     }
     func saveImageFinished(){
@@ -76,26 +81,25 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     func getUsersFinished(users: Array<User>){
         self.delegate?.getUsersFinished?(users)
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            self.getImages(users)
-        }
-        
 
-    
     }
 
     func getUsersFrom(event: Event){
         userDao?.getUsersFrom(event)
     }
-    func getImages(users : Array<User>){
-        for var x = 0 ; x < users.count ; x++ {
-            users[x].image = self.userDao?.downloadImage(users[x].id!)
-        }
+    func getImage(user : User){
+        
+        
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, {
+            user.image = self.userDao?.downloadImage(user.id!)
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.downloadImageUserFinished?(user)
+            })
+            
+        })
 
-        DispatcherClass.dispatcher { () -> () in
-            self.delegate?.downloadImageFinished?(users)
-        }
     }
     func updateUserLocation(user: User , location : Localizacao, event : Event){
         self.userDao?.updateUserLocation(user, location: location, event: event)

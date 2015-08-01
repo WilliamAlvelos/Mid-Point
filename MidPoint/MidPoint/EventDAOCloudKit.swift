@@ -15,56 +15,62 @@ protocol EventoDAOCloudKitDelegate{
     func eventNotFound(event : Event)
     func getEventFinished(event: Event)
     func getEventsFinished(events: Array<Event>)
-    func inviteFinished(event: Event)
-
-    
-    
+    //func inviteFinished(event: Event)
 }
 
-
-class EventDAOCloudKit: NSObject, EventoDAOProtocol{
+class EventDAOCloudKit: NSObject{
     var delegate: EventoDAOCloudKitDelegate?
-    
-    func inviteFriendsToEvent(event: Event, sender: User, friends: Array<User>){
-        var dictionary = JsonResponse.userToCall(friends)
-        let url : String = "\(LinkAccessGlobalConstants.LinkEvents)inviteToEvent.php"
-        let avent: String = JsonResponse.dictionaryToString(JsonResponse.userToCall(friends))
-        var bodyHttp = String(format: "\(EventGlobalConstants.Id)=%d&\(EventGlobalConstants.UserToInvite)=%@&\(EventGlobalConstants.UserSender)=%d" , event.id!, avent , sender.id!)
-        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            if (error != nil) {
-            DispatcherClass.dispatcher({ () -> () in
-                    self.delegate?.errorThrowed(error)
-            })
-
-                return
-            }
-
-            let string = JsonResponse.parseJSON(data)
-            
-            if (string.objectForKey("error") != nil){
-                let error : NSError = NSError(domain: "Erro", code: (string.objectForKey("error")! as! Int), userInfo: nil)
-                DispatcherClass.dispatcher({ () -> () in
-                    self.delegate?.errorThrowed(error)
-                })
-
-                return
-            }
-            
-            
-            if (string.objectForKey("succesfull") != nil){
-                DispatcherClass.dispatcher({ () -> () in
-                    self.delegate?.inviteFinished(event)
-                })
-
-                return
-            }
-        })
-    }
-    
-    func saveEvent(event: Event, usuario: User) {
+    func getEventInformations(event: Event){
         
+    }
+//    func inviteFriendsToEvent(event: Event, sender: User, friends: Array<User>){
+//        var dictionary = JsonResponse.userToCall(friends)
+//        let url : String = "\(LinkAccessGlobalConstants.LinkEvents)inviteToEvent.php"
+//        let avent: String = JsonResponse.dictionaryToString(JsonResponse.userToCall(friends))
+//        var bodyHttp = String(format: "\(EventGlobalConstants.Id)=%d&\(EventGlobalConstants.UserToInvite)=%@&\(EventGlobalConstants.UserSender)=%d" , event.id!, avent , sender.id!)
+//        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+//            if (error != nil) {
+//            DispatcherClass.dispatcher({ () -> () in
+//                    self.delegate?.errorThrowed(error)
+//            })
+//
+//                return
+//            }
+//
+//            let string = JsonResponse.parseJSON(data)
+//            
+//            if (string.objectForKey("error") != nil){
+//                let error : NSError = NSError(domain: "Erro", code: (string.objectForKey("error")! as! Int), userInfo: nil)
+//                DispatcherClass.dispatcher({ () -> () in
+//                    self.delegate?.errorThrowed(error)
+//                })
+//
+//                return
+//            }
+//            
+//            
+//            if (string.objectForKey("succesfull") != nil){
+//                DispatcherClass.dispatcher({ () -> () in
+//                    self.delegate?.inviteFinished(event)
+//                })
+//
+//                return
+//            }
+//        })
+//    }
+//    
+    func saveEvent(event: Event, usuario: User, friends: Array<User>, localizacaoUsuario: Localizacao ) {
+        let users_to_invite: String = "\(EventGlobalConstants.UserToInvite)=\(JsonResponse.dictionaryToString(JsonResponse.userToCall(friends)))"
+        let event_name = "\(EventGlobalConstants.Name)=\(event.name!)"
+        let event_description = "\(EventGlobalConstants.Description)=\(event.descricao!)"
+        let event_date = "\(EventGlobalConstants.Date)=\(event.date!)"
+        let user_id = "\(UserGlobalConstants.Id)=\(usuario.id!)"
+        let event_latitude = "\(EventGlobalConstants.Latitude)=\(event.localizacao!.latitude!)"
+        let event_longitude = "\(EventGlobalConstants.Longitude)=\(event.localizacao!.longitude!)"
+        let user_latitude = "\(UserGlobalConstants.Latitude)=\(localizacaoUsuario.latitude!)"
+        let user_longitude = "\(UserGlobalConstants.Longitude)=\(localizacaoUsuario.longitude!)"
         let url : String = "\(LinkAccessGlobalConstants.LinkEvents)insereEvento.php"
-        let bodyHttp = String(format: "\(EventGlobalConstants.Name)=%@&\(EventGlobalConstants.Description)=%@&\(EventGlobalConstants.Date)=%@&\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.Latitude)=%f&\(EventGlobalConstants.Longitude)=%f", event.name!,event.descricao!,event.date!, usuario.id!, event.localizacao!.latitude!,event.localizacao!.longitude!)
+        let bodyHttp = "\(users_to_invite)&\(event_name)&\(event_description)&\(event_date)&\(user_id)&\(event_latitude)&\(event_longitude)&\(user_latitude)&\(user_longitude)"
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 DispatcherClass.dispatcher({ () -> () in
@@ -74,7 +80,7 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 
                 return
             }
-
+            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
             let string = JsonResponse.parseJSON(data)
         
             if (string.objectForKey("error") != nil){
@@ -96,7 +102,7 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
         })
         
     }
-    func getEvent(user:User, usuario: Option){
+    func getEventsFromUser(user:User, usuario: Option){
         let url : String = "\(LinkAccessGlobalConstants.LinkEvents)busca.php"
         let bodyHttp = String(format: "\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.UserState)=%d", user.id!, usuario.rawValue)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in

@@ -520,26 +520,9 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         self.messages.append(locationMessage)
     
     }
-    
-    
-    
-//    func addVideoMediaMessage(){
-//        var videoURL:NSURL = NSURL(string: "file://")!
-//        
-//        var videoItem:JSQVideoMediaItem = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay: true)
-//        
-//        var videoMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: videoItem)
-//        
-//        self.messages.append(videoMessage)
-//        
-//    }
-    
-    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!){
         let data : NSData = NSData(data: UIImageJPEGRepresentation(image, 1))
         data.writeToFile(self.imagePathURL().path!, atomically: true)
-        
-        //addPhotoMediaMessage(image)
         
         sendImage(image, sender: self.senderId, name: self.senderDisplayName)
         
@@ -586,14 +569,15 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         self.users?.removeAllObjects()
         
         for(var i = 0; i < users.count ; i++){
-            //self.users?.setValue(users[i].name, forKey: users[i].id)
-            
+            self.userManager?.getImage(users[i])
             self.users?.setValue(users[i].id, forKey: users[i].name!)
         }
         
         self.usuarios = users
     }
-    
+    func downloadImageUserFinished(user: User) {
+        //achar aonde o cabloco esta e colocar a imagem dele
+    }
     //
     //        self.avatars = [kJSQDemoAvatarIdSquires: jsqImage,
     //            kJSQDemoAvatarIdCook : cookImage,

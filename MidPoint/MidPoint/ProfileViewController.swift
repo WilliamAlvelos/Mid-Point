@@ -45,7 +45,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         var newETB = ETBScrollView(numberOfButtons: 3, images:[UIImage(named: "btest1.png")!, UIImage(named: "btest2.png")!,UIImage(named: "btest3.png")!])
         
-        
         //Cor de fundo da barra
         newETB.toolbarBackgroundColor = Colors.Azul
         
@@ -87,41 +86,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         
-        eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
-        
-        //tableView.rowHeight = UITableViewAutomaticDimension
+        reloadData()
         tableView.estimatedRowHeight = 200.0
-        
-//        //gestures
-//        var swipeUPSearch:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipeSearch:"))
-//        swipeUPSearch.direction = UISwipeGestureRecognizerDirection.Up
-//        
-//        var swipeDownSearch:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipeSearch:"))
-//        
-//        swipeDownSearch.direction = UISwipeGestureRecognizerDirection.Down
-//        
-//        var swipeUP:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipe:"))
-//        swipeUP.direction = UISwipeGestureRecognizerDirection.Up
-//        
-//        var swipeDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipe:"))
-//        
-//        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
-//        
-//        self.view.addGestureRecognizer(swipeUPSearch)
-//        
-//        self.view.addGestureRecognizer(swipeDownSearch)
-//        
-//        
-////        self.tabBar.addGestureRecognizer(swipeUP)
-////        
-////        self.tabBar.addGestureRecognizer(swipeDown)
         
     }
 
     
     func reloadData(){
-        eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
-        self.tableView.reloadData()
+        eventManager.getEventsFromUser(UserDAODefault.getLoggedUser(), usuario: .All)
 
     }
 
@@ -180,28 +152,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     }
     
     
-    func errorThrowedServer(stringError: String) {
-        
-    }
-    
-    func errorThrowedSystem(error: NSError) {
-        
-    }
-    
-    func getEventsFinished(events: Array<Event>) {
-        self.events = events
-
-        self.tableView.reloadData()
-    }
-    func downloadImageEventFinished(images: Array<Event>) {
-        events = images
-        
-        self.tableView.reloadData()
-        
-        self.refreshControl!.endRefreshing()
-    }
-  
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CustomCellProfile = self.tableView.dequeueReusableCellWithIdentifier("CustomCellProfile") as! CustomCellProfile
         
@@ -216,25 +166,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         cell.titleEvent.text = self.events[indexPath.row].name
         
-        //cell.imageEvent.image = self.events[indexPath.row].image
-        
         cell.selectionStyle = .None
-        
-        //cell.localHorarioEvento.text = self.events[indexPath.row].date
+    
         cell.descricao.text = self.events[indexPath.row].descricao
-        
-        
-        
-        //Inicia a UBA com o numero de botoões
-//        var uba = UBAView(buttonsQuantity: 0)
-        
-        //Prepara os botões na view passada
-        //uba.prepareAnimationOnView(self.view)
-        
-        //Adiciona um seletor para o botão no indice passado
-        //uba.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
-        
-        
 
         if(self.events[indexPath.row].numberOfPeople! > 1){
         
@@ -245,35 +179,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         }
         
         if(image != nil){
-
-
-        //        
-        //        var imageCortada : UIImage = UIImage(CGImage: imageRef, scale: image!.scale, orientation: image!.imageOrientation)!
-            
             activity!.removeActivityViewWithName(cell.view)
 
-            // Create a copy of the image without the imageOrientation property so it is in its native orientation (landscape)
             let contextImage: UIImage = UIImage(CGImage: image!.CGImage)!
             
-            // Get the size of the contextImage
             let contextSize: CGSize = contextImage.size
             
             var rect: CGRect = CGRectMake(image!.size.width/4, image!.size.height/4, 375, 200)
-            
-            
-
-            
-            // Create bitmap image from context using the rect
             let imageRef: CGImageRef = CGImageCreateWithImageInRect(contextImage.CGImage, rect)
-                
-            // Create a new image based on the imageRef and rotate back to the original orientation
             let imageFinal: UIImage = UIImage(CGImage: imageRef, scale: image!.scale, orientation: image!.imageOrientation)!
 
-            //cell.imageEvent.image = imageFinal
-            
-            // ** OCView ** --------------------
-            
-            //var main = self.events[indexPath.row].image
             var images = [UIImage]()
             
             for var x = 0.3; x < 1.0; x = x + 0.2 {
@@ -287,12 +202,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
             
             rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
             
-            //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
             ocView = OCView(mainImage: imageFinal, insideImages: images, frame: rect)
-            
-            //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
-            
-            //Adiciona a OCView
             cell.view.addSubview(ocView)
             
             
@@ -303,13 +213,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         cell.titleEvent.textColor = Colors.Rosa
         cell.descricao.textColor = Colors.Rosa
         cell.numeroPessoas.textColor = Colors.Rosa
-        
-//        cell.titleLabel?.text = self.data![indexPath.row]
-//        
-//        cell.imageLabel = UIImageView(image: UIImage(named: "teste"))
-//        
-//        cell.subtitleLabel.text = self.data![indexPath.row]
-        
+
         return cell
     }
     
@@ -323,4 +227,20 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         return image
     }
     
+    func errorThrowedServer(stringError: String) {
+        
+    }
+    func errorThrowedSystem(error: NSError) {
+        
+    }
+    func getEventsFinished(events: Array<Event>) {
+        self.events = events
+        for event in events {
+            self.eventManager.getImage(event)
+        }
+        self.animateTable()
+    }
+    func downloadImageEventFinshed(event: Event) {
+        //descobrir aonde esta esse evento na table view e entao recarregar
+    }
 }

@@ -25,13 +25,13 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.eventDelegate.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
-        
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.eventDelegate.delegate = self
         
+        
+       self.reloadData()
         self.resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
@@ -58,7 +58,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
     
     func reloadData(){
-        self.eventDelegate.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
+        self.eventDelegate.getEventsFromUser(UserDAODefault.getLoggedUser(), usuario: .All)
         
         
     }
@@ -92,7 +92,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
         for i in cells {
             let cell: UITableViewCell = i as! UITableViewCell
-            //          cell.transform = CGAffineTransformMakeTranslation(0, tableHeight)
             cell.transform = CGAffineTransformMakeTranslation(-tableWidth, 0)
         }
         
@@ -119,16 +118,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             ])
         
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
 
@@ -149,13 +140,9 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.resultSearchController.active = false
-        
         let nextView = TransitionManager.creatView("changeMidPoint") as! ChangeMidPointViewController
-        //nextView.conversa = Data[indexPath.row].id
-        //nextView.name = Data[indexPath.row].name
         nextView.event = Data[indexPath.row]
-        //nextView.imageEvent = Data[indexPath.row].image
-        
+    
         self.navigationController?.pushViewController(nextView, animated: true)
     }
 
@@ -190,25 +177,20 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
 
     
-    // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        
         
         return true
     }
     
 
-    // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+
+        }
     }
     
-    // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
+    
         return true
     }
 
@@ -225,28 +207,23 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         }
         self.tableView.reloadData()
     }
-
-    func getEventsFinished(events: Array<Event>){
-        Data = events
-        //animateTable()
-        self.refreshControl?.endRefreshing()
-
-        self.animateTable()
-        
-    }
-    
-    func errorThrowedSystem(error: NSError){
+    func errorThrowedSystem(error: NSError) {
         
     }
     func errorThrowedServer(stringError: String) {
-        println(stringError)
+        
     }
     
-    func downloadImageEventFinished(images: Array<Event>){
-        self.Data = images
-        self.tableView.reloadData()
+    func getEventsFinished(events: Array<Event>) {
+        self.Data = events
+        for event in events {
+            self.eventDelegate.getImage(event)
+        }
+        self.animateTable()
     }
-
     
+    func downloadImageEventFinshed(event: Event) {
+        // descobrir aonde esta esse evento na table view, e recarregar a celular
+    }
 
 }
