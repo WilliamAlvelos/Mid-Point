@@ -195,8 +195,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.tableView.reloadData()
     }
-
-    
     
     
     func getUsersFinished(users: Array<User>) {

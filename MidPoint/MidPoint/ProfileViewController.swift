@@ -9,20 +9,26 @@
 import Foundation
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, EventManagerDelegate
+class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, EventManagerDelegate, UserManagerDelegate
 {
 
     var ocView: OCView!
 
     var navItem: UINavigationItem?
     
-    var travado: Bool = false
+    var userManager: UserManager?
+    
+    var carregou: Bool = false
     
     var eventManager : EventManager = EventManager()
     
     var events = Array<Event>()
     
+    var imageUsers = Array<User>()
+    
     var user:User?
+    
+    var quantidade = 0
     
     
     @IBOutlet var tableView: UITableView!
@@ -35,6 +41,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
      override func viewDidLoad() {
     
         user = UserDAODefault.getLoggedUser()
+        
+        
+        self.userManager = UserManager()
+        
+        self.userManager!.delegate = self
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.backgroundColor = Colors.Azul
@@ -84,6 +95,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         navItem?.title = user!.name
         
+        
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -92,44 +105,29 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         //tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200.0
         
-//        //gestures
-//        var swipeUPSearch:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipeSearch:"))
-//        swipeUPSearch.direction = UISwipeGestureRecognizerDirection.Up
-//        
-//        var swipeDownSearch:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipeSearch:"))
-//        
-//        swipeDownSearch.direction = UISwipeGestureRecognizerDirection.Down
-//        
-//        var swipeUP:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("UpSwipe:"))
-//        swipeUP.direction = UISwipeGestureRecognizerDirection.Up
-//        
-//        var swipeDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("DownSwipe:"))
-//        
-//        swipeDown.direction = UISwipeGestureRecognizerDirection.Down
-//        
-//        self.view.addGestureRecognizer(swipeUPSearch)
-//        
-//        self.view.addGestureRecognizer(swipeDownSearch)
-//        
-//        
-////        self.tabBar.addGestureRecognizer(swipeUP)
-////        
-////        self.tabBar.addGestureRecognizer(swipeDown)
+
         
     }
 
     
     func reloadData(){
-        eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
-        self.tableView.reloadData()
-
+        //eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
+        animateTable()
+    }
+    
+    func imagesUser(){
+        self.quantidade = self.events.count
+        
+        for(var i = 0 ; i < self.events.count; i++){
+            self.userManager!.getUsersFrom(self.events[i])
+        }
     }
 
     
     override func viewWillAppear(animated: Bool) {
         
         animateTable()
-        
+        self.carregou = false
 
     }
     
@@ -194,11 +192,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.tableView.reloadData()
     }
     func downloadImageEventFinished(images: Array<Event>) {
-        events = images
+        
+        self.events = images
         
         self.tableView.reloadData()
         
         self.refreshControl!.endRefreshing()
+        
+        imagesUser()
     }
   
     
@@ -207,10 +208,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         
         
-        var activity: activityCell?
+        //var activity: activityCell?
         
         
-        activity = activityCell(view: cell.view, inverse: true)
+        //activity = activityCell(view: cell.view, inverse: true)
         
         var image = self.events[indexPath.row].image
         
@@ -224,16 +225,106 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         cell.descricao.text = self.events[indexPath.row].descricao
         
         
+        var auxDouble:Double = NSNumber(float: self.events[indexPath.row].localizacao!.latitude!).doubleValue
+
+        var aux:Double = NSNumber(float: self.events[indexPath.row].localizacao!.latitude!).doubleValue
         
-        //Inicia a UBA com o numero de botoões
-//        var uba = UBAView(buttonsQuantity: 0)
+        var latitude: CLLocationDegrees = auxDouble
+        var longitude: CLLocationDegrees = aux
+
+        var location = CLLocation(latitude: latitude, longitude: longitude)
+        //println(location)
         
-        //Prepara os botões na view passada
-        //uba.prepareAnimationOnView(self.view)
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+            var placemark:CLPlacemark!
+            
+            if error == nil && placemarks.count > 0 {
+                placemark = placemarks[0] as! CLPlacemark
+                
+                var addressString : String = ""
+//                if placemark.ISOcountryCode == "BR" /*Address Format in Brazil*/ {
+//                    if placemark.country != nil {
+//                        addressString = placemark.country
+//                    }
+//                    if placemark.subAdministrativeArea != nil {
+//                        addressString = addressString + placemark.subAdministrativeArea + ", "
+//                    }
+//                    if placemark.postalCode != nil {
+//                        addressString = addressString + placemark.postalCode + " "
+//                    }
+//                    if placemark.locality != nil {
+//                        addressString = addressString + placemark.locality
+//                    }
+//                    if placemark.thoroughfare != nil {
+//                        addressString = addressString + placemark.thoroughfare
+//                    }
+//                    if placemark.subThoroughfare != nil {
+//                        addressString = addressString + placemark.subThoroughfare
+//                    }
+//                } else {
+//                    if placemark.subThoroughfare != nil {
+//                        addressString = placemark.subThoroughfare + " "
+//                    }
+//                    if placemark.thoroughfare != nil {
+//                        addressString = addressString + placemark.thoroughfare + ", "
+//                    }
+                    if placemark.locality != nil {
+                        addressString = addressString + placemark.locality + ", "
+                    }
+//                    if placemark.administrativeArea != nil {
+//                        addressString = addressString + placemark.administrativeArea + " "
+//                    }
+                    if placemark.country != nil {
+                        addressString = addressString + placemark.country
+                    }
+                    else{
+                        addressString = addressString + "Local não encontrado"
+                        
+                    }
+               // }
+                
+                    cell.localHorarioEvento.text = addressString
+                }
+            })
         
-        //Adiciona um seletor para o botão no indice passado
-        //uba.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
-        
+//        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+//            let placeArray = placemarks as? [CLPlacemark]
+//            
+//            
+//            // Place details
+//            var placeMark: CLPlacemark!
+//            placeMark = placeArray?[0]
+//            
+//            // Address dictionary
+//            println(placeMark.addressDictionary)
+//            
+//            // Location name
+//            if let locationName = placeMark.addressDictionary["Name"] as? NSString {
+//                println(locationName)
+//            }
+//            
+//            // Street address
+//            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
+//                println(street)
+//            }
+//            
+//            // City
+//            if let city = placeMark.addressDictionary["City"] as? NSString {
+//                println(city)
+//            }
+//            
+//            // Zip code
+//            if let zip = placeMark.addressDictionary["ZIP"] as? NSString {
+//                println(zip)
+//            }
+//            
+//            // Country
+//            if let country = placeMark.addressDictionary["Country"] as? NSString {
+//                println(country)
+//            }
+//            
+//        })
+
         
 
         if(self.events[indexPath.row].numberOfPeople! > 1){
@@ -250,7 +341,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         //        
         //        var imageCortada : UIImage = UIImage(CGImage: imageRef, scale: image!.scale, orientation: image!.imageOrientation)!
             
-            activity!.removeActivityViewWithName(cell.view)
+            //activity!.removeActivityViewWithName(cell.view)
 
             // Create a copy of the image without the imageOrientation property so it is in its native orientation (landscape)
             let contextImage: UIImage = UIImage(CGImage: image!.CGImage)!
@@ -276,33 +367,36 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
             //var main = self.events[indexPath.row].image
             var images = [UIImage]()
             
-            for var x = 0.3; x < 1.0; x = x + 0.2 {
+            if(self.carregou == true){
                 
-                var newImage = getImageWithColor(UIColor(red: 0.8, green: 0.2, blue: CGFloat(x), alpha: 1.0), size: CGSizeMake(100.0,100.0))
-                images.append(newImage)
+                for(var x = 0; x <= self.events[indexPath.row].numberOfPeople!; x++){
+                    images.append(self.imageUsers.removeAtIndex(0).image!)
+                }
+                
+                
+                
+                rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
+                
+                //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
+                ocView = OCView(mainImage: imageFinal, insideImages: images, frame: rect)
+                
+                //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
+                
+                //Adiciona a OCView
+                cell.view.addSubview(ocView)
+
+            }
+            else{
+                cell.view.backgroundColor = UIColor(patternImage: self.events[indexPath.row].image!)
                 
             }
-            
-            
-            
-            rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
-            
-            //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
-            ocView = OCView(mainImage: imageFinal, insideImages: images, frame: rect)
-            
-            //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
-            
-            //Adiciona a OCView
-            cell.view.addSubview(ocView)
-            
-            
         
         }
-        
         
         cell.titleEvent.textColor = Colors.Rosa
         cell.descricao.textColor = Colors.Rosa
         cell.numeroPessoas.textColor = Colors.Rosa
+        cell.localHorarioEvento.textColor = Colors.Rosa
         
 //        cell.titleLabel?.text = self.data![indexPath.row]
 //        
@@ -311,6 +405,24 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
 //        cell.subtitleLabel.text = self.data![indexPath.row]
         
         return cell
+    }
+    
+    
+
+
+    func getUsersFinished(users: Array<User>) {
+    }
+
+    func downloadImageFinished(image: Array<User>) {
+        for(var i = 0; i < image.count; i++){
+            self.imageUsers.append(image[i])
+        }
+        self.quantidade--
+        
+        if(self.quantidade == 0){
+            animateTable()
+            self.carregou = true
+        }
     }
     
     func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {

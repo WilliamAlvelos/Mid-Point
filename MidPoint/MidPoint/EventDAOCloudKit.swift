@@ -16,8 +16,6 @@ protocol EventoDAOCloudKitDelegate{
     func getEventFinished(event: Event)
     func getEventsFinished(events: Array<Event>)
     func inviteFinished(event: Event)
-
-    
     
 }
 
