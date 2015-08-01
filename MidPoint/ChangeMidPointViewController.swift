@@ -22,6 +22,9 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     var array = Array<User>()
     
     
+    var pins = Array<MKPointAnnotation>()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userManager = UserManager()
@@ -117,11 +120,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     func addUsersMap(){
         
         
-//        for (var i = 0; i < mapView.annotations.count; i++){
-//            if
-//            
-//            mapView.removeAnnotation(mapView.annotations[i].annotation)
-//        }
+        mapView.removeAnnotations(self.pins)
 
         
         
@@ -149,6 +148,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         
         
         mapView.addAnnotation(point)
+        
+        self.pins.append(point)
     
     }
     
