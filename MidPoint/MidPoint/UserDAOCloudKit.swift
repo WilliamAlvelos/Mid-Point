@@ -213,41 +213,17 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         return UIImage(data: urlData!)
         
     }
-    func updateUserState(user: User , state : Option, event : Event){
-        let url : String = "\(LinkAccessGlobalConstants.LinkUsers)updateStateUser.php"
-        let bodyHttp = String(format: "\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.UserState)=%d&\(EventGlobalConstants.Id)=%d", user.id! ,state.rawValue, event.id!)
-        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            if (error != nil) {
-                DispatcherClass.dispatcher({ () -> () in
-                    self.delegate?.errorThrowed(error)
-                })
-                return
-            }
 
-            let string = JsonResponse.parseJSON(data)
-            
-            if (string.objectForKey("error") != nil){
-                var int = string.objectForKey("error")! as! Int
-                let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
-                DispatcherClass.dispatcher({ () -> () in
-                    self.delegate?.errorThrowed(error)
-                })
-                return
-            }
-            if (string.objectForKey("succesfull") != nil){
-                DispatcherClass.dispatcher({ () -> () in
-                    self.delegate?.updateStateFinished()
-                })
-                return
-            }
-            
-            
-        })
-    }
-    func updateUserLocation(user: User , location : Localizacao, event : Event){
-
+    func updateUserLocationAndState(user: User , location : Localizacao?, event : Event, state: Option){
         let url : String = "\(LinkAccessGlobalConstants.LinkUsers)updateLocationUser.php"
-        let bodyHttp = String(format: "\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.Id)=%d&\(UserGlobalConstants.Latitude)=%f&\(UserGlobalConstants.Longitude)=%f&\(LocationGlobalConstants.NameLocation)=%@", user.id! ,event.id!, location.latitude!, location.longitude!, location.name!)
+        var bodyHttp :String = ""
+        if (location == nil ){
+            bodyHttp = String(format: "\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.Id)=%d&\(EventGlobalConstants.UserState)=%d", user.id! ,event.id!, state.rawValue)
+            
+        }
+        else {
+            bodyHttp = String(format: "\(UserGlobalConstants.Id)=%d&\(EventGlobalConstants.Id)=%d&\(UserGlobalConstants.Latitude)=%f&\(UserGlobalConstants.Longitude)=%f&\(LocationGlobalConstants.NameLocation)=%@&\(EventGlobalConstants.UserState)=%d", user.id! ,event.id!, location!.latitude!, location!.longitude!, location!.name!, state.rawValue)
+        }
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             if (error != nil) {
                 DispatcherClass.dispatcher({ () -> () in
@@ -255,6 +231,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
                 return
             }
+            
             var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
 
             let string = JsonResponse.parseJSON(data)
@@ -269,6 +246,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 return
             }
             if (string.objectForKey("succesfull") != nil){
+                // pegar aqui o valor do novo mid point 
                 DispatcherClass.dispatcher({ () -> () in
                     self.delegate?.updateLocationFinished()
                 })

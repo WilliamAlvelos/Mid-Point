@@ -12,5 +12,10 @@ class Localizacao{
     var latitude: Float?
     var longitude: Float?
     var name: String?
-    
+    class func LocationNull()->Localizacao{
+        let localizacao = Localizacao()
+        localizacao.longitude = -1
+        localizacao.latitude = -1
+        return localizacao
+    }
 }

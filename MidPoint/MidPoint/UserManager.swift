@@ -101,13 +101,8 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
         })
 
     }
-    func updateUserLocation(user: User , location : Localizacao, event : Event){
-        self.userDao?.updateUserLocation(user, location: location, event: event)
-    }
-    
-    
-    func updateUserState(user: User , state : Option, event : Event){
-        userDao?.updateUserState(user, state: state, event: event)
+    func updateUserLocationAndState(user: User , location : Localizacao?, event : Event, state: Option){
+        userDao?.updateUserLocationAndState(user, location: location, event: event, state: state)
     }
     func updateStateFinished() {
         self.delegate?.updateStateFinished?()

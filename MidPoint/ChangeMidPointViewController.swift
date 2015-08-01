@@ -87,7 +87,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         
         localizacao.name = UserDAODefault.getLoggedUser().name
         
-        self.userManager?.updateUserLocation(UserDAODefault.getLoggedUser(), location: localizacao, event: event!)
+        //self.userManager?.updateUserLocation(UserDAODefault.getLoggedUser(), location: localizacao, event: event!)
         
 //        self.mapView.addAnnotation(point1)
 //    
@@ -99,22 +99,21 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     }
     
     func acepted(){
-        self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Accepted, event: event!)
-        
+       // self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Accepted, event: event!)
 
     }
     
     func owner(){
-        self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Owner, event: event!)
+        //self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Owner, event: event!)
     }
     
     
     func passed(){
-        self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Passed, event: event!)
+        //self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Passed, event: event!)
     }
     
     func refused(){
-        self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Refused, event: event!)
+        //self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Refused, event: event!)
     }
 
     override func didReceiveMemoryWarning() {
