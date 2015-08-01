@@ -20,14 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func teste(){
-        var user = User(id: 30)
+        var user = User(id: 35)
         var localizacao = Localizacao()
         localizacao.latitude = -144.837
         localizacao.longitude = 343.16
         localizacao.name = "Nome do local"
         var event = Event()
         event.id = 10;
-        UserDAOCloudKit().updateUserLocationAndState(user, location: localizacao, event: event, state: .Accepted)
+        UserDAOCloudKit().insereNovaLocalizacao(UserDAODefault.getLoggedUser(), localizacao: localizacao)
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{

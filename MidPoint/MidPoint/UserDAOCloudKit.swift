@@ -19,15 +19,17 @@ protocol UserDAOCloudKitDelegate{
     func getLocationFinished(users: Array<Localizacao>)
     func updateStateFinished()
     func updateLocationFinished()
+    func insertLocationFinished()
+    
 }
 
 class UserDAOCloudKit: NSObject, UserDAOProtocol{
     
-
+    
     var delegate: UserDAOCloudKitDelegate?
     
-
-
+    
+    
     func saveUser(user: User, password : String){
         let url : String = "\(LinkAccessGlobalConstants.LinkUsers)cadastro.php"
         let bodyHttp = String(format: "\(UserGlobalConstants.Email)=%@&\(UserGlobalConstants.Password)=%@&\(UserGlobalConstants.Name)=%@", user.email!,password,user.name!)
@@ -38,9 +40,9 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
                 return
             }
-
+            
             let string = JsonResponse.parseJSON(data)
-        
+            
             if (string.objectForKey("error") != nil){
                 var int = string.objectForKey("error")! as! Int
                 let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
@@ -59,11 +61,11 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
             }
             
         })
-
+        
     }
     
     func getUser(user: User, password : String){
-
+        
         let url : String = "\(LinkAccessGlobalConstants.LinkUsers)login.php"
         let bodyHttp = String(format: "\(UserGlobalConstants.Password)=%@&\(UserGlobalConstants.Email)=%@", password ,user.email!)
         JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
@@ -86,7 +88,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 let name = string.objectForKey("\(UserGlobalConstants.Name)") as! String
                 let email = string.objectForKey("\(UserGlobalConstants.Email)") as! String
                 let id = (string.objectForKey("\(UserGlobalConstants.Id)")! as! NSString).integerValue
-
+                
                 
                 DispatcherClass.dispatcher({ () -> () in
                     self.delegate?.getUserFinished(User(name: name, email: email, id: id))
@@ -95,7 +97,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
             
             
         })
-    
+        
     }
     
     func getUsersWithName(name: String) {
@@ -151,7 +153,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 return
             }
             var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
-
+            
             
             let array = JsonResponse.parseJSONToArray(data)
             var arrayToReturn :[User]? = Array()
@@ -170,7 +172,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 var latitude = (dataString[UserGlobalConstants.Latitude]  as! NSString).doubleValue
                 var longitude = (dataString[UserGlobalConstants.Longitude]  as! NSString).doubleValue
                 var state = (dataString[EventGlobalConstants.UserState] as! String).toInt()
-
+                
                 let stateFinal = State()
                 stateFinal.event = event
                 stateFinal.state = Option(rawValue: state!)
@@ -213,7 +215,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
         return UIImage(data: urlData!)
         
     }
-
+    
     func updateUserLocationAndState(user: User , location : Localizacao?, event : Event, state: Option){
         let url : String = "\(LinkAccessGlobalConstants.LinkUsers)updateLocationUser.php"
         var bodyHttp :String = ""
@@ -233,10 +235,10 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
             }
             
             var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
-
+            
             let string = JsonResponse.parseJSON(data)
             
-
+            
             if (string.objectForKey("error") != nil){
                 var int = string.objectForKey("error")! as! Int
                 let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
@@ -246,7 +248,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 return
             }
             if (string.objectForKey("succesfull") != nil){
-                // pegar aqui o valor do novo mid point 
+                // pegar aqui o valor do novo mid point
                 DispatcherClass.dispatcher({ () -> () in
                     self.delegate?.updateLocationFinished()
                 })
@@ -266,8 +268,11 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
                 return
             }
+            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
+            
             let array = JsonResponse.parseJSONToArray(data)
             var arrayToReturn :[Localizacao]? = Array()
+            
             for dataString in array {
                 if (dataString.objectForKey("error") != nil){
                     var int = dataString.objectForKey("error") as! Int
@@ -277,6 +282,13 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                     })
                     return
                 }
+                if (dataString.objectForKey("empty") != nil){
+                    DispatcherClass.dispatcher({ () -> () in
+                        self.delegate?.getLocationFinished(arrayToReturn!)
+                    })
+                    return
+                }
+                
                 
                 var nameLocation = dataString[LocationGlobalConstants.LocationName] as! String
                 var latitude = (dataString[LocationGlobalConstants.Latitude] as! NSString).floatValue
@@ -299,5 +311,37 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
             
         })
     }
-    
+    func insereNovaLocalizacao(user: User, localizacao : Localizacao){
+        let url : String = "\(LinkAccessGlobalConstants.LinkUsers)insereNovaLocalizacao.php"
+        let bodyHttp = String(format: "\(UserGlobalConstants.Id)=%d&\(LocationGlobalConstants.Latitude)=%f&\(LocationGlobalConstants.Longitude)=%f&\(LocationGlobalConstants.LocationName)=%@", user.id!, localizacao.latitude!, localizacao.longitude!, localizacao.name!)
+        JsonResponse.createMutableRequest(url, bodyHttp: bodyHttp, completionHandler: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            if (error != nil) {
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+                return
+            }
+            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
+            
+            let array = JsonResponse.parseJSON(data)
+            
+            if (array.objectForKey("error") != nil){
+                var int = array.objectForKey("error") as! Int
+                let error : NSError = NSError(domain: "Erro", code: int, userInfo: nil)
+                DispatcherClass.dispatcher({ () -> () in
+                    self.delegate?.errorThrowed(error)
+                })
+                return
+            }
+            
+            DispatcherClass.dispatcher({ () -> () in
+                self.delegate?.insertLocationFinished()
+            })
+            
+            
+            
+            
+        })
+        
+    }
 }

@@ -23,6 +23,7 @@ import Parse
     optional func updateStateFinished()
     optional func updateLocationFinished()
     optional func getLocationFinished(users: Array<Localizacao>)
+    optional func insertLocationFinished()
 }
 
 class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
@@ -113,5 +114,13 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     func getLocationFinished(users: Array<Localizacao>) {
         self.delegate?.getLocationFinished?(users)
     }
-    
+    func getAllLocation(user: User){
+        self.userDao?.getAllLocation(user)
+    }
+    func insertLocationFinished(){
+        self.delegate?.insertLocationFinished?()
+    }
+     func insereNovaLocalizacao(user: User, localizacao : Localizacao){
+        self.userDao?.insereNovaLocalizacao(user, localizacao: localizacao)
+    }
 }

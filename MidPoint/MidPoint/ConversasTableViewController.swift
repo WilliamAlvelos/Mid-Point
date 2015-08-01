@@ -223,7 +223,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
     
     func downloadImageEventFinshed(event: Event) {
-        // descobrir aonde esta esse evento na table view, e recarregar a celular
+        // descobrir aonde esta esse evento na table view, e recarregar a celula
     }
 
 }
