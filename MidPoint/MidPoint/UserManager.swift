@@ -97,6 +97,11 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
             self.delegate?.downloadImageFinished?(users)
         }
     }
+    func updateUserLocation(user: User , location : Localizacao, event : Event){
+        self.userDao?.updateUserLocation(user, location: location, event: event)
+    }
+    
+    
     func updateUserState(user: User , state : Option, event : Event){
         userDao?.updateUserState(user, state: state, event: event)
     }

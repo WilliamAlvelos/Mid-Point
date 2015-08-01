@@ -131,10 +131,13 @@ class EventDAOCloudKit: NSObject, EventoDAOProtocol{
                 var event_date = (dataString.objectForKey("\(EventGlobalConstants.Date)") as! String).toInt()
                 var name = (dataString.objectForKey("\(EventGlobalConstants.Name)") as! String)
                 var description = (dataString.objectForKey("\(EventGlobalConstants.Description)") as! String)
-                var latitude = (dataString.objectForKey("\(EventGlobalConstants.Latitude)") as! String)
-                var longitude = (dataString.objectForKey("\(EventGlobalConstants.Longitude)") as! String)
+                var latitude = (dataString.objectForKey("\(EventGlobalConstants.Latitude)") as! NSString).doubleValue
+                var longitude = (dataString.objectForKey("\(EventGlobalConstants.Longitude)") as! NSString).doubleValue
                 
                 var midPoint : Localizacao = Localizacao()
+                midPoint.latitude = Float(latitude)
+                midPoint.longitude = Float(longitude)
+                midPoint.name = name
                 
 
                 var event = Event(name: name, id: id!, descricao: description)

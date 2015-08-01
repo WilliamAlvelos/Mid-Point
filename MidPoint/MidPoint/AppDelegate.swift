@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         localizacao.name = "Nome do local"
         var event = Event()
         event.id = 10;
-        UserDAOCloudKit().getUsersFrom(event)
+        EventDAOCloudKit().getEvent(user, usuario: .All)
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
