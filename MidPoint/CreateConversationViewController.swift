@@ -23,7 +23,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     var location: CLLocationCoordinate2D?
     
     var nameRole: String?
-    
     @IBOutlet var button: UIButton!
     
     @IBOutlet var titleGroup: UITextField!
@@ -70,7 +69,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
             ActionError.actionWithTextField("Cuidado", errorMessage: "O titulo do Grupo está vazio", placeholder:"Digite o Titulo do Grupo", textFieldView: self.titleGroup, view: self)
 
         }
-        
+
         
         if(self.subtitleGroup.text == ""){
             
@@ -109,13 +108,8 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
                 
             }
             
-            // Add the actions
-
             alertController.addAction(okAction)
             alertController.addAction(takeAction)
-
-            
-            // Present the controller
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         

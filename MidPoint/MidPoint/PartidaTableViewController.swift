@@ -18,32 +18,32 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
     override func  viewDidLoad() {
         self.title = "Pontos de Partida"
         var logButton : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("adicionarNovaLocalizacao"))
-        
         self.navigationItem.rightBarButtonItem = logButton
-        alertView1.show(self.navigationController!.view!, title: "Carregando", text: "Aguarde enquanto carregamos algumas informações", buttonText: nil, color: UIColorFromHex(0x9b59b6, alpha: 1))
-        alertView1.setTextTheme(.Light)
-        
-        
-              self.tableView.delegate = self
+                     self.tableView.delegate = self
         self.tableView.dataSource = self
         userManager.delegate = self
+       
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.user = UserDAODefault.getLoggedUser()
-        
+        alertView1.show(self.navigationController!.view!, title: "Carregando", text: "Aguarde enquanto carregamos algumas informações", buttonText: nil, color: UIColorFromHex(0x9b59b6, alpha: 1))
+        alertView1.setTextTheme(.Light)
+
         userManager.getAllLocation(self.user!)
     }
-    @availability(iOS, deprecated=1.0, message="William eu sei que voce é o cara, entao aqui coloque a view que voce fez ontem de tocar no mapa e colocar o ponto. Na proxima view chama o método do userManger, UserDAOCloudKit().insereNovaLocalizacao(\"O usuario aqui\", localizacao: e a localizacao) o delegate retorna o método func insertLocationFinished()")
+
     func adicionarNovaLocalizacao(){
-        println("Adicionar um local de partida")
+        let nextView = TransitionManager.creatView("PartidaSelectVC") as! PartidaSelectVC
+        nextView.locations = self.locations
+        self.presentViewController(nextView, animated: true, completion: nil)
     }
     override func  tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:PartidaViewCell = self.tableView.dequeueReusableCellWithIdentifier("PartidaCell") as! PartidaViewCell
         cell.name.text = self.locations[indexPath.row].name
         
         cell.local.text = "Latitude: \(self.locations[indexPath.row].latitude!) Latitude: \(self.locations[indexPath.row].longitude!)"
-        
-
-        
         return cell
     }
     

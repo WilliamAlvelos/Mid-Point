@@ -37,7 +37,7 @@ class JsonResponse {
         var error: NSError?
 
         var boardsDictionary:  NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions(0), error: &error) as! NSDictionary
-        
+            
         return boardsDictionary
     }
     

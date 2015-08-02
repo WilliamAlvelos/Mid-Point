@@ -66,11 +66,17 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
         
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController!.navigationBar.barTintColor = Colors.Azul
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : Colors.Rosa]
         
+        self.navigationController?.navigationBar.tintColor = Colors.Rosa
+
         
         //activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse:false, viewController:self)
 

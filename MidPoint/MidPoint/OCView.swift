@@ -10,7 +10,6 @@
 //
 import UIKit
 
-
 class OCView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     let halfOpenDuration = 0.3
@@ -117,12 +116,12 @@ class OCView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         rollingInside.layer.zPosition = 59.0
         rollingCover.layer.zPosition = 60.0
         leftCover.layer.zPosition = 70.0
-        
+
         self.addSubview(insideScrollView)
         self.addSubview(rollingCover)
         self.addSubview(leftCover)
         
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = Colors.Rosa
         
         //Add the left swipe gesture recognizer
         var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("openContent"))
