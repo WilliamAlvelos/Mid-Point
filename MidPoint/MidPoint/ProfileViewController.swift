@@ -324,24 +324,28 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
 
             var images = [UIImage]()
             
-            if(self.eventosCarregados[indexPath.row].pessoas.count > 0){
-                
-                for(var x = 0; x <= self.eventosCarregados[indexPath.row].numberOfPeople!; x++){
-                    images.append(self.eventosCarregados[indexPath.row].pessoas[x].image!)
+            if(self.events.count > indexPath.row){
+                if(self.events[indexPath.row].pessoas.count > 0){
+                    
+                    for(var x = 0; x < self.events[indexPath.row].numberOfPeople!; x++){
+                        images.append(self.events[indexPath.row].pessoas[x].image!)
+                    }
+                    
+                    
+                    
+                    rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
+                    
+                    //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
+                    ocView = OCView(mainImage: imageFinal, insideImages: images, frame: rect)
+                    
+                    //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
+                    
+                    //Adiciona a OCView
+                    cell.view.addSubview(ocView)
+                    
                 }
-                
-                
-                
-                rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
-                
-                //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
-                ocView = OCView(mainImage: imageFinal, insideImages: images, frame: rect)
-                
-                //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
-                
-                //Adiciona a OCView
-                cell.view.addSubview(ocView)
 
+            
             }
             else{
                 cell.view.backgroundColor = UIColor(patternImage: self.events[indexPath.row].image!)
@@ -371,18 +375,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.eventManager.getImages(events)
         
         
-    }
-    
-    
-    func getEventFinished(event: Event) {
-        self.userManager?.getUsersFrom(event)
+        for event in events{
+            self.userManager?.getUsersFrom(event)
+        }
         
     }
     
     
+    
     func downloadImageUsersFinished(users: Array<User>, event: Event) {
         event.pessoas = users
-        self.eventosCarregados.append(event)
+        
+        for(var i = 0 ; i < self.events.count ; i++ ){
+            if(self.events[i].id == event.id){
+                self.events[i] = event
+            }
+        }
         self.tableView.reloadData()
     }
 

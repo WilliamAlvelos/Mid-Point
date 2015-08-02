@@ -54,6 +54,11 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     
     
+    func getUsersFinished(users: Array<User>){
+        self.delegate?.getUsersFinished?(users)
+    }
+    
+    
     func getUsersFinished(users: Array<User>, event: Event){
         self.delegate?.getUsersFinished?(users, event: event)
     }
@@ -71,6 +76,7 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     func getUserFinished(user: User){
         self.delegate?.getUserFinished?(user)
     }
+    
     func insertUserDatabase(user:User, password : String){
         userDao?.saveUser(user, password: password)
     }
@@ -88,10 +94,7 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     func saveImageFinished(){
         self.delegate?.saveUserFinished?()
     }
-    func getUsersFinished(users: Array<User>){
-        self.delegate?.getUsersFinished?(users)
-
-    }
+    
 
     func getUsersFrom(event: Event){
         userDao?.getUsersFrom(event)
@@ -113,6 +116,7 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
 
     }
     
+
     
     func getImages(users : Array<User> , event: Event){
         

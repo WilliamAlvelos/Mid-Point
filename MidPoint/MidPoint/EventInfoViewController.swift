@@ -189,7 +189,11 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     func errorThrowedSystem(error: NSError) {
         
     }
+    
+    
     func downloadImageUserFinished(user: User) {
+//        for(var i )
+        
         //achar aonde o cara esta e colocar a imagem dele
     }
 
