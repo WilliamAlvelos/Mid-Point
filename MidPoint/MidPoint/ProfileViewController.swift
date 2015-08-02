@@ -48,9 +48,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
         user = UserDAODefault.getLoggedUser()
         
-        activity = activityIndicator(view: self.navigationController!, texto: "Carregando Eventos", inverse: false, viewController: self)
-        
-        
         self.userManager = UserManager()
         
         self.userManager!.delegate = self
@@ -369,6 +366,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     
     func getEventsFinished(events: Array<Event>) {
+        
+        activity = activityIndicator(view: self.navigationController!, texto: "Carregando Eventos", inverse: false, viewController: self)
+        
+        
         self.events = events
         
         self.tableView.reloadData()
@@ -405,7 +406,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     }
 
 
-    
     func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
         var rect = CGRectMake(0, 0, size.width, size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
