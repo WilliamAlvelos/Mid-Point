@@ -860,7 +860,34 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pzM-BW-vCM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2834" y="923"/>
+            <point key="canvasLocation" x="2330" y="1893"/>
+        </scene>
+        <!--Partida SelectVC-->
+        <scene sceneID="lxq-u4-EXU">
+            <objects>
+                <viewController storyboardIdentifier="PartidaSelectVC" id="PUs-Hk-6QL" customClass="PartidaSelectVC" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EMk-nT-luD"/>
+                        <viewControllerLayoutGuide type="bottom" id="fw4-kl-8cn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bKp-ce-4Ow">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AGq-gN-FoC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mapView" destination="AGq-gN-FoC" id="CBn-9r-RxH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VTW-7H-dHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4559.5" y="938.5"/>
         </scene>
         <!--Partida Table View Controller-->
         <scene sceneID="whL-SN-TGB">
@@ -910,7 +937,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TUU-hU-iuu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3753.5" y="932.5"/>
+            <point key="canvasLocation" x="3121.5" y="1892.5"/>
         </scene>
         <!--Evento View Controller-->
         <scene sceneID="mDr-aD-NG8">

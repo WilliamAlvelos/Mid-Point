@@ -12,7 +12,7 @@ import UIKit
 class TransitionManager: NSObject {
 
 
-    func changeView(indentifier: String, animated: Bool, view: UIViewController){
+    class func changeView(indentifier: String, animated: Bool, view: UIViewController){
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier(indentifier) as! UIViewController
         view.presentViewController(nextViewController, animated:animated, completion:nil)

@@ -72,7 +72,9 @@
 		7B744E951B548D9C00D8E783 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E941B548D9C00D8E783 /* MapKit.framework */; };
 		7B744E971B548DA000D8E783 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E961B548DA000D8E783 /* QuartzCore.framework */; };
 		7B744E991B548DA500D8E783 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E981B548DA500D8E783 /* UIKit.framework */; };
+		7B84B6321B6D9609001AE500 /* PartidaSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B84B6311B6D9609001AE500 /* PartidaSelectVC.swift */; };
 		7B9FB4691B6D3C7500BD7016 /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9FB4681B6D3C7500BD7016 /* JSSAlertView.swift */; };
+		7B9FB46B1B6D7A7000BD7016 /* GestureRecognizerMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9FB46A1B6D7A7000BD7016 /* GestureRecognizerMap.swift */; };
 		7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */; };
 		7BD872991B6D2DFD00DBDE2F /* PartidaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD872981B6D2DFD00DBDE2F /* PartidaTableViewController.swift */; };
 		7BD8729B1B6D2F4200DBDE2F /* PartidaViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD8729A1B6D2F4200DBDE2F /* PartidaViewCell.swift */; };
@@ -175,7 +177,9 @@
 		7B744E941B548D9C00D8E783 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B744E961B548DA000D8E783 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7B744E981B548DA500D8E783 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7B84B6311B6D9609001AE500 /* PartidaSelectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PartidaSelectVC.swift; path = ../PartidaSelectVC.swift; sourceTree = "<group>"; };
 		7B9FB4681B6D3C7500BD7016 /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
+		7B9FB46A1B6D7A7000BD7016 /* GestureRecognizerMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureRecognizerMap.swift; sourceTree = "<group>"; };
 		7BACDD5C1B4DB6E600AA7060 /* PermissionsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PermissionsResponse.swift; path = ../PermissionsResponse.swift; sourceTree = "<group>"; };
 		7BD872981B6D2DFD00DBDE2F /* PartidaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartidaTableViewController.swift; sourceTree = "<group>"; };
 		7BD8729A1B6D2F4200DBDE2F /* PartidaViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartidaViewCell.swift; sourceTree = "<group>"; };
@@ -306,6 +310,7 @@
 		3DFB8A201B4C383300463EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7B84B6311B6D9609001AE500 /* PartidaSelectVC.swift */,
 				3DA7BD831B6A5BAD00882C07 /* ChangeMidPointViewController.swift */,
 				3D6A3AC61B5774C400E7948F /* CreateConversationViewController.swift */,
 				3DE928981B55CA9E0053B43C /* ProfileViewController.swift */,
@@ -440,6 +445,7 @@
 			children = (
 				7B227C801B6C92CA00EE562A /* State.swift */,
 				3DA7BD811B6A2BD600882C07 /* PushResponse.swift */,
+				7B9FB46A1B6D7A7000BD7016 /* GestureRecognizerMap.swift */,
 				7B63155F1B66D7A400D13DE5 /* GlobalConstants.swift */,
 				7B2DADD61B6AAD0F009D2C50 /* Localizacao.swift */,
 				7B6315591B66D04700D13DE5 /* PictureCloudKit.swift */,
@@ -692,7 +698,9 @@
 				3D3359E91B61B73400F22D88 /* CustomCellAmigosGrupo.swift in Sources */,
 				3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */,
 				7BF9E0921B697D2C0090FE47 /* MidPointTableViewCell.swift in Sources */,
+				7B84B6321B6D9609001AE500 /* PartidaSelectVC.swift in Sources */,
 				3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */,
+				7B9FB46B1B6D7A7000BD7016 /* GestureRecognizerMap.swift in Sources */,
 				FF3692361B5FFF7E00C71BBC /* UBAView.swift in Sources */,
 				FF36924D1B66DCF700C71BBC /* ConfigurationViewController.swift in Sources */,
 				FF36924F1B66DE3A00C71BBC /* UserConfigurations.swift in Sources */,

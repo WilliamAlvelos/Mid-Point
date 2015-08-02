@@ -13,7 +13,7 @@ import Foundation
 import UIKit
 
 class JSSAlertView: UIViewController {
-    
+
     var containerView:UIView!
     var alertBackgroundView:UIView!
     var dismissButton:UIButton!

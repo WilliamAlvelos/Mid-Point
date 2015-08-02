@@ -15,10 +15,7 @@ class activityIndicator {
     
     
     init(view:UINavigationController, texto: String, inverse: Bool, viewController: UIViewController) {
-
-        
         viewController.view.alpha = 0.5
-        
         var activityView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activityView.color = Colors.Rosa
@@ -28,8 +25,6 @@ class activityIndicator {
         textLabel.textColor = Colors.Rosa
         textLabel.text = texto
         
-        
-
         
         boxView = UIView(frame: CGRect(x: view.view.frame.midX - (textLabel.frame.width/2 + 25), y: view.view.frame.midY - 30, width: 60 + textLabel.frame.width, height: 50))
         boxView.backgroundColor = Colors.Azul

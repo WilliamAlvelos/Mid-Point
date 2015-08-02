@@ -25,7 +25,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     var pins = Array<MKPointAnnotation>()
     
-    
+    var gestureRecognizer: GestureRecognizerMap?
     override func viewDidLoad() {
         super.viewDidLoad()
         userManager = UserManager()
@@ -36,171 +36,105 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         mapView.showsUserLocation = true
         
         self.title = "MID POINT"
-
+        gestureRecognizer  = GestureRecognizerMap()
         
-        userManager!.getUsersFrom(event!)
-        
-        
-        
-        var tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("tap:"))
-        
-        tapRecognizer.numberOfTapsRequired = 1
-        
-        tapRecognizer.numberOfTouchesRequired = 1
-        
-        self.mapView.addGestureRecognizer(tapRecognizer)
-        
+        gestureRecognizer!.initWithViewController(self, mapView: self.mapView)
+    
+       // userManager!.getUsersFrom(event!)
         
         //        //Inicia a UBA com o numero de botoões
-        var uba = UBAView(buttonsQuantity: 4)
+       // var uba = UBAView(buttonsQuantity: 4)
         //
         //        //Prepara os botões na view passada
-        uba.prepareAnimationOnView(self.view, navigation: self.navigationController!.navigationBar.frame.size)
-        
-        uba.addSelectorToButton(0, target: self, selector: Selector("acepted"), image:"group")
-        
-        uba.addSelectorToButton(1, target: self, selector: Selector("refused"), image:"group")
-        
-        uba.addSelectorToButton(2, target: self, selector: Selector("passed"), image:"group")
-        
-        uba.addSelectorToButton(3, target: self, selector: Selector("owner"), image:"group")
+//        uba.prepareAnimationOnView(self.view, navigation: self.navigationController!.navigationBar.frame.size)
+//        
+//        uba.addSelectorToButton(0, target: self, selector: Selector("acepted"), image:"group")
+//        
+//        uba.addSelectorToButton(1, target: self, selector: Selector("refused"), image:"group")
+//        
+//        uba.addSelectorToButton(2, target: self, selector: Selector("passed"), image:"group")
+//        
+//        uba.addSelectorToButton(3, target: self, selector: Selector("owner"), image:"group")
         
     }
-    func tap(recognizer: UITapGestureRecognizer){
-        
-        activity = activityIndicator(view: self.navigationController!, texto: "Enviando localizaçāo", inverse: false, viewController: self)
-        
-        var point: CGPoint = recognizer.locationInView(self.mapView)
-        
-        var tapPoint: CLLocationCoordinate2D = self.mapView.convertPoint(point, toCoordinateFromView: self.view)
-        
-        var point1 : MKPointAnnotation = MKPointAnnotation()
-        
-        point1.coordinate = tapPoint
-
-        var localizacao = Localizacao()
-        
-        localizacao.latitude = NSNumber(double: point1.coordinate.latitude) as Float
-        
-        localizacao.longitude = NSNumber(double: point1.coordinate.longitude) as Float
-
-        
-        localizacao.name = UserDAODefault.getLoggedUser().name
-        
-        //self.userManager?.updateUserLocation(UserDAODefault.getLoggedUser(), location: localizacao, event: event!)
-        
-//        self.mapView.addAnnotation(point1)
+//    func addUsersMap(){
+//        
+//        
+//        mapView.removeAnnotations(self.mapView.annotations)
+//        
+//        for(var i = 0; i < self.array.count; i++){
+//            var point: MKPointAnnotation = MKPointAnnotation()
+//            
+//            var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.array[i].location!.latitude!), Double(self.array[i].location!.longitude!))
+//            
+//            point.title = self.array[i].name
+//            point.coordinate = coordinate
+//            
+//            
+//            mapView.addAnnotation(point)
+//        
+//        }
+//        
+//        var point: MKPointAnnotation = MKPointAnnotation()
+//        
+//        var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.event!.localizacao!.latitude!), Double(self.event!.localizacao!.longitude!))
+//        
+//        point.title = self.event?.localizacao?.name
+//        point.coordinate = coordinate
+//        
+//        
+//        mapView.addAnnotation(point)
+//        
+//        self.pins.append(point)
+//        
+//        activity?.removeActivityViewWithName(self)
 //    
-    }
-    
-    
-    override func viewWillDisappear(animated: Bool) {
-        activity?.removeActivityViewWithName(self)
-    }
-    
-    func acepted(){
-       // self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Accepted, event: event!)
-
-    }
-    
-    func owner(){
-        //self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Owner, event: event!)
-    }
-    
-    
-    func passed(){
-        //self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Passed, event: event!)
-    }
-    
-    func refused(){
-        //self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Refused, event: event!)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
-    func addUsersMap(){
-        
-        
-        mapView.removeAnnotations(self.mapView.annotations)
-        
-        for(var i = 0; i < self.array.count; i++){
-            var point: MKPointAnnotation = MKPointAnnotation()
-            
-            var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.array[i].location!.latitude!), Double(self.array[i].location!.longitude!))
-            
-            point.title = self.array[i].name
-            point.coordinate = coordinate
-            
-            
-            mapView.addAnnotation(point)
-        
-        }
-        
-        var point: MKPointAnnotation = MKPointAnnotation()
-        
-        var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.event!.localizacao!.latitude!), Double(self.event!.localizacao!.longitude!))
-        
-        point.title = self.event?.localizacao?.name
-        point.coordinate = coordinate
-        
-        
-        mapView.addAnnotation(point)
-        
-        self.pins.append(point)
-        
-        activity?.removeActivityViewWithName(self)
-    
-    }
-    
-    
-    
-    func mapView(mapView: MKMapView!,
-        viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-            
-            if annotation is MKUserLocation {
-                return nil
-            }
-            
-            let reuseId = "pin"
-            
-            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-            if pinView == nil {
-                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                pinView!.canShowCallout = true
-                pinView!.animatesDrop = true
-                pinView!.canBecomeFirstResponder()
-                pinView!.pinColor = .Purple
-                
-
-                
-                pinView?.pinColor = MKPinAnnotationColor.Green
-                
-                if(pinView?.annotation.title == event!.localizacao?.name){
-                    pinView!.pinColor = .Red
-                    
-                }
-                
-                
-
-                
-            }
-            else {
-                pinView!.annotation = annotation
-            }
-            
-            
-            
-
-            return pinView
-    }
-    
-    
-    
+//    }
+//    
+//    
+//    
+//    func mapView(mapView: MKMapView!,
+//        viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+//            
+//            if annotation is MKUserLocation {
+//                return nil
+//            }
+//            
+//            let reuseId = "pin"
+//            
+//            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+//            if pinView == nil {
+//                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+//                pinView!.canShowCallout = true
+//                pinView!.animatesDrop = true
+//                pinView!.canBecomeFirstResponder()
+//                pinView!.pinColor = .Purple
+//                
+//
+//                
+//                pinView?.pinColor = MKPinAnnotationColor.Green
+//                
+//                if(pinView?.annotation.title == event!.localizacao?.name){
+//                    pinView!.pinColor = .Red
+//                    
+//                }
+//                
+//                
+//
+//                
+//            }
+//            else {
+//                pinView!.annotation = annotation
+//            }
+//            
+//            
+//            
+//
+//            return pinView
+//    }
+//    
+//    
+//    
     func locationManager(manager: CLLocationManager!,
         didChangeAuthorizationStatus status: CLAuthorizationStatus) {
             
@@ -244,7 +178,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     func getUsersFinished(users: Array<User>) {
         self.array = users
-        addUsersMap()
+       // addUsersMap()
     }
 
     
@@ -255,12 +189,13 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     func errorThrowedSystem(error: NSError) {
         
     }
-
     
-    func updateLocationFinished() {
-        self.userManager?.getUsersFrom(event!)
+    override func viewWillDisappear(animated: Bool) {
+        mapView.showsUserLocation = false;
+        mapView.delegate = nil;
+        mapView.removeFromSuperview();
+        mapView = nil;
     }
-    
 
 
 }

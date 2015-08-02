@@ -85,10 +85,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     func animateTable() {
         tableView.reloadData()
-        
         let cells = tableView.visibleCells()
         let tableWidth: CGFloat = tableView.bounds.size.width
-        
         for i in cells {
             let cell: UITableViewCell = i as! UITableViewCell
             cell.transform = CGAffineTransformMakeTranslation(tableWidth, 0)
