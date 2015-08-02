@@ -19,6 +19,14 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     var user  = User()
     
+    var conversa:Int?
+    
+    
+    var avatars:NSMutableDictionary?
+    
+    var pessoas = NSMutableDictionary()
+
+    
     var locations = Localizacao()
     
     var locationManager = CLLocationManager()
@@ -40,8 +48,15 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         locationManager.delegate = self
         mapView.showsUserLocation = true
         
+        
+        
         self.title = "MID POINT"
 
+//        var reply = UIBarButtonItem(image: UIImage(named: "btest3"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("conversa:"))
+//        self.navigationItem.rightBarButtonItem = reply
+//        
+        
+        
         
         userManager!.getUsersFrom(event!)
         
@@ -79,6 +94,27 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         
         uba.addSelectorToButton(3, target: self, selector: Selector("owner"), image:"group")
         
+        
+        
+        
+        var messageButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        messageButton.setImage(UIImage(named: "message"), forState: UIControlState.Normal)
+        messageButton.addTarget(self, action: Selector("changeView:"), forControlEvents: .TouchUpInside)
+        var message = UIBarButtonItem(customView: messageButton)
+        self.navigationItem.rightBarButtonItem = message
+        
+    }
+    
+    
+    func changeView(sender: UIButton){
+        var nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
+        nextView.conversa = self.conversa
+        nextView.event = self.event
+        nextView.imageEvent = event?.image
+        nextView.avatars = self.avatars!
+        nextView.users = self.pessoas
+        self.navigationController?.pushViewController(nextView, animated: true)
+        
     }
     
     func tap(recognizer: UITapGestureRecognizer){
@@ -114,22 +150,22 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     
     func acepted(){
-        self.userManager!.updateUserLocationAndState(self.user, location: nil, event: event!, state: Option.Accepted)
+        self.userManager!.updateUserLocationAndState(UserDAODefault.getLoggedUser(), location: nil, event: event!, state: Option.Accepted)
     }
     
     func owner(){
-        self.userManager!.updateUserLocationAndState(self.user, location: nil, event: event!, state: Option.Owner)
+        self.userManager!.updateUserLocationAndState(UserDAODefault.getLoggedUser(), location: nil, event: event!, state: Option.Owner)
         //self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Owner, event: event!)
     }
     
     
     func passed(){
-        self.userManager!.updateUserLocationAndState(self.user, location: nil, event: event!, state: Option.Passed)
+        self.userManager!.updateUserLocationAndState(UserDAODefault.getLoggedUser(), location: nil, event: event!, state: Option.Passed)
         //self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Passed, event: event!)
     }
     
     func refused(){
-        self.userManager!.updateUserLocationAndState(self.user, location: nil, event: event!, state: Option.Refused)
+        self.userManager!.updateUserLocationAndState(UserDAODefault.getLoggedUser(), location: nil, event: event!, state: Option.Refused)
         //self.userManager?.updateUserState(UserDAODefault.getLoggedUser(), state: Option.Refused, event: event!)
     }
 
@@ -428,18 +464,33 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     func getUsersFinished(users: Array<User>, event: Event) {
         
         self.array = users
+        self.userManager?.getImages(users, event: event)
         
         for(var i = 0; i < self.array.count; i++){
+            self.pessoas.setValue(users[i].id, forKey: users[i].name!)
             if(UserDAODefault.getLoggedUser().id == self.array[i].id){
                 self.user = self.array[i]
             }
         }
+        
+
         self.addUsersMap()
 
-
     }
-
     
+    func downloadImageUsersFinished(users:Array<User>, event: Event){
+        
+        self.avatars = NSMutableDictionary()
+        self.avatars?.removeAllObjects()
+        
+        for user in users {
+            var usuario :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(user.image, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+            self.avatars?.setValue(usuario, forKey: "\(user.id!)")
+        }
+        
+    }
+    
+
     func errorThrowedServer(stringError: String) {
         
     }

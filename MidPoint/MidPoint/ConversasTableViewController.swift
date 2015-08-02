@@ -142,7 +142,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.resultSearchController.active = false
         let nextView = TransitionManager.creatView("changeMidPoint") as! ChangeMidPointViewController
         nextView.event = Data[indexPath.row]
-    
+        nextView.conversa = Data[indexPath.row].id
         self.navigationController?.pushViewController(nextView, animated: true)
     }
 

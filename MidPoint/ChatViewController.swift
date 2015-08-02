@@ -29,18 +29,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
     var locationManager = CLLocationManager()
     
-    //constantes
-    let kJSQDemoAvatarDisplayNameSquires = "a"
-    let kJSQDemoAvatarDisplayNameCook = "Tim Cook"
-    let kJSQDemoAvatarDisplayNameJobs = "b"
-    let kJSQDemoAvatarDisplayNameWoz = "Steve Wozniak"
-    
-    let kJSQDemoAvatarIdSquires = "1"
-    let kJSQDemoAvatarIdCook = "2"
-    let kJSQDemoAvatarIdJobs = "3"
-    let kJSQDemoAvatarIdWoz = "3"
-
-    
     var Pessoas:[User]?
     
     
@@ -50,13 +38,11 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
     //propriedades
     
-    
-    
     var messages:Array<JSQMessage!> = []
-    var avatars:NSMutableDictionary?
+    var avatars = NSDictionary()
     var outgoingBubbleImageData: JSQMessagesBubbleImage?
     var incomingBubbleImageData: JSQMessagesBubbleImage?
-    var users: NSMutableDictionary?
+    var users: NSDictionary?
     
     
     override func viewDidAppear(animated: Bool) {
@@ -68,23 +54,11 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         
         activity = activityIndicator(view: self.navigationController!, texto: "Buscando Mensagens", inverse: false, viewController:self)
         
-        
-        var jsqImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("WILL", backgroundColor: UIColor(white: 0.85, alpha: 1.0), textColor: UIColor(white: 0.60, alpha: 1.0), font: UIFont.systemFontOfSize(12.0), diameter:UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
 
-        
-        var cookImage :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named:"demo_avatar_cook"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-        var jobsImage :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named:"demo_avatar_jobs"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-        var wozImage :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named:"demo_avatar_woz"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-        
-        self.avatars = [ kJSQDemoAvatarIdSquires : jsqImage,
-            kJSQDemoAvatarIdCook : cookImage,
-            kJSQDemoAvatarIdJobs : jobsImage,
-            kJSQDemoAvatarIdWoz : wozImage ]
-        
         
         
         pickerLibrary = UIImagePickerController()
@@ -102,7 +76,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         setupFirebase()
         //setupImageFirebase()
         
-        self.title = name
+        self.title = event?.name
         
         let buttonEdit: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         buttonEdit.frame = CGRectMake(0, 0, 40, 40)
@@ -362,11 +336,10 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
         let message = self.messages[indexPath.item]
-        if message?.senderId == self.senderId {
-            return nil;
-        }
-
-        return self.avatars![message!.senderId] as! JSQMessageAvatarImageDataSource
+//        if message?.senderId == self.senderId {
+//            return self.imageUser as JSQMessageAvatarImageDataSource
+//        }
+        return self.avatars[message!.senderId] as! JSQMessageAvatarImageDataSource
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         if indexPath.item % 3 == 0 {
@@ -550,15 +523,15 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     }
     
     func downloadImageFinished(image: Array<User>) {
-        self.avatars?.removeAllObjects()
-        
-        for(var i = 0; i < image.count; i++){
-            var user :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(image[i].image, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-            
-            self.avatars!.setValue(user, forKey: "\(image[i].id!)")
-        }
-
-        self.usuarios = image
+//        self.avatars?.removeAllObjects()
+//        
+//        for(var i = 0; i < image.count; i++){
+//            var user :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(image[i].image, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+//            
+//            self.avatars!.setValue(user, forKey: "\(image[i].id!)")
+//        }
+//
+//        self.usuarios = image
 
     }
     
@@ -566,14 +539,14 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
     
     func getUsersFinished(users: Array<User>) {
-        self.users?.removeAllObjects()
-        
-        for(var i = 0; i < users.count ; i++){
-            self.userManager?.getImage(users[i])
-            self.users?.setValue(users[i].id, forKey: users[i].name!)
-        }
-        
-        self.usuarios = users
+//        self.users?.removeAllObjects()
+//        
+//        for(var i = 0; i < users.count ; i++){
+//            self.userManager?.getImage(users[i])
+//            self.users?.setValue(users[i].id, forKey: users[i].name!)
+//        }
+//        
+//        self.usuarios = users
     }
     func downloadImageUserFinished(user: User) {
         //achar aonde o cabloco esta e colocar a imagem dele

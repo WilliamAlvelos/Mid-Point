@@ -121,7 +121,7 @@ class OCView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
         self.addSubview(rollingCover)
         self.addSubview(leftCover)
         
-        self.backgroundColor = Colors.Rosa
+        self.backgroundColor = Colors.Azul
         
         //Add the left swipe gesture recognizer
         var leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("openContent"))

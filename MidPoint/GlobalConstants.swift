@@ -9,8 +9,8 @@
 import Foundation
 
 struct Colors {
-    static let Rosa = UIColor(red: 223/255, green: 34/255, blue: 96/255, alpha: 1)
-    static let Azul = UIColor(red: 25/255, green: 28/255, blue: 87/255, alpha: 1)
+    static let Rosa = UIColor(red: 226/255, green: 27/255, blue: 94/255, alpha: 1)
+    static let Azul = UIColor(red: 25/255, green: 25/255, blue: 89/255, alpha: 1)
 }
 
 
