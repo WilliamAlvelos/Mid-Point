@@ -18,6 +18,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     var daoFriend: UserManager = UserManager()
     
+    var startLocation: Localizacao?
+    
     var data: Array<User> = Array()
 
     
@@ -66,12 +68,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
 
     }
     func finish(){
-        //mostrar para o usuario selecionar partir de uma localizacao
-        let localizacao = Localizacao()
-        localizacao.longitude = 102.2
-        localizacao.latitude = 102.2
-        
-        eventDelegate.saveEvent(event!, usuario: UserDAODefault.getLoggedUser(), friends: self.dataSelected, localizacaoUsuario: localizacao)
+
+        eventDelegate.saveEvent(event!, usuario: UserDAODefault.getLoggedUser(), friends: self.dataSelected, localizacaoUsuario: self.startLocation!)
         self.showProgresView()
     }
     

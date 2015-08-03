@@ -19,6 +19,8 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
     var event:Event?
+    
+    var startLocation : Localizacao?
 
     var location: CLLocationCoordinate2D?
     
@@ -93,6 +95,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
                 
                 let nextViewController = TransitionManager.creatView("AmigosViewController") as! AmigosTableViewController
                 nextViewController.event = self.event
+                nextViewController.startLocation = self.startLocation!
                 
                 self.navigationController?.pushViewController(nextViewController, animated: true)
                 

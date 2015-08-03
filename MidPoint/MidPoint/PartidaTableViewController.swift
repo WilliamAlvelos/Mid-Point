@@ -33,7 +33,12 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
 
         userManager.getAllLocation(self.user!)
     }
-
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let nextView = TransitionManager.creatView("CreateConversation") as! CreateConversationViewController
+        nextView.startLocation = locations[indexPath.row]
+        self.navigationController?.pushViewController(nextView, animated: true)
+        
+    }
     func adicionarNovaLocalizacao(){
         let nextView = TransitionManager.creatView("PartidaSelectVC") as! PartidaSelectVC
         nextView.locations = self.locations
