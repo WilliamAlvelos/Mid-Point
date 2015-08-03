@@ -99,8 +99,6 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         messageButton.addTarget(self, action: Selector("changeView:"), forControlEvents: .TouchUpInside)
         var message = UIBarButtonItem(customView: messageButton)
         self.navigationItem.rightBarButtonItem = message
-     
-        
         
     }
     
@@ -223,13 +221,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
                 pinView!.canBecomeFirstResponder()
                 
                 pinView?.pinColor = MKPinAnnotationColor.Green
-//
-//                if(pinView?.annotation.title == "Mid Point"){
-//                    pinView!.pinColor = .Red
-//                    
-//                }
-                
-                
+
             }
             else {
                 pinView!.annotation = annotation
@@ -268,7 +260,6 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         
         let region = MKCoordinateRegionMakeWithDistance(coord, 100, 100)
         
-        
         mapView.setRegion(region, animated: true)
         
         mapView.userLocation.title = "user"
@@ -279,14 +270,16 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     func getUsersFinished(users: Array<User>, event: Event) {
         
-        self.array = users
-        
+        self.array.removeAll(keepCapacity: false)
         
         for user2 in users{
-            
-        
             if user2.id == UserDAODefault.getLoggedUser().id{
                 self.user = user2
+            }
+            if(user2.location?.longitude == -1 && user2.location?.longitude == -1){
+            
+            }else{
+                self.array.append(user2)
             }
             
         }

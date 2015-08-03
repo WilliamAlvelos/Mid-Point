@@ -25,6 +25,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     var location: CLLocationCoordinate2D?
     
     var nameRole: String?
+    
     @IBOutlet var button: UIButton!
     
     @IBOutlet var titleGroup: UITextField!
@@ -139,13 +140,19 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         
         var point: MKPointAnnotation = MKPointAnnotation()
         
-        var coordinate: CLLocationCoordinate2D = self.location!
         
-        print(self.location!)
+        if(self.location == nil){
+            var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: Double(self.startLocation!.latitude!) , longitude: Double(self.startLocation!.longitude!))
+            point.coordinate = coordinate
+
+        }else{
+            point.coordinate = self.location!
+        }
+        
+        
         
         point.subtitle = "Role"
         point.title = self.nameRole
-        point.coordinate = coordinate
         
         mapView.addAnnotation(point)
     }
@@ -203,7 +210,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         var locationObj = locationArray.lastObject as! CLLocation
         //var coord = locationObj.coordinate
         
-        let region = MKCoordinateRegionMakeWithDistance(self.location!, 500, 500)
+        let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: Double(self.startLocation!.latitude!), longitude: Double(self.startLocation!.longitude!)), 500, 500)
         
         //geoLocation = coord
         

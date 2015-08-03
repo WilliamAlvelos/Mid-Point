@@ -44,10 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.navigationController!.navigationBar.barTintColor = Colors.Azul
 //        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: ,NSForegroundColorAttributeName : Colors.Rosa]
 //        
-        if let font = UIFont(name: "OpenSans-light", size: 42) {
-            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font]
-        }
-        
+//        if let font = UIFont(name: "OpenSans-light", size: 42) {
+//            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font]
+//        }
+//        
 
         Parse.setApplicationId("rpnQRmwvLdmTkuLSFkgFZTOXIhpIvjfrzM2k33vK",
             clientKey: "JwLwixuhZEzE2ZJX5u5ZQHsnj1nwEo3AUxvTHQxB")
