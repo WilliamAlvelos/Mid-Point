@@ -66,6 +66,7 @@ struct LinkAccessGlobalConstants {
 
 struct ParseGlobalConstants {
     static let Id = "user_id"
+    static let Event_Id = "event_id"
     static let Logged = "logged"
     static let Group_id = "group_id"
     
