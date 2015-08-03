@@ -41,7 +41,7 @@ class PartidaSelectVC: UIViewController, GestureRecognizerMapDelegate, UserManag
         
     }
     func getLocationMapFinished(location: Localizacao) {
-        location.name = "asdasd"
+        location.name = location.streetName
         var customIcon = UIImage(named: "lightbulb")
         alertView1 = JSSAlertView()
         alertView1!.show(self.view, title: "Porra da partida", text: "Seu local de partida é \(location.streetName!)?                       ", buttonText: "Sim", cancelButtonText: "Não",color: Colors.Rosa, iconImage: customIcon)

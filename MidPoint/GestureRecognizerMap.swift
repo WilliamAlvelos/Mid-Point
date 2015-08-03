@@ -16,7 +16,6 @@ class GestureRecognizerMap: NSObject , UIGestureRecognizerDelegate{
     var viewController: UIViewController?
     var delegate: GestureRecognizerMapDelegate?
     private var  alertView1 =  JSSAlertView()
-    private var showing: Bool?
     func initWithViewController(viewController : UIViewController ,mapView: MKMapView){
         var tapRecognizer: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("tap:"))
         tapRecognizer.minimumPressDuration = 3
@@ -27,10 +26,9 @@ class GestureRecognizerMap: NSObject , UIGestureRecognizerDelegate{
     }
     
     func tap(sender: UIGestureRecognizer){
-        if (showing == true){
+        if sender.state != .Began {
             return
         }
-        showing = true
         alertView1.show(viewController!.view, title: "Carregando", text: "Buscando as informações sobre o local", buttonText: nil, color: UIColorFromHex(0x9b59b6, alpha: 1))
         alertView1.setTextTheme(.Light)
         var point: CGPoint = sender.locationInView(self.mapView)
@@ -54,9 +52,7 @@ class GestureRecognizerMap: NSObject , UIGestureRecognizerDelegate{
             if let street = placeMark.addressDictionary["Name"] as? String {
                 localizacao.streetName = street
             }
-
             self.alertView1.removeView()
-            self.showing = false
             self.delegate?.getLocationMapFinished(localizacao)
         })
     }
