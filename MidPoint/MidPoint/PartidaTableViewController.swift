@@ -42,7 +42,7 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
     override func  tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:PartidaViewCell = self.tableView.dequeueReusableCellWithIdentifier("PartidaCell") as! PartidaViewCell
         cell.name.text = self.locations[indexPath.row].name
-        
+        cell.selectionStyle = .None
         cell.local.text = "Latitude: \(self.locations[indexPath.row].latitude!) Latitude: \(self.locations[indexPath.row].longitude!)"
         return cell
     }
@@ -83,7 +83,6 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
     }
     func errorThrowedServer(stringError: String) {
         alertView1.removeView()
-
         alertView2.danger(self.navigationController!.view, title: "Oh, shit.", text: stringError)
     }
     func errorThrowedSystem(error: NSError) {

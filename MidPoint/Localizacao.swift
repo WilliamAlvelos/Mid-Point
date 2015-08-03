@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Localizacao{
+class Localizacao: NSObject{
     var latitude: Float?
     var longitude: Float?
     var name: String?
@@ -18,5 +18,8 @@ class Localizacao{
         localizacao.longitude = -1
         localizacao.latitude = -1
         return localizacao
+    }
+    override init(){
+        super.init()
     }
 }

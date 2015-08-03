@@ -21,7 +21,7 @@ class PartidaSelectVC: UIViewController, GestureRecognizerMapDelegate, UserManag
         gestureRecognizer?.delegate = self
         gestureRecognizer?.initWithViewController(self, mapView: self.mapView)
         userManager = UserManager()
-        userManager?.delegate
+        userManager?.delegate = self
         viewToPres = view
     }
     

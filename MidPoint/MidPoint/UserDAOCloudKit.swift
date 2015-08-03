@@ -19,7 +19,7 @@ protocol UserDAOCloudKitDelegate{
     func getUsersFinished(users: Array<User>)
     func getLocationFinished(users: Array<Localizacao>)
     func updateStateFinished()
-    func updateLocationFinished()
+    func updateLocationFinished(localizacao : Localizacao)
     func insertLocationFinished()
     
 }
@@ -248,8 +248,14 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
             }
             if (string.objectForKey("succesfull") != nil){
                 // pegar aqui o valor do novo mid point
+                let latitude = string.objectForKey(EventGlobalConstants.Latitude) as! Float
+                let longitude = string.objectForKey(EventGlobalConstants.Longitude) as! Float
+                
+                let localizacao = Localizacao()
+                localizacao.latitude = latitude
+                localizacao.longitude = longitude
                 DispatcherClass.dispatcher({ () -> () in
-                    self.delegate?.updateLocationFinished()
+                    self.delegate?.updateLocationFinished(localizacao)
                 })
                 return
             }

@@ -21,9 +21,9 @@ import Parse
     optional func getUsersFinished(users: Array<User>)
     optional func downloadImageUserFinished(user: User)
     optional func updateStateFinished()
-    optional func updateLocationFinished()
     optional func getLocationFinished(users: Array<Localizacao>)
     optional func insertLocationFinished()
+    optional func updateLocationFinished(localizacao : Localizacao)
     optional func getUsersFinished(users: Array<User>, event: Event)
     optional func downloadImageUsersFinished(users:Array<User>, event: Event)
 }
@@ -143,8 +143,9 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     func updateStateFinished() {
         self.delegate?.updateStateFinished?()
     }
-    func updateLocationFinished() {
-        self.delegate?.updateLocationFinished?()
+    func updateLocationFinished(localizacao: Localizacao) {
+        
+        //self.delegate?.updateLocationFinished?()
     }
     func getLocationFinished(users: Array<Localizacao>) {
         self.delegate?.getLocationFinished?(users)
