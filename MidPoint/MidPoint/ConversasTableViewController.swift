@@ -60,8 +60,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     func reloadData(){
         self.eventDelegate.getEventsFromUser(UserDAODefault.getLoggedUser(), usuario: .All)
         
-        
-    }
+        }
     
 
     

@@ -144,8 +144,7 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
         self.delegate?.updateStateFinished?()
     }
     func updateLocationFinished(localizacao: Localizacao) {
-        
-        //self.delegate?.updateLocationFinished?()
+        self.delegate?.updateLocationFinished?(localizacao)
     }
     func getLocationFinished(users: Array<Localizacao>) {
         self.delegate?.getLocationFinished?(users)
