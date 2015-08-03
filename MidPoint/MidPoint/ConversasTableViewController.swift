@@ -210,15 +210,16 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
     }
     func errorThrowedServer(stringError: String) {
+    }
+    func downloadImageEventsFinshed(images: Array<Event>) {
+        self.Data = images
+        self.animateTable()
+
         
     }
-    
     func getEventsFinished(events: Array<Event>) {
-        self.Data = events
-        for event in events {
-            self.eventDelegate.getImage(event)
-        }
-        self.animateTable()
+        self.eventDelegate.getImages(events)
+        
     }
     
     func downloadImageEventFinshed(event: Event) {

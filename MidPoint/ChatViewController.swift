@@ -178,7 +178,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
             JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
             
             
-            self.activity?.removeActivityViewWithName(self)
             
             if(text != ""){
                 var message = JSQMessage(senderId: sender, senderDisplayName: name, date: NSDate(), text: text)
@@ -201,6 +200,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
             self.finishReceivingMessage()
             
         })
+        
+        self.activity?.removeActivityViewWithName(self)
         
     }
     
@@ -337,8 +338,9 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
         let message = self.messages[indexPath.item]
 //        if message?.senderId == self.senderId {
-//            return self.imageUser as JSQMessageAvatarImageDataSource
+//            return nil
 //        }
+        
         return self.avatars[message!.senderId] as! JSQMessageAvatarImageDataSource
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {

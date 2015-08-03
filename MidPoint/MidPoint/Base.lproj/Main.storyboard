@@ -844,22 +844,6 @@
             </objects>
             <point key="canvasLocation" x="2207.5" y="1000.5"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ut1-nc-CQt">
-            <objects>
-                <navigationController id="iLb-2k-w95" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2F7-dA-EGO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="1Y9-iZ-B44" kind="relationship" relationship="rootViewController" id="5eo-is-PL9"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pzM-BW-vCM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2330" y="1893"/>
-        </scene>
         <!--Partida SelectVC-->
         <scene sceneID="lxq-u4-EXU">
             <objects>
@@ -890,7 +874,7 @@
         <!--Partida Table View Controller-->
         <scene sceneID="whL-SN-TGB">
             <objects>
-                <tableViewController id="1Y9-iZ-B44" customClass="PartidaTableViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PartidaTableViewController" id="1Y9-iZ-B44" customClass="PartidaTableViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="22" sectionFooterHeight="22" id="bX4-ei-aLh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

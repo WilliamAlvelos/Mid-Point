@@ -13,7 +13,8 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
     var user : User?
     private var  alertView1 =  JSSAlertView()
     private var  alertView2 =  JSSAlertView()
-
+    var event: Event?
+    var location: CLLocationCoordinate2D?
     var userManager = UserManager()
     override func  viewDidLoad() {
         self.title = "Pontos de Partida"
@@ -36,6 +37,8 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let nextView = TransitionManager.creatView("CreateConversation") as! CreateConversationViewController
         nextView.startLocation = locations[indexPath.row]
+        nextView.location = self.location
+        nextView.event = Event()
         self.navigationController?.pushViewController(nextView, animated: true)
         
     }

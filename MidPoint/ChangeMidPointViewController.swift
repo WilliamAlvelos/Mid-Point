@@ -39,7 +39,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     var gestureRecognizer: GestureRecognizerMap?
     
-    var userPoint: MKPointAnnotation?
+    var userPoint: MKPointAnnotation  = MKPointAnnotation()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +60,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
 //        
         
         
-        
         userManager!.getUsersFrom(event!)
-        
         
         
         
@@ -76,8 +75,6 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
 
         gestureRecognizer  = GestureRecognizerMap()
 
-
-        
         gestureRecognizer!.initWithViewController(self, mapView: self.mapView)
     
        // userManager!.getUsersFrom(event!)
@@ -96,9 +93,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         uba.addSelectorToButton(2, target: self, selector: Selector("passed"), image:"group")
         
         uba.addSelectorToButton(3, target: self, selector: Selector("owner"), image:"group")
-        
-        
-        
+    
         
         var messageButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
         messageButton.setImage(UIImage(named: "message"), forState: UIControlState.Normal)
@@ -121,8 +116,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     }
     
     func tap(recognizer: UITapGestureRecognizer){
-        
-        
+        self.mapView.removeAnnotation(self.userPoint)
+
         activity = activityIndicator(view: self.navigationController!, texto: "Enviando localizaçāo", inverse: false, viewController: self)
         
         var point: CGPoint = recognizer.locationInView(self.mapView)
@@ -144,7 +139,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         self.userManager!.updateUserLocationAndState(self.user, location: localizacao, event: event!, state: self.user.state!.state!)
         
 
-//        self.mapView.addAnnotation(point1)
+        self.mapView.addAnnotation(point1)
 //    
     }
     
@@ -187,31 +182,19 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         
         for(var i = 0; i < self.array.count; i++){
             var point: MKPointAnnotation = MKPointAnnotation()
+            if (self.array[i].id == self.user.id){
+                self.userPoint = point
+            }
             
             var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.array[i].location!.latitude!), Double(self.array[i].location!.longitude!))
             
             point.title = self.array[i].name
             point.coordinate = coordinate
             
-            
             mapView.addAnnotation(point)
-        
         }
         
-//        var point: MKPointAnnotation = MKPointAnnotation()
-//        
-//        var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.event!.localizacao!.latitude!), Double(self.event!.localizacao!.longitude!))
-//        
-//        point.title = self.event?.localizacao?.name
-//        point.coordinate = coordinate
-//        
-//        
-//        mapView.addAnnotation(point)
-        
-        //self.pins.append(point)
-        
         activity?.removeActivityViewWithName(self)
-    
     }
     
     
@@ -233,26 +216,19 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
                 pinView!.canBecomeFirstResponder()
                 
                 pinView?.pinColor = MKPinAnnotationColor.Green
-                
-                if(pinView?.annotation.title == "Mid Point"){
-                    pinView!.pinColor = .Red
-                    
-                }
-                
+//                
+//                if(pinView?.annotation.title == "Mid Point"){
+//                    pinView!.pinColor = .Red
+//                    
+//                }
+//                
                 
             }
             else {
                 pinView!.annotation = annotation
             }
-            
-            
-            
-
             return pinView
     }
-    
-    
-
     func locationManager(manager: CLLocationManager!,
         didChangeAuthorizationStatus status: CLAuthorizationStatus) {
             
@@ -296,16 +272,13 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     func getUsersFinished(users: Array<User>, event: Event) {
         
-        self.array = users
-        self.userManager?.getImages(users, event: event)
-        
-        for(var i = 0; i < self.array.count; i++){
-            self.pessoas.setValue(users[i].id, forKey: users[i].name!)
-            if(UserDAODefault.getLoggedUser().id == self.array[i].id){
-                self.user = self.array[i]
+        for user2 in users{
+            if user2.id == UserDAODefault.getLoggedUser().id{
+                self.user = user2
             }
+            
         }
-        
+        self.userManager?.getImages(users, event: event)
 
         self.addUsersMap()
 

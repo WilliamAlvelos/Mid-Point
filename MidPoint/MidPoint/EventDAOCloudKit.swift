@@ -61,14 +61,26 @@ class EventDAOCloudKit: NSObject{
 //    }
 //    
     func saveEvent(event: Event, usuario: User, friends: Array<User>, localizacaoUsuario: Localizacao ) {
+        var event_latitude: String!
+        var event_longitude: String!
+        
+        if(event.localizacao != nil ){
+            event_latitude = "\(EventGlobalConstants.Latitude)=\(event.localizacao!.latitude!)"
+            event_longitude = "\(EventGlobalConstants.Longitude)=\(event.localizacao!.longitude!)"
+
+        }
+        else {
+            event_latitude = "\(EventGlobalConstants.Latitude)=\(localizacaoUsuario.latitude!)"
+            event_longitude = "\(EventGlobalConstants.Longitude)=\(localizacaoUsuario.longitude!)"
+
+        }
+        
         let users_to_invite: String = "\(EventGlobalConstants.UserToInvite)=\(JsonResponse.dictionaryToString(JsonResponse.userToCall(friends)))"
         let event_name = "\(EventGlobalConstants.Name)=\(event.name!)"
         let event_description = "\(EventGlobalConstants.Description)=\(event.descricao!)"
         let event_date = "\(EventGlobalConstants.Date)=\(event.date!)"
         let user_id = "\(UserGlobalConstants.Id)=\(usuario.id!)"
-        let event_latitude = "\(EventGlobalConstants.Latitude)=\(event.localizacao!.latitude!)"
-        let event_longitude = "\(EventGlobalConstants.Longitude)=\(event.localizacao!.longitude!)"
-        let user_latitude = "\(UserGlobalConstants.Latitude)=\(localizacaoUsuario.latitude!)"
+               let user_latitude = "\(UserGlobalConstants.Latitude)=\(localizacaoUsuario.latitude!)"
         let user_longitude = "\(UserGlobalConstants.Longitude)=\(localizacaoUsuario.longitude!)"
         let url : String = "\(LinkAccessGlobalConstants.LinkEvents)insereEvento.php"
         let bodyHttp = "\(users_to_invite)&\(event_name)&\(event_description)&\(event_date)&\(user_id)&\(event_latitude)&\(event_longitude)&\(user_latitude)&\(user_longitude)"

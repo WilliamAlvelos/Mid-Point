@@ -124,6 +124,7 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
             
             let nextViewController = TransitionManager.creatView("AmigosViewController") as! AmigosTableViewController
             nextViewController.event = event
+            nextViewController.startLocation = self.startLocation
             self.navigationController?.pushViewController(nextViewController, animated: true)
             //var vc = segue.destinationViewController as! AmigosTableViewController
         }

@@ -361,15 +361,15 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         var annView = view.annotation
         
     
-        let nextViewController = TransitionManager.creatView("CreateConversation") as! CreateConversationViewController
+        let nextViewController = TransitionManager.creatView("PartidaTableViewController") as! PartidaTableViewController
         var event = Event()
         
         
         event.localizacao = Localizacao()
         event.localizacao?.name = annView.title
         
-        event.localizacao?.latitude = NSNumber(double: annView.coordinate.latitude) as Float
-        event.localizacao?.longitude = NSNumber(double: annView.coordinate.longitude) as Float
+        event.localizacao?.latitude = Float(annView.coordinate.latitude)
+        event.localizacao?.longitude = Float(annView.coordinate.longitude)
         
         nextViewController.event = event
         

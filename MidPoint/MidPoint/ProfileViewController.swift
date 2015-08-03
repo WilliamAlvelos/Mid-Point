@@ -329,8 +329,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
                         images.append(self.events[indexPath.row].pessoas[x].image!)
                     }
                     
-                    
-                    
                     rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
                     
                     //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
