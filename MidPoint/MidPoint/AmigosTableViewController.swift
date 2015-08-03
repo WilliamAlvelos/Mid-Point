@@ -184,16 +184,17 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         println(stringError)
     }
     func getUsersFinished(users: Array<User>) {
-        self.data = users
-        for user in users {
-            self.daoFriend.getImage(user)
-        }
-        self.tableView.reloadData()
+        self.daoFriend.getImages(users, event: self.event!)
+
     }
     func downloadImageUserFinished(user: User) {
 
 
         
+    }
+    func downloadImageUsersFinished(users: Array<User>, event: Event) {
+        self.data = users
+        self.animateTable()
     }
     
     func addConversation(id: String, title: String!, subtitle: String!, image: String!) {
