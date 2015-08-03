@@ -205,7 +205,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8jQ-jg-9rg">
                                 <rect key="frame" x="205" y="507" width="89" height="89"/>
-                                <state key="normal" title="Button" image="login_tt">
+                                <state key="normal" title="Button" image="icon_twitter">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -214,7 +214,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eG5-B2-1CL">
                                 <rect key="frame" x="89" y="512" width="80" height="80"/>
-                                <state key="normal" title="Button" image="login_fb">
+                                <state key="normal" title="Button" image="icon_facebook">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -978,12 +978,12 @@
     <resources>
         <image name="b_search.png" width="155" height="155"/>
         <image name="barraTableViewProfile" width="567" height="140"/>
-        <image name="group" width="64" height="64"/>
-        <image name="login_fb" width="206" height="206"/>
-        <image name="login_tt" width="206" height="206"/>
-        <image name="logo" width="248" height="248"/>
-        <image name="picture_start" width="115" height="115"/>
+        <image name="group" width="110" height="110"/>
+        <image name="icon_facebook" width="200" height="200"/>
+        <image name="icon_twitter" width="200" height="200"/>
+        <image name="logo" width="250" height="250"/>
+        <image name="picture_start" width="80" height="80"/>
         <image name="teste.png" width="26" height="20"/>
-        <image name="users" width="128" height="128"/>
+        <image name="users" width="110" height="110"/>
     </resources>
 </document>
