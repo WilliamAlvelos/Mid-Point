@@ -54,6 +54,7 @@
 		3DF050D21B6FE6D1003E4B2A /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DF050C81B6FE6D1003E4B2A /* OpenSans-Regular.ttf */; };
 		3DF050D31B6FE6D1003E4B2A /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DF050C91B6FE6D1003E4B2A /* OpenSans-Semibold.ttf */; };
 		3DF050D41B6FE6D1003E4B2A /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DF050CA1B6FE6D1003E4B2A /* OpenSans-SemiboldItalic.ttf */; };
+		3DF050D71B6FF6D9003E4B2A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF050D61B6FF6D9003E4B2A /* Default-568h@2x.png */; };
 		3DFB8A181B4C218700463EA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A171B4C218700463EA4 /* User.swift */; };
 		3DFB8A1B1B4C223800463EA4 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */; };
 		3DFB8A1D1B4C22DD00463EA4 /* UserDAOCloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB8A1C1B4C22DD00463EA4 /* UserDAOCloudKit.swift */; };
@@ -167,6 +168,7 @@
 		3DF050C81B6FE6D1003E4B2A /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		3DF050C91B6FE6D1003E4B2A /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		3DF050CA1B6FE6D1003E4B2A /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		3DF050D61B6FF6D9003E4B2A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3DFB8A141B4C1EE200463EA4 /* MidPoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MidPoint.entitlements; sourceTree = "<group>"; };
 		3DFB8A171B4C218700463EA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../User.swift; sourceTree = "<group>"; };
 		3DFB8A1A1B4C223800463EA4 /* UserDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDAO.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 		FFC2C6D91AF935E0004B0AA7 = {
 			isa = PBXGroup;
 			children = (
+				3DF050D61B6FF6D9003E4B2A /* Default-568h@2x.png */,
 				7B227C801B6C92CA00EE562A /* State.swift */,
 				3DF050D51B6FE804003E4B2A /* Fonts */,
 				3DA7BD811B6A2BD600882C07 /* PushResponse.swift */,
@@ -638,6 +641,7 @@
 				3DF050D11B6FE6D1003E4B2A /* OpenSans-LightItalic.ttf in Resources */,
 				3DF050D21B6FE6D1003E4B2A /* OpenSans-Regular.ttf in Resources */,
 				3DF050D31B6FE6D1003E4B2A /* OpenSans-Semibold.ttf in Resources */,
+				3DF050D71B6FF6D9003E4B2A /* Default-568h@2x.png in Resources */,
 				3DF050D41B6FE6D1003E4B2A /* OpenSans-SemiboldItalic.ttf in Resources */,
 				3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */,
 				FF3867231B6AE58C0075E612 /* btest2.png in Resources */,
