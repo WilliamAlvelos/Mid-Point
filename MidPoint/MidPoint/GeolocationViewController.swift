@@ -172,9 +172,14 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             
             var places: NSArray = jsonGooogle.objectForKey("results") as! NSArray
             
-            if let token = jsonGooogle.objectForKey("token_next_page") as? String {
+            if let token = jsonGooogle.objectForKey("next_page_token") as? String {
                 
                 addPointsOfInterest(type, name: name, location: location, pageToken:token)
+            }
+            
+            if let error = jsonGooogle.objectForKey("error_message") as? String {
+                
+                println(error)
             }
             
             if((places.count < 15 && name == "") || places.count < 1){
