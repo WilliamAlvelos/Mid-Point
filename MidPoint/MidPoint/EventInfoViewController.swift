@@ -25,7 +25,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.backgroundColor = Colors.Rosa
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.userManager = UserManager()
@@ -117,7 +116,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             
             cell.titleLabel.text = event?.name
             
-            cell.backgroundColor = Colors.Azul
             
             return cell
         }

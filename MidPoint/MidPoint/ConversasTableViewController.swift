@@ -214,8 +214,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     func downloadImageEventsFinshed(images: Array<Event>) {
         self.Data = images
         self.animateTable()
-
-        
+        self.refreshControl?.endRefreshing()
     }
     func getEventsFinished(events: Array<Event>) {
         self.eventDelegate.getImages(events)
