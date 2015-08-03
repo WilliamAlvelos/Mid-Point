@@ -57,6 +57,7 @@
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Ative a localização para a navegação do MidPoint.</string>
+<<<<<<< HEAD
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Bold.ttf</string>
@@ -70,6 +71,8 @@
 		<string>OpenSans-Semibold.ttf</string>
 		<string>OpenSans-SemiboldItalic.ttf</string>
 	</array>
+=======
+>>>>>>> origin/master
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
