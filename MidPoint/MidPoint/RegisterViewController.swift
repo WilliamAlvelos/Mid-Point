@@ -318,7 +318,9 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
         var okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
             UIAlertAction in
-            TransitionManager(indentifier: "navigationHome", animated: false, view: self)
+            UserDAODefault.saveLogin(self.user!)
+            let nextView = TransitionManager.creatView("navigationHome")
+            self.presentViewController(nextView, animated: false, completion: nil)
         }
         
         alertController.addAction(okAction)

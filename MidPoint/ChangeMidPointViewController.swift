@@ -184,14 +184,19 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
             var point: MKPointAnnotation = MKPointAnnotation()
             if (self.array[i].id == self.user.id){
                 self.userPoint = point
+            
+                var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.array[i].location!.latitude!), Double(self.array[i].location!.longitude!))
+                
+                point.title = self.array[i].name
+                point.coordinate = coordinate
+                
+                mapView.addAnnotation(point)
+            
+            
             }
             
-            var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.array[i].location!.latitude!), Double(self.array[i].location!.longitude!))
             
-            point.title = self.array[i].name
-            point.coordinate = coordinate
-            
-            mapView.addAnnotation(point)
+
         }
         
         activity?.removeActivityViewWithName(self)

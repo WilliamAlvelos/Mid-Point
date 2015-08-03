@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     var eventosCarregados = Array<Event>()
     
+    var a = 0
     
     var j = 0
  
@@ -216,38 +217,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
                 placemark = placemarks[0] as! CLPlacemark
                 
                 var addressString : String = ""
-//                if placemark.ISOcountryCode == "BR" /*Address Format in Brazil*/ {
-//                    if placemark.country != nil {
-//                        addressString = placemark.country
-//                    }
-//                    if placemark.subAdministrativeArea != nil {
-//                        addressString = addressString + placemark.subAdministrativeArea + ", "
-//                    }
-//                    if placemark.postalCode != nil {
-//                        addressString = addressString + placemark.postalCode + " "
-//                    }
-//                    if placemark.locality != nil {
-//                        addressString = addressString + placemark.locality
-//                    }
-//                    if placemark.thoroughfare != nil {
-//                        addressString = addressString + placemark.thoroughfare
-//                    }
-//                    if placemark.subThoroughfare != nil {
-//                        addressString = addressString + placemark.subThoroughfare
-//                    }
-//                } else {
-//                    if placemark.subThoroughfare != nil {
-//                        addressString = placemark.subThoroughfare + " "
-//                    }
-//                    if placemark.thoroughfare != nil {
-//                        addressString = addressString + placemark.thoroughfare + ", "
-//                    }
                     if placemark.locality != nil {
                         addressString = addressString + placemark.locality + ", "
                     }
-//                    if placemark.administrativeArea != nil {
-//                        addressString = addressString + placemark.administrativeArea + " "
-//                    }
                     if placemark.country != nil {
                         addressString = addressString + placemark.country
                     }
@@ -260,55 +232,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
                     cell.localHorarioEvento.text = addressString
                 }
             })
-        
-//        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
-//            let placeArray = placemarks as? [CLPlacemark]
-//            
-//            
-//            // Place details
-//            var placeMark: CLPlacemark!
-//            placeMark = placeArray?[0]
-//            
-//            // Address dictionary
-//            println(placeMark.addressDictionary)
-//            
-//            // Location name
-//            if let locationName = placeMark.addressDictionary["Name"] as? NSString {
-//                println(locationName)
-//            }
-//            
-//            // Street address
-//            if let street = placeMark.addressDictionary["Thoroughfare"] as? NSString {
-//                println(street)
-//            }
-//            
-//            // City
-//            if let city = placeMark.addressDictionary["City"] as? NSString {
-//                println(city)
-//            }
-//            
-//            // Zip code
-//            if let zip = placeMark.addressDictionary["ZIP"] as? NSString {
-//                println(zip)
-//            }
-//            
-//            // Country
-//            if let country = placeMark.addressDictionary["Country"] as? NSString {
-//                println(country)
-//            }
-//            
-//        })
-
-
-
-        if(self.events[indexPath.row].numberOfPeople! > 1){
-        
-        cell.numeroPessoas.text? = String(format: "%d Pessoas", self.events[indexPath.row].numberOfPeople!)
-        
-        }else{
-            cell.numeroPessoas.text? = String(format: "%d Pessoa", self.events[indexPath.row].numberOfPeople!)
+        var s = "\(self.events[indexPath.row].numberOfPeople!) Pessoas "
+        if !(self.events[indexPath.row].numberOfPeople! > 1){
+            s = "1 pessoa"
         }
-        
+         cell.numeroPessoas.text? = s
         if(image != nil){
 
 
@@ -322,31 +250,25 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
 
             var images = [UIImage]()
             
-            if(self.events.count > indexPath.row){
-                if(self.events[indexPath.row].pessoas.count > 0){
-                    
-                    for(var x = 0; x < self.events[indexPath.row].numberOfPeople!; x++){
-                        images.append(self.events[indexPath.row].pessoas[x].image!)
-                    }
-                    
-                    rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
-                    
-                    //Cria uma OCView, passando a imagem de capa, as imagens dentro da scrollview e o frame da OCVIew
-                    ocView = OCView(mainImage: imageFinal, insideImages: images, frame: rect)
-                    
-                    //Neste caso, todo o código acima é para criar imagens coloridas de teste para a OCView. Ele não é importante.
-                    
-                    //Adiciona a OCView
-                    cell.view.addSubview(ocView)
-                    
-                }
-
             
+            if(self.a == self.events.count){
+                for(var x = 0; x < self.events[indexPath.row].pessoas.count; x++){
+                    images.append(self.events[indexPath.row].pessoas[x].image!)
+                }
+            
+                rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
+                ocView = OCView(mainImage: imageFinal, insideImages: images, frame: rect)
+         
+                cell.view.addSubview(ocView)
+                
             }
             else{
                 cell.view.backgroundColor = UIColor(patternImage: self.events[indexPath.row].image!)
                 
             }
+        
+         
+            
             
             
             rect = CGRectMake(0, 0, cell.view.frame.size.width, cell.view.frame.size.height)
@@ -355,29 +277,24 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
             cell.view.addSubview(ocView)
    }
         
-        cell.titleEvent.textColor = Colors.Rosa
-        cell.descricao.textColor = Colors.Rosa
-        cell.numeroPessoas.textColor = Colors.Rosa
-        cell.localHorarioEvento.textColor = Colors.Rosa
+        cell.titleEvent.textColor = Colors.Branco
+        cell.descricao.textColor = Colors.Branco
+        cell.numeroPessoas.textColor = Colors.Branco
+        cell.localHorarioEvento.textColor = Colors.Branco
         
         return cell
     }
     
     
     func getEventsFinished(events: Array<Event>) {
-        
         activity = activityIndicator(view: self.navigationController!, texto: "Carregando Eventos", inverse: false, viewController: self)
         
         
         self.events = events
-        
-        self.tableView.reloadData()
         self.eventManager.getImages(events)
         
         
-        for event in events{
-            self.userManager?.getUsersFrom(event)
-        }
+        
         
     }
     
@@ -385,13 +302,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     func downloadImageUsersFinished(users: Array<User>, event: Event) {
         event.pessoas = users
+        a++
         
-        for(var i = 0 ; i < self.events.count ; i++ ){
-            if(self.events[i].id == event.id){
-                self.events[i] = event
-            }
+        if a == self.events.count{
+            self.tableView.reloadData()
         }
-        self.tableView.reloadData()
     }
 
     func getUsersFinished(users: Array<User>, event: Event) {
@@ -424,7 +339,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     func downloadImageEventsFinshed(images: Array<Event>) {
         self.events = images
         self.activity?.removeActivityViewWithName(self)
-        self.tableView.reloadData()
+       
+        for event in events{
+            self.userManager?.getUsersFrom(event)
+        }
+        // self.tableView.reloadData()
     }
     
     func downloadImageEventFinshed(event: Event) {

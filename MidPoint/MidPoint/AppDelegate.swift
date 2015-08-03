@@ -33,6 +33,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool{
         Fabric.with([Twitter()])
         teste()
+        
+        
+//        if let font = UIFont(name: "OpenSans-Bold.ttf", size: 36) {
+//            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName : Colors.Rosa]
+//            
+//        }
+        
+//        
+//        self.navigationController!.navigationBar.barTintColor = Colors.Azul
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: ,NSForegroundColorAttributeName : Colors.Rosa]
+//        
+        if let font = UIFont(name: "OpenSans-light", size: 42) {
+            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font]
+        }
+        
 
         Parse.setApplicationId("rpnQRmwvLdmTkuLSFkgFZTOXIhpIvjfrzM2k33vK",
             clientKey: "JwLwixuhZEzE2ZJX5u5ZQHsnj1nwEo3AUxvTHQxB")
@@ -64,6 +79,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
     }
+    
+    
+    
     
 //    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
 //        
