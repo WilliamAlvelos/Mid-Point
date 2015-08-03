@@ -37,7 +37,10 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let nextView = TransitionManager.creatView("CreateConversation") as! CreateConversationViewController
         nextView.startLocation = locations[indexPath.row]
-        nextView.location = self.location
+        if(self.location != nil){
+            nextView.location = self.location
+        }
+
         nextView.event = Event()
         self.navigationController?.pushViewController(nextView, animated: true)
         

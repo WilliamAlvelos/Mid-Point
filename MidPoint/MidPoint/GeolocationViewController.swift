@@ -26,6 +26,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     var radius: CLLocationDistance = 300
     
+    var bool : Bool = true
     
     var activity :activityIndicator?
     
@@ -93,7 +94,11 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         uba.addSelectorToButton(0, target: self, selector: Selector("perfil"), image:"users")
         
         uba.addSelectorToButton(1, target: self, selector: Selector("grupos"), image:"group")
+        
+        uba.addSelectorToButton(2, target: self, selector: Selector("creatGroup"), image:"group")
     
+        
+        addPointsOfInterest("", name: "", location: geoLocation, pageToken: "")
 //        
 //        //Adiciona um seletor para o botão no indice passado
 //        var add:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("createConversation"))
@@ -115,16 +120,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         localTextField.hidden = true
         
         locationManager.requestAlwaysAuthorization()
-        
-        var coorSP:CLLocationCoordinate2D = CLLocationCoordinate2DMake(-23.670055, -46.701234)
-        var coor2:CLLocationCoordinate2D = CLLocationCoordinate2DMake(-23.690055, -46.901234)
-        
-        getMiddleDistanceFromPoints(coorSP, coordinate2: coor2)
-        //addPointsOfInterest("restaurant|food", name: "", location: coor2);
-        //addLocationsFromGoogle()
-        
-        //activity.stopAnimating()
-
     }
     
     
@@ -134,14 +129,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     
-//    func showActivity(){
-//        activity.hidesWhenStopped = true
-//        activity.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
-//        activity.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-//        activity.layer.cornerRadius = 10
-//        activity.startAnimating()
-//    }
-//    
+
     
     
     
@@ -151,8 +139,10 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         //showActivity()
 
         
+
+        //Not completed. Needs [ &types=" + type + ] in the future ***
         
-        var url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&sensor=true&key=" + googleAPIKey
+        var url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&sensor=true&key=" + googleAPIKey
         
         if name.isEmpty == false {
             url = url + "&name=" + name
@@ -241,62 +231,21 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         
         activity?.removeActivityViewWithName(self)
-//        let data1: NSData?
-//        
-//        data1 = NSData(contentsOfURL: NSURL(string: url!)!)
-//            
-//        if data1 != nil {
-//
-//            
-//            var jsonFourSquare: AnyObject! = NSJSONSerialization.JSONObjectWithData(data1!, options: NSJSONReadingOptions.MutableContainers, error: nil)
-//            
-//            
-//            var venues: NSDictionary = jsonFourSquare.objectForKey("response") as! NSDictionary
-//            
-//            var placesFourSquare: NSArray = venues.objectForKey("venues") as! NSArray
-//            
-//            if((placesFourSquare.count < 15 && name == "") || placesFourSquare.count < 1){
-//                radius = radius + 500
-//                
-//                if(radius < 15000){
-//                    addPointsOfInterest(type, name: name, location: location)
-//                }
-//                
-//            }
-//            
-//            
-//            for(var x = 0; x < placesFourSquare.count; x++) {
-//                
-//                var placeFourSquare: NSDictionary = placesFourSquare.objectAtIndex(x) as! NSDictionary
-//                
-//                var locFourSquare: NSDictionary = placeFourSquare.objectForKey("location") as! NSDictionary
-//                
-//                var nameFourSquare: String = placeFourSquare.objectForKey("name") as! String
-//                
-//                var latFourSquare: NSNumber = locFourSquare.objectForKey("lat") as! NSNumber
-//                
-//                var lonFourSquare: NSNumber = locFourSquare.objectForKey("lng") as! NSNumber
-//                
-//                var pointFourSquare: MKPointAnnotation = MKPointAnnotation()
-//                
-//                var coordinateFourSquare: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latFourSquare.doubleValue, lonFourSquare.doubleValue)
-//                
-//                pointFourSquare.title = nameFourSquare
-//                pointFourSquare.coordinate = coordinateFourSquare
-//                pointFourSquare.subtitle = "FourSquare"
-//                
-//                mapView.addAnnotation(pointFourSquare)
-//                
-//            }
-//            
-//        }
-        
 
-        //activity.stopAnimating()
     
     }
     
 
+    func creatGroup(){
+        
+        let nextViewController = TransitionManager.creatView("PartidaTableViewController") as! PartidaTableViewController
+        var event = Event()
+        nextViewController.event = event
+        
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+    
+    }
     
 
     
@@ -354,6 +303,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             
             return pinView
     }
+    
+    
     
     
     func selectRole (sender : UIButton!) {
@@ -419,6 +370,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             
             
             addPointsOfInterest("", name: string, location: geoLocation, pageToken: "")
+            
             locationManager.startUpdatingLocation()
         }
     }
@@ -452,7 +404,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
 
-        
         locationManager.stopUpdatingLocation()
 
         var locationArray = locations as NSArray
@@ -463,15 +414,15 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         geoLocation = coord
         
+        if(self.bool){
+            addPointsOfInterest("", name: "", location: geoLocation, pageToken: "")
+            self.bool = false
+        }
         mapView.setRegion(region, animated: true)
         
         mapView.userLocation.title = nomeUser
         
         var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
-        
-        
-        addPointsOfInterest("", name: string, location: coord, pageToken:"")
-        
 
     }
 

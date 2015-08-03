@@ -52,7 +52,6 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         mapView.showsUserLocation = true
         
         
-        
         self.title = "MID POINT"
 
 //        var reply = UIBarButtonItem(image: UIImage(named: "btest3"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("conversa:"))
@@ -60,7 +59,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
 //        
         
         
-        userManager!.getUsersFrom(event!)
+        self.userManager!.getUsersFrom(event!)
         
         
         
@@ -100,6 +99,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         messageButton.addTarget(self, action: Selector("changeView:"), forControlEvents: .TouchUpInside)
         var message = UIBarButtonItem(customView: messageButton)
         self.navigationItem.rightBarButtonItem = message
+     
+        
         
     }
     
@@ -117,7 +118,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     func tap(recognizer: UITapGestureRecognizer){
         self.mapView.removeAnnotation(self.userPoint)
-
+    
+        
         activity = activityIndicator(view: self.navigationController!, texto: "Enviando localizaçāo", inverse: false, viewController: self)
         
         var point: CGPoint = recognizer.locationInView(self.mapView)
@@ -138,7 +140,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         
         self.userManager!.updateUserLocationAndState(self.user, location: localizacao, event: event!, state: self.user.state!.state!)
         
-
+        self.userPoint = point1
+        
         self.mapView.addAnnotation(point1)
 //    
     }
@@ -182,19 +185,18 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         
         for(var i = 0; i < self.array.count; i++){
             var point: MKPointAnnotation = MKPointAnnotation()
+            
+            
+            var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.array[i].location!.latitude!), Double(self.array[i].location!.longitude!))
+            
+            point.title = self.array[i].name
+            point.coordinate = coordinate
+            
+            mapView.addAnnotation(point)
+            
             if (self.array[i].id == self.user.id){
                 self.userPoint = point
-            
-                var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(self.array[i].location!.latitude!), Double(self.array[i].location!.longitude!))
-                
-                point.title = self.array[i].name
-                point.coordinate = coordinate
-                
-                mapView.addAnnotation(point)
-            
-            
             }
-            
             
 
         }
@@ -221,12 +223,12 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
                 pinView!.canBecomeFirstResponder()
                 
                 pinView?.pinColor = MKPinAnnotationColor.Green
-//                
+//
 //                if(pinView?.annotation.title == "Mid Point"){
 //                    pinView!.pinColor = .Red
 //                    
 //                }
-//                
+                
                 
             }
             else {
@@ -277,7 +279,12 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     func getUsersFinished(users: Array<User>, event: Event) {
         
+        self.array = users
+        
+        
         for user2 in users{
+            
+        
             if user2.id == UserDAODefault.getLoggedUser().id{
                 self.user = user2
             }
@@ -319,7 +326,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         self.midPoint.title = "Mid Point"
         self.mapView.addAnnotation(self.midPoint)
         self.activity?.removeActivityViewWithName(self)
-        //self.userManager?.getUsersFrom(self.event!)
+        
         
     }
 //    override func viewWillDisappear(animated: Bool) {
