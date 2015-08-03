@@ -18,7 +18,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     var nomeUser: String?
     
-    let googleAPIKey: String = "AIzaSyDHIzjnXRJtWRDpPsux99HhTwjOmcLQplU"
+    let googleAPIKey: String = "AIzaSyA75fDAWf4X6SJmcDA1UDxQNM0HjwMc9bc"
     
     var locationManager = CLLocationManager()
     
@@ -141,29 +141,34 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     
     
-    private func addPointsOfInterest(type: String, name: String, location: CLLocationCoordinate2D) {
+    private func addPointsOfInterest(type: String, name: String, location: CLLocationCoordinate2D, pageToken:String) {
         
         mapView.removeAnnotations(mapView.annotations)
         //showActivity()
 
         
         
-        var url: String?
-        //var url2: String!
+        var url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&sensor=true&key=" + googleAPIKey
         
-        if name.isEmpty {
-            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&sensor=true&key=" + googleAPIKey
-
-            
-            //url = "https://api.foursquare.com/v2/venues/search?client_id=AF0RKOHW12ZHKMLCLO0C5LV0CA3CQEFC2RBIV4TDUQARJCE0&client_secret=VBQQDPB5OHA4NFRX5O02KZR5FVDNNBKC1HLB1YKJUTTLODNB&v=20130815&ll=\(location.latitude),\(location.longitude)&query="
-        }else {
-            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&name=" + name + "&sensor=true&key=" + googleAPIKey
-            
-            //url = "https://api.foursquare.com/v2/venues/search?client_id=AF0RKOHW12ZHKMLCLO0C5LV0CA3CQEFC2RBIV4TDUQARJCE0&client_secret=VBQQDPB5OHA4NFRX5O02KZR5FVDNNBKC1HLB1YKJUTTLODNB&v=20130815&ll=\(location.latitude),\(location.longitude)&query="+name
-            
+        if name.isEmpty == false {
+            url = url + "&name=" + name
         }
+        
+        if pageToken.isEmpty == false {
+            url = "https://maps.googleapis.com/maps/api/place/search/json?key=" + googleAPIKey + "&pagetoken=" + pageToken
+        }
+        
+    
+//        if name.isEmpty {
+//            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&sensor=true&key=" + googleAPIKey
+//
+//        }
+//        
+//        else {
+//            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&name=" + name + "&sensor=true&key=" + googleAPIKey
+//        }
 
-        let data: NSData? = NSData(contentsOfURL: NSURL(string: url!)!)
+        let data: NSData? = NSData(contentsOfURL: NSURL(string: url)!)
 
         var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers, error: nil)
         
@@ -173,12 +178,16 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             
             var places: NSArray = jsonGooogle.objectForKey("results") as! NSArray
             
+            if let token = jsonGooogle.objectForKey("token_next_page") as? String {
+                
+                addPointsOfInterest(type, name: name, location: location, pageToken:token)
+            }
             
             if((places.count < 15 && name == "") || places.count < 1){
                 
                 if(radius < 3000000){
                     radius = radius * 2
-                    addPointsOfInterest(type, name: name, location: location)
+                    addPointsOfInterest(type, name: name, location: location, pageToken:"")
                 }
             }
             
@@ -405,7 +414,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             //var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
             
             
-            addPointsOfInterest("", name: string, location: geoLocation);
+            addPointsOfInterest("", name: string, location: geoLocation, pageToken: "")
             locationManager.startUpdatingLocation()
         }
     }
@@ -457,7 +466,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
         
         
-        addPointsOfInterest("", name: string, location: coord);
+        addPointsOfInterest("", name: string, location: coord, pageToken:"")
         
 
     }
