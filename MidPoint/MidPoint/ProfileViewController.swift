@@ -46,8 +46,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
      override func viewDidLoad() {
     
-        user = UserDAODefault.getLoggedUser()
-        
+        if(user == nil){
+            user = UserDAODefault.getLoggedUser()
+        }
         self.userManager = UserManager()
         
         self.userManager!.delegate = self
@@ -115,7 +116,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     }
     
     func reloadData(){
-        eventManager.getEventsFromUser(UserDAODefault.getLoggedUser(), usuario: .All)
+        eventManager.getEventsFromUser(self.user!, usuario: .All)
         //eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
         animateTable()
     }

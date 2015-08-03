@@ -25,6 +25,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.backgroundColor = Colors.Rosa
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.userManager = UserManager()
@@ -92,7 +93,12 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        
+        if(indexPath.section == 1){
+            var nextView = TransitionManager.creatView("ProfileView") as! ProfileViewController
+            nextView.user = self.dataPessoas[indexPath.row]
+            self.navigationController?.pushViewController(nextView, animated: true)
+        }
     }
     
     
@@ -111,6 +117,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             
             cell.titleLabel.text = event?.name
             
+            cell.backgroundColor = Colors.Azul
+            
             return cell
         }
         
@@ -123,6 +131,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             
             
              cell.button.addTarget(self, action: Selector("ChangeMidPoint"), forControlEvents: UIControlEvents.TouchDown)
+            
+            
            
             
 //            cell.imageLabel.image = event?.image
@@ -146,6 +156,9 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height / 2.0
         
         cell.imageLabel.layer.masksToBounds = true
+        
+        cell.backgroundColor = Colors.Azul
+        
 //
 //        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0
 //        
