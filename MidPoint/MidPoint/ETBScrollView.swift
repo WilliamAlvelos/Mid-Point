@@ -155,7 +155,7 @@ class ETBScrollView: UIScrollView, UIScrollViewDelegate {
         toolbarView.frame.size.height = self.frame.size.height * toolbarHeightFactor
         toolbarView.frame.size.width = self.frame.size.width
         toolbarView.frame.origin.y = insideToolbarView.frame.size.height - toolbarView.frame.size.height
-        toolbarView.backgroundColor = toolbarBackgroundColor
+        toolbarView.backgroundColor = UIColor.clearColor()
         
         //The y values that makes the bar lock above the view
         yBarLock = toolbarView.frame.origin.y
