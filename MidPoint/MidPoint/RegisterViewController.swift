@@ -162,6 +162,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         println("userStillInserted")
     }
     func saveUserFinished(user: User){
+        PushResponse.createNewDeviceToPush(user)
         //changeView("geolocation", animated: true)
         UserDAODefault.saveLogin(user)
         PictureCloudKit().uploadImageUser(user)

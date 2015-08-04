@@ -23,7 +23,8 @@ struct UserGlobalConstants {
     static let Image = "user_picture"
     static let Latitude = "user_latitude"
     static let Longitude = "user_longitude"
-        static let Location = "user_location"
+    static let Location = "user_location"
+    static let LoggedNow = "logged"
     
 }
 struct EventGlobalConstants {

@@ -169,6 +169,7 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         println("userNotFound")
     }
     func getUserFinished(user: User){
+        PushResponse.createNewDeviceToPush(user)
         UserDAODefault.saveLogin(user)
         
         let nextViewController = TransitionManager.creatView("navigationHome") as! UINavigationController

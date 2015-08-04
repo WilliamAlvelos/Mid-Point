@@ -74,6 +74,7 @@ class UserManager: UserDAOCloudKitDelegate, PictureCloudKitDelegate{
     }
     
     func getUserFinished(user: User){
+        
         self.delegate?.getUserFinished?(user)
     }
     

@@ -77,6 +77,7 @@ class UserDAOCloudKit: NSObject, UserDAOProtocol{
                 })
                 return
             }
+            var dataString = NSString(data: data, encoding:NSUTF8StringEncoding)
             let string = JsonResponse.parseJSON(data)
             if (string.objectForKey("error") != nil){
                 var int = string.objectForKey("error")! as! Int

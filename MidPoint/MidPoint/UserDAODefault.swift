@@ -13,8 +13,10 @@ class UserDAODefault {
     
     
     class func saveLogin(user: User){
-        let userFixo = NSUserDefaults.standardUserDefaults()
         
+        
+        let userFixo = NSUserDefaults.standardUserDefaults()
+        userFixo.setBool(true, forKey: UserGlobalConstants.LoggedNow)
         userFixo.setObject(user.name, forKey: UserGlobalConstants.Name)
         userFixo.setInteger(user.id!, forKey: UserGlobalConstants.Id)
         userFixo.setObject(user.email, forKey: UserGlobalConstants.Email)

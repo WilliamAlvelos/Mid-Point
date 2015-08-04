@@ -43,6 +43,7 @@ class EventManager: EventoDAOCloudKitDelegate, PictureCloudKitDelegate{
         self.delegate?.getEventFinished?(event)
     }
     func getEventsFinished(events: Array<Event>){
+        PushResponse.registerDeviceFromEvent(events)
         self.delegate?.getEventsFinished?(events)
     }
     func progressUpload(float : Float){

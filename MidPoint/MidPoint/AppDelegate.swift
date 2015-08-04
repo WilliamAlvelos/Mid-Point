@@ -130,10 +130,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
 
-        PFPush.handlePush(userInfo)
-        if application.applicationState == UIApplicationState.Inactive {
-            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+        if let aps = userInfo["aps"] as? NSDictionary {
+            if let alert = aps["alert"] as? NSDictionary {
+                if let message = alert["message"] as? NSString {
+                    RKDropdownAlert.title("Mid Point", message: message as String)
+                }
+            } else if let alert = aps["alert"] as? NSString {
+                RKDropdownAlert.title("Mid Point", message: alert as String)
+            }
         }
+        
+        PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
     }
     
     

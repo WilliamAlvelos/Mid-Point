@@ -213,6 +213,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
 //            "image":imageName
 //            ])
         
+        
+        PushResponse.sendPushToGroup(self.event!, message: "\(name) enviou: \(text) para o grupo \(self.event!.name!).")
         var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
         
         messagesRef.childByAutoId().setValue([
@@ -236,7 +238,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         var imageData: NSData = UIImagePNGRepresentation(uploadImage)
         
         self.base64String = imageData.base64EncodedStringWithOptions(.allZeros)
-        
+        PushResponse.sendPushToGroup(self.event!, message: "\(name) enviou uma imagem para o grupo \(self.event!.name!).")
+
 
         messagesRef.childByAutoId().setValue([
             "text":"",
@@ -251,7 +254,8 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
     
     func sendLocation(latitude: Double, longitude:Double, sender:String!, name: String!){
-    
+        PushResponse.sendPushToGroup(self.event!, message: "\(name) enviou uma localização para o grupo \(self.event!.name!).")
+
     
         var messagesRef = Firebase(url: String(format: "https://midpoint.firebaseio.com/%d/messages", conversa!))
         
