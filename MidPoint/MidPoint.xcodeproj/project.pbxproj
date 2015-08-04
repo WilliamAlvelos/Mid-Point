@@ -109,9 +109,6 @@
 		FF36924B1B66845500C71BBC /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = FF36924A1B66845500C71BBC /* test.png */; };
 		FF36924D1B66DCF700C71BBC /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF36924C1B66DCF700C71BBC /* ConfigurationViewController.swift */; };
 		FF36924F1B66DE3A00C71BBC /* UserConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF36924E1B66DE3A00C71BBC /* UserConfigurations.swift */; };
-		FF3867221B6AE58C0075E612 /* btest3.png in Resources */ = {isa = PBXBuildFile; fileRef = FF38671F1B6AE58C0075E612 /* btest3.png */; };
-		FF3867231B6AE58C0075E612 /* btest2.png in Resources */ = {isa = PBXBuildFile; fileRef = FF3867201B6AE58C0075E612 /* btest2.png */; };
-		FF3867241B6AE58C0075E612 /* btest1.png in Resources */ = {isa = PBXBuildFile; fileRef = FF3867211B6AE58C0075E612 /* btest1.png */; };
 		FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */; };
 		FFC2C6EB1AF935E0004B0AA7 /* MidPoint.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */; };
 		FFC2C6ED1AF935E0004B0AA7 /* GeolocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC2C6EC1AF935E0004B0AA7 /* GeolocationViewController.swift */; };
@@ -630,7 +627,6 @@
 			files = (
 				FFC2C6F01AF935E0004B0AA7 /* Main.storyboard in Resources */,
 				FFC2C6F51AF935E0004B0AA7 /* LaunchScreen.xib in Resources */,
-				FF3867221B6AE58C0075E612 /* btest3.png in Resources */,
 				FF36924B1B66845500C71BBC /* test.png in Resources */,
 				3DF050CB1B6FE6D1003E4B2A /* OpenSans-Bold.ttf in Resources */,
 				3DF050CC1B6FE6D1003E4B2A /* OpenSans-BoldItalic.ttf in Resources */,
@@ -644,10 +640,8 @@
 				3DF050D71B6FF6D9003E4B2A /* Default-568h@2x.png in Resources */,
 				3DF050D41B6FE6D1003E4B2A /* OpenSans-SemiboldItalic.ttf in Resources */,
 				3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */,
-				FF3867231B6AE58C0075E612 /* btest2.png in Resources */,
 				FFC2C6F21AF935E0004B0AA7 /* Images.xcassets in Resources */,
 				3DFB8A301B4CC4A900463EA4 /* TwitterKitResources.bundle in Resources */,
-				FF3867241B6AE58C0075E612 /* btest1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

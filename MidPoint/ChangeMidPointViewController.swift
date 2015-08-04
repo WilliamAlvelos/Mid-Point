@@ -99,8 +99,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         uba.addSelectorToButton(3, target: self, selector: Selector("owner"), image:"group")
     
         
-        var messageButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        messageButton.setImage(UIImage(named: "message"), forState: UIControlState.Normal)
+        var messageButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        messageButton.setImage(UIImage(named: "main_chat"), forState: UIControlState.Normal)
         messageButton.addTarget(self, action: Selector("changeView:"), forControlEvents: .TouchUpInside)
         var message = UIBarButtonItem(customView: messageButton)
         self.navigationItem.rightBarButtonItem = message
@@ -122,8 +122,6 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     func tap(recognizer: UITapGestureRecognizer){
         self.mapView.removeAnnotation(self.userPoint)
     
-        
-        activity = activityIndicator(view: self.navigationController!, texto: "Enviando localizaçāo", inverse: false, viewController: self)
         
         var point: CGPoint = recognizer.locationInView(self.mapView)
         
@@ -184,6 +182,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         //showActivity()
         
         //Not completed. Needs [ &types=" + type + ] in the future ***
+        activity = activityIndicator(view: self.navigationController!, texto: "Buscando locais", inverse: false, viewController: self)
         
         var url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&sensor=true&key=" + googleAPIKey
         
@@ -209,10 +208,10 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
                 
                 var places: NSArray = jsonGooogle.objectForKey("results") as! NSArray
                 
-//                if let token = jsonGooogle.objectForKey("next_page_token") as? String {
-//                    
-//                    self.addPointsOfInterest(type, name: name, location: location, pageToken:token)
-//                }
+                if let token = jsonGooogle.objectForKey("next_page_token") as? String {
+                    
+                    self.addPointsOfInterest(type, name: name, location: location, pageToken:token)
+                }
                 
                 if let error = jsonGooogle.objectForKey("error_message") as? String {
                     ActionError.actionError("Error", errorMessage: error, view: self)
@@ -277,7 +276,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
             
         })
         
-        
+        self.activity?.removeActivityViewWithName(self)
+
     }
     
     

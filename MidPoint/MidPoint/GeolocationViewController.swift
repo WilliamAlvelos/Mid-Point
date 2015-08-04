@@ -30,6 +30,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     var activity :activityIndicator?
     
+    var pinsLocations = Array<MKPointAnnotation>()
+    
     
     var geoLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(-23.670055, -46.701234)
 
@@ -78,9 +80,9 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         let font = UIFont(name: "OpenSans-light", size: 42)
 
         self.navigationController!.navigationBar.barTintColor = Colors.Azul
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : Colors.Rosa]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : Colors.Branco]
         
-        self.navigationController?.navigationBar.tintColor = Colors.Rosa
+        self.navigationController?.navigationBar.tintColor = Colors.Branco
 
         
         //activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse:false, viewController:self)
@@ -134,8 +136,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     
     private func addPointsOfInterest(type: String, name: String, location: CLLocationCoordinate2D, pageToken:String) {
-        
-        //mapView.removeAnnotations(mapView.annotations)
+        self.mapView.removeAnnotations(self.pinsLocations)
         //showActivity()
 
         
@@ -223,6 +224,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                     }
                     
                     DispatcherClass.dispatcher({ () -> () in
+                        self.pinsLocations.append(point)
                         self.mapView.addAnnotation(point)
                     })
                     

@@ -37,12 +37,13 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             controller.searchResultsUpdater = self
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.sizeToFit()
-            
+            controller.searchBar.barTintColor = Colors.Azul
             
             self.tableView.tableHeaderView = controller.searchBar
             
             return controller
         })()
+    
         
         
         //refreshControl
