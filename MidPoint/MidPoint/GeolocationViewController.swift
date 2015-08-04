@@ -135,7 +135,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     private func addPointsOfInterest(type: String, name: String, location: CLLocationCoordinate2D, pageToken:String) {
         
-        mapView.removeAnnotations(mapView.annotations)
+        //mapView.removeAnnotations(mapView.annotations)
         //showActivity()
 
         
@@ -152,87 +152,91 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
             url = "https://maps.googleapis.com/maps/api/place/search/json?key=" + googleAPIKey + "&pagetoken=" + pageToken
         }
         
-    
-//        if name.isEmpty {
-//            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&sensor=true&key=" + googleAPIKey
-//
-//        }
-//        
-//        else {
-//            url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&types=" + type + "&name=" + name + "&sensor=true&key=" + googleAPIKey
-//        }
-
-        let data: NSData? = NSData(contentsOfURL: NSURL(string: url)!)
-
-        var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers, error: nil)
         
-        if data != nil {
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, {
+            let data: NSData? = NSData(contentsOfURL: NSURL(string: url)!)
             
-            var jsonGooogle: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil)
+            var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers, error: nil)
             
-            var places: NSArray = jsonGooogle.objectForKey("results") as! NSArray
-            
-            if let token = jsonGooogle.objectForKey("next_page_token") as? String {
+            if data != nil {
                 
-                addPointsOfInterest(type, name: name, location: location, pageToken:token)
-            }
-            
-            if let error = jsonGooogle.objectForKey("error_message") as? String {
+                var jsonGooogle: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil)
                 
-                println(error)
-            }
-            
-            if((places.count < 15 && name == "") || places.count < 1){
+                var places: NSArray = jsonGooogle.objectForKey("results") as! NSArray
                 
-                if(radius < 3000000){
-                    radius = radius * 2
-                    addPointsOfInterest(type, name: name, location: location, pageToken:"")
-                }
-            }
-            
-            
-            for(var x = 0; x < places.count; x++) {
+//                if let token = jsonGooogle.objectForKey("next_page_token") as? String {
+//                    
+//                    self.addPointsOfInterest(type, name: name, location: location, pageToken:token)
+//                }
                 
-                var place: NSDictionary = places.objectAtIndex(x) as! NSDictionary
-                var geo: NSDictionary = place.objectForKey("geometry") as! NSDictionary
-                var opening: NSDictionary? = place.objectForKey("opening_hours") as? NSDictionary
-                var openNow: NSString? = opening?.objectForKey("open_now") as? NSString
-                var icon: String = place.objectForKey("icon") as! String
-                var loc: NSDictionary = geo.objectForKey("location") as! NSDictionary
-                var name: String = place.objectForKey("name") as! String
-                var lat: NSNumber = loc.objectForKey("lat") as! NSNumber
-                var lon: NSNumber = loc.objectForKey("lng") as! NSNumber
-                var types = place.objectForKey("types") as! [AnyObject]
-                
-                var point: MKPointAnnotation = MKPointAnnotation()
-                
-                var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat.doubleValue, lon.doubleValue)
-                
-                point.subtitle = ""
-                point.title = name
-                point.coordinate = coordinate
-                
-                
-                if openNow == "true"{
-                    point.subtitle = "Aberto"
-                }else if openNow == "false"{
-                    point.subtitle = "Fechado"
+                if let error = jsonGooogle.objectForKey("error_message") as? String {
+                    ActionError.actionError("Error", errorMessage: error, view: self)
+                    println(error)
+
                 }
                 
-                
-                for(var i = 0; i < types.count; i++){
-                    let typeString: String = types[i] as! String
+                if((places.count < 15 && name == "") || places.count < 1){
                     
-                    var string = typeString.stringByReplacingOccurrencesOfString("_", withString: " ", options:  NSStringCompareOptions.LiteralSearch, range: nil)
-                    point.subtitle = point.subtitle + string + "\n"
+                    if(self.radius < 3000000){
+                        self.radius = self.radius * 2
+                        self.addPointsOfInterest(type, name: name, location: location, pageToken:"")
+                    }
                 }
-
-
-                mapView.addAnnotation(point)
                 
+                
+                for(var x = 0; x < places.count; x++) {
+                    
+                    var place: NSDictionary = places.objectAtIndex(x) as! NSDictionary
+                    var geo: NSDictionary = place.objectForKey("geometry") as! NSDictionary
+                    var opening: NSDictionary? = place.objectForKey("opening_hours") as? NSDictionary
+                    var openNow: NSString? = opening?.objectForKey("open_now") as? NSString
+                    var icon: String = place.objectForKey("icon") as! String
+                    var loc: NSDictionary = geo.objectForKey("location") as! NSDictionary
+                    var name: String = place.objectForKey("name") as! String
+                    var lat: NSNumber = loc.objectForKey("lat") as! NSNumber
+                    var lon: NSNumber = loc.objectForKey("lng") as! NSNumber
+                    var types = place.objectForKey("types") as! [AnyObject]
+                    
+                    var point: MKPointAnnotation = MKPointAnnotation()
+                    
+                    var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat.doubleValue, lon.doubleValue)
+                    
+                    point.subtitle = ""
+                    point.title = name
+                    point.coordinate = coordinate
+                    
+                    
+                    if openNow == "true"{
+                        point.subtitle = "Aberto"
+                    }else if openNow == "false"{
+                        point.subtitle = "Fechado"
+                    }
+                    
+                    
+                    for(var i = 0; i < types.count; i++){
+                        let typeString: String = types[i] as! String
+                        
+                        var string = typeString.stringByReplacingOccurrencesOfString("_", withString: " ", options:  NSStringCompareOptions.LiteralSearch, range: nil)
+                        point.subtitle = point.subtitle + string + "\n"
+                    }
+                    
+                    DispatcherClass.dispatcher({ () -> () in
+                        self.mapView.addAnnotation(point)
+                    })
+                    
+                }
+                
+            }else{
+                ActionError.actionError("Error", errorMessage: "Falha na Conexão", view: self)
+
             }
             
-        }
+            
+        })
+
+       
         
         
         activity?.removeActivityViewWithName(self)

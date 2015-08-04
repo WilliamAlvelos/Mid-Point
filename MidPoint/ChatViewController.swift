@@ -415,10 +415,15 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
             case 3:
             
                 var weak:UICollectionView = self.collectionView
+                var locationItem: JSQLocationMediaItem = JSQLocationMediaItem()
                 
-                self.addLocationMediaMessageCompletion({ () -> Void in
-                    weak.reloadData()
-                })
+                
+                locationItem.setLocation(self.locationManager.location, withCompletionHandler:nil)
+                
+                
+                self.sendLocation(self.locationManager.location.coordinate.latitude, longitude:self.locationManager.location.coordinate.longitude, sender: self.senderId, name: self.senderDisplayName)
+                
+                weak.reloadData()
             break;
             
             default:
@@ -470,9 +475,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         var locationMessage:JSQMessage = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: locationItem)
         
         self.messages.append(locationMessage)
-        
-        
-
         
     }
     

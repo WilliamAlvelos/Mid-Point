@@ -231,8 +231,6 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         event?.date = NSDate(timeIntervalSinceNow: 0)
         var vc = segue.destinationViewController as! AmigosTableViewController
         vc.event = event
-        
-    
     }
 
     
