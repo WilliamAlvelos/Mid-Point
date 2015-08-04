@@ -84,19 +84,19 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
        // userManager!.getUsersFrom(event!)
         
         //        //Inicia a UBA com o numero de botoões
-        var uba = UBAView(buttonsQuantity: 4)
+        var uba = UBAView(buttonsQuantity: 3)
         //
         //        //Prepara os botões na view passada
 
         uba.prepareAnimationOnView(self.view, navigation: self.navigationController!.navigationBar.frame.size)
         
-        uba.addSelectorToButton(0, target: self, selector: Selector("acepted"), image:"group")
+        uba.addSelectorToButton(0, target: self, selector: Selector("acepted"), image:"sim_selected")
         
-        uba.addSelectorToButton(1, target: self, selector: Selector("refused"), image:"group")
-        
-        uba.addSelectorToButton(2, target: self, selector: Selector("passed"), image:"group")
-        
-        uba.addSelectorToButton(3, target: self, selector: Selector("owner"), image:"group")
+        uba.addSelectorToButton(1, target: self, selector: Selector("refused"), image:"talvez_selected")
+//        
+        uba.addSelectorToButton(2, target: self, selector: Selector("passed"), image:"nao")
+//        
+//        uba.addSelectorToButton(3, target: self, selector: Selector("owner"), image:"group")
     
         
         var messageButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))

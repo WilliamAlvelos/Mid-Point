@@ -61,26 +61,26 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         tableView.addSubview(self.refreshControl!)
         
         
-        var newETB = ETBScrollView(numberOfButtons: 3, images:[UIImage(named: "btest1.png")!, UIImage(named: "btest2.png")!,UIImage(named: "btest3.png")!])
+        //var newETB = ETBScrollView(numberOfButtons: 3, images:[UIImage(named: "btest1.png")!, UIImage(named: "btest2.png")!,UIImage(named: "btest3.png")!])
         
         //Cor de fundo da barra
-        newETB.toolbarBackgroundColor = Colors.Azul
+        //newETB.toolbarBackgroundColor = Colors.Azul
         
         //Foto do usuário
-        newETB.profileImage = user?.image
+        //newETB.profileImage = user?.image
         
         //Nome do usuário
-        newETB.profileName = user?.name
+        ///\newETB.profileName = user?.name
         
         //Local do usuário
-        newETB.profileLocation = "Maceio"
+        //newETB.profileLocation = "Maceio"
         
         //View de teste
         var viewTeste = UIView(frame:self.view.frame)
         viewTeste.backgroundColor = Colors.Rosa
         
         //Prepara a ETB, passando a view com o conteúdo que ela terá normalmente e o frame da view onde a ETB será inserida
-        newETB.prepareScrollViewWithContent(self.view, frame: self.view.frame)
+        //newETB.prepareScrollViewWithContent(self.view, frame: self.view.frame)
         
         
         
@@ -93,7 +93,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         //self.navigationController?.view.addSubview(newETB)
         
         //Adiciona um seletor para o botão no indice passado
-        newETB.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
+      //  newETB.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
         
         self.eventManager.delegate = self
         

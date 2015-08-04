@@ -59,6 +59,9 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         UIMPConfiguration.configureTextField(self.nomeText, text: "qual o seu email?")
         UIMPConfiguration.configureTextField(self.senhaText, text: "e a sua senha secreta?")
         
+            
+            
+            
         UIMPConfiguration.addBorderToView(self.loginButton, color: Colors.Rosa, width: 3.0, corner: 25.0)
         UIMPConfiguration.addColorAndFontToButton(self.loginButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 20)
         UIMPConfiguration.addColorAndFontToButton(self.createAccountButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 18)

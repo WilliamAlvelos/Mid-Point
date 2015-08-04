@@ -17,6 +17,13 @@ class UIMPConfiguration {
         textField.textColor = Colors.Rosa
 
     }
+    class func configureTextField(textField: UITextField, text: String, color: UIColor){
+        textField.attributedPlaceholder = NSAttributedString(string:text,
+            attributes:[NSForegroundColorAttributeName: color])
+        UIMPConfiguration.addBottomLineToView(textField, bottomSize: 0.5, color: color)
+        textField.textColor = color
+        
+    }
     class func addBorderAndMakeRounded(view: UIView, color: UIColor, width: Float){
         UIMPConfiguration.addBorderToView(view, color: color, width: width, corner: Float(view.bounds.size.width/2))
     }
@@ -26,6 +33,13 @@ class UIMPConfiguration {
         calayer.backgroundColor = UIColor.whiteColor().CGColor
         view.layer.addSublayer(calayer)
 
+    }
+    class func addBottomLineToView(view: UIView, bottomSize: CGFloat, color: UIColor){
+        let calayer = CALayer()
+        calayer.frame = CGRectMake(0, view.frame.size.height-bottomSize, view.frame.size.width, bottomSize)
+        calayer.backgroundColor = color.CGColor
+        view.layer.addSublayer(calayer)
+        
     }
     class func addBorderToView(view : UIView, color : UIColor, width: Float, corner : Float){
         view.layer.masksToBounds = true

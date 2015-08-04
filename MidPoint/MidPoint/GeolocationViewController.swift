@@ -97,7 +97,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         uba.addSelectorToButton(1, target: self, selector: Selector("grupos"), image:"group")
         
-        uba.addSelectorToButton(2, target: self, selector: Selector("creatGroup"), image:"group")
+        uba.addSelectorToButton(2, target: self, selector: Selector("creatGroup"), image:"main_mais")
     
         
         addPointsOfInterest("", name: "", location: geoLocation, pageToken: "")
@@ -292,8 +292,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 
                     roleButton.frame.size.width = 44
                     roleButton.frame.size.height = 44
-                    roleButton.backgroundColor = UIColor.redColor()
-                    roleButton.setImage(UIImage(named: "teste.png"), forState: .Normal)
+                    roleButton.setImage(UIImage(named: "main_seta"), forState: .Normal)
                 
                 
                 
@@ -303,8 +302,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 
                     pinView!.rightCalloutAccessoryView = roleButton
                 
-                    var icon = UIImageView(image: UIImage(named: "teste.png"))
-                    pinView!.leftCalloutAccessoryView = icon
+//                    var icon = UIImageView(image: UIImage(named: "teste.png"))
+//                    pinView!.leftCalloutAccessoryView = icon
                 
             }
             else {

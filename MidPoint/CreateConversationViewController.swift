@@ -39,8 +39,18 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
         super.viewDidLoad()
         self.title = "Criar Grupo"
         
+        UIMPConfiguration.addBorderAndMakeRounded(self.button!, color: Colors.Rosa, width: 1.5)
+        UIMPConfiguration.configureTextField(self.subtitleGroup, text: "Nome do grupo", color: Colors.Azul)
+        UIMPConfiguration.configureTextField(self.titleGroup, text: "Descricao", color: Colors.Azul)
+
+        let float: Float = Float(self.button.frame.width/2.0)
+        
+        UIMPConfiguration.addBorderToView(self.button!, color: Colors.Rosa, width: 3.0, corner: float)
+        UIMPConfiguration.addColorAndFontToButton(self.button, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 20)
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
+        
+        self.button.layer.cornerRadius = 10
         
         mapView.delegate = self
         locationManager.delegate = self
