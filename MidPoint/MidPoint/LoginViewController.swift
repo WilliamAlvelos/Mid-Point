@@ -22,8 +22,6 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     @IBOutlet weak var createAccountButton: UIButton!
     @IBOutlet weak var labelCadastre: UILabel!
     @IBOutlet weak var labelOu: UILabel!
-
-    
     var activity: activityIndicator?
     
     var usuario: UserManager = UserManager()
@@ -34,7 +32,6 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         IHKeyboardAvoiding.setAvoidingView(self.view)
-        
     }
     @IBAction func buttonTwitterTouch(sender: AnyObject) {
         Twitter.sharedInstance().logInWithCompletion { session, error in
@@ -54,8 +51,10 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         self.view.backgroundColor = Colors.Azul
         appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0
         
+        
+       
             
-        //UIMPConfiguration.configureNavigationBar(self.navigationController!.navigationBar, color: Colors.Azul)
+            //UIMPConfiguration.configureNavigationBar(self.navigationController!.navigationBar, color: Colors.Azul)
         UIMPConfiguration.configureTextField(self.nomeText, text: "qual o seu email?")
         UIMPConfiguration.configureTextField(self.senhaText, text: "e a sua senha secreta?")
         

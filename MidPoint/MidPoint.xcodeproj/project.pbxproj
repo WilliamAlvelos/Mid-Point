@@ -83,6 +83,11 @@
 		7B744E951B548D9C00D8E783 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E941B548D9C00D8E783 /* MapKit.framework */; };
 		7B744E971B548DA000D8E783 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E961B548DA000D8E783 /* QuartzCore.framework */; };
 		7B744E991B548DA500D8E783 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B744E981B548DA500D8E783 /* UIKit.framework */; };
+		7B7987AC1B719819000B2765 /* SoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7987AA1B719819000B2765 /* SoundView.m */; };
+		7B7987AD1B719819000B2765 /* SoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B7987AB1B719819000B2765 /* SoundView.xib */; };
+		7B7987AF1B71997B000B2765 /* ShowEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7987AE1B71997B000B2765 /* ShowEvents.swift */; };
+		7B7987B21B71B39B000B2765 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7987B01B71B39B000B2765 /* ActionButton.swift */; };
+		7B7987B31B71B39B000B2765 /* ActionButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7987B11B71B39B000B2765 /* ActionButtonItem.swift */; };
 		7B84B6321B6D9609001AE500 /* PartidaSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B84B6311B6D9609001AE500 /* PartidaSelectVC.swift */; };
 		7B9FB4691B6D3C7500BD7016 /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9FB4681B6D3C7500BD7016 /* JSSAlertView.swift */; };
 		7B9FB46B1B6D7A7000BD7016 /* GestureRecognizerMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9FB46A1B6D7A7000BD7016 /* GestureRecognizerMap.swift */; };
@@ -196,6 +201,12 @@
 		7B744E941B548D9C00D8E783 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B744E961B548DA000D8E783 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7B744E981B548DA500D8E783 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7B7987A91B719819000B2765 /* SoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundView.h; sourceTree = "<group>"; };
+		7B7987AA1B719819000B2765 /* SoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundView.m; sourceTree = "<group>"; };
+		7B7987AB1B719819000B2765 /* SoundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SoundView.xib; sourceTree = "<group>"; };
+		7B7987AE1B71997B000B2765 /* ShowEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowEvents.swift; sourceTree = "<group>"; };
+		7B7987B01B71B39B000B2765 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		7B7987B11B71B39B000B2765 /* ActionButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButtonItem.swift; sourceTree = "<group>"; };
 		7B84B6311B6D9609001AE500 /* PartidaSelectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PartidaSelectVC.swift; path = ../PartidaSelectVC.swift; sourceTree = "<group>"; };
 		7B9FB4681B6D3C7500BD7016 /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
 		7B9FB46A1B6D7A7000BD7016 /* GestureRecognizerMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureRecognizerMap.swift; sourceTree = "<group>"; };
@@ -401,6 +412,9 @@
 		7BE9F2A81B6828FF00AAD032 /* Objc-Files */ = {
 			isa = PBXGroup;
 			children = (
+				7B7987A91B719819000B2765 /* SoundView.h */,
+				7B7987AA1B719819000B2765 /* SoundView.m */,
+				7B7987AB1B719819000B2765 /* SoundView.xib */,
 				7BE9F2A51B6828F900AAD032 /* IHKeyboardAvoiding.h */,
 				7BE9F2A61B6828F900AAD032 /* IHKeyboardAvoiding.m */,
 			);
@@ -483,6 +497,8 @@
 				7B227C801B6C92CA00EE562A /* State.swift */,
 				3DF050D51B6FE804003E4B2A /* Fonts */,
 				3DA7BD811B6A2BD600882C07 /* PushResponse.swift */,
+				7B7987B01B71B39B000B2765 /* ActionButton.swift */,
+				7B7987B11B71B39B000B2765 /* ActionButtonItem.swift */,
 				7B9FB46A1B6D7A7000BD7016 /* GestureRecognizerMap.swift */,
 				7B63155F1B66D7A400D13DE5 /* GlobalConstants.swift */,
 				7B2DADD61B6AAD0F009D2C50 /* Localizacao.swift */,
@@ -519,6 +535,7 @@
 				FF3692311B5FFF4E00C71BBC /* Animations */,
 				FF3692401B6000E700C71BBC /* Social */,
 				FFC2C6EE1AF935E0004B0AA7 /* Main.storyboard */,
+				7B7987AE1B71997B000B2765 /* ShowEvents.swift */,
 				FFC2C6F11AF935E0004B0AA7 /* Images.xcassets */,
 				FFC2C6F31AF935E0004B0AA7 /* LaunchScreen.xib */,
 				FFC2C6E91AF935E0004B0AA7 /* MidPoint.xcdatamodeld */,
@@ -641,6 +658,7 @@
 				3DF050D41B6FE6D1003E4B2A /* OpenSans-SemiboldItalic.ttf in Resources */,
 				3D6FD8DB1B4A3C08008E70E9 /* b_search.png in Resources */,
 				FFC2C6F21AF935E0004B0AA7 /* Images.xcassets in Resources */,
+				7B7987AD1B719819000B2765 /* SoundView.xib in Resources */,
 				3DFB8A301B4CC4A900463EA4 /* TwitterKitResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -704,6 +722,7 @@
 				7BE9F2A21B680FDE00AAD032 /* EventManager.swift in Sources */,
 				3DA699EC1B6946220021FBF1 /* EventInfoViewController.swift in Sources */,
 				3DA7BD821B6A2BD600882C07 /* PushResponse.swift in Sources */,
+				7B7987B31B71B39B000B2765 /* ActionButtonItem.swift in Sources */,
 				7BED36651B54B9430045FDB5 /* TransitionManager.swift in Sources */,
 				FF3692461B6296DA00C71BBC /* ETBScrollView.swift in Sources */,
 				7B6315601B66D7A400D13DE5 /* GlobalConstants.swift in Sources */,
@@ -720,6 +739,7 @@
 				3D6A3AC71B5774C400E7948F /* CreateConversationViewController.swift in Sources */,
 				7B9FB4691B6D3C7500BD7016 /* JSSAlertView.swift in Sources */,
 				FFC2C6E81AF935E0004B0AA7 /* AppDelegate.swift in Sources */,
+				7B7987AC1B719819000B2765 /* SoundView.m in Sources */,
 				3DE9289B1B55D8540053B43C /* CustomCellProfile.swift in Sources */,
 				7B4D268D1B55BAE500DD86EF /* JsonResponse.swift in Sources */,
 				7BACDD5D1B4DB6E600AA7060 /* PermissionsResponse.swift in Sources */,
@@ -744,10 +764,12 @@
 				3D3359E91B61B73400F22D88 /* CustomCellAmigosGrupo.swift in Sources */,
 				3DEE4F5A1B4ED86100645CA1 /* FriendViewController.swift in Sources */,
 				7BF9E0921B697D2C0090FE47 /* MidPointTableViewCell.swift in Sources */,
+				7B7987B21B71B39B000B2765 /* ActionButton.swift in Sources */,
 				7B84B6321B6D9609001AE500 /* PartidaSelectVC.swift in Sources */,
 				3D6A3AC51B5771D200E7948F /* CustomCellConversas.swift in Sources */,
 				7B9FB46B1B6D7A7000BD7016 /* GestureRecognizerMap.swift in Sources */,
 				FF3692361B5FFF7E00C71BBC /* UBAView.swift in Sources */,
+				7B7987AF1B71997B000B2765 /* ShowEvents.swift in Sources */,
 				FF36924D1B66DCF700C71BBC /* ConfigurationViewController.swift in Sources */,
 				FF36924F1B66DE3A00C71BBC /* UserConfigurations.swift in Sources */,
 				3DA699EE1B69497D0021FBF1 /* UsersTableViewCell.swift in Sources */,

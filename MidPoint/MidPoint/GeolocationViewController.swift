@@ -41,7 +41,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     }
     @IBAction func groups(sender: AnyObject) {
-        let nextViewController = TransitionManager.creatView("ConversasTableView") as! ConversasTableViewController
+        let nextViewController = TransitionManager.creatView("ConversasVC") as! ShowEvents
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
 
@@ -58,7 +58,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     
     func grupos(){
-        let nextViewController = TransitionManager.creatView("ConversasTableView") as! ConversasTableViewController
+        let nextViewController = TransitionManager.creatView("ConversasVC") as! ShowEvents
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }

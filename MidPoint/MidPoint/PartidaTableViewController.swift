@@ -7,15 +7,21 @@
 //
 
 import UIKit
-
-class PartidaTableViewController: UITableViewController, UITableViewDataSource , UITableViewDelegate, UserManagerDelegate {
+protocol PartidaProtocol {
+    func locationFinished(location : Localizacao?)
+}
+class PartidaTableViewController: UITableViewController, UITableViewDataSource , UITableViewDelegate, UserManagerDelegate, PartidaSelectProtocol {
            private var locations:Array<Localizacao> = Array()
+    var shouldReturn : Bool = false
     var user : User?
+    var delegate : PartidaProtocol?
     private var  alertView1 =  JSSAlertView()
     private var  alertView2 =  JSSAlertView()
     var event: Event?
     var location: CLLocationCoordinate2D?
     var userManager = UserManager()
+    
+    var localizacao: Localizacao?
     override func  viewDidLoad() {
         self.title = "Pontos de Partida"
         var logButton : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("adicionarNovaLocalizacao"))
@@ -29,12 +35,22 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
         super.viewWillAppear(animated)
         
         self.user = UserDAODefault.getLoggedUser()
+        if (self.navigationController?.view != nil  ){
         alertView1.show(self.navigationController!.view!, title: "Carregando", text: "Aguarde enquanto carregamos algumas informações", buttonText: nil, color: UIColorFromHex(0x9b59b6, alpha: 1))
+        }
+        else {
+        alertView1.show(self.view!, title: "Carregando", text: "Aguarde enquanto carregamos algumas informações", buttonText: nil, color: UIColorFromHex(0x9b59b6, alpha: 1))
+        }
         alertView1.setTextTheme(.Light)
 
         userManager.getAllLocation(self.user!)
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (shouldReturn == true) {
+            self.delegate?.locationFinished(locations[indexPath.row])
+            self.dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
         let nextView = TransitionManager.creatView("CreateConversation") as! CreateConversationViewController
         nextView.startLocation = locations[indexPath.row]
         if(self.location != nil){
@@ -90,6 +106,12 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
     }
     
     func cancelCallback() {
+        if (shouldReturn == true){
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        else {
+            self.navigationController?.popViewControllerAnimated(true)
+        }
         println("Cancelar")
     }
     func errorThrowedServer(stringError: String) {
@@ -100,5 +122,8 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
     
         self.alertView1.removeView()
     }
-    
+    func locationFinished(location: Localizacao?) {
+        self.delegate?.locationFinished(location)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

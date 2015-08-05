@@ -6,3 +6,4 @@
 #import <JSQMessagesViewController/JSQMessages.h>
 #import "IHKeyboardAvoiding.h"
 #import "RKDropdownAlert.h"
+#import "SoundView.h"

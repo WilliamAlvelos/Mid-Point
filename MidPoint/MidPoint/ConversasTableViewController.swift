@@ -59,7 +59,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     }
     
     func reloadData(){
-        self.eventDelegate.getEventsFromUser(UserDAODefault.getLoggedUser(), usuario: .All)
         
         }
     
@@ -140,10 +139,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.resultSearchController.active = false
-        let nextView = TransitionManager.creatView("changeMidPoint") as! ChangeMidPointViewController
-        nextView.event = Data[indexPath.row]
-        nextView.conversa = Data[indexPath.row].id
-        self.navigationController?.pushViewController(nextView, animated: true)
+       
     }
 
     
