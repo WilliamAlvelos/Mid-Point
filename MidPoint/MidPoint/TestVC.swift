@@ -25,7 +25,7 @@ class TestVC: UIViewController {
         /* Cria uma nova ETB, com a quantidade de botões 
         na barra e a imagem de cada um deles */
         
-        var newETB = ETBScrollView(numberOfButtons: 3, images:[UIImage(named: "btest1.png")!, UIImage(named: "btest2.png")!,UIImage(named: "btest3.png")!])
+        var newETB = ETBScrollView(numberOfButtons: 3, images:[UIImage(named: "user_historico")!, UIImage(named: "user_locais_favoritos")!,UIImage(named: "user_chat")!])
         
         //Cor de fundo da barra
         newETB.toolbarBackgroundColor = UIColor.blackColor()

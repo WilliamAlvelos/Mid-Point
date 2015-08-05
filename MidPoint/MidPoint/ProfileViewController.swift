@@ -60,6 +60,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.refreshControl?.addTarget(self, action: Selector("reloadData"), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(self.refreshControl!)
         
+        
+        
         self.tableView.backgroundColor = Colors.Azul
         
         //Mude a cor da view que irá inserir a ETB para a mesma da toolbar
@@ -69,7 +71,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         //self.navigationController?.view.addSubview(newETB)
         
         //Adiciona um seletor para o botão no indice passado
-        //newETB.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
+
         
         self.eventManager.delegate = self
         

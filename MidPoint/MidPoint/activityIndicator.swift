@@ -29,6 +29,7 @@ class activityIndicator {
         boxView = UIView(frame: CGRect(x: view.view.frame.midX - (textLabel.frame.width/2 + 25), y: view.view.frame.midY - 30, width: 60 + textLabel.frame.width, height: 50))
         boxView.backgroundColor = Colors.Azul
         boxView.alpha = 0.8
+        boxView.userInteractionEnabled = false
         boxView.layer.cornerRadius = 10
         
         boxView.addSubview(activityView)
@@ -40,7 +41,6 @@ class activityIndicator {
             activityView.color = Colors.Azul
             boxView.backgroundColor = Colors.Rosa
         }
-        
         
         view.view.addSubview(boxView)
     }

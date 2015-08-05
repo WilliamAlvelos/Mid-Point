@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversasTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, EventManagerDelegate{
+class ConversasTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, EventManagerDelegate, UserManagerDelegate{
 
     var conversasRef:Firebase = Firebase(url: "https://midpoint.firebaseio.com/")
     
@@ -18,18 +18,29 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     var filteredImageData = [UIImage]()
     
+    var event = Event()
+    
+    var userManager = UserManager()
+    
     var eventDelegate = EventManager()
     
     var resultSearchController = UISearchController()
     
+    var avatars = NSMutableDictionary()
+    
+    var pessoas = NSMutableDictionary()
+    
+    var activity :activityIndicator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.activity = activityIndicator(view: self.navigationController!, texto: "Carregando Eventos", inverse: false, viewController: self)
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.eventDelegate.delegate = self
-        
+        self.userManager.delegate = self
         
        self.reloadData()
         self.resultSearchController = ({
@@ -43,8 +54,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             
             return controller
         })()
-    
         
+        self.eventDelegate.getEventsFromUser(UserDAODefault.getLoggedUser(), usuario: .All)
         
         //refreshControl
         self.refreshControl = UIRefreshControl()
@@ -58,31 +69,16 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
     }
     
+    
     func reloadData(){
-        self.eventDelegate.getEventsFromUser(UserDAODefault.getLoggedUser(), usuario: .All)
-        
-        }
+        self.refreshControl?.endRefreshing()
+    }
     
 
     
-    func setupFirebase() {
-        
-        conversasRef.observeEventType(FEventType.ChildAdded, withBlock: { snapshot in
-            var id = snapshot.value["id"] as? Int
-            var title = snapshot.value["text"] as? String
-            var subtitle = snapshot.value["subtitle"] as? String
-            var image = snapshot.value["image"] as? String
-            
-            //var conversa = Event(id: id!, title: title!, subtitle:subtitle!)
-            
-            var event = Event(name: title!, id: id!, descricao: subtitle!)
-            
-            
-            self.Data.append(event)
-        })
-        
-    }
     
+    
+
     
     func animateTable() {
         tableView.reloadData()
@@ -108,23 +104,12 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         
     }
     
-    func addConversation(id: String!, title: String!, subtitle: String!, image: String!) {
-        
-        conversasRef.childByAppendingPath(id).setValue([
-            "id":id,
-            "title":title,
-            "subtitle":subtitle,
-            "image":image
-            ])
-        
-    }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
 
         if (self.resultSearchController.active) {
             return self.filteredTableData.count
@@ -134,16 +119,25 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         }
     }
     
-    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.activity?.removeActivityViewWithName(self)
+    }
     
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.resultSearchController.active = false
-        let nextView = TransitionManager.creatView("changeMidPoint") as! ChangeMidPointViewController
-        nextView.event = Data[indexPath.row]
-        nextView.conversa = Data[indexPath.row].id
+        
+        var nextView = TransitionManager.creatView("ChatViewController") as! ChatViewController
+        nextView.conversa = self.Data[indexPath.row].id
+        nextView.event = self.Data[indexPath.row]
+        nextView.imageEvent = self.Data[indexPath.row].image
+        nextView.avatars = self.avatars
+        nextView.users = self.pessoas
         self.navigationController?.pushViewController(nextView, animated: true)
+       
     }
 
     
@@ -220,10 +214,34 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     func getEventsFinished(events: Array<Event>) {
         self.eventDelegate.getImages(events)
         
+        for event in events{
+            self.userManager.getUsersFrom(event)
+        }
     }
     
     func downloadImageEventFinshed(event: Event) {
         // descobrir aonde esta esse evento na table view, e recarregar a celula
+    }
+    
+    
+    func getUsersFinished(users: Array<User>, event: Event) {
+        self.userManager.getImages(users, event: event)
+        
+        
+    }
+    
+    func downloadImageUsersFinished(users:Array<User>, event: Event){
+        
+        self.avatars = NSMutableDictionary()
+        self.avatars.removeAllObjects()
+        
+        for user in users {
+            var usuario :JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(user.image, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+            self.avatars.setValue(usuario, forKey: "\(user.id!)")
+        }
+        
+        self.activity?.removeActivityViewWithName(self)
+
     }
 
 }

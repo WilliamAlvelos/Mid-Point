@@ -155,7 +155,6 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         
         cell.imageLabel.layer.masksToBounds = true
         
-        cell.backgroundColor = Colors.Azul
         
 //
 //        cell.imageLabel?.layer.cornerRadius = cell.imageLabel.frame.size.height/2.0

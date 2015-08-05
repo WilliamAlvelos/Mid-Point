@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UserManagerDelegate{
+class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UserManagerDelegate, PartidaProtocol{
 
-    
+    var alertView2: JSSAlertView = JSSAlertView()
+
     var userManager: UserManager?
     
     @IBOutlet var mapView: MKMapView!
@@ -18,8 +19,9 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     var event : Event?
     
     var user  = User()
-    
-    var radius: CLLocationDistance = 300
+    var actionButton: ActionButton!
+
+    var radius: CLLocationDistance = 750
     
     let googleAPIKey: String = "AIzaSyA75fDAWf4X6SJmcDA1UDxQNM0HjwMc9bc"
 
@@ -30,14 +32,14 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     var pessoas = NSMutableDictionary()
     
     var midPoint : MKPointAnnotation = MKPointAnnotation()
+    
+    var activity:activityIndicator?
 
     var locations = Localizacao()
     
     var locationManager = CLLocationManager()
     
     var array = Array<User>()
-    
-    var activity: activityIndicator?
     
     var pins = Array<MKPointAnnotation>()
     
@@ -54,49 +56,36 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
+        self.activity = activityIndicator(view: self.navigationController!, texto: "Carregando Locais", inverse: true, viewController: self)
         
+        let twitterImage = UIImage(named: "sim_selected")!
+        let plusImage = UIImage(named: "talvez_selected")!
+        let twitter = ActionButtonItem(title: "Aceitar", image: twitterImage)
+        twitter.action = {
         
-        self.title = "MID POINT"
+            item in
+            DispatcherClass.dispatcher({ () -> () in
+               self.acepted()
+            })
 
-//        var reply = UIBarButtonItem(image: UIImage(named: "btest3"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("conversa:"))
-//        self.navigationItem.rightBarButtonItem = reply
-//        
+        }
         
+        let google = ActionButtonItem(title: "Recusar", image: plusImage)
+        google.action = { item in
+            self.refused()
+        
+        
+        
+        }
+
+        actionButton = ActionButton(attachedToView: self.view, items: [google, twitter])
+        actionButton.action = { button in button.toggleMenu() }
+        actionButton.backgroundColor = Colors.Rosa
+        self.title = "Mid Point"
+
         
         self.userManager!.getUsersFrom(event!)
         
-        
-        
-        var tapRecognizer: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("tap:"))
-        
-        
-        tapRecognizer.minimumPressDuration = 2.0;
-        
-//        tapRecognizer.numberOfTouchesRequired = 1
-        
-        
-        self.mapView.addGestureRecognizer(tapRecognizer)
-
-        gestureRecognizer  = GestureRecognizerMap()
-
-        gestureRecognizer!.initWithViewController(self, mapView: self.mapView)
-    
-       // userManager!.getUsersFrom(event!)
-        
-        //        //Inicia a UBA com o numero de botoões
-        var uba = UBAView(buttonsQuantity: 4)
-        //
-        //        //Prepara os botões na view passada
-
-        uba.prepareAnimationOnView(self.view, navigation: self.navigationController!.navigationBar.frame.size)
-        
-        uba.addSelectorToButton(0, target: self, selector: Selector("acepted"), image:"group")
-        
-        uba.addSelectorToButton(1, target: self, selector: Selector("refused"), image:"group")
-        
-        uba.addSelectorToButton(2, target: self, selector: Selector("passed"), image:"group")
-        
-        uba.addSelectorToButton(3, target: self, selector: Selector("owner"), image:"group")
     
         
         var messageButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -118,43 +107,24 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         self.navigationController?.pushViewController(nextView, animated: true)
         
     }
-    
-    func tap(recognizer: UITapGestureRecognizer){
-        self.mapView.removeAnnotation(self.userPoint)
-    
-        
-        var point: CGPoint = recognizer.locationInView(self.mapView)
-        
-        var tapPoint: CLLocationCoordinate2D = self.mapView.convertPoint(point, toCoordinateFromView: self.view)
-        
-        var point1 : MKPointAnnotation = MKPointAnnotation()
-        
-        point1.coordinate = tapPoint
 
-        var localizacao = Localizacao()
-        
-        localizacao.latitude = NSNumber(double: point1.coordinate.latitude) as Float
-        
-        localizacao.longitude = NSNumber(double: point1.coordinate.longitude) as Float
-        
-        localizacao.name = self.user.name
-        
-        self.userManager!.updateUserLocationAndState(self.user, location: localizacao, event: event!, state: self.user.state!.state!)
-        
-        self.userPoint = point1
-        
-        self.mapView.addAnnotation(point1)
-//    
-    }
     
     
     override func viewWillDisappear(animated: Bool) {
-        activity?.removeActivityViewWithName(self)
+        alertView2.removeView()
     }
     
     
     func acepted(){
-        self.userManager!.updateUserLocationAndState(UserDAODefault.getLoggedUser(), location: nil, event: event!, state: Option.Accepted)
+        let a = TransitionManager.creatView("PartidaTableViewController") as! PartidaTableViewController
+        a.shouldReturn = true
+        a.delegate = self
+        
+        let b = TransitionManager.creatView("navigationController") as! UINavigationController
+        b.viewControllers = [a]
+        self.navigationController!.presentViewController(b, animated: true, completion: nil)
+        //
+//
     }
     
     func owner(){
@@ -182,7 +152,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         //showActivity()
         
         //Not completed. Needs [ &types=" + type + ] in the future ***
-        activity = activityIndicator(view: self.navigationController!, texto: "Buscando locais", inverse: false, viewController: self)
+     
         
         var url = "https://maps.googleapis.com/maps/api/place/search/json?location=\(location.latitude),\(location.longitude)&radius=\(radius)&sensor=true&key=" + googleAPIKey
         
@@ -218,7 +188,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
                     println(error)
                 }
                 
-                if((places.count < 15 && name == "") || places.count < 1){
+                if((places.count < 5 && name == "") || places.count < 1){
                     
                     if(self.radius < 3000000){
                         self.radius = self.radius * 2
@@ -276,8 +246,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
             
         })
         
-        self.activity?.removeActivityViewWithName(self)
 
+        self.alertView2.removeView()
     }
     
     
@@ -304,7 +274,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
 
         }
         
-        activity?.removeActivityViewWithName(self)
+        self.alertView2.removeView()
     }
     
     
@@ -405,11 +375,13 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
             self.avatars?.setValue(usuario, forKey: "\(user.id!)")
         }
         
+        self.activity?.removeActivityViewWithName(self)
     }
     
 
     func errorThrowedServer(stringError: String) {
-        
+        alertView2.danger(self.navigationController!.view, title: "Oh, shit.", text: stringError, cancelButtonText : "Ok")
+    
     }
     
     func errorThrowedSystem(error: NSError) {
@@ -435,13 +407,17 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         let region = MKCoordinateRegionMakeWithDistance(self.midPoint.coordinate, radius, radius)
         
         addPointsOfInterest("", name: "", location: self.midPoint.coordinate, pageToken: "")
-//        self.mapView.setRegion(MKCoordinateRegion(center: self.midPoint.coordinate, span: self.radius), animated: true)
+
         self.mapView.setRegion(region, animated: true)
 
-        self.activity?.removeActivityViewWithName(self)
+        self.alertView2.removeView()
         
         
-        
+    }
+    
+    func locationFinished(location: Localizacao?) {
+        alertView2.show(self.view!, title: "Carregando", text: "Estamos salvando o ponto.", buttonText: nil, color: Colors.Rosa)
+        self.userManager!.updateUserLocationAndState(UserDAODefault.getLoggedUser(), location: location, event: event!, state: Option.Accepted)
     }
 //    override func viewWillDisappear(animated: Bool) {
 //        mapView.showsUserLocation = false;

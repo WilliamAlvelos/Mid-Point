@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+protocol PartidaSelectProtocol {
+    func locationFinished(location : Localizacao?)
+}
 class PartidaSelectVC: UIViewController, GestureRecognizerMapDelegate, UserManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var location: Localizacao?
@@ -16,6 +18,8 @@ class PartidaSelectVC: UIViewController, GestureRecognizerMapDelegate, UserManag
     var userManager : UserManager?
     var alertView1: JSSAlertView?
     private var viewToPres: UIView?
+    var delegate: PartidaSelectProtocol?
+    var shouldReturn : Bool = false
     override func viewDidLoad() {
         gestureRecognizer = GestureRecognizerMap()
         gestureRecognizer?.delegate = self
@@ -23,6 +27,7 @@ class PartidaSelectVC: UIViewController, GestureRecognizerMapDelegate, UserManag
         userManager = UserManager()
         userManager?.delegate = self
         viewToPres = view
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -61,9 +66,11 @@ class PartidaSelectVC: UIViewController, GestureRecognizerMapDelegate, UserManag
     }
     func insertLocationFinished() {
         alertView1?.removeView()
+        self.delegate?.locationFinished(location)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     override func viewWillDisappear(animated: Bool) {
+        
         self.cleanClass()
     }
     func cleanClass(){

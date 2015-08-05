@@ -41,7 +41,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     }
     @IBAction func groups(sender: AnyObject) {
-        let nextViewController = TransitionManager.creatView("ConversasTableView") as! ConversasTableViewController
+        let nextViewController = TransitionManager.creatView("ConversasVC") as! ShowEvents
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
 
@@ -53,12 +53,17 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
         
+    }
+    
+    func messages(){
+        let nextViewController = TransitionManager.creatView("ConversasTableView") as! ConversasTableViewController
         
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     
     func grupos(){
-        let nextViewController = TransitionManager.creatView("ConversasTableView") as! ConversasTableViewController
+        let nextViewController = TransitionManager.creatView("ConversasVC") as! ShowEvents
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
@@ -79,17 +84,15 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         
         self.localTextField.layer.cornerRadius = self.localTextField.frame.height/2
+        //#warning
         let font = UIFont(name: "OpenSans-light", size: 42)
 
-        self.navigationController!.navigationBar.barTintColor = Colors.Azul
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : Colors.Branco]
-        
-        self.navigationController?.navigationBar.tintColor = Colors.Branco
+        UIMPConfiguration.customTabBar(self.navigationController!.navigationBar)
         
         //activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse:false, viewController:self)
 
 //        //Inicia a UBA com o numero de botoões
-        var uba = UBAView(buttonsQuantity: 3)
+        var uba = UBAView(buttonsQuantity: 4)
 //        
 //        //Prepara os botões na view passada
         uba.prepareAnimationOnView(self.view, navigation: self.navigationController!.navigationBar.frame.size)
@@ -98,7 +101,9 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         uba.addSelectorToButton(1, target: self, selector: Selector("grupos"), image:"group")
         
-        uba.addSelectorToButton(2, target: self, selector: Selector("creatGroup"), image:"group")
+        uba.addSelectorToButton(2, target: self, selector: Selector("messages"), image:"main_chat")
+        
+        uba.addSelectorToButton(3, target: self, selector: Selector("creatGroup"), image:"main_mais")
     
         
         addPointsOfInterest("", name: "", location: geoLocation, pageToken: "")
@@ -115,6 +120,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         self.title = "Mapa"
 
     }
+
     
     override func viewWillAppear(animated: Bool) {
         mapView.delegate = self
@@ -293,8 +299,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 
                     roleButton.frame.size.width = 44
                     roleButton.frame.size.height = 44
-                    roleButton.backgroundColor = UIColor.redColor()
-                    roleButton.setImage(UIImage(named: "teste.png"), forState: .Normal)
+                    roleButton.setImage(UIImage(named: "main_seta"), forState: .Normal)
                 
                 
                 
@@ -304,8 +309,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 
                     pinView!.rightCalloutAccessoryView = roleButton
                 
-                    var icon = UIImageView(image: UIImage(named: "teste.png"))
-                    pinView!.leftCalloutAccessoryView = icon
+//                    var icon = UIImageView(image: UIImage(named: "teste.png"))
+//                    pinView!.leftCalloutAccessoryView = icon
                 
             }
             else {

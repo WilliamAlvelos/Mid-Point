@@ -22,8 +22,6 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     @IBOutlet weak var createAccountButton: UIButton!
     @IBOutlet weak var labelCadastre: UILabel!
     @IBOutlet weak var labelOu: UILabel!
-
-    
     var activity: activityIndicator?
     
     var usuario: UserManager = UserManager()
@@ -34,7 +32,6 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         IHKeyboardAvoiding.setAvoidingView(self.view)
-        
     }
     @IBAction func buttonTwitterTouch(sender: AnyObject) {
         Twitter.sharedInstance().logInWithCompletion { session, error in
@@ -50,15 +47,27 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         override func viewDidLoad() {
         super.viewDidLoad()
         
+        if(UserDAODefault.getLoggedUser().id != nil){
+            
+            let nextViewController = TransitionManager.creatView("navigationHome") as! UINavigationController
+            self.presentViewController(nextViewController, animated:true, completion:nil)
+            
+        }
+            
         usuario.delegate = self
         self.view.backgroundColor = Colors.Azul
         appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0
         
+        
+       
             
-        //UIMPConfiguration.configureNavigationBar(self.navigationController!.navigationBar, color: Colors.Azul)
+            //UIMPConfiguration.configureNavigationBar(self.navigationController!.navigationBar, color: Colors.Azul)
         UIMPConfiguration.configureTextField(self.nomeText, text: "qual o seu email?")
         UIMPConfiguration.configureTextField(self.senhaText, text: "e a sua senha secreta?")
         
+            
+            
+            
         UIMPConfiguration.addBorderToView(self.loginButton, color: Colors.Rosa, width: 3.0, corner: 25.0)
         UIMPConfiguration.addColorAndFontToButton(self.loginButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 20)
         UIMPConfiguration.addColorAndFontToButton(self.createAccountButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 18)
