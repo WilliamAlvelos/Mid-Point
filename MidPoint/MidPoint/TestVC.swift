@@ -50,7 +50,7 @@ class TestVC: UIViewController {
         self.view.backgroundColor = UIColor.blackColor()
         
         //Adiciona a ETB na view
-        //self.view.addSubview(newETB)
+        self.view.addSubview(newETB)
         
         //Adiciona um seletor para o botão no indice passado
         newETB.addSelectorToButton(2,target:self, selector: Selector("holyTest"))

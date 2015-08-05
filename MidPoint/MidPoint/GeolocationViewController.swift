@@ -66,6 +66,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     func perfil(){
         let nextViewController = TransitionManager.creatView("ProfileView") as! ProfileViewController
+        nextViewController.user = UserDAODefault.getLoggedUser()
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
         
@@ -77,13 +78,13 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         super.viewDidLoad()
         
         
+        self.localTextField.layer.cornerRadius = self.localTextField.frame.height/2
         let font = UIFont(name: "OpenSans-light", size: 42)
 
         self.navigationController!.navigationBar.barTintColor = Colors.Azul
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : Colors.Branco]
         
         self.navigationController?.navigationBar.tintColor = Colors.Branco
-
         
         //activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse:false, viewController:self)
 

@@ -225,9 +225,6 @@
 		FF36924A1B66845500C71BBC /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		FF36924C1B66DCF700C71BBC /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		FF36924E1B66DE3A00C71BBC /* UserConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserConfigurations.swift; sourceTree = "<group>"; };
-		FF38671F1B6AE58C0075E612 /* btest3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btest3.png; sourceTree = "<group>"; };
-		FF3867201B6AE58C0075E612 /* btest2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btest2.png; sourceTree = "<group>"; };
-		FF3867211B6AE58C0075E612 /* btest1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btest1.png; sourceTree = "<group>"; };
 		FFC2C6E21AF935E0004B0AA7 /* MidPoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidPoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC2C6E61AF935E0004B0AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFC2C6E71AF935E0004B0AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -454,9 +451,6 @@
 		FF3692311B5FFF4E00C71BBC /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				FF38671F1B6AE58C0075E612 /* btest3.png */,
-				FF3867201B6AE58C0075E612 /* btest2.png */,
-				FF3867211B6AE58C0075E612 /* btest1.png */,
 				FF3692451B6296DA00C71BBC /* ETBScrollView.swift */,
 				FF3692321B5FFF7E00C71BBC /* UBAView.swift */,
 				FF3692331B5FFF7E00C71BBC /* UBAButton.swift */,

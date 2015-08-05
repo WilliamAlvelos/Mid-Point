@@ -60,30 +60,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.refreshControl?.addTarget(self, action: Selector("reloadData"), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(self.refreshControl!)
         
-        
-        var newETB = ETBScrollView(numberOfButtons: 3, images:[UIImage(named: "btest1.png")!, UIImage(named: "btest2.png")!,UIImage(named: "btest3.png")!])
-        
-        //Cor de fundo da barra
-        newETB.toolbarBackgroundColor = Colors.Azul
-        
-        //Foto do usuário
-        newETB.profileImage = user?.image
-        
-        //Nome do usuário
-        newETB.profileName = user?.name
-        
-        //Local do usuário
-        newETB.profileLocation = "Maceio"
-        
-        //View de teste
-        var viewTeste = UIView(frame:self.view.frame)
-        viewTeste.backgroundColor = Colors.Rosa
-        
-        //Prepara a ETB, passando a view com o conteúdo que ela terá normalmente e o frame da view onde a ETB será inserida
-        newETB.prepareScrollViewWithContent(self.view, frame: self.view.frame)
-        
-        
-        
         self.tableView.backgroundColor = Colors.Azul
         
         //Mude a cor da view que irá inserir a ETB para a mesma da toolbar
@@ -93,14 +69,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         //self.navigationController?.view.addSubview(newETB)
         
         //Adiciona um seletor para o botão no indice passado
-        newETB.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
+        //newETB.addSelectorToButton(1,target:self, selector: Selector("holyTest"))
         
         self.eventManager.delegate = self
         
         navItem = self.navigationItem
         
         navItem?.title = user!.name
-        
         
         
         tableView.delegate = self
@@ -117,6 +92,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     }
     
     func reloadData(){
+        self.refreshControl?.endRefreshing()
+        
         eventManager.getEventsFromUser(self.user!, usuario: .All)
         //eventManager.getEvent(UserDAODefault.getLoggedUser(), usuario: .All)
         animateTable()

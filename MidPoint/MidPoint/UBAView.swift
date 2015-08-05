@@ -147,16 +147,31 @@ class UBAView: UIView, UIGestureRecognizerDelegate, UBAButtonTouch {
         //Border space of the buttons
         let border = size * borderFactor
         
-        var buttonFrame = CGRectMake(border, view.frame.height/2, size, size)
+        var buttonFrame = CGRectMake(border, view.frame.height/2 - 100, size, size)
         let spacement = CGFloat(Double(size) * spaceFactor)
         
         //Radius of the rounded part of the U
         let radius = size * radiusFactor
         
+        
+        //
+        //  [A]               [F]
+        //   |                 |
+        //   |                 |
+        //   |                 |
+        //   |                 |
+        //  (1)               (5)
+        //   |                 |
+        //   |                 |
+        //   |                 |
+        //  [B]               [E]
+        //   |                 |
+        //  (2)-[C]--(3)--[D]-(4)
+        
         //Points of the U shape
-        let pointA = CGPointMake(buttonFrame.origin.x, buttonFrame.origin.y + self.frame.size.height/2 + navigation.height)
-        let pointB = CGPointMake(border, self.frame.size.height - radius - border - size + self.frame.size.height/2 + navigation.height)
-        let pointC = CGPointMake(border + radius, self.frame.size.height - border - size + self.frame.size.height/2 + navigation.height)
+        let pointA = CGPointMake(buttonFrame.origin.x, buttonFrame.origin.y + self.frame.size.height/2 - navigation.height * 2)
+        let pointB = CGPointMake(border, self.frame.size.height - radius - border - size + self.frame.size.height/2 )
+        let pointC = CGPointMake(border + radius, self.frame.size.height - border - size + self.frame.size.height/2)
         let pointD = CGPointMake(self.frame.size.width - border - radius - size, pointC.y)
         let pointE = CGPointMake(self.frame.size.width - border - size, pointB.y)
         let pointF = CGPointMake(pointE.x, pointA.y )

@@ -49,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
 //        
 
+        
         Parse.setApplicationId("rpnQRmwvLdmTkuLSFkgFZTOXIhpIvjfrzM2k33vK",
             clientKey: "JwLwixuhZEzE2ZJX5u5ZQHsnj1nwEo3AUxvTHQxB")
         if application.applicationState != UIApplicationState.Background {
