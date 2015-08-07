@@ -20,13 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func teste(){
-        var user = User(id: 35)
-        var localizacao = Localizacao()
-        localizacao.latitude = -144.837
-        localizacao.longitude = 343.16
-        localizacao.name = "Nome do local"
-        var event = Event()
-        event.id = 10;
+        
+        var user = User()
+        
+        //UserDAODefault.saveLogin(user)
+//        var user = User(id: 35)
+//        var localizacao = Localizacao()
+//        localizacao.latitude = -144.837
+//        localizacao.longitude = 343.16
+//        localizacao.name = "Nome do local"
+//        var event = Event()
+//        event.id = 10;
        // UserDAOCloudKit().insereNovaLocalizacao(UserDAODefault.getLoggedUser(), localizacao: localizacao)
     }
     

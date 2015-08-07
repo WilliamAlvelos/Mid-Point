@@ -42,6 +42,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         self.clearsSelectionOnViewWillAppear = false
         progressView = ProgressView(frame: self.view.frame)
 
+        self.navigationController!.navigationBar.translucent = true
         self.resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.dimsBackgroundDuringPresentation = false
@@ -156,6 +157,10 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController!.navigationBar.translucent = false
+    }
+    
     func errorThrowedSystem(error: NSError) {
         
     }

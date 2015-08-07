@@ -47,6 +47,7 @@ class LoginViewController: UIViewController, UserManagerDelegate {
         override func viewDidLoad() {
         super.viewDidLoad()
         
+            
         if(UserDAODefault.getLoggedUser().id != nil){
             
             let nextViewController = TransitionManager.creatView("navigationHome") as! UINavigationController

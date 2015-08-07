@@ -42,6 +42,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.eventDelegate.delegate = self
         self.userManager.delegate = self
         
+        self.navigationController!.navigationBar.translucent = true
+        
        self.reloadData()
         self.resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)
@@ -121,9 +123,11 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        self.navigationController!.navigationBar.translucent = false
         self.activity?.removeActivityViewWithName(self)
     }
+    
+    
     
 
     
@@ -210,8 +214,10 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.Data = images
         self.animateTable()
         self.refreshControl?.endRefreshing()
+        self.activity?.removeActivityViewWithName(self)
     }
     func getEventsFinished(events: Array<Event>) {
+        
         self.eventDelegate.getImages(events)
         
         for event in events{
