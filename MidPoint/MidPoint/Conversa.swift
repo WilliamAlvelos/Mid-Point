@@ -22,3 +22,5 @@ class Conversa: NSObject{
         self.subtitle = subtitle
     }
 }
+
+

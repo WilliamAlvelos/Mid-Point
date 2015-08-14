@@ -12,7 +12,6 @@ import Foundation
 
 class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UserManagerDelegate{
     
-    var demoData:DemoModelData?
     var event: Event?
     var conversa:Int?
     var imageEvent: UIImage?
@@ -48,7 +47,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.collectionView.collectionViewLayout.springinessEnabled = true
+        self.collectionView.collectionViewLayout.springinessEnabled = false
         
         
     }
@@ -72,7 +71,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         self.senderId = String(format: "%d", UserDAODefault.getLoggedUser().id!)
         self.senderDisplayName = UserDAODefault.getLoggedUser().name
         self.showLoadEarlierMessagesHeader = false
-        self.demoData = DemoModelData()
         setupFirebase()
         //setupImageFirebase()
         

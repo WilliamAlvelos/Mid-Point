@@ -48,7 +48,9 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.sizeToFit()
             controller.searchBar.delegate = self
+            controller.searchBar.backgroundColor = Colors.Azul
             self.tableView.tableHeaderView = controller.searchBar
+            
             
             return controller
         })()

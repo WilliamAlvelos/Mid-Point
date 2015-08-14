@@ -12,9 +12,7 @@ import CoreLocation
 
 
 
-class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-
-    @IBOutlet var localTextField: UITextField!
+class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UISearchControllerDelegate{
     
     var nomeUser: String?
     
@@ -28,16 +26,17 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     var bool : Bool = true
     
+    var barra: Bool = false
+    
+    var resultSearchController = UISearchController()
+    
     var activity :activityIndicator?
     
     var pinsLocations = Array<MKPointAnnotation>()
     
-    
     var geoLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(-23.670055, -46.701234)
-
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        localTextField.resignFirstResponder()
 
     }
     @IBAction func groups(sender: AnyObject) {
@@ -79,11 +78,39 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }
     
+    func showSearch(sender: UIButton){
+        
+        if(!barra){
+            self.resultSearchController = ({
+                let controller = UISearchController(searchResultsController: nil)
+                controller.dimsBackgroundDuringPresentation = true
+                controller.hidesNavigationBarDuringPresentation = false
+
+                controller.searchBar.delegate = self
+                controller
+                return controller
+            })()
+            self.barra = true
+            self.navigationItem.titleView = resultSearchController.searchBar
+            //self.navigationItem.rightBarButtonItem = nil
+        }else{
+            self.navigationItem.titleView = nil
+            self.barra = false
+        }
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var messageButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        messageButton.setImage(UIImage(named: "main_buscar"), forState: UIControlState.Normal)
+        messageButton.addTarget(self, action: Selector("showSearch:"), forControlEvents: .TouchUpInside)
+        var message = UIBarButtonItem(customView: messageButton)
         
-        self.localTextField.layer.cornerRadius = self.localTextField.frame.height/2
+        self.navigationItem.rightBarButtonItem = message
+        
         //#warning
         let font = UIFont(name: "OpenSans-light", size: 42)
 
@@ -91,6 +118,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         //activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse:false, viewController:self)
 
+        
+        
 //        //Inicia a UBA com o numero de botoões
         var uba = UBAView(buttonsQuantity: 4)
 //        
@@ -126,7 +155,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
-        localTextField.hidden = true
         
         locationManager.requestAlwaysAuthorization()
     }
@@ -366,31 +394,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 //        detailView.phoneNumber = annView.phonenumber;
 //        [self presentModalViewController:detailView animated:YES];
     }
-    
-
-    @IBAction func actionSearch(sender: AnyObject) {
-        
-        
-        
-        if(localTextField.hidden){
-            localTextField.hidden = false
-            
-        }else{
-        
-            activity = activityIndicator(view: self.navigationController!, texto: "Buscando Locais", inverse: false, viewController: self)
-            
-            localTextField.hidden = true
-            
-            var string = localTextField.text.stringByReplacingOccurrencesOfString(" ", withString: "%20", options:  NSStringCompareOptions.LiteralSearch, range: nil)
-            
-            //var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
-            
-            
-            addPointsOfInterest("", name: string, location: geoLocation, pageToken: "")
-            
-            locationManager.startUpdatingLocation()
-        }
-    }
 
     func locationManager(manager: CLLocationManager!,
         didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -439,8 +442,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         mapView.userLocation.title = nomeUser
         
-        var string : String = localTextField.text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)! as String
-
     }
 
     
@@ -477,6 +478,20 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         }
         
         
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        
+        var string = searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "%20", options:  NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        self.addPointsOfInterest(string, name: string, location: self.geoLocation, pageToken: "")
+    
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        var string = searchController.searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "%20", options:  NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        self.addPointsOfInterest(string, name: string, location: self.geoLocation, pageToken: "")
     }
 }
 

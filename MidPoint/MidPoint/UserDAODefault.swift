@@ -13,8 +13,6 @@ class UserDAODefault {
     
     
     class func saveLogin(user: User){
-        
-        
         let userFixo = NSUserDefaults.standardUserDefaults()
         userFixo.setBool(true, forKey: UserGlobalConstants.LoggedNow)
         userFixo.setObject(user.name, forKey: UserGlobalConstants.Name)

@@ -24,7 +24,7 @@ class ShowEvents: UIViewController, EventManagerDelegate {
         self.scroll.showsVerticalScrollIndicator = false
         self.scroll.showsHorizontalScrollIndicator = false
         self.eventManager!.getEventsFromUser(UserDAODefault.getLoggedUser(), usuario: .All)
-
+        
         
         // Do any additional setup after loading the view.
     }

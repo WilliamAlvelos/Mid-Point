@@ -52,20 +52,6 @@
                                     </mask>
                                 </variation>
                             </mapView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Digite aqui o local" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OFI-zo-UTu">
-                                <rect key="frame" x="16" y="30" width="275" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7S-o3-GAW">
-                                <rect key="frame" x="305" y="20" width="49" height="49"/>
-                                <state key="normal" image="main_buscar">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="actionSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QLr-RZ-Pfg"/>
-                                </connections>
-                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayt-2d-KCF">
                                 <rect key="frame" x="28" y="376" width="67" height="67"/>
                                 <state key="normal" image="users">
@@ -96,7 +82,6 @@
                     <navigationItem key="navigationItem" id="BIh-H8-fCD"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="localTextField" destination="OFI-zo-UTu" id="kYe-MA-16J"/>
                         <outlet property="mapView" destination="Ocn-MR-G2Q" id="qxw-vx-JgR"/>
                     </connections>
                 </viewController>
@@ -692,14 +677,6 @@
                         <view key="tableHeaderView" contentMode="scaleToFill" id="YSf-Fb-oSI">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaK-5K-OSX">
-                                    <rect key="frame" x="131" y="8" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
@@ -732,7 +709,6 @@
                     </tableView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="progressLabel" destination="aaK-5K-OSX" id="4Ei-wA-bmb"/>
                         <outlet property="progressLayer" destination="YSf-Fb-oSI" id="oeC-jF-j2w"/>
                         <outlet property="searchDisplayController" destination="6ig-2i-39N" id="7Wa-TO-L93"/>
                     </connections>
@@ -752,7 +728,7 @@
         <!--Friend View Controller-->
         <scene sceneID="Awb-j8-aky">
             <objects>
-                <viewController id="3Xw-0E-rJ3" customClass="FriendViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="hdioashdasd" id="3Xw-0E-rJ3" customClass="FriendViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jy3-lQ-DNZ"/>
                         <viewControllerLayoutGuide type="bottom" id="6MS-di-srL"/>
@@ -997,7 +973,7 @@
         <!--Evento View Controller-->
         <scene sceneID="mDr-aD-NG8">
             <objects>
-                <viewController id="tQc-JG-FXu" customClass="EventoViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="asdasdasd" id="tQc-JG-FXu" customClass="EventoViewController" customModule="MidPoint" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9rW-7G-SXR"/>
                         <viewControllerLayoutGuide type="bottom" id="Qqe-jr-Rw0"/>
@@ -1054,7 +1030,6 @@
         <image name="icon_facebook" width="200" height="200"/>
         <image name="icon_twitter" width="200" height="200"/>
         <image name="logo" width="250" height="250"/>
-        <image name="main_buscar" width="110" height="110"/>
         <image name="picture_start" width="80" height="80"/>
         <image name="teste.png" width="26" height="20"/>
         <image name="users" width="110" height="110"/>

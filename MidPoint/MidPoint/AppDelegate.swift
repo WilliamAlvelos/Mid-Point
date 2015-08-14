@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var user = User()
         
-        //UserDAODefault.saveLogin(user)
+ //       UserDAODefault.saveLogin(user)
 //        var user = User(id: 35)
 //        var localizacao = Localizacao()
 //        localizacao.latitude = -144.837
@@ -77,8 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         } else {
-            let types = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
-            application.registerForRemoteNotificationTypes(types)
+            UIUserNotificationType.Badge
+            let types = UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound
+            application.registerForRemoteNotifications()
         }
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
