@@ -35,18 +35,24 @@ class CreateConversationViewController: UIViewController, UIImagePickerControlle
     @IBOutlet var mapView: MKMapView!
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "Criar Grupo"
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
         
         UIMPConfiguration.addBorderAndMakeRounded(self.button!, color: Colors.Rosa, width: 1.5)
         UIMPConfiguration.configureTextField(self.subtitleGroup, text: "Nome do grupo", color: Colors.Azul)
         UIMPConfiguration.configureTextField(self.titleGroup, text: "Descricao", color: Colors.Azul)
-
+        
         let float: Float = Float(self.button.frame.width/2.0)
         
         UIMPConfiguration.addBorderToView(self.button!, color: Colors.Rosa, width: 3.0, corner: float)
         UIMPConfiguration.addColorAndFontToButton(self.button, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 20)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "Criar Grupo"
+        
         pickerLibrary = UIImagePickerController()
         pickerLibrary!.delegate = self
         

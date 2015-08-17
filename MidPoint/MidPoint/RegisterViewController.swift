@@ -51,16 +51,6 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         pickerLibrary!.delegate = self
         
         IHKeyboardAvoiding.setAvoidingView(self.view)
-         UIMPConfiguration.addBorderToView(self.registerButton, color: Colors.Rosa, width: 3.0, corner: 25.0)
-        UIMPConfiguration.addColorAndFontToButton(self.registerButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 20)
-        UIMPConfiguration.addBorderAndMakeRounded(self.button, color: Colors.Rosa, width: 2)
-
-        UIMPConfiguration.configureTextField(self.nameTextField, text: "qual o seu nome?")
-        UIMPConfiguration.configureTextField(self.emailTexteField, text: "e o seu email?")
-        UIMPConfiguration.configureTextField(self.passwordTextField, text: "crie uma super-senha")
-        UIMPConfiguration.configureTextField(self.confirmPasswordTextFied, text: "confirme ela aqui")
-        UIMPConfiguration.addColorAndFontToButton(self.buttonAdicioneUmaFoto, color: Colors.Rosa, fontName: FontName.LabelFont, fontSize: 14)
-        UIMPConfiguration.addColorAndFontToButton(self.cancelarButton, color: Colors.Rosa, fontName: FontName.LabelFont, fontSize: 14)
         button.imageView?.alpha = 0.1
         
         if user == nil {
@@ -76,6 +66,25 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
 //        var buttonRegister: UIBarButtonItem = UIBarButtonItem(title: "Register", style: UIBarButtonItemStyle.Done, target: self, action: Selector("register"))
 //        
 //        self.navigationItem.rightBarButtonItem = buttonRegister
+        
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        
+        UIMPConfiguration.addBorderToView(self.registerButton, color: Colors.Rosa, width: 3.0, corner: 25.0)
+        UIMPConfiguration.addColorAndFontToButton(self.registerButton, color: Colors.Rosa, fontName: FontName.ButtonFont, fontSize: 20)
+        UIMPConfiguration.addBorderAndMakeRounded(self.button, color: Colors.Rosa, width: 2)
+        
+        UIMPConfiguration.configureTextField(self.nameTextField, text: "qual o seu nome?")
+        UIMPConfiguration.configureTextField(self.emailTexteField, text: "e o seu email?")
+        UIMPConfiguration.configureTextField(self.passwordTextField, text: "crie uma super-senha")
+        UIMPConfiguration.configureTextField(self.confirmPasswordTextFied, text: "confirme ela aqui")
+        UIMPConfiguration.addColorAndFontToButton(self.buttonAdicioneUmaFoto, color: Colors.Rosa, fontName: FontName.LabelFont, fontSize: 14)
+        UIMPConfiguration.addColorAndFontToButton(self.cancelarButton, color: Colors.Rosa, fontName: FontName.LabelFont, fontSize: 14)
+        
         
     }
     
