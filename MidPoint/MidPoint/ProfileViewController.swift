@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, EventManagerDelegate, UserManagerDelegate
+class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, EventManagerDelegate, UserManagerDelegate, ETBNavigationTitle
 {
 
     var ocView: OCView!
@@ -59,19 +59,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.refreshControl?.tintColor = Colors.Rosa
         self.refreshControl?.addTarget(self, action: Selector("reloadData"), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(self.refreshControl!)
-        
-        
-        
-        self.tableView.backgroundColor = Colors.Azul
-        
-        //Mude a cor da view que irá inserir a ETB para a mesma da toolbar
-        self.view.backgroundColor = Colors.Azul
-        
-        //Adiciona a ETB na view
-        //self.navigationController?.view.addSubview(newETB)
-        
-        //Adiciona um seletor para o botão no indice passado
 
+        self.tableView.backgroundColor = Colors.Azul
+        self.view.backgroundColor = Colors.Azul
         
         self.eventManager.delegate = self
         
@@ -79,15 +69,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         
         navItem?.title = user!.name
         
-        
         tableView.delegate = self
         tableView.dataSource = self
         
         reloadData()
         tableView.estimatedRowHeight = 200.0
+        
     }
-
-    
     
     override func viewWillDisappear(animated: Bool) {
         self.activity?.removeActivityViewWithName(self)
@@ -111,6 +99,40 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
 
     
     override func viewWillAppear(animated: Bool) {
+        
+        /* Cria uma nova ETB, com a quantidade de botões
+        na barra e a imagem de cada um deles */
+        var newETB = ETBScrollView(numberOfButtons: 3, images:[UIImage(named: "user_historico")!, UIImage(named: "user_locais_favoritos")!,UIImage(named: "user_chat")!], backgroundImage:UIImage(named: "testbg.png")!)
+        
+        //Foto do usuário
+        newETB.profileImage = UIImage(named: "4user.png")
+        
+        //Nome do usuário
+        newETB.profileName = "Felipe Viana Teruel"
+        
+        //Local do usuário
+        newETB.profileLocation = "Diadema, SP"
+        
+        //ETB Delegate
+        newETB.ETBNavigationDelegate = self
+        
+        var contentView = UIView(frame: CGRectMake(0.0, 0.0, self.view.frame.size.width, CGFloat(events.count) * tableView.estimatedRowHeight))
+        contentView.frame.size.height = 800
+        
+        
+        tableView.frame.size.height = contentView.frame.size.height
+        tableView.frame.origin = CGPointZero
+        
+        var rect = contentView.frame
+        contentView.addSubview(tableView)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        //newETB.prepareScrollViewWithContentView(contentView, frame: self.view.frame, navigationBar: self.navigationController!.navigationBar)
+        
+        //Adiciona a ETB na view
+        //self.view.addSubview(newETB)
         
         animateTable()
         self.carregou = false
@@ -328,5 +350,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     func downloadImageEventFinshed(event: Event) {
 
         //descobrir aonde esta esse evento na table view e entao recarregar
+    }
+    
+    //MARK: ETB Delegate
+    
+    func shouldDisplayTitle(title:String!) {
+        self.title = title
+    }
+    
+    func shouldHideTitle() {
+        self.title = ""
     }
 }
