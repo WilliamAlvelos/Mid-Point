@@ -85,17 +85,17 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 let controller = UISearchController(searchResultsController: nil)
                 controller.dimsBackgroundDuringPresentation = true
                 controller.hidesNavigationBarDuringPresentation = false
-
+                self.navigationItem.rightBarButtonItem = nil
                 controller.searchBar.delegate = self
-                controller
+                controller.delegate = self
                 return controller
             })()
             self.barra = true
             self.navigationItem.titleView = resultSearchController.searchBar
-            //self.navigationItem.rightBarButtonItem = nil
         }else{
             self.navigationItem.titleView = nil
             self.barra = false
+            
         }
         
     }
@@ -110,6 +110,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         var message = UIBarButtonItem(customView: messageButton)
         
         self.navigationItem.rightBarButtonItem = message
+        
+        self.resultSearchController.delegate = self
         
         //#warning
         let font = UIFont(name: "OpenSans-light", size: 42)
@@ -480,6 +482,19 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }
     
+    func willDismissSearchController(searchController: UISearchController) {
+        self.navigationItem.titleView = nil
+        
+        var messageButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        messageButton.setImage(UIImage(named: "main_buscar"), forState: UIControlState.Normal)
+        messageButton.addTarget(self, action: Selector("showSearch:"), forControlEvents: .TouchUpInside)
+        var message = UIBarButtonItem(customView: messageButton)
+        
+        self.navigationItem.rightBarButtonItem = message
+
+        
+    }
+    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
         var string = searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "%20", options:  NSStringCompareOptions.LiteralSearch, range: nil)
@@ -487,6 +502,8 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         self.addPointsOfInterest(string, name: string, location: self.geoLocation, pageToken: "")
     
     }
+    
+
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         var string = searchController.searchBar.text.stringByReplacingOccurrencesOfString(" ", withString: "%20", options:  NSStringCompareOptions.LiteralSearch, range: nil)
