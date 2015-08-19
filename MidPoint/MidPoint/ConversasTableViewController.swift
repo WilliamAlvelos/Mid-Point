@@ -51,9 +51,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.sizeToFit()
             controller.searchBar.barTintColor = Colors.Azul
-            
             self.tableView.tableHeaderView = controller.searchBar
-            
+            controller.searchBar.tintColor = Colors.Rosa
             return controller
         })()
         
@@ -75,11 +74,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     func reloadData(){
         self.refreshControl?.endRefreshing()
     }
-    
-
-    
-    
-    
 
     
     func animateTable() {
@@ -141,7 +135,6 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         nextView.avatars = self.avatars
         nextView.users = self.pessoas
         self.navigationController?.pushViewController(nextView, animated: true)
-       
     }
 
     
@@ -247,6 +240,7 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         }
         
         self.activity?.removeActivityViewWithName(self)
+        
 
     }
 

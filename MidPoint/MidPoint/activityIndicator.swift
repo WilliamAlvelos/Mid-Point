@@ -25,6 +25,8 @@ class activityIndicator {
         textLabel.textColor = Colors.Rosa
         textLabel.text = texto
         
+        viewController.view.userInteractionEnabled = false
+        
         
         boxView = UIView(frame: CGRect(x: view.view.frame.midX - (textLabel.frame.width/2 + 25), y: view.view.frame.midY - 30, width: 60 + textLabel.frame.width, height: 50))
         boxView.backgroundColor = Colors.Azul
@@ -48,6 +50,7 @@ class activityIndicator {
     func removeActivityViewWithName(view: UIViewController){
         view.view.alpha = 1
         boxView.removeFromSuperview()
+        view.view.userInteractionEnabled = true
     }
     
     

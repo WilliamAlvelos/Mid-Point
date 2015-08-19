@@ -124,7 +124,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         tableView.frame.origin = CGPointZero
         
         var rect = contentView.frame
-        contentView.addSubview(tableView)
+       // contentView.addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -304,7 +304,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     func downloadImageUsersFinished(users: Array<User>, event: Event) {
         event.pessoas = users
         a++
-        
         if a == self.events.count{
             self.tableView.reloadData()
         }
@@ -344,7 +343,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         for event in events{
             self.userManager?.getUsersFrom(event)
         }
-        // self.tableView.reloadData()
+        //self.tableView.reloadData()
     }
     
     func downloadImageEventFinshed(event: Event) {

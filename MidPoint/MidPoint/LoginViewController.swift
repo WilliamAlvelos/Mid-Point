@@ -22,6 +22,9 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     @IBOutlet weak var createAccountButton: UIButton!
     @IBOutlet weak var labelCadastre: UILabel!
     @IBOutlet weak var labelOu: UILabel!
+    
+    private var  alertView2 =  JSSAlertView()
+    
     var activity: activityIndicator?
     
     var usuario: UserManager = UserManager()
@@ -53,6 +56,7 @@ class LoginViewController: UIViewController, UserManagerDelegate {
                 println("signed in as \(session.userName)");
             } else {
                 println("error: \(error.localizedDescription)");
+                self.alertView2.danger(self.navigationController!.view, title: "Error.", text: error.localizedDescription)
             }
         }
     }
@@ -61,12 +65,12 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-//        if(UserDAODefault.getLoggedUser().id != nil){
-//            
-//            let nextViewController = TransitionManager.creatView("navigationHome") as! UINavigationController
-//            self.presentViewController(nextViewController, animated:true, completion:nil)
-//        }
+        
+        
+        if(UserDAODefault.getLoggedUser().id != nil){
+            let nextViewController = TransitionManager.creatView("navigationHome") as! UINavigationController
+            self.presentViewController(nextViewController, animated:true, completion:nil)
+        }
         
         usuario.delegate = self
         self.view.backgroundColor = Colors.Azul

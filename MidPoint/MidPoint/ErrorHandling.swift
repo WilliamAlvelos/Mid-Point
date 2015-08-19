@@ -10,6 +10,8 @@ import Foundation
 
 class ErrorHandling {
     class func stringForError(error : NSError)-> String{
+        var  alertView1 =  JSSAlertView()
+        
         switch error.code
         {
         case -1:

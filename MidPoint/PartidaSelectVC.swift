@@ -67,7 +67,10 @@ class PartidaSelectVC: UIViewController, GestureRecognizerMapDelegate, UserManag
     func insertLocationFinished() {
         alertView1?.removeView()
         self.delegate?.locationFinished(location)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let nextViewController = TransitionManager.creatView("PartidaTableViewController") as! PartidaTableViewController
+        //self.navigationController?.popToViewController(nextViewController, animated: true)
+        self.navigationController?.popViewControllerAnimated(true)
+//        self.dismissViewControllerAnimated(true, completion: nil)
     }
     override func viewWillDisappear(animated: Bool) {
         

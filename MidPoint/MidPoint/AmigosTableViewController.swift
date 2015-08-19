@@ -49,15 +49,15 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
             controller.searchBar.sizeToFit()
             controller.searchBar.delegate = self
             controller.searchBar.backgroundColor = Colors.Azul
+            controller.searchBar.barTintColor = Colors.Azul
             self.tableView.tableHeaderView = controller.searchBar
-            
-            
+            controller.searchBar.tintColor = Colors.Rosa
             return controller
         })()
+        
         self.tableView.reloadData()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action:Selector("finish"))
-        
         
         self.title = "Amigos"
         

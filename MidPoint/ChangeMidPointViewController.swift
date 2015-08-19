@@ -18,6 +18,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     var event : Event?
     
+    private var alertView =  JSSAlertView()
+    
     var user  = User()
     var actionButton: ActionButton!
 
@@ -112,6 +114,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
     override func viewWillDisappear(animated: Bool) {
         alertView2.removeView()
+        activity?.removeActivityViewWithName(self)
     }
     
     
@@ -171,7 +174,10 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
             let data: NSData? = NSData(contentsOfURL: NSURL(string: url)!)
             
             var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers, error: nil)
-            
+            if data == nil {
+                self.alertView2.danger(self.navigationController!.view, title: "Error", text: "Sem Internet", cancelButtonText : "Ok")
+                return
+            }
             if data != nil {
                 
                 var jsonGooogle: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil)
@@ -380,7 +386,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     
 
     func errorThrowedServer(stringError: String) {
-        alertView2.danger(self.navigationController!.view, title: "Oh, shit.", text: stringError, cancelButtonText : "Ok")
+        alertView2.danger(self.navigationController!.view, title: "Error", text: stringError, cancelButtonText : "Ok")
     
     }
     

@@ -16,6 +16,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     
     var user : User?
     
+    private var  alertView1 =  JSSAlertView()
     
     @IBOutlet weak var buttonAdicioneUmaFoto: UIButton!
     private var  userManager :UserManager = UserManager()
@@ -146,13 +147,13 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
     func errorThrowed(error: NSError){
         
         if error.code == 3 || error.code == 4{
-            println("BAD INTERNET")
+            alertView1.show(self.view!, title: "Error", text: "Sem Internet", buttonText: "Ok", color: Colors.Rosa)
         }else if error.code == 9 || error.code == 1{
-            println("nao esta logado no icloud fdp")
+            alertView1.show(self.view!, title: "Error", text: error.description, buttonText: "Ok", color: Colors.Rosa)
         }else{
-            println("internal error")
+            alertView1.show(self.view!, title: "Error", text: error.description, buttonText: "Ok", color: Colors.Rosa)
         }
-        
+        alertView1.setTextTheme(.Light)
     }
     
     
@@ -284,6 +285,7 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
             
             ActionError.actionWithTextField("Cuidado", errorMessage: "O seu Nome está vazio", placeholder: "Digite o seu Nome", textFieldView: self.nameTextField, view: self)
             
+            
         }
         
         if(self.emailTexteField.text == ""){
@@ -312,7 +314,6 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
     }
     func progressUpload(float: Float) {
-        println(float)
         
         var progressView: ProgressView = ProgressView(frame: self.view.frame)
         
@@ -339,10 +340,10 @@ class RegisterViewController: UIViewController, UserManagerDelegate, UIImagePick
         
     }
     func errorThrowedSystem(error: NSError) {
-        
+        alertView1.show(self.view!, title: "Error", text: error.description, buttonText: "Ok", color: Colors.Rosa)
     }
     func errorThrowedServer(stringError : String){
-        println(stringError)
+        alertView1.show(self.view!, title: "Error", text: stringError, buttonText: "Ok", color: Colors.Rosa)
     }
 
     

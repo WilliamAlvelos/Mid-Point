@@ -70,6 +70,11 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
         
         self.senderId = String(format: "%d", UserDAODefault.getLoggedUser().id!)
         self.senderDisplayName = UserDAODefault.getLoggedUser().name
+        if(self.senderDisplayName == nil){
+            self.senderDisplayName = ""
+        }
+        
+        print(self.senderDisplayName)
         self.showLoadEarlierMessagesHeader = false
         setupFirebase()
         //setupImageFirebase()
@@ -342,8 +347,15 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
 //        if message?.senderId == self.senderId {
 //            return nil
 //        }
+        if(self.avatars[message!.senderId] != nil){
+            return self.avatars[message!.senderId] as! JSQMessageAvatarImageDataSource
+        }
         
-        return self.avatars[message!.senderId] as! JSQMessageAvatarImageDataSource
+        var jsqImage:JSQMessagesAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials("MID", backgroundColor: Colors.Rosa, textColor: Colors.Azul, font: UIFont.systemFontOfSize(14.0), diameter:UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+        
+        var avatar = [message.senderId: jsqImage]
+        
+        return jsqImage as JSQMessageAvatarImageDataSource
     }
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         if indexPath.item % 3 == 0 {

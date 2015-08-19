@@ -24,9 +24,13 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     var radius: CLLocationDistance = 300
     
+    private var alertView =  JSSAlertView()
+
     var bool : Bool = true
     
     var barra: Bool = false
+    
+
     
     var resultSearchController = UISearchController()
     
@@ -47,7 +51,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     @IBAction func profile(sender: AnyObject) {
-        
+
         let nextViewController = TransitionManager.creatView("ProfileView") as! ProfileViewController
         
         self.navigationController?.pushViewController(nextViewController, animated: true)
@@ -55,26 +59,28 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     func messages(){
-        let nextViewController = TransitionManager.creatView("ConversasTableView") as! ConversasTableViewController
+
+            let nextViewController = TransitionManager.creatView("ConversasTableView") as! ConversasTableViewController
         
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+            self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     
     func grupos(){
-        let nextViewController = TransitionManager.creatView("ConversasVC") as! ShowEvents
         
+        let nextViewController = TransitionManager.creatView("ConversasVC") as! ShowEvents
         self.navigationController?.pushViewController(nextViewController, animated: true)
+
     }
+        
     
     
     func perfil(){
-        let nextViewController = TransitionManager.creatView("ProfileView") as! ProfileViewController
-        nextViewController.user = UserDAODefault.getLoggedUser()
         
-        self.navigationController?.pushViewController(nextViewController, animated: true)
-        
-        
+            let nextViewController = TransitionManager.creatView("ProfileView") as! ProfileViewController
+            nextViewController.user = UserDAODefault.getLoggedUser()
+            
+            self.navigationController?.pushViewController(nextViewController, animated: true)
         
     }
     
@@ -85,7 +91,6 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 let controller = UISearchController(searchResultsController: nil)
                 controller.dimsBackgroundDuringPresentation = true
                 controller.hidesNavigationBarDuringPresentation = false
-                self.navigationItem.rightBarButtonItem = nil
                 controller.searchBar.delegate = self
                 controller.delegate = self
                 return controller
@@ -195,7 +200,13 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
         dispatch_async(backgroundQueue, {
             let data: NSData? = NSData(contentsOfURL: NSURL(string: url)!)
-            
+            if data == nil {
+                DispatcherClass.dispatcher({ () -> () in
+                    self.alertView.danger(self.navigationController!.view, title: "Error", text: "Sem Internet", buttonText : "Ok")
+                    
+                })
+                return
+            }
             var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers, error: nil)
             
             if data != nil {
@@ -421,7 +432,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
                 locationManager.startUpdatingLocation()
             }
             
-               }
+    }
     
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -482,7 +493,7 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }
     
-    func willDismissSearchController(searchController: UISearchController) {
+    func didDismissSearchController(searchController: UISearchController) {
         self.navigationItem.titleView = nil
         
         var messageButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -501,6 +512,11 @@ class GeolocationViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         self.addPointsOfInterest(string, name: string, location: self.geoLocation, pageToken: "")
     
+    }
+    
+    
+    func willPresentSearchController(searchController: UISearchController) {
+        self.navigationItem.rightBarButtonItem = nil
     }
     
 

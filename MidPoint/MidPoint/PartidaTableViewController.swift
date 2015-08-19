@@ -73,7 +73,10 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
     func adicionarNovaLocalizacao(){
         let nextView = TransitionManager.creatView("PartidaSelectVC") as! PartidaSelectVC
         nextView.locations = self.locations
-        self.presentViewController(nextView, animated: true, completion: nil)
+        //self.presentViewController(nextView, animated: true, completion: nil)
+        //self.navigationController?.presentViewController(nextView, animated: true, completion: nil)
+        self.navigationController!.pushViewController(nextView, animated: true)
+        
     }
     override func  tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:PartidaViewCell = self.tableView.dequeueReusableCellWithIdentifier("PartidaCell") as! PartidaViewCell
@@ -159,9 +162,12 @@ class PartidaTableViewController: UITableViewController, UITableViewDataSource ,
         }
         println("Cancelar")
     }
+    
     func errorThrowedServer(stringError: String) {
         alertView1.removeView()
-        alertView2.danger(self.navigationController!.view, title: "Oh, shit.", text: stringError)
+        alertView2.danger(self.navigationController!.view, title: "Error", text: stringError, buttonText: "Ok")
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        
     }
     func errorThrowedSystem(error: NSError) {
     
