@@ -162,6 +162,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.reloadData()
+    }
     
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
