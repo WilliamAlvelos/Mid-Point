@@ -32,6 +32,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     var quantidade = 0
     
+    private var alertView1 = JSSAlertView()
+    
     var eventosCarregados = Array<Event>()
     
     var a = 0
@@ -64,6 +66,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         self.view.backgroundColor = Colors.Azul
         
         self.eventManager.delegate = self
+        
+        activity = activityIndicator(view: self.navigationController!, texto: "Carregando Eventos", inverse: false, viewController: self)
         
         navItem = self.navigationItem
         
@@ -293,14 +297,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     
     func getEventsFinished(events: Array<Event>) {
-        activity = activityIndicator(view: self.navigationController!, texto: "Carregando Eventos", inverse: false, viewController: self)
-        
         
         self.events = events
         self.eventManager.getImages(events)
-        
-        
-        
         
     }
     
@@ -311,6 +310,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
         a++
         if a == self.events.count{
             self.tableView.reloadData()
+            self.activity?.removeActivityViewWithName(self)
         }
     }
 
@@ -336,18 +336,20 @@ class ProfileViewController: UIViewController, UITableViewDelegate,UITableViewDa
     }
     
     func errorThrowedServer(stringError: String) {
-        
+        alertView1.show(self.view!, title: "Error", text: stringError, buttonText: "Ok", color: Colors.Rosa)
+
     }
     func errorThrowedSystem(error: NSError) {
-        
+        alertView1.show(self.view!, title: "Error", text: error.description, buttonText: "Ok", color: Colors.Rosa)
+
     }
     func downloadImageEventsFinshed(images: Array<Event>) {
         self.events = images
-        self.activity?.removeActivityViewWithName(self)
-       
         for event in events{
             self.userManager?.getUsersFrom(event)
         }
+        //self.tableView.reloadData()
+        //self.activity?.removeActivityViewWithName(self)
         //self.tableView.reloadData()
     }
     

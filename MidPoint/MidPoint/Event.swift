@@ -23,7 +23,6 @@ class Event: NSObject {
     var numberOfPending:Int?
     var localizacao :Localizacao?
     
-    
     var pessoas = Array<User>()
 
     override init() {

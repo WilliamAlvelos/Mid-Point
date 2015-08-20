@@ -50,7 +50,7 @@ class ShowEvents: UIViewController, EventManagerDelegate {
         let screenHeight = UIScreen.mainScreen().bounds.size.height + 10
         let screenWidth = UIScreen.mainScreen().bounds.size.width
         let scrollBarHeight = self.navigationController?.navigationBar.frame.height
-        self.scroll.contentSize = CGSizeMake(screenWidth , CGFloat(events!.count/2) *  CGFloat(width + 10))
+        self.scroll.contentSize = CGSizeMake(screenWidth , CGFloat((events!.count+1)/2) *  CGFloat(width + 10))
     
         x = 10
         y = 10

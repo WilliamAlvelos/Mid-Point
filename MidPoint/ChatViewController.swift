@@ -30,6 +30,7 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     
     var Pessoas:[User]?
     
+    private var alertView1 = JSSAlertView()
     
     var base64String: NSString?
     
@@ -533,11 +534,11 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     }
 
     func errorThrowedSystem(error: NSError) {
-        
+        alertView1.show(self.view!, title: "Error", text: error.description, buttonText: "Ok", color: Colors.Rosa)
     }
     
     func errorThrowedServer(stringError: String) {
-        
+        alertView1.show(self.view!, title: "Error", text: stringError, buttonText: "Ok", color: Colors.Rosa)
     }
     
     func downloadImageFinished(image: Array<User>) {
@@ -577,8 +578,6 @@ class ChatViewController : JSQMessagesViewController, UIActionSheetDelegate, CLL
     //
 
     
-    
-
     
     
     func closePressed(sender:UIBarButtonItem){

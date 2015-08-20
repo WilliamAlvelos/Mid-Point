@@ -96,6 +96,8 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         var message = UIBarButtonItem(customView: messageButton)
         self.navigationItem.rightBarButtonItem = message
         
+        self.navigationItem.rightBarButtonItem!.enabled = false
+        
     }
     
     
@@ -382,6 +384,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
         }
         
         self.activity?.removeActivityViewWithName(self)
+        self.navigationItem.rightBarButtonItem!.enabled = true
     }
     
 
@@ -391,7 +394,7 @@ class ChangeMidPointViewController: UIViewController, MKMapViewDelegate, CLLocat
     }
     
     func errorThrowedSystem(error: NSError) {
-        
+        alertView2.danger(self.navigationController!.view, title: "Error", text: error.description, cancelButtonText : "Ok")
     }
 
 

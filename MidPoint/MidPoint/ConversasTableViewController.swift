@@ -32,6 +32,8 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
     
     var activity :activityIndicator?
     
+    private var alertView1 = JSSAlertView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -199,9 +201,10 @@ class ConversasTableViewController: UITableViewController, UITableViewDelegate, 
         self.tableView.reloadData()
     }
     func errorThrowedSystem(error: NSError) {
-        
+        alertView1.show(self.view!, title: "Error", text: error.description, buttonText: "Ok", color: Colors.Rosa)
     }
     func errorThrowedServer(stringError: String) {
+        alertView1.show(self.view!, title: "Error", text: stringError, buttonText: "Ok", color: Colors.Rosa)
     }
     func downloadImageEventsFinshed(images: Array<Event>) {
         self.Data = images

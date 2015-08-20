@@ -20,6 +20,7 @@ class PartidaSelectVC: UIViewController, GestureRecognizerMapDelegate, UserManag
     private var viewToPres: UIView?
     var delegate: PartidaSelectProtocol?
     var shouldReturn : Bool = false
+    private var alertView2 = JSSAlertView()
     override func viewDidLoad() {
         gestureRecognizer = GestureRecognizerMap()
         gestureRecognizer?.delegate = self
@@ -40,10 +41,10 @@ class PartidaSelectVC: UIViewController, GestureRecognizerMapDelegate, UserManag
         }
     }
     func errorThrowedServer(stringError: String) {
-        
+        alertView2.show(self.view!, title: "Error", text: stringError, buttonText: "Ok", color: Colors.Rosa)
     }
     func errorThrowedSystem(error: NSError) {
-        
+        alertView2.show(self.view!, title: "Error", text: error.description, buttonText: "Ok", color: Colors.Rosa)
     }
     func getLocationMapFinished(location: Localizacao) {
         location.name = location.streetName

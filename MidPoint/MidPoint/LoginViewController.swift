@@ -66,12 +66,12 @@ class LoginViewController: UIViewController, UserManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        if(UserDAODefault.getLoggedUser().id != nil){
-            let nextViewController = TransitionManager.creatView("navigationHome") as! UINavigationController
-            self.presentViewController(nextViewController, animated:true, completion:nil)
-        }
-        
+//        
+//        if(UserDAODefault.getLoggedUser().id != nil){
+//            let nextViewController = TransitionManager.creatView("navigationHome") as! UINavigationController
+//            self.presentViewController(nextViewController, animated:true, completion:nil)
+//        }
+//        
         usuario.delegate = self
         self.view.backgroundColor = Colors.Azul
         appIcon.layer.cornerRadius = appIcon.frame.size.height / 2.0

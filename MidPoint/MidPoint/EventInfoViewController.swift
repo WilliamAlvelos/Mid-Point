@@ -18,6 +18,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet var tableView: UITableView!
     
+    private var alertView1 = JSSAlertView()
+    
     var dataPessoas = Array<User>()
     
     var event: Event?
@@ -194,10 +196,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func errorThrowedServer(stringError: String) {
-        
+        self.alertView1.show(self.navigationController!.view, title: "Error", text: stringError, buttonText: "OK", cancelButtonText: nil, color: Colors.Rosa, iconImage: nil)
     }
     func errorThrowedSystem(error: NSError) {
-        
+        self.alertView1.show(self.navigationController!.view, title: "Error", text: error.description, buttonText: "OK", cancelButtonText: nil, color: Colors.Rosa, iconImage: nil)
     }
     
     

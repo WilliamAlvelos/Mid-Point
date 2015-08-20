@@ -20,9 +20,10 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     
     var startLocation: Localizacao?
     
+    private var alertView1 = JSSAlertView()
+    
     var data: Array<User> = Array()
 
-    
     var dataSelected: Array<User> = Array()
     
     var resultSearchController = UISearchController()
@@ -164,7 +165,7 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
     }
     
     func errorThrowedSystem(error: NSError) {
-        
+        alertView1.show(self.view!, title: "Error", text: error.description, buttonText: "Ok", color: Colors.Rosa)
     }
     func uploadImageFinished(){
 
@@ -188,7 +189,8 @@ class AmigosTableViewController: UITableViewController, UITableViewDelegate,UITa
         println("terminou de salvar a porra toda, fazendo upload da imagem em background o novo id é \(event.id!)")
     }
     func errorThrowedServer(stringError: String) {
-        println(stringError)
+        alertView1.show(self.view!, title: "Error", text: stringError, buttonText: "Ok", color: Colors.Rosa)
+
     }
     func getUsersFinished(users: Array<User>) {
         self.daoFriend.getImages(users, event: self.event!)
